@@ -47,51 +47,6 @@ define('APP', ROOT . DS . APP_DIR . DS);
 define('CONFIG', ROOT . DS . 'config' . DS);
 
 /**
- * Bake detail config directory.
- */
-define('BAKE_DETAIL_CONFIG', CONFIG . 'bake_config' . DS);
-
-/**
- * Baked config file.
- */
-define('BAKED_CONFIG_FILE', CONFIG . 'bake_codes.php');
-
-/**
- * Baked left_side_menu file.
- */
-define('BAKED_LEFT_SIDE_MENU_FILE', CONFIG . 'left_side_menu.php');
-
-/**
- * Baked admin_config file.
- */
-define('BAKED_ADMIN_CONFIG_FILE', CONFIG . 'admin_config.php');
-
-/**
- * Baked env dir.
- */
-define('BAKED_ENV_DIR', dirname(ROOT) . DS . 'env' . DS);
-
-/**
- * Baked create table sql dir.
- */
-define('BAKED_CREATE_TABLE_SQL_DIR', dirname(ROOT) . DS . 'env' . DS . 'sql' . DS);
-
-/**
- * admins.sql file.
- */
-define('CREATE_ADMINS_TABLE_SQL_FILE', dirname(ROOT) . DS . 'env' . DS . 'admins.sql');
-
-/**
- * Baked app.php file.
- */
-define('BAKED_APP_CONFIG_FILE', CONFIG . 'app.php');
-
-/**
- * app.php.org file.
- */
-define('BAKED_APP_CONFIG_FILE_ORG', CONFIG . 'app.php.org');
-
-/**
  * File path to the webroot directory.
  */
 define('WWW_ROOT', ROOT . DS . 'webroot' . DS);
