@@ -60,7 +60,14 @@ Router::scope('/', function (RouteBuilder $routes) {
      * 管理者権限
      */
     Router::prefix('admin', function (RouteBuilder $routes) {
-    	$routes->fallbacks(DashedRoute::class);
+        $routes->fallbacks(DashedRoute::class);
+    });
+
+    /**
+     * ガシャAPIのルーティング
+     */
+    Router::prefix('api', function (RouteBuilder $routes) {
+        $routes->fallbacks(DashedRoute::class);
     });
 
     /**
