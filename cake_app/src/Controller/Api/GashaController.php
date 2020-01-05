@@ -52,6 +52,7 @@ class GashaController extends AppController
 	];
 
 	private $rarity_codes;
+	private $zokusei_codes;
 
 	/**
 	 * Initialize Method.
@@ -63,6 +64,9 @@ class GashaController extends AppController
 
 		// レアリティのコード値とコード名を反転させた配列。検索に使う
 		$this->rarity_codes = array_flip(_code('Cards.rarity'));
+
+		// 属性のコード値とコード名を反転させた配列。検索に使う
+		$this->zokusei_codes = array_flip(_code('Cards.type'));
 	}
 
 	/**
@@ -70,9 +74,9 @@ class GashaController extends AppController
 	 *
 	 * @param string $gasha_type
 	 */
-	public function tanpatu($gasha_type = 'normal') {
+	public function tanpatu($gasha_type = 'normal', $zokusei = '') {
 
-		$cards[] = $this->_pick($gasha_type);
+		$cards[] = $this->_pick(['gasha_type' => $gasha_type, 'zokusei' => $zokusei]);
 
 		$this->viewBuilder()->enableAutoLayout(false);
 		$this->autoRender = false;
@@ -86,13 +90,13 @@ class GashaController extends AppController
 	 *
 	 * @param string $gasha_type
 	 */
-	public function jyuren($gasha_type = 'normal') {
+	public function jyuren($gasha_type = 'normal', $zokusei = '') {
 
 		$cards = [];
 		for ($i = 0; $i < 9; $i++) {
-			$cards[] = $this->_pick($gasha_type);
+			$cards[] = $this->_pick(['gasha_type' => $gasha_type, 'zokusei' => $zokusei]);
 		}
-		$cards[] = $this->_pick($gasha_type . "_sr_kakutei");
+		$cards[] = $this->_pick(['gasha_type' => $gasha_type . "_sr_kakutei", 'zokusei' => $zokusei]);
 
 		$this->viewBuilder()->enableAutoLayout(false);
 		$this->autoRender = false;
@@ -102,15 +106,19 @@ class GashaController extends AppController
 
 	/**
 	 * ガシャを1回引く
-	 * @param string $gasha_type ガシャタイプ（SR確定：sr_kakutei、フェス：fes）
+	 * @param array $options
+	 * @return \Cake\Datasource\EntityInterface|NULL
 	 */
-	private function _pick($gasha_type = 'normal') {
+	private function _pick($options) {
 
 		// レアリティ設定
-		$rarity_data = $this->rarity_config[$gasha_type];
+		$rarity_data = $this->rarity_config[$options['gasha_type']];
 		$ssr_rate = $rarity_data['ssr'];
 		$sr_rate = $rarity_data['sr'];
 		$r_rate = $rarity_data['r'];
+
+		// 検索用配列
+		$conditions = [];
 
 		// レアリティ抽選
 		$rarity = rand(1, 100);
@@ -121,10 +129,18 @@ class GashaController extends AppController
 		} else {
 			$pick_rarity = 'R';
 		}
-		$rarity_code = $this->rarity_codes[$pick_rarity];
+		$conditions['rarity'] = $this->rarity_codes[$pick_rarity];
+
+		// タイプ別抽選
+		if (!empty($options['zokusei'])) {
+			$tmp_zokusei = $this->zokusei_codes[$options['zokusei']];
+			if (!empty($tmp_zokusei)) {
+				$conditions['type'] = $tmp_zokusei;
+			}
+		}
 
 		// mysqlのrand()でランダム抽選
-		$card = $this->Cards->find()->where(['rarity' => $rarity_code])->order('rand()')->first();
+		$card = $this->Cards->find()->where($conditions)->order('rand()')->first();
 		return $card;
 	}
 }
