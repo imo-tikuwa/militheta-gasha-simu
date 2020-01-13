@@ -11,7 +11,7 @@ $this->assign('title', "カード{$button_name}");
     <div class="card-body">
       <?= $this->Form->create($card) ?>
       <div class="row">
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-3 col-sm-12">
           <div class="form-group">
             <?= $this->Form->control('character_id', ['type' => 'select', 'class' => 'form-control rounded-0 ', 'label' => 'キャラクター']); ?>
           </div>
@@ -21,7 +21,7 @@ $this->assign('title', "カード{$button_name}");
             <?= $this->Form->control('name', ['class' => 'form-control rounded-0 ', 'label' => 'カード名']); ?>
           </div>
         </div>
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-3 col-sm-12">
           <div class="form-group">
             <?= $this->Form->control('rarity', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.rarity'), 'class' => 'form-control ', 'label' => 'レアリティ']); ?>
           </div>
@@ -47,6 +47,16 @@ $this->assign('title', "カード{$button_name}");
           });
         });
         <?= $this->Html->scriptEnd() ?>
+        <div class="col-md-3 col-sm-12">
+          <div class="form-group">
+            <?= $this->Form->control('gasha_include', ['type' => 'select', 'options' => _code('Cards.gasha_include'), 'default' => '1', 'class' => 'form-control ', 'label' => 'ガシャ対象？']); ?>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12">
+          <div class="form-group">
+            <?= $this->Form->control('limited', ['type' => 'select', 'options' => _code('Cards.limited'), 'default' => '0', 'class' => 'form-control ', 'label' => '限定？']); ?>
+          </div>
+        </div>
         <div class="col-md-12">
           <?= $this->Form->button($button_name, ['class' => "btn btn-flat btn-outline-secondary"]) ?>
         </div>

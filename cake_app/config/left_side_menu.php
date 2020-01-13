@@ -1,6 +1,11 @@
 <?php
 return [
 		'LeftSideMenu' => [
+				'Gasha' => [
+						'controller' => 'Gasha',
+						'label' => 'ガシャ',
+						'icon_class' => 'fas fa-database',
+				],
 				'Characters' => [
 						'controller' => 'Characters',
 						'label' => 'キャラクター',

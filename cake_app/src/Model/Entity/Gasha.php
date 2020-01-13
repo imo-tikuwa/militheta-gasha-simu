@@ -4,23 +4,17 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Card Entity
+ * Gasha Entity
  *
  * @property int $id
- * @property int|null $character_id
- * @property string|null $name
- * @property string|null $rarity
- * @property string|null $type
- * @property \Cake\I18n\FrozenDate|null $add_date
- * @property int|null $gasha_include
- * @property int|null $limited
+ * @property \Cake\I18n\FrozenDate|null $start_date
+ * @property \Cake\I18n\FrozenDate|null $end_date
+ * @property string|null $title
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
  * @property string $delete_flag
- *
- * @property \App\Model\Entity\Character $character
  */
-class Card extends Entity
+class Gasha extends Entity
 {
 
     /**
@@ -33,16 +27,11 @@ class Card extends Entity
      * @var array
      */
     protected $_accessible = [
-        'character_id' => true,
-        'name' => true,
-        'rarity' => true,
-        'type' => true,
-        'add_date' => true,
-        'gasha_include' => true,
-        'limited' => true,
+        'start_date' => true,
+        'end_date' => true,
+        'title' => true,
         'created' => true,
         'modified' => true,
-        'delete_flag' => true,
-        'character' => true
+        'delete_flag' => true
     ];
 }

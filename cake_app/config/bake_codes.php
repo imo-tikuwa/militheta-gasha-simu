@@ -12,5 +12,13 @@ return [
 						'02' => 'Fairy',
 						'03' => 'Angel',
 				],
+				'gasha_include' => [
+						'1' => 'true',
+						'0' => 'false',
+				],
+				'limited' => [
+						'1' => 'true',
+						'0' => 'false',
+				],
 		],
 ];

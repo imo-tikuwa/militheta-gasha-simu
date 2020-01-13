@@ -78,6 +78,12 @@ class CardsTable extends AppTable
             ->date('add_date')
             ->allowEmpty('add_date');
 
+        $validator
+            ->allowEmpty('gasha_include');
+
+        $validator
+            ->allowEmpty('limited');
+
         return $validator;
     }
 
@@ -117,6 +123,8 @@ class CardsTable extends AppTable
             'レアリティ',
             'タイプ',
             '実装日',
+            'ガシャ対象？',
+            '限定？',
             '作成日時',
             '更新日時',
         ];
@@ -133,6 +141,8 @@ class CardsTable extends AppTable
             'rarity',
             'type',
             'add_date',
+            'gasha_include',
+            'limited',
             'created',
             'modified',
         ];

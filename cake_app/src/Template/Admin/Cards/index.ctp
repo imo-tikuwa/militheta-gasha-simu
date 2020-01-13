@@ -11,17 +11,6 @@ $this->assign('title', "カード");
    <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => 'add']) ?>'">新規登録</button>
    <button type="button" class="btn btn-flat btn-outline-secondary" data-toggle="modal" data-target="#cards-search-form-modal">検索</button>
    <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => 'csvExport', '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
-   <button type="button" class="btn btn-flat btn-outline-secondary" onclick="$('#csv-import-file').trigger('click');">CSVインポート</button>
-   <?= $this->Form->create(null, ['id' => 'csv-import-form', 'action' => 'csvImport', 'enctype' => 'multipart/form-data', 'style' => 'display:none;']) ?>
-     <input type="file" name="csv_import_file" id="csv-import-file"/>
-   <?= $this->Form->end(); ?>
-   <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
-   $(function(){
-     $('#csv-import-file').on('change', function(){
-       $('#csv-import-form').submit();
-     });
-   });
-   <?= $this->Html->scriptEnd() ?>
   </div>
   <div class="card-body table-responsive p-0">
    <table class="table table-hover">
@@ -33,6 +22,8 @@ $this->assign('title', "カード");
                 <th scope="col"><?= $this->Paginator->sort('rarity', 'レアリティ') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('type', 'タイプ') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('add_date', '実装日') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('gasha_include', 'ガシャ対象？') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('limited', '限定？') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified', '更新日時') ?></th>
                 <th scope="col" class="actions">操作</th>
             </tr>
@@ -52,6 +43,8 @@ $this->assign('title', "カード");
                     <?= h($card->add_date->i18nFormat('yyyy/MM/dd')) ?>
                   <?php } ?>
                 </td>
+                <td><?= @h(_code("Cards.gasha_include.{$card->gasha_include}")) ?></td>
+                <td><?= @h(_code("Cards.limited.{$card->limited}")) ?></td>
                 <td>
                   <?php if (!is_null($card->modified)) { ?>
                     <?= h($card->modified->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
@@ -126,6 +119,20 @@ $this->assign('title', "カード");
                   });
                 });
                 <?= $this->Html->scriptEnd() ?>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <?= $this->Form->control('gasha_include', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.gasha_include'), 'class' => 'form-control', 'label' => 'ガシャ対象？', 'value' => @$params['gasha_include']]); ?>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <?= $this->Form->control('limited', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.limited'), 'class' => 'form-control', 'label' => '限定？', 'value' => @$params['limited']]); ?>
               </div>
             </div>
           </div>

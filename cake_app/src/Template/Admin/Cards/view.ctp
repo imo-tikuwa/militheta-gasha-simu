@@ -38,6 +38,14 @@ $this->assign('title', "カード詳細");
             </td>
         </tr>
         <tr>
+            <th scope="row">ガシャ対象？</th>
+            <td><?= @h(_code("Cards.gasha_include.{$card->gasha_include}")) ?></td>
+        </tr>
+        <tr>
+            <th scope="row">限定？</th>
+            <td><?= @h(_code("Cards.limited.{$card->limited}")) ?></td>
+        </tr>
+        <tr>
             <th scope="row">作成日時</th>
             <td>
               <?php if (!is_null($card->created)) { ?>
