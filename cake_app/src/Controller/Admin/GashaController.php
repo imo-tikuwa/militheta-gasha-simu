@@ -178,6 +178,34 @@ class GashaController extends AppController
             },
             // ガシャタイトル
             'title',
+            // SSRレート
+            function ($row) {
+                if (!empty($row['ssr_rate'])) {
+                    return $row['ssr_rate']."%";
+                }
+                return "";
+            },
+            // SRレート
+            function ($row) {
+                if (!empty($row['sr_rate'])) {
+                    return $row['sr_rate']."%";
+                }
+                return "";
+            },
+            // SSRピックアップレート
+            function ($row) {
+                if (!empty($row['ssr_pickup_rate'])) {
+                    return $row['ssr_pickup_rate']."%";
+                }
+                return "";
+            },
+            // SRピックアップレート
+            function ($row) {
+                if (!empty($row['sr_pickup_rate'])) {
+                    return $row['sr_pickup_rate']."%";
+                }
+                return "";
+            },
             // 作成日時
             function ($row) {
                 if ($row['created'] instanceof FrozenTime) {

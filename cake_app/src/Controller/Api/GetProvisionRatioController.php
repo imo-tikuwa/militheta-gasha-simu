@@ -1,0 +1,127 @@
+<?php
+namespace App\Controller\Api;
+
+use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
+use Cake\Utility\Hash;
+
+/**
+ * 提供割合を返すコントローラ
+ *
+ * @property \App\Model\Table\GashaTable $Gasha
+ * @property \App\Model\Table\CardsTable $Cards
+ *
+ * @method \App\Model\Entity\Card[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ */
+class GetProvisionRatioController extends AppController
+{
+
+	/**
+	 * Initialize Method.
+	 */
+	public function initialize()
+	{
+		parent::initialize();
+		$this->Gasha = TableRegistry::getTableLocator()->get("Gasha");
+		$this->Cards = TableRegistry::getTableLocator()->get("Cards");
+
+		$this->rarity_codes = _code("Cards.rarity");
+		$this->type_codes = _code("Cards.type");
+	}
+
+	/**
+	 * 提供割合情報を返す
+	 *
+	 * @param string $gasha_id
+	 */
+	public function index($gasha_id = null) {
+
+		$this->viewBuilder()->enableAutoLayout(false);
+		$this->autoRender = false;
+
+		if (empty($gasha_id)) {
+			echo json_encode([]);
+			exit;
+		}
+
+		// ガシャ情報取得
+		$gasha = $this->Gasha->get($gasha_id);
+		$gasha_from = $gasha->start_date->i18nFormat('yyyy-MM-dd');
+		$gasha_to = $gasha->end_date->i18nFormat('yyyy-MM-dd');
+
+		// カード情報取得
+		$cards = $this->Cards->find()->select(['id', 'character_id', 'name', 'rarity', 'type'])->where([
+				'add_date <=' => $gasha_from,
+				'gasha_include' => 1,
+		])
+		->enableHydration(false)
+		->toArray();
+
+		// レアリティごとに持ち替え
+		$cards = Hash::combine($cards, '{n}.id', '{n}', '{n}.rarity');
+
+		// ガシャ情報からSSRとSRのレートを取得、Rのレートを計算
+		$ssr_rate = $gasha->ssr_rate;
+		$sr_rate = $gasha->sr_rate;
+		$r_rate = 100 - $ssr_rate - $sr_rate;
+		$ssr_pickup_rate = $gasha->ssr_pickup_rate;
+		$sr_pickup_rate = $gasha->sr_pickup_rate;
+
+		// TODO ピックアップ対象カードはとりあえずゼロとする
+		$ssr_pickup_target_count = 0;
+		$sr_pickup_target_count = 0;
+		$r_pickup_target_count = 0;
+
+		// 非ピックアップ1枚当たりのピック確率を計算する
+		// SSR、SRは最初にピックアップの確率で減算し、残りの枚数で分け合う
+		$per_ssr_pick_rate = null;
+		$per_sr_pick_rate = null;
+		$per_r_pick_rate = null;
+		foreach ($this->rarity_codes as $rarity_code => $rarity_text) {
+			if (array_key_exists($rarity_code, $cards)) {
+				switch ($rarity_code) {
+					case '02': // R
+						$per_r_pick_rate = $r_rate / count($cards[$rarity_code]);
+						break;
+					case '03': // SR
+						$per_sr_pick_rate = ($sr_rate - ($sr_pickup_rate * $sr_pickup_target_count)) / (count($cards[$rarity_code]) - $sr_pickup_target_count);
+						break;
+					case '04': // SSR
+						$per_ssr_pick_rate = ($ssr_rate - ($ssr_pickup_rate * $ssr_pickup_target_count)) / (count($cards[$rarity_code]) - $ssr_pickup_target_count);
+						break;
+				}
+			}
+		}
+
+		// 結果を返す
+		$response = [];
+		foreach (array_reverse($this->rarity_codes) as $rarity_code => $rarity_text) {
+			$response[$rarity_text] = [];
+			if (!array_key_exists($rarity_code, $cards)) {
+				continue;
+			}
+			foreach ($cards[$rarity_code] as $card) {
+				$card_info = [
+						'name' => $card['name'],
+						'type' => $this->type_codes[$card['type']],
+				];
+				switch ($rarity_code) {
+					case '02':
+						$card_info['rate'] = $per_r_pick_rate;
+						break;
+					case '03':
+						$card_info['rate'] = $per_sr_pick_rate;
+						break;
+					case '04':
+						$card_info['rate'] = $per_ssr_pick_rate;
+						break;
+				}
+				$response[$rarity_text][] = $card_info;
+			}
+		}
+		debug($response);exit;
+		echo json_encode($response);
+		return;
+	}
+
+}

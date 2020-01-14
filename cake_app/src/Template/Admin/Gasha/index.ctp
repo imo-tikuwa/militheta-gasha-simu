@@ -20,6 +20,10 @@ $this->assign('title', "ガシャ");
                 <th scope="col"><?= $this->Paginator->sort('start_date', 'ガシャ開始日') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('end_date', 'ガシャ終了日') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('title', 'ガシャタイトル') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('ssr_rate', 'SSRレート') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('sr_rate', 'SRレート') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('ssr_pickup_rate', 'SSRピックアップレート') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('sr_pickup_rate', 'SRピックアップレート') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified', '更新日時') ?></th>
                 <th scope="col" class="actions">操作</th>
             </tr>
@@ -39,6 +43,10 @@ $this->assign('title', "ガシャ");
                   <?php } ?>
                 </td>
                 <td><?= h($gasha->title) ?></td>
+                <td><?= $this->Number->format($gasha->ssr_rate) ?>%</td>
+                <td><?= $this->Number->format($gasha->sr_rate) ?>%</td>
+                <td><?= $this->Number->format($gasha->ssr_pickup_rate) ?>%</td>
+                <td><?= $this->Number->format($gasha->sr_pickup_rate) ?>%</td>
                 <td>
                   <?php if (!is_null($gasha->modified)) { ?>
                     <?= h($gasha->modified->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>

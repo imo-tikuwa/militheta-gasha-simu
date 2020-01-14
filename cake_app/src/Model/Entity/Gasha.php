@@ -10,6 +10,10 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenDate|null $start_date
  * @property \Cake\I18n\FrozenDate|null $end_date
  * @property string|null $title
+ * @property int|null $ssr_rate
+ * @property int|null $sr_rate
+ * @property float|null $ssr_pickup_rate
+ * @property float|null $sr_pickup_rate
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
  * @property string $delete_flag
@@ -30,6 +34,10 @@ class Gasha extends Entity
         'start_date' => true,
         'end_date' => true,
         'title' => true,
+        'ssr_rate' => true,
+        'sr_rate' => true,
+        'ssr_pickup_rate' => true,
+        'sr_pickup_rate' => true,
         'created' => true,
         'modified' => true,
         'delete_flag' => true

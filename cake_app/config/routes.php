@@ -67,6 +67,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * ガシャAPIのルーティング
      */
     Router::prefix('api', function (RouteBuilder $routes) {
+        $routes->connect('/get-provision-ratio/*', ['controller' => 'GetProvisionRatio', 'action' => 'index']);
         $routes->fallbacks(DashedRoute::class);
     });
 
