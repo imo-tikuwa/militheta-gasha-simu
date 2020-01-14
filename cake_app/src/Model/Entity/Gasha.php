@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property int|null $sr_rate
  * @property float|null $ssr_pickup_rate
  * @property float|null $sr_pickup_rate
+ * @property float|null $r_pickup_rate
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
  * @property string $delete_flag
@@ -38,6 +39,7 @@ class Gasha extends Entity
         'sr_rate' => true,
         'ssr_pickup_rate' => true,
         'sr_pickup_rate' => true,
+        'r_pickup_rate' => true,
         'created' => true,
         'modified' => true,
         'delete_flag' => true

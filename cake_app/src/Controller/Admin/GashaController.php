@@ -206,6 +206,13 @@ class GashaController extends AppController
                 }
                 return "";
             },
+            // Rピックアップレート
+            function ($row) {
+                if (!empty($row['r_pickup_rate'])) {
+                    return $row['r_pickup_rate']."%";
+                }
+                return "";
+            },
             // 作成日時
             function ($row) {
                 if ($row['created'] instanceof FrozenTime) {

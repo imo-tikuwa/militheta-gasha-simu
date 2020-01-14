@@ -82,6 +82,10 @@ class GashaTable extends AppTable
             ->numeric('sr_pickup_rate')
             ->allowEmpty('sr_pickup_rate');
 
+        $validator
+            ->numeric('r_pickup_rate')
+            ->allowEmpty('r_pickup_rate');
+
         return $validator;
     }
 
@@ -109,6 +113,7 @@ class GashaTable extends AppTable
             'SRレート',
             'SSRピックアップレート',
             'SRピックアップレート',
+            'Rピックアップレート',
             '作成日時',
             '更新日時',
         ];
@@ -127,6 +132,7 @@ class GashaTable extends AppTable
             'sr_rate',
             'ssr_pickup_rate',
             'sr_pickup_rate',
+            'r_pickup_rate',
             'created',
             'modified',
         ];
@@ -147,6 +153,8 @@ class GashaTable extends AppTable
         $csv_data['ssr_pickup_rate'] = preg_replace('/[^0-9]/', '', $csv_data['ssr_pickup_rate']);
         // SRピックアップレート
         $csv_data['sr_pickup_rate'] = preg_replace('/[^0-9]/', '', $csv_data['sr_pickup_rate']);
+        // Rピックアップレート
+        $csv_data['r_pickup_rate'] = preg_replace('/[^0-9]/', '', $csv_data['r_pickup_rate']);
 
         unset($csv_data['created']);
         unset($csv_data['modified']);

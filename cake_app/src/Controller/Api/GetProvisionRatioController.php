@@ -64,8 +64,6 @@ class GetProvisionRatioController extends AppController
 		$ssr_rate = $gasha->ssr_rate;
 		$sr_rate = $gasha->sr_rate;
 		$r_rate = 100 - $ssr_rate - $sr_rate;
-		$ssr_pickup_rate = $gasha->ssr_pickup_rate;
-		$sr_pickup_rate = $gasha->sr_pickup_rate;
 
 		// TODO ピックアップ対象カードはとりあえずゼロとする
 		$ssr_pickup_target_count = 0;
@@ -74,24 +72,9 @@ class GetProvisionRatioController extends AppController
 
 		// 非ピックアップ1枚当たりのピック確率を計算する
 		// SSR、SRは最初にピックアップの確率で減算し、残りの枚数で分け合う
-		$per_ssr_pick_rate = null;
-		$per_sr_pick_rate = null;
-		$per_r_pick_rate = null;
-		foreach ($this->rarity_codes as $rarity_code => $rarity_text) {
-			if (array_key_exists($rarity_code, $cards)) {
-				switch ($rarity_code) {
-					case '02': // R
-						$per_r_pick_rate = $r_rate / count($cards[$rarity_code]);
-						break;
-					case '03': // SR
-						$per_sr_pick_rate = ($sr_rate - ($sr_pickup_rate * $sr_pickup_target_count)) / (count($cards[$rarity_code]) - $sr_pickup_target_count);
-						break;
-					case '04': // SSR
-						$per_ssr_pick_rate = ($ssr_rate - ($ssr_pickup_rate * $ssr_pickup_target_count)) / (count($cards[$rarity_code]) - $ssr_pickup_target_count);
-						break;
-				}
-			}
-		}
+		$per_ssr_pick_rate = floor_plus(($ssr_rate - ($gasha->ssr_pickup_rate * $ssr_pickup_target_count)) / (count($cards['04']) - $ssr_pickup_target_count), 3);
+		$per_sr_pick_rate = floor_plus(($sr_rate - ($gasha->sr_pickup_rate * $sr_pickup_target_count)) / (count($cards['03']) - $sr_pickup_target_count), 3);
+		$per_r_pick_rate = floor_plus(($r_rate - ($gasha->r_pickup_rate * $r_pickup_target_count)) / (count($cards['02']) - $r_pickup_target_count), 3);
 
 		// 結果を返す
 		$response = [];
