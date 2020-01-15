@@ -11,6 +11,7 @@ return [
 						'01' => 'Princess',
 						'02' => 'Fairy',
 						'03' => 'Angel',
+						'04' => 'Ex',
 				],
 				'gasha_include' => [
 						'1' => 'true',
