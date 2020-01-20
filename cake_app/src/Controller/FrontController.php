@@ -9,6 +9,7 @@ use Cake\Utility\Hash;
  * Front Controller
  *
  * @property \App\Model\Table\GashasTable $Gashas
+ * @property \App\Model\Table\CardsTable $Cards
  */
 class FrontController extends AppController
 {
@@ -32,7 +33,7 @@ class FrontController extends AppController
 		$gasha_datas = $this->Gashas->findGashaData();
 
 		$gasha_json_data = $this->Gashas->getGashaJsonData($gasha_datas);
-		$gasha_selections = Hash::combine($gasha_datas, '{n}.id', '{n}.title');
+		$gasha_selections = Hash::combine($gasha_datas, '{n}.id', ['%s　%s', '{n}.start_date', '{n}.title']);
 
 		$rarity_codes = _code("Cards.rarity");
 		$type_codes = _code("Cards.type");

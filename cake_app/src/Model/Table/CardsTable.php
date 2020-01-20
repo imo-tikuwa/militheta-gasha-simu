@@ -197,41 +197,47 @@ class CardsTable extends AppTable
 
 		$start_date = $gasha->start_date->i18nFormat('yyyy-MM-dd');
 
-		$query = $this->find()->select(['id', 'character_id', 'name', 'rarity', 'type']);
+		$query = $this->find()->select(['id', 'character_id', 'name', 'rarity', 'type'])->enableHydration(false);
 
-		$where = [];
-		$where['add_date <='] = $start_date;
-		// ガシャ対象
-		$where['gasha_include'] = 1;
+		// 恒常カード情報を取得
+		$cards = $query->where([
+				'gasha_include' => 1,
+				'limited' => 0,
+				'add_date <=' => $start_date
+		])->toArray();
 
-		// 恒常の条件追加
-		$or_where = [];
-		$or_where[] = ['limited' => 0];
-		// 限定？の条件追加
+		// 限定カードを取得
 		if ($gasha->isLimited()) {
-			$or_where[] = [
+
+			$limited_cards = $query->where([
+					'gasha_include' => 1,
 					'limited' => 1,
-					'add_date' => $start_date,
-			];
+					'add_date' => $start_date
+			], [], true)->toArray();
+			$cards = array_merge($cards, $limited_cards);
+
 		}
-		// フェス限定？の条件追加
+		// フェス限定カードを取得
 		else if ($gasha->isFesLimited()) {
-			$or_where[] = [
+
+			$fes_limited_cards = $query->where([
+					'gasha_include' => 1,
 					'limited' => 2,
 					'add_date <=' => $start_date, // 過去のフェス限を含める
-			];
-		}
-// 		// 復刻？の条件追加
-// 		else if ($gasha->isReprintLimited()) {
-// 			$or_where[] = [
-// 					'limited' => 1,
-// 					'add_date' => $start_date,
-// 			];
-// 		}
-		$where['OR'] = $or_where;
+			], [], true)->toArray();
+			$cards = array_merge($cards, $fes_limited_cards);
 
-		// カード情報を取得
-		$cards = $query->where($where)->enableHydration(false)->toArray();
+		}
+		// 復刻？の条件追加
+		else if ($gasha->isReprintLimited()) {
+
+			$reprint_limited_cards = $query->where([
+					'CardReprints.gasha_id' => $gasha->id,
+					'Cards.gasha_include' => 1,
+					'Cards.limited' => 1,
+			], [], true)->contain('CardReprints')->toArray();
+			$cards = array_merge($cards, $reprint_limited_cards);
+		}
 
 		// レアリティごとに持ち替え
 		$cards = Hash::combine($cards, '{n}.id', '{n}', '{n}.rarity');

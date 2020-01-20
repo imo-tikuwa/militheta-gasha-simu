@@ -48,7 +48,10 @@ $(function(){
 		}).fail(function(jqxhr, status, error){
 			alert(error);
 		});
+	});
 
+	$('#pick-gasha').on('click', function(){
+		console.log("pick gasha");
 	});
 });
 <?= $this->Html->scriptEnd() ?>
@@ -58,13 +61,13 @@ $(function(){
     <div class="card-body">
 
       <div class="row">
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-7 col-sm-12">
           <div class="form-group">
             <label>ガシャ</label>
-            <?php echo $this->Form->control('gasha', ['type' => 'select', 'id' => 'gasha_id', 'label' => false, 'options' => $gasha_selections]); ?>
+            <?php echo $this->Form->control('gasha', ['type' => 'select', 'class' => 'form-control form-control-sm rounded-0', 'id' => 'gasha_id', 'label' => false, 'options' => $gasha_selections]); ?>
           </div>
         </div>
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-5 col-sm-12">
           <div class="form-group" id="current_gasha_info">
             <label>選択中のガシャ情報</label>
             <div class="input">
@@ -76,6 +79,7 @@ $(function(){
               <label for="sr_pickup_rate">SRピックアップレート</label>：<span id="sr_pickup_rate"></span>%<br />
               <label for="r_pickup_rate">Rピックアップレート</label>：<span id="r_pickup_rate"></span>%<br />
               <button type="button" class="btn btn-sm btn-secondary rounded-0" id="display-provision-ratio-modal">提供割合</button>
+              <button type="button" class="btn btn-sm btn-secondary rounded-0" id="pick-gasha">10連ガシャを引く</button>
             </div>
           </div>
         </div>
