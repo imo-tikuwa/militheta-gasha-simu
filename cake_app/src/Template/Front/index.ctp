@@ -32,13 +32,13 @@ $(function(){
 			let html = "";
 			$.each(json, function(rarity, cards){
 				html += "<span>" + rarity + "</span>";
-				html += "<table>";
+				html += "<table class=\"table table-sm\">";
 				html += "<tr><th>タイプ</th><th>カード名</th><th>レート</th></tr>";
 				$.each(cards, function(index, card){
 					html += "<tr>";
 					html += "<td>" + card.type + "</td>";
 					html += "<td>" + card.name + "</td>";
-					html += "<td>" + card.rate + "</td>";
+					html += "<td>" + card.rate + "%</td>";
 					html += "</tr>";
 				});
 				html += "</table>";

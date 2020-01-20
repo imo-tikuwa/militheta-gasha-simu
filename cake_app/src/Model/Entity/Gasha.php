@@ -44,4 +44,29 @@ class Gasha extends Entity
         'modified' => true,
         'delete_flag' => true
     ];
+
+    /**
+     * 限定ガチャ？
+     */
+    public function isLimited() {
+
+    	return starts_with($this->title, '【期間限定】') ;
+    }
+
+    /**
+     * フェス限定ガチャ？
+     */
+    public function isFesLimited() {
+
+    	return starts_with($this->title, '【フェス限定】') ;
+    }
+
+    /**
+     * 復刻ガチャ？
+     */
+    public function isReprintLimited() {
+
+    	return starts_with($this->title, '【限定復刻】') ;
+    }
+
 }

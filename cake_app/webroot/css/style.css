@@ -522,3 +522,27 @@ table td {
     vertical-align: top;
     word-break: break-all;
 }
+
+#current_gasha_info label {
+    margin-bottom: 0;
+}
+#provision-ratio-modal .modal-body {
+    height: 400px;
+    overflow-y: scroll;
+}
+
+#provision-ratio-modal .modal-body table {
+	font-size: 80% !important;
+}
+#provision-ratio-modal .modal-body table tr th:nth-child(1),
+#provision-ratio-modal .modal-body table tr td:nth-child(1) {
+	width: 15%;
+}
+#provision-ratio-modal .modal-body table tr th:nth-child(2),
+#provision-ratio-modal .modal-body table tr td:nth-child(2) {
+	width: 70%;
+}
+#provision-ratio-modal .modal-body table tr th:nth-child(3),
+#provision-ratio-modal .modal-body table tr td:nth-child(3) {
+	width: 15%;
+}

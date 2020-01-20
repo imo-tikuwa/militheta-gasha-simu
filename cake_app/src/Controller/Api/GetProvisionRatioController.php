@@ -48,19 +48,9 @@ class GetProvisionRatioController extends AppController
 
 		// ガシャ情報取得
 		$gasha = $this->Gasha->get($gasha_id);
-		$gasha_from = $gasha->start_date->i18nFormat('yyyy-MM-dd');
-		$gasha_to = $gasha->end_date->i18nFormat('yyyy-MM-dd');
 
 		// カード情報取得
-		$cards = $this->Cards->find()->select(['id', 'character_id', 'name', 'rarity', 'type'])->where([
-				'add_date <=' => $gasha_from,
-				'gasha_include' => 1,
-		])
-		->enableHydration(false)
-		->toArray();
-
-		// レアリティごとに持ち替え
-		$cards = Hash::combine($cards, '{n}.id', '{n}', '{n}.rarity');
+		$cards = $this->Cards->findGashaTargetCards($gasha);
 
 		// ガシャ情報からSSRとSRのレートを取得、Rのレートを計算
 		$ssr_rate = $gasha->ssr_rate;
