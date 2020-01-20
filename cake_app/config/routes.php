@@ -47,14 +47,11 @@ use Cake\Routing\Route\DashedRoute;
 Router::defaultRouteClass(DashedRoute::class);
 
 Router::scope('/', function (RouteBuilder $routes) {
-    /**
-     * Here, we are connecting '/' (base path) to a controller called 'Pages',
-     * its action called 'display', and we pass a param to select the view file
-     * to use (in this case, src/Template/Pages/home.ctp)...
-     */
-//     $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-    // ドメイン直下のURLにアクセスしたとき、ログイン画面を表示する
-    $routes->redirect('/', ['controller' => 'Auth', 'action' => 'login', 'prefix' => 'admin']);
+
+	/**
+	 * トップページ
+	 */
+    $routes->connect('/', ['controller' => 'Front']);
 
     /**
      * 管理者権限

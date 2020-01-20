@@ -208,3 +208,5 @@ if (Configure::read('debug')) {
 	Configure::write('DebugKit.forceEnable', true);
 	Plugin::load('DebugKit', ['bootstrap' => true, 'routes' => true]);
 }
+
+Plugin::load('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);

@@ -38,6 +38,8 @@ class GetProvisionRatioController extends AppController
 
 		$this->viewBuilder()->enableAutoLayout(false);
 		$this->autoRender = false;
+		$this->response->withCharset('UTF-8');
+		$this->response->withType('json');
 
 		if (empty($gasha_id)) {
 			echo json_encode([]);
@@ -102,8 +104,8 @@ class GetProvisionRatioController extends AppController
 				$response[$rarity_text][] = $card_info;
 			}
 		}
-		debug($response);exit;
-		echo json_encode($response);
+
+		$this->response->body(json_encode($response, JSON_UNESCAPED_UNICODE));
 		return;
 	}
 
