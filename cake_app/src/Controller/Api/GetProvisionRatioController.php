@@ -8,7 +8,7 @@ use Cake\Utility\Hash;
 /**
  * 提供割合を返すコントローラ
  *
- * @property \App\Model\Table\GashaTable $Gasha
+ * @property \App\Model\Table\GashasTable $Gashas
  * @property \App\Model\Table\CardsTable $Cards
  *
  * @method \App\Model\Entity\Card[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
@@ -22,7 +22,7 @@ class GetProvisionRatioController extends AppController
 	public function initialize()
 	{
 		parent::initialize();
-		$this->Gasha = TableRegistry::getTableLocator()->get("Gasha");
+		$this->Gashas = TableRegistry::getTableLocator()->get("Gashas");
 		$this->Cards = TableRegistry::getTableLocator()->get("Cards");
 
 		$this->rarity_codes = _code("Cards.rarity");
@@ -47,7 +47,7 @@ class GetProvisionRatioController extends AppController
 		}
 
 		// ガシャ情報取得
-		$gasha = $this->Gasha->get($gasha_id);
+		$gasha = $this->Gashas->get($gasha_id);
 
 		// カード情報取得
 		$cards = $this->Cards->findGashaTargetCards($gasha);

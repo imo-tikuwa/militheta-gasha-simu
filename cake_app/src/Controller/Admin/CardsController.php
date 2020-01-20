@@ -91,7 +91,7 @@ class CardsController extends AppController
             $query->where([$this->Cards->aliasField('limited') => $request['limited']]);
         }
         $query->group('Cards.id');
-        return $query->contain(['Characters']);
+        return $query->contain(['Characters', 'CardReprints']);
     }
 
     /**
@@ -103,7 +103,7 @@ class CardsController extends AppController
      */
     public function view($id = null)
     {
-        $card = $this->Cards->get($id, ['contain' => ['Characters']]);
+        $card = $this->Cards->get($id, ['contain' => ['Characters', 'CardReprints']]);
 
         $this->set('card', $card);
     }
@@ -147,7 +147,7 @@ class CardsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $conn = $this->Cards->getConnection();
             $conn->begin();
-            $card = $this->Cards->patchEntity($card, $this->request->getData(), ['associated' => ['Characters']]);
+            $card = $this->Cards->patchEntity($card, $this->request->getData(), ['associated' => ['Characters', 'CardReprints']]);
             if ($this->Cards->save($card, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('カードの登録が完了しました。');

@@ -9,7 +9,9 @@ use Cake\Datasource\EntityInterface;
 use Cake\ORM\TableRegistry;
 
 /**
- * Gasha Model
+ * Gashas Model
+ *
+ * @property \App\Model\Table\CardReprintsTable|\Cake\ORM\Association\HasMany $CardReprints
  *
  * @method \App\Model\Entity\Gasha get($primaryKey, $options = [])
  * @method \App\Model\Entity\Gasha newEntity($data = null, array $options = [])
@@ -22,83 +24,87 @@ use Cake\ORM\TableRegistry;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class GashaTable extends AppTable
+class GashasTable extends AppTable
 {
 
-	/**
-	 * Initialize method
-	 *
-	 * @param array $config The configuration for the Table.
-	 * @return void
-	 */
-	public function initialize(array $config)
-	{
-		parent::initialize($config);
+    /**
+     * Initialize method
+     *
+     * @param array $config The configuration for the Table.
+     * @return void
+     */
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
 
-		$this->setTable('gasha');
-		$this->setDisplayField('title');
-		$this->setPrimaryKey('id');
+        $this->setTable('gashas');
+        $this->setDisplayField('title');
+        $this->setPrimaryKey('id');
 
-	}
 
-	/**
-	 * Default validation rules.
-	 *
-	 * @param \Cake\Validation\Validator $validator Validator instance.
-	 * @return \Cake\Validation\Validator
-	 */
-	public function validationDefault(Validator $validator)
-	{
-		$validator
-			->integer('id')
-			->allowEmpty('id', 'create');
+        $this->hasMany('CardReprints', [
+            'foreignKey' => 'gasha_id'
+        ]);
+    }
 
-		$validator
-			->date('start_date')
-			->allowEmpty('start_date');
+    /**
+     * Default validation rules.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->integer('id')
+            ->allowEmpty('id', 'create');
 
-		$validator
-			->date('end_date')
-			->allowEmpty('end_date');
+        $validator
+            ->date('start_date')
+            ->allowEmpty('start_date');
 
-		$validator
-			->scalar('title')
-			->maxLength('title', 255)
-			->allowEmpty('title');
+        $validator
+            ->date('end_date')
+            ->allowEmpty('end_date');
 
-		$validator
-			->integer('ssr_rate')
-			->allowEmpty('ssr_rate');
+        $validator
+            ->scalar('title')
+            ->maxLength('title', 255)
+            ->allowEmpty('title');
 
-		$validator
-			->integer('sr_rate')
-			->allowEmpty('sr_rate');
+        $validator
+            ->integer('ssr_rate')
+            ->allowEmpty('ssr_rate');
 
-		$validator
-			->numeric('ssr_pickup_rate')
-			->allowEmpty('ssr_pickup_rate');
+        $validator
+            ->integer('sr_rate')
+            ->allowEmpty('sr_rate');
 
-		$validator
-			->numeric('sr_pickup_rate')
-			->allowEmpty('sr_pickup_rate');
+        $validator
+            ->numeric('ssr_pickup_rate')
+            ->allowEmpty('ssr_pickup_rate');
 
-		$validator
-			->numeric('r_pickup_rate')
-			->allowEmpty('r_pickup_rate');
+        $validator
+            ->numeric('sr_pickup_rate')
+            ->allowEmpty('sr_pickup_rate');
 
-		return $validator;
-	}
+        $validator
+            ->numeric('r_pickup_rate')
+            ->allowEmpty('r_pickup_rate');
 
-	/**
-	 * patchEntityのオーバーライド
-	 * ファイル項目、GoogleMap項目のJSON文字列を配列に変換する
-	 * {@inheritDoc}
-	 * @see \Cake\ORM\Table::patchEntity()
-	 */
-	public function patchEntity(EntityInterface $entity, array $data, array $options = [])
-	{
-		return parent::patchEntity($entity, $data, $options);
-	}
+        return $validator;
+    }
+
+    /**
+     * patchEntityのオーバーライド
+     * ファイル項目、GoogleMap項目のJSON文字列を配列に変換する
+     * {@inheritDoc}
+     * @see \Cake\ORM\Table::patchEntity()
+     */
+    public function patchEntity(EntityInterface $entity, array $data, array $options = [])
+    {
+        return parent::patchEntity($entity, $data, $options);
+    }
 
 	/**
 	 * CSVヘッダー情報を取得する

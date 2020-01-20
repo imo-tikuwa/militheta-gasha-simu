@@ -8,7 +8,7 @@ use Cake\Utility\Hash;
 /**
  * Front Controller
  *
- * @property \App\Model\Table\GashaTable $Gasha
+ * @property \App\Model\Table\GashasTable $Gashas
  */
 class FrontController extends AppController
 {
@@ -18,7 +18,7 @@ class FrontController extends AppController
 	public function initialize()
 	{
 		parent::initialize();
-		$this->Gasha = TableRegistry::getTableLocator()->get("Gasha");
+		$this->Gashas = TableRegistry::getTableLocator()->get("Gashas");
 		$this->Cards = TableRegistry::getTableLocator()->get("Cards");
 	}
 
@@ -29,9 +29,9 @@ class FrontController extends AppController
 	 */
 	public function index()
 	{
-		$gasha_datas = $this->Gasha->findGashaData();
+		$gasha_datas = $this->Gashas->findGashaData();
 
-		$gasha_json_data = $this->Gasha->getGashaJsonData($gasha_datas);
+		$gasha_json_data = $this->Gashas->getGashaJsonData($gasha_datas);
 		$gasha_selections = Hash::combine($gasha_datas, '{n}.id', '{n}.title');
 
 		$rarity_codes = _code("Cards.rarity");

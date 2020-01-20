@@ -4,24 +4,19 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Card Entity
+ * CardReprint Entity
  *
  * @property int $id
- * @property int|null $character_id
- * @property string|null $name
- * @property string|null $rarity
- * @property string|null $type
- * @property \Cake\I18n\FrozenDate|null $add_date
- * @property int|null $gasha_include
- * @property int|null $limited
+ * @property int|null $gasha_id
+ * @property int|null $card_id
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
  * @property string $delete_flag
  *
- * @property \App\Model\Entity\Character $character
- * @property \App\Model\Entity\CardReprint[] $card_reprints
+ * @property \App\Model\Entity\Gasha $gasha
+ * @property \App\Model\Entity\Card $card
  */
-class Card extends Entity
+class CardReprint extends Entity
 {
 
     /**
@@ -34,17 +29,12 @@ class Card extends Entity
      * @var array
      */
     protected $_accessible = [
-        'character_id' => true,
-        'name' => true,
-        'rarity' => true,
-        'type' => true,
-        'add_date' => true,
-        'gasha_include' => true,
-        'limited' => true,
+        'gasha_id' => true,
+        'card_id' => true,
         'created' => true,
         'modified' => true,
         'delete_flag' => true,
-        'character' => true,
-        'card_reprints' => true
+        'gasha' => true,
+        'card' => true
     ];
 }

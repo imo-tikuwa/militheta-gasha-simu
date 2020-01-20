@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Gasha[]|\Cake\Collection\CollectionInterface $gasha
+ * @var \App\Model\Entity\Gasha[]|\Cake\Collection\CollectionInterface $gashas
  */
 $this->assign('title', "ガシャ");
 ?>
@@ -30,7 +30,7 @@ $this->assign('title', "ガシャ");
             </tr>
     </thead>
     <tbody>
-            <?php foreach ($gasha as $gasha) { ?>
+            <?php foreach ($gashas as $gasha) { ?>
             <tr>
                 <td><?= $this->Html->link($gasha->id, ['action' => 'view', $gasha->id]) ?></td>
                 <td>

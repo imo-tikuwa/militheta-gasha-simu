@@ -16,5 +16,10 @@ return [
 						'label' => 'カード',
 						'icon_class' => 'fas fa-table',
 				],
+				'CardReprints' => [
+						'controller' => 'CardReprints',
+						'label' => '復刻情報',
+						'icon_class' => 'fas fa-table',
+				],
 		],
 ];

@@ -10,11 +10,11 @@ use Cake\Utility\Hash;
 /**
  * Gasha Controller
  *
- * @property \App\Model\Table\GashaTable $Gasha
+ * @property \App\Model\Table\GashasTable $Gashas
  *
  * @method \App\Model\Entity\Gasha[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class GashaController extends AppController
+class GashasController extends AppController
 {
 
     /**
@@ -36,7 +36,7 @@ class GashaController extends AppController
         $query = $this->_getQuery($request);
         $gasha = $this->paginate($query);
 
-        $this->set(compact('gasha'));
+        $this->set(compact('gashas'));
     }
 
     /**
@@ -45,22 +45,22 @@ class GashaController extends AppController
      */
     private function _getQuery($request)
     {
-        $query = $this->Gasha->find();
+        $query = $this->Gashas->find();
         // ID
         if (isset($request['id']) && !is_null($request['id']) && $request['id'] !== '') {
-            $query->where([$this->Gasha->aliasField('id') => $request['id']]);
+            $query->where([$this->Gashas->aliasField('id') => $request['id']]);
         }
         // ガシャ開始日
         if (isset($request['start_date']) && !is_null($request['start_date']) && $request['start_date'] !== '') {
-            $query->where([$this->Gasha->aliasField('start_date') => $request['start_date']]);
+            $query->where([$this->Gashas->aliasField('start_date') => $request['start_date']]);
         }
         // ガシャ終了日
         if (isset($request['end_date']) && !is_null($request['end_date']) && $request['end_date'] !== '') {
-            $query->where([$this->Gasha->aliasField('end_date') => $request['end_date']]);
+            $query->where([$this->Gashas->aliasField('end_date') => $request['end_date']]);
         }
         // ガシャタイトル
         if (isset($request['title']) && !is_null($request['title']) && $request['title'] !== '') {
-            $query->where([$this->Gasha->aliasField('title LIKE') => "%{$request['title']}%"]);
+            $query->where([$this->Gashas->aliasField('title LIKE') => "%{$request['title']}%"]);
         }
         return $query;
     }
@@ -74,7 +74,7 @@ class GashaController extends AppController
      */
     public function view($id = null)
     {
-        $gasha = $this->Gasha->get($id);
+        $gasha = $this->Gashas->get($id);
 
         $this->set('gasha', $gasha);
     }
@@ -111,14 +111,14 @@ class GashaController extends AppController
     private function _form($id = null)
     {
         if ($this->request->action == 'edit') {
-            $gasha = $this->Gasha->get($id);
+            $gasha = $this->Gashas->get($id);
         } else {
-            $gasha = $this->Gasha->newEntity();
+            $gasha = $this->Gashas->newEntity();
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $conn = $this->Gasha->getConnection();
+            $conn = $this->Gashas->getConnection();
             $conn->begin();
-            $gasha = $this->Gasha->patchEntity($gasha, $this->request->getData(), ['associated' => []]);
+            $gasha = $this->Gashas->patchEntity($gasha, $this->request->getData(), ['associated' => []]);
             if ($this->Gasha->save($gasha, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('ガシャの登録が完了しました。');
@@ -141,7 +141,7 @@ class GashaController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        if ($this->Gasha->deleteRecord($id, DeleteType::LOGICAL)) {
+        if ($this->Gashas->deleteRecord($id, DeleteType::LOGICAL)) {
             $this->Flash->success('ガシャの削除が完了しました。');
         } else {
             $this->Flash->error('エラーが発生しました。');
@@ -158,7 +158,7 @@ class GashaController extends AppController
         $request = $this->request->getQueryParams();
         $gasha = $this->_getQuery($request)->toArray();
         $_serialize = 'gasha';
-        $_header = $this->Gasha->getCsvHeaders();
+        $_header = $this->Gashas->getCsvHeaders();
         $_extract = [
             // ID
             'id',
@@ -233,7 +233,7 @@ class GashaController extends AppController
         $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
 
         $_csvEncoding = 'UTF-8';
-        $this->response = $this->response->withDownload("gasha-{$datetime->format('YmdHis')}.csv");
+        $this->response = $this->response->withDownload("gashas-{$datetime->format('YmdHis')}.csv");
         $this->viewBuilder()->setClassName('CsvView.Csv');
         $this->set(compact('gasha', '_serialize', '_header', '_extract', '_csvEncoding'));
     }
