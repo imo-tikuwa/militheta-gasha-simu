@@ -9,7 +9,7 @@ return [
 						'col_sm_size' => 12,
 				],
 				'character_id' => [
-						'search' => false,
+						'search' => true,
 						'listview' => true,
 						'label' => 'キャラクター',
 						'col_md_size' => 3,
@@ -17,7 +17,6 @@ return [
 						'input_type' => 'foreign_key',
 						'foreign_table' => 'characters',
 						'foreign_disp_column' => 'name',
-						'boolean_init_value' => 'null',
 				],
 				'name' => [
 						'search' => true,
@@ -25,6 +24,7 @@ return [
 						'label' => 'カード名',
 						'col_md_size' => 6,
 						'col_sm_size' => 12,
+						'search_type' => 'LIKE',
 				],
 				'rarity' => [
 						'search' => true,
@@ -33,7 +33,6 @@ return [
 						'col_md_size' => 3,
 						'col_sm_size' => 12,
 						'input_type' => 'select',
-						'boolean_init_value' => 'null',
 						'selections' => [
 								'01' => 'N',
 								'02' => 'R',
@@ -53,8 +52,8 @@ return [
 								'01' => 'Princess',
 								'02' => 'Fairy',
 								'03' => 'Angel',
+								'04' => 'Ex',
 						],
-						'default_value' => '01',
 				],
 				'add_date' => [
 						'search' => true,

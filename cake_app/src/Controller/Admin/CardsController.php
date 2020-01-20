@@ -23,7 +23,7 @@ class CardsController extends AppController
     public function initialize()
     {
         parent::initialize();
-        if (!in_array($this->request->action, ['delete', 'csvExport'], true)) {
+        if (!in_array($this->request->action, ['delete', 'csvExport', 'csvImport'], true)) {
             // キャラクターの選択肢
             $this->set('characters', $this->Cards->findForeignSelectionData('Characters', 'name', true));
         }
@@ -62,9 +62,13 @@ class CardsController extends AppController
         if (isset($request['id']) && !is_null($request['id']) && $request['id'] !== '') {
             $query->where([$this->Cards->aliasField('id') => $request['id']]);
         }
+        // キャラクター
+        if (isset($request['character_id']) && !is_null($request['character_id']) && $request['character_id'] !== '') {
+            $query->where(['Characters.id' => $request['character_id']]);
+        }
         // カード名
         if (isset($request['name']) && !is_null($request['name']) && $request['name'] !== '') {
-            $query->where([$this->Cards->aliasField('name') => $request['name']]);
+            $query->where([$this->Cards->aliasField('name LIKE') => "%{$request['name']}%"]);
         }
         // レアリティ
         if (isset($request['rarity']) && !is_null($request['rarity']) && $request['rarity'] !== '') {
@@ -222,5 +226,67 @@ class CardsController extends AppController
         $this->response = $this->response->withDownload("cards-{$datetime->format('YmdHis')}.csv");
         $this->viewBuilder()->setClassName('CsvView.Csv');
         $this->set(compact('cards', '_serialize', '_header', '_extract', '_csvEncoding'));
+    }
+
+    /**
+     * CSVインポート
+     * @return \Cake\Http\Response|NULL
+     */
+    public function csvImport() {
+
+        $csv_import_file = @$_FILES["csv_import_file"]["tmp_name"];
+        if (is_uploaded_file($csv_import_file)){
+            $conn = $this->Cards->getConnection();
+            try {
+                if (($handle = fopen($csv_import_file, "r")) !== false) {
+                    $conn->begin();
+                    $index = 0;
+                    $insert_count = 0;
+                    $update_count = 0;
+                    while ($csv_row = fgetcsv($handle)) {
+
+                        // ヘッダチェック
+                        if ($index == 0) {
+                            if ($this->Cards->getCsvHeaders() != $csv_row) {
+                                throw new \Exception('HeaderCheckError');
+                            }
+                            $index++;
+                            continue;
+                        }
+                        $index++;
+
+                        // CSV1行の情報を変換
+                        $csv_data = $this->Cards->getCsvData($csv_row);
+
+                        // 更新のとき既存データ取得、新規のとき空のエンティティを作成
+                        if (!empty($csv_data['id'])) {
+                            $card = $this->Cards->get($csv_data['id']);
+                            $update_count++;
+                        } else {
+                            $card = $this->Cards->newEntity();
+                            $insert_count++;
+                        }
+
+                        // CSVのデータで上書きして保存
+                        $card = $this->Cards->patchEntity($card, $csv_data);
+                        if (!$this->Cards->save($card, ['atomic' => false])) {
+                            throw new \Exception('SaveError');
+                        }
+                    }
+                    if (!$conn->commit()) {
+                        throw new \Exception('CommitError');
+                    }
+                    $this->Flash->success("カードCSVの登録が完了しました。<br />新規：{$insert_count}件<br />更新：{$update_count}件", ['params' => ['escape' => false]]);
+                }
+            } catch (\Exception $e) {
+                $error_message = 'カードCSVの登録でエラーが発生しました。';
+                if (!empty($e->getMessage())) {
+                    $error_message .= "(" . $e->getMessage() . ")";
+                }
+                $this->Flash->error($error_message);
+                $conn->rollback();
+            }
+        }
+        return $this->redirect(['action' => 'index']);
     }
 }
