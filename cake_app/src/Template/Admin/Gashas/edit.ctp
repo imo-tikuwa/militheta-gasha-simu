@@ -70,39 +70,6 @@ $this->assign('title', "ガシャ{$button_name}");
             </div>
           </div>
         </div>
-        <div class="col-md-2 col-sm-12">
-          <div class="form-group">
-            <div class="input number">
-              <label for="ssr_pickup_rate">SSRピックアップレート</label>
-              <div class="input-group">
-                <?= $this->Form->text('ssr_pickup_rate', ['type' => 'number', 'id' => 'ssr_pickup_rate', 'class' => 'form-control rounded-0', 'label' => 'SSRピックアップレート', 'min' => '0', 'max' => '2', 'step' => '0.001']); ?>
-                <div class="input-group-append"><span class="input-group-text rounded-0">%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-12">
-          <div class="form-group">
-            <div class="input number">
-              <label for="sr_pickup_rate">SRピックアップレート</label>
-              <div class="input-group">
-                <?= $this->Form->text('sr_pickup_rate', ['type' => 'number', 'id' => 'sr_pickup_rate', 'class' => 'form-control rounded-0', 'label' => 'SRピックアップレート', 'min' => '0', 'max' => '2', 'step' => '0.001']); ?>
-                <div class="input-group-append"><span class="input-group-text rounded-0">%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-12">
-          <div class="form-group">
-            <div class="input number">
-              <label for="r_pickup_rate">Rピックアップレート</label>
-              <div class="input-group">
-                <?= $this->Form->text('r_pickup_rate', ['type' => 'number', 'id' => 'r_pickup_rate', 'class' => 'form-control rounded-0', 'label' => 'Rピックアップレート', 'min' => '0', 'max' => '20', 'step' => '0.001']); ?>
-                <div class="input-group-append"><span class="input-group-text rounded-0">%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="col-md-12">
           <?= $this->Form->button($button_name, ['class' => "btn btn-flat btn-outline-secondary"]) ?>
         </div>

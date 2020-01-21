@@ -9,8 +9,19 @@ $this->assign('title', "ガシャ");
  <div class="card">
   <div class="card-header">
    <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => 'add']) ?>'">新規登録</button>
-   <button type="button" class="btn btn-flat btn-outline-secondary" data-toggle="modal" data-target="#gasha-search-form-modal">検索</button>
+   <button type="button" class="btn btn-flat btn-outline-secondary" data-toggle="modal" data-target="#gashas-search-form-modal">検索</button>
    <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => 'csvExport', '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
+   <button type="button" class="btn btn-flat btn-outline-secondary" onclick="$('#csv-import-file').trigger('click');">CSVインポート</button>
+   <?= $this->Form->create(null, ['id' => 'csv-import-form', 'action' => 'csvImport', 'enctype' => 'multipart/form-data', 'style' => 'display:none;']) ?>
+     <input type="file" name="csv_import_file" id="csv-import-file"/>
+   <?= $this->Form->end(); ?>
+   <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
+   $(function(){
+     $('#csv-import-file').on('change', function(){
+       $('#csv-import-form').submit();
+     });
+   });
+   <?= $this->Html->scriptEnd() ?>
   </div>
   <div class="card-body table-responsive p-0">
    <table class="table table-hover">
@@ -22,9 +33,6 @@ $this->assign('title', "ガシャ");
                 <th scope="col"><?= $this->Paginator->sort('title', 'ガシャタイトル') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('ssr_rate', 'SSRレート') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('sr_rate', 'SRレート') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('ssr_pickup_rate', 'SSRピックアップレート') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sr_pickup_rate', 'SRピックアップレート') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('r_pickup_rate', 'Rピックアップレート') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified', '更新日時') ?></th>
                 <th scope="col" class="actions">操作</th>
             </tr>
@@ -46,9 +54,6 @@ $this->assign('title', "ガシャ");
                 <td><?= h($gasha->title) ?></td>
                 <td><?= $this->Number->format($gasha->ssr_rate) ?>%</td>
                 <td><?= $this->Number->format($gasha->sr_rate) ?>%</td>
-                <td><?= $this->Number->format($gasha->ssr_pickup_rate) ?>%</td>
-                <td><?= $this->Number->format($gasha->sr_pickup_rate) ?>%</td>
-                <td><?= $this->Number->format($gasha->r_pickup_rate) ?>%</td>
                 <td>
                   <?php if (!is_null($gasha->modified)) { ?>
                     <?= h($gasha->modified->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
@@ -73,14 +78,14 @@ $this->assign('title', "ガシャ");
  <?= $this->element('pager') ?>
 </div>
 
-<div class="modal search-form fade" id="gasha-search-form-modal" tabindex="-1" role="dialog" aria-labelledby="gasha-search-form-modal-label" aria-hidden="true">
+<div class="modal search-form fade" id="gashas-search-form-modal" tabindex="-1" role="dialog" aria-labelledby="gashas-search-form-modal-label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">ガシャ検索</h5>
       </div>
       <div class="modal-body">
-        <?= $this->Form->create(null, ['type' => 'get', 'id' => 'gasha-search-form']) ?>
+        <?= $this->Form->create(null, ['type' => 'get', 'id' => 'gashas-search-form']) ?>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">

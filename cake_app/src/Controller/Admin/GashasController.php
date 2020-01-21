@@ -8,7 +8,7 @@ use Cake\I18n\FrozenDate;
 use Cake\Utility\Hash;
 
 /**
- * Gasha Controller
+ * Gashas Controller
  *
  * @property \App\Model\Table\GashasTable $Gashas
  *
@@ -34,7 +34,7 @@ class GashasController extends AppController
         $request = $this->request->getQueryParams();
         $this->set('params', $request);
         $query = $this->_getQuery($request);
-        $gasha = $this->paginate($query);
+        $gashas = $this->paginate($query);
 
         $this->set(compact('gashas'));
     }
@@ -118,8 +118,8 @@ class GashasController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $conn = $this->Gashas->getConnection();
             $conn->begin();
-            $gasha = $this->Gashas->patchEntity($gasha, $this->request->getData(), ['associated' => []]);
-            if ($this->Gasha->save($gasha, ['atomic' => false])) {
+            $gasha = $this->Gashas->patchEntity($gasha, $this->request->getData(), ['associated' => ['CardReprints']]);
+            if ($this->Gashas->save($gasha, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('ガシャの登録が完了しました。');
                 return $this->redirect(['action' => 'index']);
@@ -156,8 +156,8 @@ class GashasController extends AppController
     public function csvExport()
     {
         $request = $this->request->getQueryParams();
-        $gasha = $this->_getQuery($request)->toArray();
-        $_serialize = 'gasha';
+        $gashas = $this->_getQuery($request)->toArray();
+        $_serialize = 'gashas';
         $_header = $this->Gashas->getCsvHeaders();
         $_extract = [
             // ID
@@ -192,27 +192,6 @@ class GashasController extends AppController
                 }
                 return "";
             },
-            // SSRピックアップレート
-            function ($row) {
-                if (!empty($row['ssr_pickup_rate'])) {
-                    return $row['ssr_pickup_rate']."%";
-                }
-                return "";
-            },
-            // SRピックアップレート
-            function ($row) {
-                if (!empty($row['sr_pickup_rate'])) {
-                    return $row['sr_pickup_rate']."%";
-                }
-                return "";
-            },
-            // Rピックアップレート
-            function ($row) {
-                if (!empty($row['r_pickup_rate'])) {
-                    return $row['r_pickup_rate']."%";
-                }
-                return "";
-            },
             // 作成日時
             function ($row) {
                 if ($row['created'] instanceof FrozenTime) {
@@ -235,6 +214,68 @@ class GashasController extends AppController
         $_csvEncoding = 'UTF-8';
         $this->response = $this->response->withDownload("gashas-{$datetime->format('YmdHis')}.csv");
         $this->viewBuilder()->setClassName('CsvView.Csv');
-        $this->set(compact('gasha', '_serialize', '_header', '_extract', '_csvEncoding'));
+        $this->set(compact('gashas', '_serialize', '_header', '_extract', '_csvEncoding'));
+    }
+
+    /**
+     * CSVインポート
+     * @return \Cake\Http\Response|NULL
+     */
+    public function csvImport() {
+
+        $csv_import_file = @$_FILES["csv_import_file"]["tmp_name"];
+        if (is_uploaded_file($csv_import_file)){
+            $conn = $this->Gashas->getConnection();
+            try {
+                if (($handle = fopen($csv_import_file, "r")) !== false) {
+                    $conn->begin();
+                    $index = 0;
+                    $insert_count = 0;
+                    $update_count = 0;
+                    while ($csv_row = fgetcsv($handle)) {
+
+                        // ヘッダチェック
+                        if ($index == 0) {
+                            if ($this->Gashas->getCsvHeaders() != $csv_row) {
+                                throw new \Exception('HeaderCheckError');
+                            }
+                            $index++;
+                            continue;
+                        }
+                        $index++;
+
+                        // CSV1行の情報を変換
+                        $csv_data = $this->Gashas->getCsvData($csv_row);
+
+                        // 更新のとき既存データ取得、新規のとき空のエンティティを作成
+                        if (!empty($csv_data['id'])) {
+                            $gasha = $this->Gashas->get($csv_data['id']);
+                            $update_count++;
+                        } else {
+                            $gasha = $this->Gashas->newEntity();
+                            $insert_count++;
+                        }
+
+                        // CSVのデータで上書きして保存
+                        $gasha = $this->Gashas->patchEntity($gasha, $csv_data);
+                        if (!$this->Gashas->save($gasha, ['atomic' => false])) {
+                            throw new \Exception('SaveError');
+                        }
+                    }
+                    if (!$conn->commit()) {
+                        throw new \Exception('CommitError');
+                    }
+                    $this->Flash->success("ガシャCSVの登録が完了しました。<br />新規：{$insert_count}件<br />更新：{$update_count}件", ['params' => ['escape' => false]]);
+                }
+            } catch (\Exception $e) {
+                $error_message = 'ガシャCSVの登録でエラーが発生しました。';
+                if (!empty($e->getMessage())) {
+                    $error_message .= "(" . $e->getMessage() . ")";
+                }
+                $this->Flash->error($error_message);
+                $conn->rollback();
+            }
+        }
+        return $this->redirect(['action' => 'index']);
     }
 }

@@ -42,18 +42,6 @@ $this->assign('title', "ガシャ詳細");
             <td><?= $this->Number->format($gasha->sr_rate) ?>%</td>
         </tr>
         <tr>
-            <th scope="row">SSRピックアップレート</th>
-            <td><?= $this->Number->format($gasha->ssr_pickup_rate) ?>%</td>
-        </tr>
-        <tr>
-            <th scope="row">SRピックアップレート</th>
-            <td><?= $this->Number->format($gasha->sr_pickup_rate) ?>%</td>
-        </tr>
-        <tr>
-            <th scope="row">Rピックアップレート</th>
-            <td><?= $this->Number->format($gasha->r_pickup_rate) ?>%</td>
-        </tr>
-        <tr>
             <th scope="row">作成日時</th>
             <td>
               <?php if (!is_null($gasha->created)) { ?>

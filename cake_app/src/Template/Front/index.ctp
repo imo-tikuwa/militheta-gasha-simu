@@ -16,9 +16,6 @@ $(function(){
 		$('#ssr_rate').text(per_gasha_data.ssr_rate);
 		$('#sr_rate').text(per_gasha_data.sr_rate);
 		$('#r_rate').text(100 - parseInt(per_gasha_data.ssr_rate) - parseInt(per_gasha_data.sr_rate));
-		$('#ssr_pickup_rate').text(per_gasha_data.ssr_pickup_rate);
-		$('#sr_pickup_rate').text(per_gasha_data.sr_pickup_rate);
-		$('#r_pickup_rate').text(per_gasha_data.r_pickup_rate);
 	});
 	$('#gasha_id').trigger('change');
 
@@ -156,9 +153,6 @@ $(function(){
               <label for="ssr_rate">SSRレート</label>：<span id="ssr_rate"></span>%<br />
               <label for="sr_rate">SRレート</label>：<span id="sr_rate"></span>%<br />
               <label for="r_rate">Rレート</label>：<span id="r_rate"></span>%<br />
-              <label for="ssr_pickup_rate">SSRピックアップレート</label>：<span id="ssr_pickup_rate"></span>%<br />
-              <label for="sr_pickup_rate">SRピックアップレート</label>：<span id="sr_pickup_rate"></span>%<br />
-              <label for="r_pickup_rate">Rピックアップレート</label>：<span id="r_pickup_rate"></span>%<br />
               <button type="button" class="btn btn-sm btn-secondary rounded-0" id="display-provision-ratio-modal">提供割合</button>
               <button type="button" class="btn btn-sm btn-secondary rounded-0" id="pick-gasha">10連ガシャを引く</button>
             </div>

@@ -12,6 +12,7 @@ use Cake\ORM\TableRegistry;
  * Gashas Model
  *
  * @property \App\Model\Table\CardReprintsTable|\Cake\ORM\Association\HasMany $CardReprints
+ * @property \App\Model\Table\GashaPickupsTable|\Cake\ORM\Association\HasMany $GashaPickups
  *
  * @method \App\Model\Entity\Gasha get($primaryKey, $options = [])
  * @method \App\Model\Entity\Gasha newEntity($data = null, array $options = [])
@@ -43,6 +44,9 @@ class GashasTable extends AppTable
 
 
         $this->hasMany('CardReprints', [
+            'foreignKey' => 'gasha_id'
+        ]);
+        $this->hasMany('GashaPickups', [
             'foreignKey' => 'gasha_id'
         ]);
     }
@@ -80,18 +84,6 @@ class GashasTable extends AppTable
             ->integer('sr_rate')
             ->allowEmpty('sr_rate');
 
-        $validator
-            ->numeric('ssr_pickup_rate')
-            ->allowEmpty('ssr_pickup_rate');
-
-        $validator
-            ->numeric('sr_pickup_rate')
-            ->allowEmpty('sr_pickup_rate');
-
-        $validator
-            ->numeric('r_pickup_rate')
-            ->allowEmpty('r_pickup_rate');
-
         return $validator;
     }
 
@@ -106,66 +98,54 @@ class GashasTable extends AppTable
         return parent::patchEntity($entity, $data, $options);
     }
 
-	/**
-	 * CSVヘッダー情報を取得する
-	 */
-	public function getCsvHeaders() {
-		return [
-			'ID',
-			'ガシャ開始日',
-			'ガシャ終了日',
-			'ガシャタイトル',
-			'SSRレート',
-			'SRレート',
-			'SSRピックアップレート',
-			'SRピックアップレート',
-			'Rピックアップレート',
-			'作成日時',
-			'更新日時',
-		];
-	}
+    /**
+     * CSVヘッダー情報を取得する
+     */
+    public function getCsvHeaders() {
+        return [
+            'ID',
+            'ガシャ開始日',
+            'ガシャ終了日',
+            'ガシャタイトル',
+            'SSRレート',
+            'SRレート',
+            '作成日時',
+            '更新日時',
+        ];
+    }
 
-	/**
-	 * CSVカラム情報を取得する
-	 */
-	public function getCsvColumns() {
-		return [
-			'id',
-			'start_date',
-			'end_date',
-			'title',
-			'ssr_rate',
-			'sr_rate',
-			'ssr_pickup_rate',
-			'sr_pickup_rate',
-			'r_pickup_rate',
-			'created',
-			'modified',
-		];
-	}
+    /**
+     * CSVカラム情報を取得する
+     */
+    public function getCsvColumns() {
+        return [
+            'id',
+            'start_date',
+            'end_date',
+            'title',
+            'ssr_rate',
+            'sr_rate',
+            'created',
+            'modified',
+        ];
+    }
 
-	/**
-	 * CSVの入力情報を取得する
-	 */
-	public function getCsvData($csv_row) {
+    /**
+     * CSVの入力情報を取得する
+     */
+    public function getCsvData($csv_row) {
 
-		$csv_data = array_combine($this->getCsvColumns(), $csv_row);
+        $csv_data = array_combine($this->getCsvColumns(), $csv_row);
 
-		// SSRレート
-		$csv_data['ssr_rate'] = preg_replace('/[^0-9]/', '', $csv_data['ssr_rate']);
-		// SRレート
-		$csv_data['sr_rate'] = preg_replace('/[^0-9]/', '', $csv_data['sr_rate']);
-		// SSRピックアップレート
-		$csv_data['ssr_pickup_rate'] = preg_replace('/[^0-9]/', '', $csv_data['ssr_pickup_rate']);
-		// SRピックアップレート
-		$csv_data['sr_pickup_rate'] = preg_replace('/[^0-9]/', '', $csv_data['sr_pickup_rate']);
-		// Rピックアップレート
-		$csv_data['r_pickup_rate'] = preg_replace('/[^0-9]/', '', $csv_data['r_pickup_rate']);
+        // SSRレート
+        $csv_data['ssr_rate'] = preg_replace('/[^0-9]/', '', $csv_data['ssr_rate']);
+        // SRレート
+        $csv_data['sr_rate'] = preg_replace('/[^0-9]/', '', $csv_data['sr_rate']);
 
-		unset($csv_data['created']);
-		unset($csv_data['modified']);
-		return $csv_data;
-	}
+        unset($csv_data['created']);
+        unset($csv_data['modified']);
+        return $csv_data;
+    }
 
 	/**
 	 * ガシャ情報を取得
@@ -178,10 +158,7 @@ class GashasTable extends AppTable
 				'end_date',
 				'title',
 				'ssr_rate',
-				'sr_rate',
-				'ssr_pickup_rate',
-				'sr_pickup_rate',
-				'r_pickup_rate'
+				'sr_rate'
 		])->enableHydration(false)->toArray();
 		return $gasha_data;
 	}
