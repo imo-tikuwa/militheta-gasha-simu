@@ -523,6 +523,11 @@ table td {
     word-break: break-all;
 }
 
+
+h1 {
+	font-size:1.5rem;
+}
+
 #current_gasha_info label {
     margin-bottom: 0;
 }
@@ -544,5 +549,22 @@ table td {
 }
 #provision-ratio-modal .modal-body table tr th:nth-child(3),
 #provision-ratio-modal .modal-body table tr td:nth-child(3) {
+	width: 15%;
+}
+
+#gasha-result table tr th:nth-child(1),
+#gasha-result table tr td:nth-child(1) {
+	width: 10%;
+}
+#gasha-result table tr th:nth-child(2),
+#gasha-result table tr td:nth-child(2) {
+	width: 15%;
+}
+#gasha-result table tr th:nth-child(3),
+#gasha-result table tr td:nth-child(3) {
+	width: 60%;
+}
+#gasha-result table tr th:nth-child(4),
+#gasha-result table tr td:nth-child(4) {
 	width: 15%;
 }
