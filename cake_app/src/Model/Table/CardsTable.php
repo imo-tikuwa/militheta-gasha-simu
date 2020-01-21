@@ -262,6 +262,20 @@ class CardsTable extends AppTable
 			$cards = array_merge($reprint_limited_cards, $cards);
 		}
 
+		// TODO 以下の処理は上のカード情報を取得するORMにまとめられそう
+		// ピックアップ情報を取得して付加
+		$card_ids = Hash::extract($cards, '{n}.id');
+		$gasha_pickups = TableRegistry::getTableLocator()->get('GashaPickups');
+		$pickup_targets = $gasha_pickups->find()->select(['card_id'])->where([
+				'card_id IN' => $card_ids,
+				'gasha_id' => $gasha->id,
+		])
+		->enableHydration(false)->toArray();
+		$pickup_targets = Hash::extract($pickup_targets, '{n}.card_id');
+		foreach ($cards as $card_index => $card) {
+			$cards[$card_index]['pickup'] = (in_array($card['id'], $pickup_targets));
+		}
+
 		// レアリティごとに持ち替え
 		$cards = Hash::combine($cards, '{n}.id', '{n}', '{n}.rarity');
 

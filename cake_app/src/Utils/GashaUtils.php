@@ -19,18 +19,40 @@ class GashaUtils {
 		$sr_rate = $gasha->sr_rate;
 		$r_rate = 100 - $ssr_rate - $sr_rate;
 
-		// TODO ピックアップ対象カードはとりあえずゼロとする
+		// ピックアップ対象カードのカウントアップ
 		$ssr_pickup_target_count = 0;
 		$sr_pickup_target_count = 0;
 		$r_pickup_target_count = 0;
+		foreach ($cards as $rarity => $per_rarity_cards) {
+			foreach ($per_rarity_cards as $card) {
+				if ($card['pickup'] === true) {
+					switch ($card['rarity']) {
+						case 'SSR':
+							$ssr_pickup_target_count++;
+							break;
+						case 'SR':
+							$sr_pickup_target_count++;
+							break;
+						case 'R':
+							$r_pickup_target_count++;
+							break;
+					}
+				}
+			}
+		}
+
+		// ピックアップカード1枚当たりのピック率
+		$per_ssr_pickup_rate = ($ssr_pickup_target_count > 0) ? @(BASE_SSR_PICKUP_RATE / $ssr_pickup_target_count) : 0;
+		$per_sr_pickup_rate = ($sr_pickup_target_count > 0) ? @(BASE_SR_PICKUP_RATE / $sr_pickup_target_count) : 0;
+		$per_r_pickup_rate = ($r_pickup_target_count > 0) ? (BASE_R_PICKUP_RATE / $r_pickup_target_count) : 0;
 
 		// 非ピックアップ1枚当たりのピック確率を計算する
 		// SSR、SRは最初にピックアップの確率で減算し、残りの枚数で分け合う
-		$per_ssr_pick_rate = floor_plus(($ssr_rate - ($gasha->ssr_pickup_rate * $ssr_pickup_target_count)) / (count($cards['SSR']) - $ssr_pickup_target_count), 3);
-		$per_sr_pick_rate = floor_plus(($sr_rate - ($gasha->sr_pickup_rate * $sr_pickup_target_count)) / (count($cards['SR']) - $sr_pickup_target_count), 3);
-		$per_r_pick_rate = 0;
+		$per_ssr_rate = floor_plus(($ssr_rate - ($per_ssr_pickup_rate * $ssr_pickup_target_count)) / (count($cards['SSR']) - $ssr_pickup_target_count), 3);
+		$per_sr_rate = floor_plus(($sr_rate - ($per_sr_pickup_rate * $sr_pickup_target_count)) / (count($cards['SR']) - $sr_pickup_target_count), 3);
+		$per_r_rate = 0;
 		if (isset($cards['R'])) {
-			$per_r_pick_rate = floor_plus(($r_rate - ($gasha->r_pickup_rate * $r_pickup_target_count)) / (count($cards['R']) - $r_pickup_target_count), 3);
+			$per_r_rate = floor_plus(($r_rate - ($per_r_pickup_rate * $r_pickup_target_count)) / (count($cards['R']) - $r_pickup_target_count), 3);
 		}
 
 		// 結果を返す
@@ -54,13 +76,25 @@ class GashaUtils {
 				];
 				switch ($rarity_text) {
 					case 'R':
-						$card_info['rate'] = $per_r_pick_rate;
+						if ($card['pickup'] === true) {
+							$card_info['rate'] = $per_r_pickup_rate;
+						} else {
+							$card_info['rate'] = $per_r_rate;
+						}
 						break;
 					case 'SR':
-						$card_info['rate'] = $per_sr_pick_rate;
+						if ($card['pickup'] === true) {
+							$card_info['rate'] = $per_sr_pickup_rate;
+						} else {
+							$card_info['rate'] = $per_sr_rate;
+						}
 						break;
 					case 'SSR':
-						$card_info['rate'] = $per_ssr_pick_rate;
+						if ($card['pickup'] === true) {
+							$card_info['rate'] = $per_ssr_pickup_rate;
+						} else {
+							$card_info['rate'] = $per_ssr_rate;
+						}
 						break;
 				}
 				$provition_ratios[$rarity_text][] = $card_info;

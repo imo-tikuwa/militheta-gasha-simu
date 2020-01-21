@@ -21,7 +21,6 @@ class GetProvisionRatioController extends ApiController
 	 */
 	public function index($gasha_id = null) {
 
-
 		if (empty($gasha_id)) {
 			echo json_encode([]);
 			exit;
