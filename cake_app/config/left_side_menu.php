@@ -1,8 +1,8 @@
 <?php
 return [
 		'LeftSideMenu' => [
-				'Gasha' => [
-						'controller' => 'Gasha',
+				'Gashas' => [
+						'controller' => 'Gashas',
 						'label' => 'ガシャ',
 						'icon_class' => 'fas fa-database',
 				],
@@ -20,6 +20,11 @@ return [
 						'controller' => 'CardReprints',
 						'label' => '復刻情報',
 						'icon_class' => 'fas fa-table',
+				],
+				'GashaPickups' => [
+						'controller' => 'GashaPickups',
+						'label' => 'ピックアップ情報',
+						'icon_class' => 'fas fa-level-up-alt',
 				],
 		],
 ];

@@ -20,6 +20,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Character $character
  * @property \App\Model\Entity\CardReprint[] $card_reprints
+ * @property \App\Model\Entity\GashaPickup[] $gasha_pickups
  */
 class Card extends Entity
 {
@@ -45,6 +46,7 @@ class Card extends Entity
         'modified' => true,
         'delete_flag' => true,
         'character' => true,
-        'card_reprints' => true
+        'card_reprints' => true,
+        'gasha_pickups' => true
     ];
 }

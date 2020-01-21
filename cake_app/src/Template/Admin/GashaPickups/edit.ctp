@@ -1,15 +1,15 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\CardReprint $card_reprint
+ * @var \App\Model\Entity\GashaPickup $gasha_pickup
  */
-$button_name = (!empty($card_reprint) && !$card_reprint->isNew()) ? "更新" : "登録";
-$this->assign('title', "復刻情報{$button_name}");
+$button_name = (!empty($gasha_pickup) && !$gasha_pickup->isNew()) ? "更新" : "登録";
+$this->assign('title', "ピックアップ情報{$button_name}");
 ?>
 <div class="col-md-12 mb-12">
   <div class="card">
     <div class="card-body">
-      <?= $this->Form->create($card_reprint) ?>
+      <?= $this->Form->create($gasha_pickup) ?>
       <div class="row">
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
