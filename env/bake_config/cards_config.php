@@ -100,7 +100,7 @@ return [
 				'is_search_form' => true,
 				'yubinbango' => false,
 				'paging_limit' => 20,
-				'left_side_menu_icon_class' => 'fas fa-table',
+				'left_side_menu_icon_class' => 'far fa-id-card',
 				'google_map_api_key' => '',
 				'delete_function' => false,
 				'csv_export' => true,

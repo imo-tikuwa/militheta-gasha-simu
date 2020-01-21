@@ -14,7 +14,7 @@ return [
 				'Cards' => [
 						'controller' => 'Cards',
 						'label' => 'カード',
-						'icon_class' => 'fas fa-table',
+						'icon_class' => 'far fa-id-card',
 				],
 				'CardReprints' => [
 						'controller' => 'CardReprints',
