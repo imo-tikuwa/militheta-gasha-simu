@@ -43,7 +43,7 @@ $(function(){
 				});
 				html += "</table>";
 			});
-			$("#provision-ratio-modal .modal-body").html(html),
+			$("#provision-ratio-modal .modal-body").html(html);
 			$('#provision-ratio-modal').modal('show');
 		}).fail(function(jqxhr, status, error){
 			alert(error);
@@ -51,7 +51,29 @@ $(function(){
 	});
 
 	$('#pick-gasha').on('click', function(){
-		console.log("pick gasha");
+		let request_url = "/api/pick-gasha/" + $('#gasha_id').val();
+		$.ajax({
+			type: "GET",
+			url: request_url,
+			contentType: 'application/json',
+			dataType: 'json'
+		}).done(function(json, status, jqxhr){
+			let html = "";
+			html += "<table class=\"table table-sm\">";
+			html += "<tr><th>ID</th><th>タイプ</th><th>カード名</th><th>レアリティ</th></tr>";
+			$.each(json, function(index, card){
+				html += "<tr>";
+				html += "<td>" + card.id + "</td>";
+				html += "<td>" + card.type + "</td>";
+				html += "<td>" + card.name + "</td>";
+				html += "<td>" + card.rarity + "</td>";
+				html += "</tr>";
+			});
+			html += "</table>";
+			$("#gasha-result").empty().html(html);
+		}).fail(function(jqxhr, status, error){
+			alert(error);
+		});
 	});
 });
 <?= $this->Html->scriptEnd() ?>
@@ -81,6 +103,12 @@ $(function(){
               <button type="button" class="btn btn-sm btn-secondary rounded-0" id="display-provision-ratio-modal">提供割合</button>
               <button type="button" class="btn btn-sm btn-secondary rounded-0" id="pick-gasha">10連ガシャを引く</button>
             </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-sm-12">
+          <div class="form-group" id="current_gasha_info">
+            <label>ガシャ結果</label>
+            <div id="gasha-result"></div>
           </div>
         </div>
       </div>

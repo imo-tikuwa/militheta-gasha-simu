@@ -197,7 +197,27 @@ class CardsTable extends AppTable
 
 		$start_date = $gasha->start_date->i18nFormat('yyyy-MM-dd');
 
-		$query = $this->find()->select(['id', 'character_id', 'name', 'rarity', 'type'])->enableHydration(false);
+		$query = $this->find();
+		$rarity_cases = $query->newExpr()->addCase(
+				[
+						$query->newExpr()->add(['rarity' => '02']),
+						$query->newExpr()->add(['rarity' => '03']),
+						$query->newExpr()->add(['rarity' => '04'])
+				],
+				['R', 'SR', 'SSR'],
+				['string', 'string', 'string']
+		);
+		$type_cases = $query->newExpr()->addCase(
+				[
+						$query->newExpr()->add(['type' => '01']),
+						$query->newExpr()->add(['type' => '02']),
+						$query->newExpr()->add(['type' => '03'])
+				],
+				['Princess', 'Fairy', 'Angel'],
+				['string', 'string', 'string']
+		);
+		$query->select(['id', 'character_id', 'name', 'rarity' => $rarity_cases, 'type' => $type_cases])
+		->enableHydration(false);
 
 		// 恒常カード情報を取得
 		$cards = $query->where([
@@ -214,7 +234,7 @@ class CardsTable extends AppTable
 					'limited' => 1,
 					'add_date' => $start_date
 			], [], true)->toArray();
-			$cards = array_merge($cards, $limited_cards);
+			$cards = array_merge($limited_cards, $cards);
 
 		}
 		// フェス限定カードを取得
@@ -225,23 +245,68 @@ class CardsTable extends AppTable
 					'limited' => 2,
 					'add_date <=' => $start_date, // 過去のフェス限を含める
 			], [], true)->toArray();
-			$cards = array_merge($cards, $fes_limited_cards);
+			$cards = array_merge($fes_limited_cards, $cards);
 
 		}
 		// 復刻？の条件追加
 		else if ($gasha->isReprintLimited()) {
 
+			$card_reprints = TableRegistry::getTableLocator()->get('CardReprints');
+			$sub_query = $card_reprints->find()->select(['card_id'])->where(['gasha_id' => $gasha->id]);
+
 			$reprint_limited_cards = $query->where([
-					'CardReprints.gasha_id' => $gasha->id,
+					'Cards.id IN' => $sub_query,
 					'Cards.gasha_include' => 1,
 					'Cards.limited' => 1,
-			], [], true)->contain('CardReprints')->toArray();
-			$cards = array_merge($cards, $reprint_limited_cards);
+			], [], true)->toArray();
+			$cards = array_merge($reprint_limited_cards, $cards);
 		}
 
 		// レアリティごとに持ち替え
 		$cards = Hash::combine($cards, '{n}.id', '{n}', '{n}.rarity');
 
 		return $cards;
+	}
+
+	/**
+	 * 引数のIDのカードの情報を返す
+	 *
+	 * ガシャを引く処理のレスポンスにセットするなカード情報とする
+	 * 順番も引数のカードIDの配列順とする
+	 *
+	 * @param array $card_ids
+	 */
+	public function findByIds($card_ids = []) {
+
+		$query = $this->find();
+		$rarity_cases = $query->newExpr()->addCase(
+				[
+						$query->newExpr()->add(['rarity' => '02']),
+						$query->newExpr()->add(['rarity' => '03']),
+						$query->newExpr()->add(['rarity' => '04'])
+				],
+				['R', 'SR', 'SSR'],
+				['string', 'string', 'string']
+		);
+		$type_cases = $query->newExpr()->addCase(
+				[
+						$query->newExpr()->add(['type' => '01']),
+						$query->newExpr()->add(['type' => '02']),
+						$query->newExpr()->add(['type' => '03'])
+				],
+				['Princess', 'Fairy', 'Angel'],
+				['string', 'string', 'string']
+		);
+		$cards = $query->select(['id', 'name', 'rarity' => $rarity_cases, 'type' => $type_cases])
+		->where(['id IN' => $card_ids])
+		->enableHydration(false)->toArray();
+		$cards = Hash::combine($cards, '{n}.id', '{n}');
+
+		// 引数の並びを保持した結果を返す
+		$results = [];
+		foreach ($card_ids as $card_id) {
+			$results[] = $cards[$card_id];
+		}
+		return $results;
 	}
 }
