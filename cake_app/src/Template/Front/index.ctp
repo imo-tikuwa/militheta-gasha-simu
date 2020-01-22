@@ -29,7 +29,7 @@ $(function(){
 		}).done(function(json, status, jqxhr){
 			let html = "";
 			$.each(json, function(rarity, cards){
-				html += "<span>" + rarity + "</span>";
+				html += "<span>" + rarity + "：全" + cards.length + "種</span>";
 				html += "<table class=\"table table-sm\">";
 				html += "<tr><th>タイプ</th><th>カード名</th><th>レート</th></tr>";
 				$.each(cards, function(index, card){
