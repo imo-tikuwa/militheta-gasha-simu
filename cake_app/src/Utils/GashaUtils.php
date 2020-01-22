@@ -68,6 +68,7 @@ class GashaUtils {
 			if (!array_key_exists($rarity_text, $cards)) {
 				continue;
 			}
+			$tmp_cards = [];
 			foreach ($cards[$rarity_text] as $card) {
 				$card_info = [
 						'id' => $card['id'],
@@ -97,8 +98,15 @@ class GashaUtils {
 						}
 						break;
 				}
-				$provition_ratios[$rarity_text][] = $card_info;
+				$tmp_cards[] = $card_info;
 			}
+
+			// 確率の高いピックアップカードが上に来るようソートする
+			usort($tmp_cards, function ($a, $b) {
+				return $a['rate'] < $b['rate'];
+			});
+
+			$provition_ratios[$rarity_text] = $tmp_cards;
 		}
 
 		return $provition_ratios;
