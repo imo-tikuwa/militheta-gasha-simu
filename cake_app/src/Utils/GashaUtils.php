@@ -101,9 +101,41 @@ class GashaUtils {
 				$tmp_cards[] = $card_info;
 			}
 
-			// 確率の高いピックアップカードが上に来るようソートする
+			// ソートする
 			usort($tmp_cards, function ($a, $b) {
-				return $a['rate'] < $b['rate'];
+
+				// ピックアップが上に来るようにする
+				if ($a['rate'] < $b['rate']) {
+					return 1;
+				} else if ($a['rate'] > $b['rate']) {
+					return -1;
+				}
+
+				// Princess、Fairy、Angelの順とする
+				if ($a['type'] === 'Princess' && $b['type'] !== 'Princess') {
+					return -1;
+				} else if ($a['type'] !== 'Princess' && $b['type'] === 'Princess') {
+					return 1;
+				}
+				if ($a['type'] === 'Fairy' && $b['type'] !== 'Fairy') {
+					return -1;
+				} else if ($a['type'] !== 'Fairy' && $b['type'] === 'Fairy') {
+					return 1;
+				}
+				if ($a['type'] === 'Angel' && $b['type'] !== 'Angel') {
+					return -1;
+				} else if ($a['type'] !== 'Angel' && $b['type'] === 'Angel') {
+					return 1;
+				}
+
+				// IDの昇順とする
+				if ($a['id'] < $b['id']) {
+					return -1;
+				} else if ($a['id'] > $b['id']) {
+					return 1;
+				}
+
+				return 0;
 			});
 
 			$provition_ratios[$rarity_text] = $tmp_cards;
