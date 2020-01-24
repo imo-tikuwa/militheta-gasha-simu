@@ -65,7 +65,6 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     Router::prefix('api', function (RouteBuilder $routes) {
         $routes->connect('/get-provision-ratio/*', ['controller' => 'GetProvisionRatio', 'action' => 'index']);
-        $routes->connect('/pick-gasha/*', ['controller' => 'PickGasha', 'action' => 'index']);
         $routes->fallbacks(DashedRoute::class);
     });
 

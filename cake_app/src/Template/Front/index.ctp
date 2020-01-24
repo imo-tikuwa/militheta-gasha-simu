@@ -48,8 +48,8 @@ $(function(){
 		});
 	});
 
-	$('#pick-gasha').on('click', function(){
-		let request_url = "/api/pick-gasha/" + $('#gasha_id').val();
+	$('.pick-gasha').on('click', function(){
+		let request_url = "/api/pick-gasha/" + $(this).data('pick-type') + "/" + $('#gasha_id').val();
 		$.ajax({
 			type: "GET",
 			url: request_url,
@@ -154,7 +154,8 @@ $(function(){
               <label for="sr_rate">SRレート</label>：<span id="sr_rate"></span>%<br />
               <label for="r_rate">Rレート</label>：<span id="r_rate"></span>%<br />
               <button type="button" class="btn btn-sm btn-secondary rounded-0" id="display-provision-ratio-modal">提供割合</button>
-              <button type="button" class="btn btn-sm btn-secondary rounded-0" id="pick-gasha">10連ガシャを引く</button>
+              <button type="button" class="btn btn-sm btn-secondary rounded-0 pick-gasha" data-pick-type="tanpatsu">単発ガシャを引く</button>
+              <button type="button" class="btn btn-sm btn-secondary rounded-0 pick-gasha" data-pick-type="jyuren">10連ガシャを引く</button>
             </div>
           </div>
         </div>
