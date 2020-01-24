@@ -51,7 +51,7 @@ class PickGashaController extends ApiController
 
 		try {
 			// ガシャID
-			$gasha_id = @$this->request->getAttribute('params')['pass'][0];
+			$gasha_id = @$this->request->getQuery('gasha_id');
 
 			if (is_null($gasha_id) || !is_numeric($gasha_id)) {
 				throw new Exception('gasha_id is invalid.');

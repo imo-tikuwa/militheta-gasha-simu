@@ -49,11 +49,14 @@ $(function(){
 	});
 
 	$('.pick-gasha').on('click', function(){
-		let request_url = "/api/pick-gasha/" + $(this).data('pick-type') + "/" + $('#gasha_id').val();
+		let request_url = "/api/pick-gasha/" + $(this).data('pick-type');
 		$.ajax({
 			type: "GET",
 			url: request_url,
 			contentType: 'application/json',
+			data: {
+				gasha_id: $('#gasha_id').val()
+			},
 			dataType: 'json'
 		}).done(function(result, status, jqxhr){
 			let html = "";
