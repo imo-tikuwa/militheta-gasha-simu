@@ -12,6 +12,14 @@ class AppController extends \App\Controller\AppController
 	 */
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
+
+		// サイドメニューの展開状態をCookie管理する
+		$sidemenu_expand_css_class = $this->request->getCookie('sidemenu-toggle-class');
+		if (empty($sidemenu_expand_css_class)) {
+			$sidemenu_expand_css_class = 'sidebar-collapse';
+			$this->response = $this->response->withCookie('sidemenu-toggle-class', $sidemenu_expand_css_class);
+		}
+		$this->set(compact('sidemenu_toggle_class'));
 	}
 
 	public function initialize()

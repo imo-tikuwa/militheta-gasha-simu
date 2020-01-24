@@ -20,6 +20,7 @@
     "bootstrap-material-datetimepicker": "^2.7.1",
     "bootstrap4-tagsinput-douglasanpa": "^4.1.2",
     "jquery": "^3.4.1",
+    "js-cookie": "^2.2.1",
     "moment": "^2.24.0",
     "select2": "^4.0.7",
     "summernote": "^0.8.12"

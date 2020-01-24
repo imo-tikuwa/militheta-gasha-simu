@@ -28,7 +28,7 @@
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
+<body class="hold-transition sidebar-mini layout-fixed <?= $sidemenu_toggle_class ?>">
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -36,7 +36,7 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#" id="sidemenu-toggle"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="<?= $this->Url->build(['controller' => 'Top'])?>" class="nav-link">Home</a>
@@ -112,6 +112,7 @@
 <?= $this->Html->script('/node_modules/summernote/dist/summernote-bs4.min.js') ?>
 <?= $this->Html->script('/node_modules/summernote/dist/lang/summernote-ja-JP.min.js') ?>
 <?= $this->Html->script('/node_modules/bootstrap4-tagsinput-douglasanpa/tagsinput.js') ?>
+<?= $this->Html->script('/node_modules/js-cookie/src/js.cookie.js') ?>
 <?= $this->Html->script('admin_script.js') ?>
 <?= $this->fetch('script') ?>
 </body>
