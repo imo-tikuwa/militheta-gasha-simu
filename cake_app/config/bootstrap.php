@@ -204,10 +204,16 @@ Type::build('timestamp')
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
 
-// DebugKitのロード
-// if (Configure::read('debug')) {
-// 	Configure::write('DebugKit.forceEnable', true);
-// 	Plugin::load('DebugKit', ['bootstrap' => true, 'routes' => true]);
-// }
+// Session設定
+Configure::write('Session', [
+    'defaults' => 'cake',
+    'timeout' => 1440 // 1 days
+]);
 
-// Plugin::load('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
+// DebugKitのロード
+if (Configure::read('debug')) {
+	Configure::write('DebugKit.forceEnable', true);
+	Plugin::load('DebugKit', ['bootstrap' => true, 'routes' => true]);
+}
+
+Plugin::load('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
