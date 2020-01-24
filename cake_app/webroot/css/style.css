@@ -536,9 +536,6 @@ h1 {
     overflow-y: scroll;
 }
 
-#provision-ratio-modal .modal-body table {
-	font-size: 80% !important;
-}
 #provision-ratio-modal .modal-body table tr th:nth-child(1),
 #provision-ratio-modal .modal-body table tr td:nth-child(1) {
 	width: 15%;
@@ -567,4 +564,27 @@ h1 {
 #gasha-result table tr th:nth-child(4),
 #gasha-result table tr td:nth-child(4) {
 	width: 15%;
+}
+
+
+#gasha-result-modal .modal-body {
+    height: 400px;
+    overflow-y: scroll;
+}
+
+#gasha-result-modal .modal-body table tr th:nth-child(1),
+#gasha-result-modal .modal-body table tr td:nth-child(1) {
+	width: 15%;
+}
+#gasha-result-modal .modal-body table tr th:nth-child(2),
+#gasha-result-modal .modal-body table tr td:nth-child(2) {
+	width: 62%;
+}
+#gasha-result-modal .modal-body table tr th:nth-child(3),
+#gasha-result-modal .modal-body table tr td:nth-child(3) {
+	width: 13%;
+}
+#gasha-result-modal .modal-body table tr th:nth-child(4),
+#gasha-result-modal .modal-body table tr td:nth-child(4) {
+	width: 10%;
 }

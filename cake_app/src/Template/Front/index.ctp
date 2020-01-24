@@ -9,6 +9,7 @@ $this->assign('title', "ミリシタ ガシャシミュレータ");
 <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
 $(function(){
 	var gasha_data = <?php echo $gasha_json_data; ?>;
+	var gasha_results = [];
 	$('#gasha_id').on('change', function(){
 		let per_gasha_data = gasha_data[$(this).val()];
 		$('#start_date').text(per_gasha_data.start_date);
@@ -69,6 +70,7 @@ $(function(){
 				html += "<td>" + card.name + "</td>";
 				html += "<td>" + card.rarity + "</td>";
 				html += "</tr>";
+				gasha_results.push(card);
 			});
 			html += "</table>";
 			$("#gasha-result").empty().html(html);
@@ -132,7 +134,43 @@ $(function(){
 		$('#picked_sr_rate').text(0);
 		$('#picked_r_count').text(0);
 		$('#picked_r_rate').text(0);
+		gasha_results = [];
 	}
+
+	// ガシャ結果表示
+	$("#gasha-result-modal-open").on("click", function(){
+		if (gasha_results.length <= 0) {
+			alert("ガシャ結果が存在しませんでした。");
+			return false;
+		}
+		let html = "";
+		html += "<table class=\"table table-sm\">";
+		html += "<tr><th>タイプ</th><th>カード名</th><th>レアリティ</th><th>ピック数</th></tr>";
+		// reduceによる集計を行う
+		let gasha_reduce_data = gasha_results.reduce(function (result, current) {
+			var element = result.find(function(p) {
+				return p.id === current.id
+			});
+			if (element) {
+				element.count++;
+			} else {
+				current.count = 1;
+				result.push(current);
+			}
+			return result;
+		}, []);
+		$.each(gasha_reduce_data, function(index, card){
+			html += "<tr>";
+			html += "<td>" + card.type + "</td>";
+			html += "<td>" + card.name + "</td>";
+			html += "<td>" + card.rarity + "</td>";
+			html += "<td>" + card.count + "</td>";
+			html += "</tr>";
+		});
+		html += "</table>";
+		$("#gasha-result-modal .modal-body").html(html);
+		$('#gasha-result-modal').modal('show');
+	});
 });
 <?= $this->Html->scriptEnd() ?>
 
@@ -180,6 +218,7 @@ $(function(){
               <label for="picked_r_count">R枚数</label>：<span id="picked_r_count">0</span><br />
               <label for="picked_r_rate">R率</label>：<span id="picked_r_rate">0</span>%<br />
               <button type="button" class="btn btn-sm btn-secondary rounded-0" id="clear-aggregate">クリア</button>
+              <button type="button" class="btn btn-sm btn-secondary rounded-0" id="gasha-result-modal-open">ガシャ結果表示</button>
             </div>
           </div>
         </div>
@@ -191,7 +230,7 @@ $(function(){
 
 
 <div class="modal fade" id="provision-ratio-modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">提供割合</h5>
@@ -200,7 +239,24 @@ $(function(){
         </button>
       </div>
       <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary rounded-0" data-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<div class="modal fade" id="gasha-result-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ガシャ結果</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary rounded-0" data-dismiss="modal">閉じる</button>
