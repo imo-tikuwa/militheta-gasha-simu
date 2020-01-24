@@ -21,7 +21,7 @@ class ApiController extends AppController
 		$this->viewBuilder()->enableAutoLayout(false);
 		$this->autoRender = false;
 		$this->response->withCharset('UTF-8');
-		$this->response->withType('json');
+		$this->response->withType('application/json');
 
 		$this->Gashas = TableRegistry::getTableLocator()->get("Gashas");
 		$this->Cards = TableRegistry::getTableLocator()->get("Cards");

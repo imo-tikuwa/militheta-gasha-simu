@@ -21,9 +21,8 @@ class GetProvisionRatioController extends ApiController
 	 */
 	public function index($gasha_id = null) {
 
-		if (empty($gasha_id)) {
-			echo json_encode([]);
-			exit;
+		if (is_null($gasha_id)) {
+			return $this->response->withStringBody(null);
 		}
 
 		// ガシャ情報取得
@@ -35,8 +34,7 @@ class GetProvisionRatioController extends ApiController
 		// 提供割合を取得
 		$provision_ratios = GashaUtils::getProvisionRatio($gasha, $cards);
 
-		$this->response->body(json_encode($provision_ratios, JSON_UNESCAPED_UNICODE));
-		return;
+		return $this->response->withStringBody(json_encode($provision_ratios, JSON_UNESCAPED_UNICODE));
 	}
 
 }

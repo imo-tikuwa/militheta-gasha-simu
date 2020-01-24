@@ -19,7 +19,11 @@ class PickGashaController extends ApiController
 	 *
 	 * @param string $gasha_id ガシャID
 	 */
-	public function index($gasha_id) {
+	public function index($gasha_id = null) {
+
+		if (is_null($gasha_id)) {
+			return $this->response->withStringBody(null);
+		}
 
 		// ガシャ情報取得
 		$gasha = $this->Gashas->get($gasha_id);
@@ -47,11 +51,9 @@ class PickGashaController extends ApiController
 		$card_ids[] = $this->_pick($cards_rate_data);
 
 		// レスポンスにセットするカード情報を取得
-		$this->log($card_ids, 'debug');
 		$results = $this->Cards->findByIds($card_ids);
 
-		$this->response->body(json_encode($results, JSON_UNESCAPED_UNICODE));
-		return;
+		return $this->response->withStringBody(json_encode($results, JSON_UNESCAPED_UNICODE));
 	}
 
 	/**
