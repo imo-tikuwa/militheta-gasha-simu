@@ -77,4 +77,41 @@ class CharactersTable extends AppTable
     {
         return parent::patchEntity($entity, $data, $options);
     }
+
+    /**
+     * CSVヘッダー情報を取得する
+     */
+    public function getCsvHeaders() {
+        return [
+            'ID',
+            '名前',
+            '作成日時',
+            '更新日時',
+        ];
+    }
+
+    /**
+     * CSVカラム情報を取得する
+     */
+    public function getCsvColumns() {
+        return [
+            'id',
+            'name',
+            'created',
+            'modified',
+        ];
+    }
+
+    /**
+     * CSVの入力情報を取得する
+     */
+    public function getCsvData($csv_row) {
+
+        $csv_data = array_combine($this->getCsvColumns(), $csv_row);
+
+
+        unset($csv_data['created']);
+        unset($csv_data['modified']);
+        return $csv_data;
+    }
 }
