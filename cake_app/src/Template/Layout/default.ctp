@@ -12,6 +12,7 @@
     <title><?= $this->fetch('title') ?></title>
     <?= $this->Html->meta('icon') ?>
 
+    <?= $this->element('google_analytics'); ?>
     <?= $this->Html->css('/node_modules/@fortawesome/fontawesome-free/css/all.css') ?>
     <?= $this->Html->css('/node_modules/bootstrap/dist/css/bootstrap.min.css') ?>
     <?= $this->Html->css('style.css') ?>
