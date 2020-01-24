@@ -92,7 +92,7 @@
       <a class="btn btn-flat btn-outline-secondary" href="https://github.com/imo-tikuwa/" target="_blank" role="button">GitHub
         <i class="fab fa-github ml-2"></i>
       </a>
-      <strong>© 2019 Copyright: <a href="https://github.com/imo-tikuwa/my_cakephp3_init2.0" target="_blank"> MyCakePHP3Init2.0 </a></strong>
+      <strong>© 2020 Copyright: <a href="https://github.com/imo-tikuwa/militheta-gasha-simu" target="_blank"> militheta-gasha-simu </a></strong>
     </div>
   </footer>
 
