@@ -111,3 +111,20 @@ table.table td.actions div.btn-group {
 .select2-selection {
 	border-radius: 0 !important;
 }
+
+/* エラーメッセージ修飾 */
+.error-message:before {
+	content: '※';
+}
+.error-message {
+	font-size: 90%;
+	color: red;
+}
+
+/* ヘッダーリンク */
+.navbar-nav .header-link {
+	border-right: 1px solid #eee;
+}
+.navbar-nav .header-link:last-of-type {
+	border-right: none;
+}

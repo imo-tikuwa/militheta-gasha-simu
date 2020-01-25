@@ -41,6 +41,7 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="<?= $this->Url->build(['controller' => 'Top'])?>" class="nav-link">Home</a>
       </li>
+      <?= $this->element('header_link'); ?>
     </ul>
 
   </nav>

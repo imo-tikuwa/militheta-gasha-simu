@@ -72,6 +72,7 @@ try {
     Configure::load('app', 'default', false);
     Configure::load('bake_codes', 'default');
     Configure::load('left_side_menu', 'default');
+    Configure::load('header_menu', 'default');
     Configure::load('admin_config', 'default');
     require_once (__DIR__ . '/functions.php');
 } catch (\Exception $e) {
@@ -216,4 +217,5 @@ if (Configure::read('debug')) {
 	Plugin::load('DebugKit', ['bootstrap' => true, 'routes' => true]);
 }
 
+// プラグインのロード
 Plugin::load('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);

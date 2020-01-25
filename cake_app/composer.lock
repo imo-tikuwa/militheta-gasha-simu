@@ -1846,12 +1846,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-admin-baker.git",
-                "reference": "5ded4f42464c136503345d38738a0979d3737fee"
+                "reference": "f7366cda67a63564bc2732804c00012eeffa9b04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/5ded4f42464c136503345d38738a0979d3737fee",
-                "reference": "5ded4f42464c136503345d38738a0979d3737fee",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/f7366cda67a63564bc2732804c00012eeffa9b04",
+                "reference": "f7366cda67a63564bc2732804c00012eeffa9b04",
                 "shasum": ""
             },
             "require": {
@@ -1880,7 +1880,7 @@
                 "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/master",
                 "issues": "https://github.com/imo-tikuwa/cakephp-admin-baker/issues"
             },
-            "time": "2020-01-17T12:30:59+00:00"
+            "time": "2020-01-25T10:45:46+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
