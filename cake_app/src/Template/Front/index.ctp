@@ -20,7 +20,7 @@ $(function(){
 	});
 	$('#gasha_id').trigger('change');
 
-	$('#display-provision-ratio-modal').on('click', function(){
+	$('.display-provision-ratio-modal').on('click', function(){
 		let request_url = "/api/get-provision-ratio/" + $('#gasha_id').val();
 		$.ajax({
 			type: "GET",
@@ -31,6 +31,7 @@ $(function(){
 			let html = "";
 			$.each(json, function(rarity, cards){
 				html += "<span>" + rarity + "：全" + cards.length + "種</span>";
+				html += "<div class=\"table-responsive\">";
 				html += "<table class=\"table table-sm\">";
 				html += "<tr><th>タイプ</th><th>カード名</th><th>レート</th></tr>";
 				$.each(cards, function(index, card){
@@ -41,6 +42,7 @@ $(function(){
 					html += "</tr>";
 				});
 				html += "</table>";
+				html += "</div>";
 			});
 			$("#provision-ratio-modal .modal-body").html(html);
 			$('#provision-ratio-modal').modal('show');
@@ -61,11 +63,12 @@ $(function(){
 			dataType: 'json'
 		}).done(function(result, status, jqxhr){
 			let html = "";
+			html += "<div class=\"table-responsive\">";
 			html += "<table class=\"table table-sm\">";
-			html += "<tr><th>ID</th><th>タイプ</th><th>カード名</th><th>レアリティ</th></tr>";
+			html += "<tr><th class=\"d-none d-lg-table-cell\">ID</th><th>タイプ</th><th>カード名</th><th>レアリティ</th></tr>";
 			$.each(result, function(index, card){
 				html += "<tr>";
-				html += "<td>" + card.id + "</td>";
+				html += "<td class=\"d-none d-lg-table-cell\">" + card.id + "</td>";
 				html += "<td>" + card.type + "</td>";
 				html += "<td>" + card.name + "</td>";
 				html += "<td>" + card.rarity + "</td>";
@@ -73,6 +76,7 @@ $(function(){
 				gasha_results.push(card);
 			});
 			html += "</table>";
+			html += "</div>";
 			$("#gasha-result").empty().html(html);
 			calc_aggregate(result);
 		}).fail(function(jqxhr, status, error){
@@ -80,7 +84,7 @@ $(function(){
 		});
 	});
 
-	$('#clear-aggregate').on('click', function(){
+	$('.clear-aggregate').on('click', function(){
 		clear_aggregate();
 	});
 
@@ -138,12 +142,13 @@ $(function(){
 	}
 
 	// ガシャ結果表示
-	$("#gasha-result-modal-open").on("click", function(){
+	$(".gasha-result-modal-open").on("click", function(){
 		if (gasha_results.length <= 0) {
 			alert("ガシャ結果が存在しませんでした。");
 			return false;
 		}
 		let html = "";
+		html += "<div class=\"table-responsive\">";
 		html += "<table class=\"table table-sm\">";
 		html += "<tr><th>タイプ</th><th>カード名</th><th>レアリティ</th><th>ピック数</th></tr>";
 		// reduceによる集計を行う
@@ -168,6 +173,7 @@ $(function(){
 			html += "</tr>";
 		});
 		html += "</table>";
+		html += "</div>";
 		$("#gasha-result-modal .modal-body").html(html);
 		$('#gasha-result-modal').modal('show');
 	});
@@ -185,7 +191,20 @@ $(function(){
             <?php echo $this->Form->control('gasha', ['type' => 'select', 'class' => 'form-control form-control-sm rounded-0', 'id' => 'gasha_id', 'label' => false, 'options' => $gasha_selections]); ?>
           </div>
         </div>
-        <div class="col-md-5 col-sm-12">
+        <?php // スマホのときだけ表示 ?>
+        <div class="col-sm-12 d-block d-lg-none">
+          <div class="form-group" id="current_gasha_info">
+            <div class="input">
+              <button type="button" class="btn btn-sm btn-secondary rounded-0 display-provision-ratio-modal">提供割合</button>
+              <button type="button" class="btn btn-sm btn-secondary rounded-0 pick-gasha" data-pick-type="tanpatsu">単発</button>
+              <button type="button" class="btn btn-sm btn-secondary rounded-0 pick-gasha" data-pick-type="jyuren">10連</button>
+              <button type="button" class="btn btn-sm btn-secondary rounded-0 gasha-result-modal-open">結果表示</button>
+              <button type="button" class="btn btn-sm btn-secondary rounded-0 clear-aggregate">クリア</button>
+            </div>
+          </div>
+        </div>
+        <?php // スマホは非表示 ?>
+        <div class="col-md-5 col-sm-12 d-none d-lg-block">
           <div class="form-group" id="current_gasha_info">
             <label>選択中のガシャ情報</label>
             <div class="input">
@@ -194,7 +213,7 @@ $(function(){
               <label for="ssr_rate">SSRレート</label>：<span id="ssr_rate"></span>%<br />
               <label for="sr_rate">SRレート</label>：<span id="sr_rate"></span>%<br />
               <label for="r_rate">Rレート</label>：<span id="r_rate"></span>%<br />
-              <button type="button" class="btn btn-sm btn-secondary rounded-0" id="display-provision-ratio-modal">提供割合</button>
+              <button type="button" class="btn btn-sm btn-secondary rounded-0 display-provision-ratio-modal">提供割合</button>
               <button type="button" class="btn btn-sm btn-secondary rounded-0 pick-gasha" data-pick-type="tanpatsu">単発ガシャを引く</button>
               <button type="button" class="btn btn-sm btn-secondary rounded-0 pick-gasha" data-pick-type="jyuren">10連ガシャを引く</button>
             </div>
@@ -206,7 +225,8 @@ $(function(){
             <div id="gasha-result"></div>
           </div>
         </div>
-        <div class="col-md-5 col-sm-12">
+        <?php // スマホは非表示 ?>
+        <div class="col-md-5 col-sm-12 d-none d-lg-block">
           <div class="form-group" id="current_gasha_info">
             <label>集計情報</label>
             <div class="input">
@@ -217,8 +237,8 @@ $(function(){
               <label for="picked_sr_rate">SR率</label>：<span id="picked_sr_rate">0</span>%<br />
               <label for="picked_r_count">R枚数</label>：<span id="picked_r_count">0</span><br />
               <label for="picked_r_rate">R率</label>：<span id="picked_r_rate">0</span>%<br />
-              <button type="button" class="btn btn-sm btn-secondary rounded-0" id="clear-aggregate">クリア</button>
-              <button type="button" class="btn btn-sm btn-secondary rounded-0" id="gasha-result-modal-open">ガシャ結果表示</button>
+              <button type="button" class="btn btn-sm btn-secondary rounded-0 clear-aggregate">クリア</button>
+              <button type="button" class="btn btn-sm btn-secondary rounded-0 gasha-result-modal-open">ガシャ結果表示</button>
             </div>
           </div>
         </div>
