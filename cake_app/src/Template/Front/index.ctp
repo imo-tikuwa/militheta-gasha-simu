@@ -254,7 +254,7 @@ $(function(){
               <a href="#sp_gasha_aggregate" class="nav-link" data-toggle="tab">集計情報</a>
             </li>
             <li class="nav-item">
-              <a href="#sp_gasha_results" class="nav-link" data-toggle="tab">ガシャ結果 <span id="sp-gasha-result-pill" class="badge badge-pill badge-danger"></span></a>
+              <a href="#sp_gasha_results" class="nav-link" data-toggle="tab" style="position:relative;">ガシャ結果 <span id="sp-gasha-result-pill" class="badge badge-pill badge-danger" style="position:absolute;right:0;top:3px;font-size:60% !important;"></span></a>
             </li>
           </ul>
           <div class="tab-content">
