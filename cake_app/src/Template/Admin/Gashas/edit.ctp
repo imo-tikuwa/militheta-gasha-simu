@@ -11,7 +11,7 @@ $this->assign('title', "ガシャ{$button_name}");
     <div class="card-body">
       <?= $this->Form->create($gasha) ?>
       <div class="row">
-        <div class="col-md-2 col-sm-12">
+        <div class="col-lg-2 col-md-2 col-sm-12">
           <div class="form-group">
             <?= $this->Form->control('start_date', ['type' => 'text', 'id' => 'start_date-datepicker', 'class' => 'form-control rounded-0 ', 'label' => 'ガシャ開始日', 'value' => $this->formatDate($gasha->start_date, 'yyyy-MM-dd')]); ?>
           </div>
@@ -27,7 +27,7 @@ $this->assign('title', "ガシャ{$button_name}");
           });
         });
         <?= $this->Html->scriptEnd() ?>
-        <div class="col-md-2 col-sm-12">
+        <div class="col-lg-2 col-md-2 col-sm-12">
           <div class="form-group">
             <?= $this->Form->control('end_date', ['type' => 'text', 'id' => 'end_date-datepicker', 'class' => 'form-control rounded-0 ', 'label' => 'ガシャ終了日', 'value' => $this->formatDate($gasha->end_date, 'yyyy-MM-dd')]); ?>
           </div>
@@ -43,12 +43,12 @@ $this->assign('title', "ガシャ{$button_name}");
           });
         });
         <?= $this->Html->scriptEnd() ?>
-        <div class="col-md-8 col-sm-12">
+        <div class="col-lg-8 col-md-8 col-sm-12">
           <div class="form-group">
             <?= $this->Form->control('title', ['class' => 'form-control rounded-0 ', 'label' => 'ガシャタイトル']); ?>
           </div>
         </div>
-        <div class="col-md-2 col-sm-12">
+        <div class="col-lg-2 col-md-2 col-sm-12">
           <div class="form-group">
             <div class="input number">
               <label for="ssr_rate">SSRレート</label>
@@ -59,7 +59,7 @@ $this->assign('title', "ガシャ{$button_name}");
             </div>
           </div>
         </div>
-        <div class="col-md-2 col-sm-12">
+        <div class="col-lg-2 col-md-2 col-sm-12">
           <div class="form-group">
             <div class="input number">
               <label for="sr_rate">SRレート</label>

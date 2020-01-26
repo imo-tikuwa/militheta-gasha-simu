@@ -11,12 +11,12 @@ $this->assign('title', "復刻情報{$button_name}");
     <div class="card-body">
       <?= $this->Form->create($card_reprint) ?>
       <div class="row">
-        <div class="col-md-6 col-sm-12">
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="form-group">
             <?= $this->Form->control('gasha_id', ['type' => 'select', 'class' => 'form-control rounded-0 ', 'label' => 'ガシャID']); ?>
           </div>
         </div>
-        <div class="col-md-6 col-sm-12">
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="form-group">
             <?= $this->Form->control('card_id', ['type' => 'select', 'class' => 'form-control rounded-0 ', 'label' => 'カードID']); ?>
           </div>
