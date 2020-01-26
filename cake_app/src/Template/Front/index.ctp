@@ -5,7 +5,8 @@
  */
 $this->assign('title', "ミリシタ ガシャシミュレータ");
 ?>
-
+<?= $this->Html->script('/node_modules/tablesorter/dist/js/jquery.tablesorter.min.js', ['block' => true]) ?>
+<?= $this->Html->css('/node_modules/tablesorter/dist/css/theme.bootstrap_4.min.css', ['block' => true]) ?>
 <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
 $(function(){
 	var gasha_data = <?php echo $gasha_json_data; ?>;
@@ -154,9 +155,8 @@ $(function(){
 			return false;
 		}
 		let html = "";
-		html += "<div class=\"table-responsive\">";
 		html += "<table class=\"table table-sm\">";
-		html += "<tr><th>タイプ</th><th>カード名</th><th>レアリティ</th><th>ピック数</th></tr>";
+		html += "<thead><tr><th>タイプ</th><th>カード名</th><th>レアリティ</th><th>ピック数</th></tr></thead>";
 		// reduceによる集計を行う
 		let gasha_reduce_data = gasha_results.reduce(function (result, current) {
 			var element = result.find(function(p) {
@@ -170,6 +170,7 @@ $(function(){
 			}
 			return result;
 		}, []);
+		html += "<tbody>";
 		$.each(gasha_reduce_data, function(index, card){
 			html += "<tr>";
 			html += "<td>" + card.type + "</td>";
@@ -178,15 +179,18 @@ $(function(){
 			html += "<td>" + card.count + "</td>";
 			html += "</tr>";
 		});
+		html += "</tbody>";
 		html += "</table>";
-		html += "</div>";
-		$("#gasha-result-modal .modal-body").html(html);
+		$("#gasha-result-sort-table").empty().html(html);
+		// ガシャ結果モーダルのテーブルのソートを有効化
+		$("#gasha-result-sort-table table").tablesorter({
+			theme: 'bootstrap4'
+		});
 		$('#gasha-result-modal').modal('show');
 	});
 
 	// SP版のタブを変更したときの処理
 	$("#sp-toggle-tab a[data-toggle='tab']").on('shown.bs.tab', function(e) {
-	console.log($(e.target).attr("href"));
 		if ($(e.target).attr("href") == "#sp_gasha_results") {
 			$(e.target).find("#sp-gasha-result-pill").text("");
 		}
@@ -383,6 +387,9 @@ $(function(){
         </button>
       </div>
       <div class="modal-body">
+        <label><small>※ヘッダー行クリックでソートできます。</small></label>
+        <div class="table-responsive" id="gasha-result-sort-table">
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary rounded-0" data-dismiss="modal">閉じる</button>
