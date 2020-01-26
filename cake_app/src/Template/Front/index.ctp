@@ -11,12 +11,13 @@ $(function(){
 	var gasha_data = <?php echo $gasha_json_data; ?>;
 	var gasha_results = [];
 	$('#gasha_id').on('change', function(){
-		let per_gasha_data = gasha_data[$(this).val()];
-		$('#start_date').text(per_gasha_data.start_date);
-		$('#end_date').text(per_gasha_data.end_date);
-		$('#ssr_rate').text(per_gasha_data.ssr_rate);
-		$('#sr_rate').text(per_gasha_data.sr_rate);
-		$('#r_rate').text(100 - parseInt(per_gasha_data.ssr_rate) - parseInt(per_gasha_data.sr_rate));
+		let per_gasha_data = gasha_data[$(this).val()],
+		r_rate = 100 - parseInt(per_gasha_data.ssr_rate) - parseInt(per_gasha_data.sr_rate);
+		$('#start_date, #start_date_sp').text(per_gasha_data.start_date);
+		$('#end_date, #end_date_sp').text(per_gasha_data.end_date);
+		$('#ssr_rate, #ssr_rate_sp').text(per_gasha_data.ssr_rate);
+		$('#sr_rate, #sr_rate_sp').text(per_gasha_data.sr_rate);
+		$('#r_rate, #r_rate_sp').text(r_rate);
 	});
 	$('#gasha_id').trigger('change');
 
@@ -62,6 +63,7 @@ $(function(){
 			},
 			dataType: 'json'
 		}).done(function(result, status, jqxhr){
+
 			let html = "";
 			html += "<div class=\"table-responsive\">";
 			html += "<table class=\"table table-sm\">";
@@ -77,7 +79,10 @@ $(function(){
 			});
 			html += "</table>";
 			html += "</div>";
-			$("#gasha-result").empty().html(html);
+			$("#gasha-result, #gasha-result-sp").empty().html(html);
+			if (!$("#sp_gasha_results").hasClass('active')) {
+				$("#sp-gasha-result-pill").text(result.length);
+			}
 			calc_aggregate(result);
 		}).fail(function(jqxhr, status, error){
 			alert(error);
@@ -120,24 +125,25 @@ $(function(){
 		picked_r_rate = picked_r_count / picked_count;
 		picked_r_rate = Math.round(picked_r_rate * 10000) / 100;
 
-		$('#picked_count').text(picked_count);
-		$('#picked_ssr_count').text(picked_ssr_count);
-		$('#picked_ssr_rate').text(picked_ssr_rate);
-		$('#picked_sr_count').text(picked_sr_count);
-		$('#picked_sr_rate').text(picked_sr_rate);
-		$('#picked_r_count').text(picked_r_count);
-		$('#picked_r_rate').text(picked_r_rate);
+		$('#picked_count, #picked_count_sp').text(picked_count);
+		$('#picked_ssr_count, #picked_ssr_count_sp').text(picked_ssr_count);
+		$('#picked_ssr_rate, #picked_ssr_rate_sp').text(picked_ssr_rate);
+		$('#picked_sr_count, #picked_sr_count_sp').text(picked_sr_count);
+		$('#picked_sr_rate, #picked_sr_rate_sp').text(picked_sr_rate);
+		$('#picked_r_count, #picked_r_count_sp').text(picked_r_count);
+		$('#picked_r_rate, #picked_r_rate_sp').text(picked_r_rate);
 	}
 
 	// 集計クリア
 	function clear_aggregate() {
-		$('#picked_count').text(0);
-		$('#picked_ssr_count').text(0);
-		$('#picked_ssr_rate').text(0);
-		$('#picked_sr_count').text(0);
-		$('#picked_sr_rate').text(0);
-		$('#picked_r_count').text(0);
-		$('#picked_r_rate').text(0);
+		$('#picked_count, #picked_count_sp').text(0);
+		$('#picked_ssr_count, #picked_ssr_count_sp').text(0);
+		$('#picked_ssr_rate, #picked_ssr_rate_sp').text(0);
+		$('#picked_sr_count, #picked_sr_count_sp').text(0);
+		$('#picked_sr_rate, #picked_sr_rate_sp').text(0);
+		$('#picked_r_count, #picked_r_count_sp').text(0);
+		$('#picked_r_rate, #picked_r_rate_sp').text(0);
+		$('#gasha-result, #gasha-result-sp').empty();
 		gasha_results = [];
 	}
 
@@ -177,6 +183,14 @@ $(function(){
 		$("#gasha-result-modal .modal-body").html(html);
 		$('#gasha-result-modal').modal('show');
 	});
+
+	// SP版のタブを変更したときの処理
+	$("#sp-toggle-tab a[data-toggle='tab']").on('shown.bs.tab', function(e) {
+	console.log($(e.target).attr("href"));
+		if ($(e.target).attr("href") == "#sp_gasha_results") {
+			$(e.target).find("#sp-gasha-result-pill").text("");
+		}
+	});
 });
 <?= $this->Html->scriptEnd() ?>
 
@@ -193,19 +207,19 @@ $(function(){
         </div>
         <?php // スマホのときだけ表示 ?>
         <div class="col-sm-12 d-block d-lg-none">
-          <div class="form-group" id="current_gasha_info">
+          <div class="form-group current_gasha_info">
             <div class="input">
               <button type="button" class="btn btn-sm btn-secondary rounded-0 display-provision-ratio-modal">提供割合</button>
               <button type="button" class="btn btn-sm btn-secondary rounded-0 pick-gasha" data-pick-type="tanpatsu">単発</button>
               <button type="button" class="btn btn-sm btn-secondary rounded-0 pick-gasha" data-pick-type="jyuren">10連</button>
-              <button type="button" class="btn btn-sm btn-secondary rounded-0 gasha-result-modal-open">結果表示</button>
+              <button type="button" class="btn btn-sm btn-secondary rounded-0 gasha-result-modal-open">集計詳細</button>
               <button type="button" class="btn btn-sm btn-secondary rounded-0 clear-aggregate">クリア</button>
             </div>
           </div>
         </div>
         <?php // スマホは非表示 ?>
         <div class="col-md-5 col-sm-12 d-none d-lg-block">
-          <div class="form-group" id="current_gasha_info">
+          <div class="form-group current_gasha_info">
             <label>選択中のガシャ情報</label>
             <div class="input">
               <label for="start_date">ガシャ開始日</label>：<span id="start_date"></span><br />
@@ -219,15 +233,107 @@ $(function(){
             </div>
           </div>
         </div>
-        <div class="col-md-7 col-sm-12">
-          <div class="form-group" id="current_gasha_info">
+        <?php // スマホは非表示 ?>
+        <div class="col-md-7 col-sm-12 d-none d-lg-block">
+          <div class="form-group current_gasha_info">
             <label>ガシャ結果</label>
             <div id="gasha-result"></div>
           </div>
         </div>
+        <?php // スマホのときだけ表示 ?>
+        <div class="col-sm-12 d-block d-lg-none">
+          <ul id="sp-toggle-tab" class="nav nav-tabs">
+            <li class="nav-item">
+              <a href="#sp_gasha_info" class="nav-link active" data-toggle="tab">ガシャ情報</a>
+            </li>
+            <li class="nav-item">
+              <a href="#sp_gasha_aggregate" class="nav-link" data-toggle="tab">集計情報</a>
+            </li>
+            <li class="nav-item">
+              <a href="#sp_gasha_results" class="nav-link" data-toggle="tab">ガシャ結果 <span id="sp-gasha-result-pill" class="badge badge-pill badge-danger"></span></a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="sp_gasha_info" class="tab-pane active">
+              <div class="col-sm-12">
+                <div class="form-group current_gasha_info">
+                  <div class="input">
+                    <table>
+                      <tr>
+                        <th><label for="start_date_sp">ガシャ開始日</label></th>
+                        <td><span id="start_date_sp"></span></td>
+                      </tr>
+                      <tr>
+                        <th><label for="end_date_sp">ガシャ終了日</label></th>
+                        <td><span id="end_date_sp"></span></td>
+                      </tr>
+                      <tr>
+                        <th><label for="ssr_rate_sp">SSRレート</label></th>
+                        <td><span id="ssr_rate_sp"></span>%</td>
+                      </tr>
+                      <tr>
+                        <th><label for="sr_rate_sp">SRレート</label></th>
+                        <td><span id="sr_rate_sp"></span>%</td>
+                      </tr>
+                      <tr>
+                        <th><label for="r_rate_sp">Rレート</label></th>
+                        <td><span id="r_rate_sp"></span>%</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="sp_gasha_aggregate" class="tab-pane">
+              <div class="col-sm-12">
+                <div class="form-group current_gasha_info">
+                  <div class="input">
+                    <table>
+                      <tr>
+                        <th><label for="picked_count_sp">ガシャカウント</label></th>
+                        <td><span id="picked_count_sp">0</span></td>
+                      </tr>
+                      <tr>
+                        <th><label for="picked_ssr_count_sp">SSR枚数</label></th>
+                        <td><span id="picked_ssr_count_sp">0</span></td>
+                      </tr>
+                      <tr>
+                        <th><label for="picked_ssr_rate_sp">SSR率</label></th>
+                        <td><span id="picked_ssr_rate_sp">0</span>%</td>
+                      </tr>
+                      <tr>
+                        <th><label for="picked_sr_count_sp">SR枚数</label></th>
+                        <td><span id="picked_sr_count_sp">0</span></td>
+                      </tr>
+                      <tr>
+                        <th><label for="picked_sr_rate_sp">SR率</label></th>
+                        <td><span id="picked_sr_rate_sp">0</span>%</td>
+                      </tr>
+                      <tr>
+                        <th><label for="picked_r_count_sp">R枚数</label></th>
+                        <td><span id="picked_r_count_sp">0</span></td>
+                      </tr>
+                      <tr>
+                        <th><label for="picked_r_rate_sp">R率</label></th>
+                        <td><span id="picked_r_rate_sp">0</span>%</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="sp_gasha_results" class="tab-pane">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <div id="gasha-result-sp"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <?php // スマホは非表示 ?>
         <div class="col-md-5 col-sm-12 d-none d-lg-block">
-          <div class="form-group" id="current_gasha_info">
+          <div class="form-group current_gasha_info">
             <label>集計情報</label>
             <div class="input">
               <label for="picked_count">ガシャカウント</label>：<span id="picked_count">0</span><br />

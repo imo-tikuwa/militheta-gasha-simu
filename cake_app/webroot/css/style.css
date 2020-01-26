@@ -518,17 +518,12 @@ div.message.hidden {
     border-bottom: 0px;
 }
 
-table td {
-    vertical-align: top;
-    word-break: break-all;
-}
-
 
 h1 {
 	font-size:1.5rem;
 }
 
-#current_gasha_info label {
+.current_gasha_info label {
     margin-bottom: 0;
 }
 /* 提供割合モーダル */
@@ -552,24 +547,50 @@ h1 {
 	width:50px;
 }
 
-/* ガシャ結果 ID */
+/* PC ガシャ結果 ID */
 #gasha-result table tr th:nth-child(1),
 #gasha-result table tr td:nth-child(1) {
 	width:50px;
 }
-/* ガシャ結果 タイプ */
+/* PC ガシャ結果 タイプ */
 #gasha-result table tr th:nth-child(2),
 #gasha-result table tr td:nth-child(2) {
 	width:60px;
 }
-/* ガシャ結果 カード名 */
+/* PC ガシャ結果 カード名 */
 #gasha-result table tr th:nth-child(3),
 #gasha-result table tr td:nth-child(3) {
 	width:250px;
 }
-/* ガシャ結果 レアリティ */
+/* PC ガシャ結果 レアリティ */
 #gasha-result table tr th:nth-child(4),
 #gasha-result table tr td:nth-child(4) {
+	width:70px;
+}
+
+/* SP ガシャ結果 */
+#gasha-result-sp table tr th {
+	border-top:none;
+}
+
+/* SP ガシャ結果 ID */
+#gasha-result-sp table tr th:nth-child(1),
+#gasha-result-sp table tr td:nth-child(1) {
+	width:50px;
+}
+/* SP ガシャ結果 タイプ */
+#gasha-result-sp table tr th:nth-child(2),
+#gasha-result-sp table tr td:nth-child(2) {
+	width:60px;
+}
+/* SP ガシャ結果 カード名 */
+#gasha-result-sp table tr th:nth-child(3),
+#gasha-result-sp table tr td:nth-child(3) {
+	width:250px;
+}
+/* SP ガシャ結果 レアリティ */
+#gasha-result-sp table tr th:nth-child(4),
+#gasha-result-sp table tr td:nth-child(4) {
 	width:70px;
 }
 
