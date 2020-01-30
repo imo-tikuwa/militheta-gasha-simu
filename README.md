@@ -19,6 +19,25 @@ mysql < env/create_millitheta.sql
 mysql millitheta < env/millitheta.sql
 ```
 
+## .envについて
+```
+#!/usr/bin/env bash
+
+# CakePHP3の標準の設定
+export APP_NAME="MillithetaGashaSimu"
+export DEBUG="false"
+export APP_ENCODING="UTF-8"
+export APP_DEFAULT_LOCALE="ja_JP"
+export APP_DEFAULT_TIMEZONE="Asia/Tokyo"
+export SECURITY_SALT="7Tosv70DGOM0SGEJcyS6MjMWOWtsPKawUHc5CgjyxbiiQulIiQZfYCEdbcEY2r1A"
+
+# CakePHP3のデータベース設定
+export DATABASE_NAME="millitheta"
+export DATABASE_PORT="33306"
+export DATABASE_USER="millitheta"
+export DATABASE_PASS="92xUCSRgoBqZ0qyB"
+```
+
 ## 使い方
 ビルトインサーバーを起動するWindows用のバッチがあります。  
 コマンドプロンプトから実行するかダブルクリックするかVSCodeのターミナルから呼び出してください。  
