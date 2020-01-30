@@ -9,7 +9,7 @@ return [
      * Development Mode:
      * true: Errors and warnings shown.
      */
-    'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),
+    'debug' => filter_var(env('DEBUG', false), FILTER_VALIDATE_BOOLEAN),
 
     /**
      * Configure basic information about the application.
@@ -249,10 +249,10 @@ return [
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
             'host' => 'localhost',
-            'port' => '33306',
-            'username' => 'millitheta',
-            'password' => '92xUCSRgoBqZ0qyB',
-            'database' => 'millitheta',
+            'port' => env('DATABASE_PORT'),
+            'username' => env('DATABASE_USER'),
+            'password' => env('DATABASE_PASS'),
+            'database' => env('DATABASE_NAME'),
             /*
              * You do not need to set this flag to use full utf-8 encoding (internal default since CakePHP 3.6).
              */
@@ -288,10 +288,10 @@ return [
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
             'host' => 'localhost',
-            'port' => '33306',
-            'username' => 'millitheta',
-            'password' => '92xUCSRgoBqZ0qyB',
-            'database' => 'millitheta_debug',
+            'port' => env('DATABASE_PORT'),
+            'username' => env('DATABASE_USER'),
+            'password' => env('DATABASE_PASS'),
+            'database' => env('DATABASE_NAME') . '_debug',
             //'encoding' => 'utf8mb4',
             'timezone' => 'UTC',
             'cacheMetadata' => true,

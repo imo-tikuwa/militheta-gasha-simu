@@ -38,8 +38,29 @@ body.sidebar-collapse .brand-text-disp-collapse {
 	padding-left: 10px;
 }
 
-.content-header h1 {
-	font-size: 1.6em;
+/* bootstrap,adminlteのフォントサイズをオーバーライド */
+h1, .h1 {
+  font-size: 1.6rem !important;
+}
+
+h2, .h2 {
+  font-size: 1.4rem !important;
+}
+
+h3, .h3 {
+  font-size: 1.3rem !important;
+}
+
+h4, .h4 {
+  font-size: 1.2rem !important;
+}
+
+h5, .h5 {
+  font-size: 1.1rem !important;
+}
+
+h6, .h6 {
+  font-size: 1rem !important;
 }
 
 .layout-fixed .main-sidebar {
@@ -127,4 +148,9 @@ table.table td.actions div.btn-group {
 }
 .navbar-nav .header-link:last-of-type {
 	border-right: none;
+}
+.navbar-nav .header-link a {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
