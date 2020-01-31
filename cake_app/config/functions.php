@@ -15,7 +15,12 @@ function _code($code_key) {
  * @param number $length
  */
 function create_random_str($length = 8) {
-	return substr(base_convert(md5(uniqid()), 16, 36), 0, $length);
+	$str = array_merge(range('a', 'z'), range('0', '9'), range('A', 'Z'));
+	$r_str = null;
+	for ($i = 0; $i < $length; $i++) {
+	    $r_str .= $str[rand(0, count($str) - 1)];
+	}
+	return $r_str;
 }
 
 
