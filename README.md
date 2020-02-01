@@ -19,6 +19,14 @@ mysql < env/create_millitheta.sql
 mysql millitheta < env/millitheta.sql
 ```
 
+config/bootstrap.phpを開いてCake3AdminBakerプラグインを無効化
+```
+// プラグインのロード
+Plugin::load('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
+↓
+// Plugin::load('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
+```
+
 ## .envについて
 ```
 #!/usr/bin/env bash
