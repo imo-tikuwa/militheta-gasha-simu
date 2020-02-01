@@ -41,7 +41,6 @@ export DATABASE_PASS="92xUCSRgoBqZ0qyB"
 ## 使い方
 ビルトインサーバーを起動するWindows用のバッチがあります。  
 コマンドプロンプトから実行するかダブルクリックするかVSCodeのターミナルから呼び出してください。  
-Wifi接続だとIPが取得できないかも  
 ```
 env/start.bat
 ```
