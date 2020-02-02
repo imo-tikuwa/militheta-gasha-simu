@@ -1,0 +1,352 @@
+@CHARSET "UTF-8";
+* {
+    margin: 0;
+    padding: 0
+}
+
+html {
+    height: 100%
+}
+
+body {
+    background-color: : #9C27B0;
+    background-image: linear-gradient(120deg, #FF4081, #81D4FA)
+}
+
+@media (max-width: 767.98px) {
+  body * {
+    font-size: 0.75rem !important;
+  }
+  body h1 {
+    font-size: 1.5rem !important;
+  }
+}
+
+table {
+    background: #fff;
+    margin-bottom: 1.25rem;
+    border: none;
+    table-layout: fixed;
+    width: 100%;
+    font-size:14px !important;
+}
+
+table thead {
+    background: none;
+}
+
+table tr {
+    border-bottom: 1px solid #ebebec;
+}
+
+table thead tr {
+    border-bottom: 1px solid #1798A5;
+}
+
+table tr th {
+    padding: 0.5625rem 0.625rem;
+    font-size: 0.875rem;
+    color: #1798A5;
+    text-align: left;
+    border-bottom: 2px solid #1798A5;
+}
+
+table tr:nth-of-type(even) {
+    background: none;
+}
+
+fieldset {
+    border: none;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+#multi-step-form {
+    text-align: center;
+    position: relative;
+    margin-top: 20px
+}
+
+#multi-step-form fieldset .form-card {
+    background: white;
+    border: 0 none;
+    border-radius: 0px;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 0 20px;
+    position: relative
+}
+
+#multi-step-form fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+#multi-step-form fieldset:nth-of-type(2),
+#multi-step-form fieldset:nth-of-type(4) {
+    max-height: 500px; /* 左記の値は暫定、ページ読み込み時にjs高さを取得して再指定する */
+    overflow-y: scroll;
+}
+
+#multi-step-form fieldset:not(:first-of-type) {
+    display: none
+}
+
+#multi-step-form fieldset .form-card {
+    text-align: left;
+    color: #9E9E9E
+}
+
+#multi-step-form input,
+#multi-step-form textarea {
+    padding: 0px 8px 4px 8px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0px;
+    margin-bottom: 25px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 16px;
+    letter-spacing: 1px
+}
+
+#multi-step-form input:focus,
+#multi-step-form textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: none;
+    font-weight: bold;
+    border-bottom: 2px solid skyblue;
+    outline-width: 0
+}
+
+#multi-step-form .action-button {
+    width: 40%;
+    box-sizing: border-box;
+    background: skyblue;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px
+}
+
+#multi-step-form .action-button:hover,
+#multi-step-form .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue
+}
+
+#multi-step-form .action-button-previous {
+    width: 40%;
+    box-sizing: border-box;
+    background: #616161;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px
+}
+
+#multi-step-form .action-button-previous:hover,
+#multi-step-form .action-button-previous:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #616161
+}
+
+select.list-dt {
+    border: none;
+    outline: 0;
+    border-bottom: 1px solid #ccc;
+    padding: 2px 5px 3px 5px;
+    margin: 2px
+}
+
+select.list-dt:focus {
+    border-bottom: 2px solid skyblue
+}
+
+.card {
+    z-index: 0;
+    border: none;
+    border-radius: 0.5rem;
+    position: relative
+}
+
+.fs-title {
+    font-size: 25px;
+    color: #2C3E50;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: left
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey
+}
+
+#progressbar .active {
+    color: #000000
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 12px;
+    width: 25%;
+    float: left;
+    position: relative
+}
+
+#progressbar #step1:before,
+#progressbar #step2:before,
+#progressbar #step3:before,
+#progressbar #step4:before {
+    font-family: 'Font Awesome 5 Free';
+}
+#progressbar #step1:before {
+    content: "\f25a";
+}
+#progressbar #step2:before {
+    content: "\f2c2";
+}
+#progressbar #step3:before {
+    content: "\f205";
+    font-weight: 900;
+}
+#progressbar #step4:before {
+    content: "\f058";
+}
+
+#progressbar li:before {
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    display: block;
+    font-size: 18px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px
+}
+
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    z-index: -1
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: skyblue
+}
+
+.radio-group {
+    position: relative;
+    margin-bottom: 25px
+}
+
+.radio {
+    display: inline-block;
+    background: #eee;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 8px 2px;
+}
+
+.radio:hover {
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3)
+}
+
+.radio.selected {
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1)
+}
+
+.fit-image {
+    width: 100%;
+    object-fit: cover
+}
+
+/* ピックしたいカード選択 */
+#pick-target-table table tr th:nth-child(1),
+#pick-target-table table tr td:nth-child(1) {
+    width: 20px;
+}
+#pick-target-table table tr th:nth-child(2),
+#pick-target-table table tr td:nth-child(2) {
+    width: 250px;
+}
+#pick-target-table table tr td:nth-child(2) img {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    bottom: 2px;
+}
+#pick-target-table table tr th:nth-child(3),
+#pick-target-table table tr td:nth-child(3) {
+    width: 70px;
+}
+
+/* ピック方法選択 */
+@media (max-width: 767.98px) {
+    #pick-type .radio img {
+        width: 130px;
+    }
+}
+
+/* ガシャ結果 */
+#gasha-result-info table tr th:nth-child(1),
+#gasha-result-info table tr td:nth-child(1) {
+    width: 100px;
+}
+@media (max-width: 767.98px) {
+    #gasha-result-info table tr th:nth-child(1),
+    #gasha-result-info table tr td:nth-child(1) {
+        width: 80px;
+    }
+}
+#gasha-result-info table tr td:nth-child(2) img {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    bottom: 2px;
+}
+
+#gasha-result-table table tr th:nth-child(1),
+#gasha-result-table table tr td:nth-child(1) {
+    width: 220px;
+}
+#gasha-result-table table tr td:nth-child(1) img {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    bottom: 2px;
+}
+#gasha-result-table table tr th:nth-child(2),
+#gasha-result-table table tr td:nth-child(2) {
+    width: 80px;
+}
+#gasha-result-table table tr th:nth-child(3),
+#gasha-result-table table tr td:nth-child(3) {
+    width: 60px;
+}

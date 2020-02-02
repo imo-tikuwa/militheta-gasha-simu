@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
+use Cake\Event\Event;
 
 /**
  * Front Controller
@@ -24,12 +25,10 @@ class FrontController extends AppController
 	}
 
 	/**
-	 * Index method
-	 *
-	 * @return \Cake\Http\Response|void
+	 * 共通処理
 	 */
-	public function index()
-	{
+	public function beforeFilter(Event $event) {
+
 		$gasha_datas = $this->Gashas->findGashaData();
 
 		$gasha_json_data = $this->Gashas->getGashaJsonData($gasha_datas);
@@ -43,6 +42,26 @@ class FrontController extends AppController
 				'gasha_selections',
 				'rarity_codes',
 				'type_codes'
-		));
+				));
+	}
+
+	/**
+	 * 通常モード
+	 *
+	 * @return \Cake\Http\Response|void
+	 */
+	public function index()
+	{
+
+	}
+
+	/**
+	 * ピック対象を引くまでに何連掛かるかモード
+	 *
+	 * @return \Cake\Http\Response|void
+	 */
+	public function targetPick()
+	{
+		$this->viewBuilder()->setLayout('target_pick');
 	}
 }
