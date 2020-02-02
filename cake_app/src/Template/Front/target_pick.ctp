@@ -239,7 +239,8 @@ $(function(){
 
 	// filedsetウィンドウの高さを設定
 	$(window).resize(function(){
-		$("fieldset").css("height", ($(window).height() - 250) + "px");
+		let height = $(window).height() - 240;
+		$("fieldset").css({"height": height + "px", "max-height": height + "px"});
 	});
 	$(window).trigger('resize');
 });
@@ -248,7 +249,7 @@ $(function(){
 <div class="container">
   <div class="row justify-content-center mt-0">
     <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-2 mb-2">
-      <div class="card px-0 pt-3 pb-3">
+      <div class="card px-0 pt-3 pb-2">
         <h2><strong>ミリシタガシャシミュレータ</strong></h2>
         <div class="row">
           <div class="col-md-12 mx-0" id="multi-step-form">
@@ -294,7 +295,7 @@ $(function(){
               </div>
               <input type="button" class="action-button-previous" onclick="location.reload();" value="最初からやり直す" />
             </fieldset>
-            <div class="privacy-policy">
+            <div class="privacy-policy mt-2">
               <a href="javascript:void(0);" data-toggle="modal" data-target="#privacy-modal">プライバシーポリシー</a>
             </div>
           </div>
