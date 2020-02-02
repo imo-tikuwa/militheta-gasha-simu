@@ -237,10 +237,9 @@ $(function(){
 		return false;
 	});
 
-
 	// filedsetウィンドウの高さを設定
 	$(window).resize(function(){
-		$("fieldset").css("height", ($(window).height() - 230) + "px");
+		$("fieldset").css("height", ($(window).height() - 250) + "px");
 	});
 	$(window).trigger('resize');
 });
@@ -295,9 +294,14 @@ $(function(){
               </div>
               <input type="button" class="action-button-previous" onclick="location.reload();" value="最初からやり直す" />
             </fieldset>
+            <div class="privacy-policy">
+              <a href="javascript:void(0);" data-toggle="modal" data-target="#privacy-modal">プライバシーポリシー</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<?= $this->element('modal_privacy'); ?>

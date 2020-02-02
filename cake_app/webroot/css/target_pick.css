@@ -350,3 +350,12 @@ select.list-dt:focus {
 #gasha-result-table table tr td:nth-child(3) {
     width: 60px;
 }
+
+.privacy-policy a {
+	font-size:14px;
+	color: #4169e1;
+	transition: color 0.3s;
+}
+.privacy-policy a:hover {
+	color: #ff8c00;
+}

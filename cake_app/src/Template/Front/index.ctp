@@ -352,6 +352,10 @@ $(function(){
             </div>
           </div>
         </div>
+
+        <div class="privacy-policy">
+          <a href="javascript:void(0);" data-toggle="modal" data-target="#privacy-modal">プライバシーポリシー</a>
+        </div>
       </div>
 
     </div>
@@ -397,3 +401,5 @@ $(function(){
     </div>
   </div>
 </div>
+
+<?= $this->element('modal_privacy'); ?>

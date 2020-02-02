@@ -629,3 +629,13 @@ h1 {
     font-size: 1.5rem !important;
   }
 }
+
+.privacy-policy {
+	width: 100%;
+	text-align: center;
+}
+
+.privacy-policy a {
+	font-size:14px;
+	transition: color 0.3s;
+}
