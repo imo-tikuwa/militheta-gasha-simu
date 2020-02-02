@@ -1,9 +1,12 @@
 # militheta-gasha-simu
 アイドルマスター ミリオンライブ！シアターデイズのガシャシミュレータです。  
-ミリシタのサービス開始から2020年1月までに実装されたカードのデータを元にガシャのシミュレートを行うことが可能です。
+ミリシタのサービス開始からこれまでに実装されたカードのデータを元にガシャのシミュレートを行うことが可能です。
 
 ## デモサイト
-https://milligasha.imo-tikuwa.com/
+最初に作ったシミュレータ  
+https://milligasha.imo-tikuwa.com/  
+ターゲットを複数指定してすべてそろうまでガシャを引き続けるシミュレータ  
+https://milligasha.imo-tikuwa.com/target-pick  
 
 ## インストール
 非公開の開発用プラグインを使用しているのでcomposer installの際--no-devを付ける必要あり
