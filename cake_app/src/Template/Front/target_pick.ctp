@@ -239,7 +239,7 @@ $(function(){
 
 	// filedsetウィンドウの高さを設定
 	$(window).resize(function(){
-		let height = $(window).height() - 240;
+		let height = $(window).height() - 252;
 		$("fieldset").css({"height": height + "px", "max-height": height + "px"});
 	});
 	$(window).trigger('resize');
