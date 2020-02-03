@@ -16,6 +16,7 @@
     <?= $this->Html->css('/node_modules/@fortawesome/fontawesome-free/css/all.css') ?>
     <?= $this->Html->css('/node_modules/bootstrap/dist/css/bootstrap.min.css') ?>
     <?= $this->Html->css('target_pick.css') ?>
+    <?= $this->Html->script('pace.min.js') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

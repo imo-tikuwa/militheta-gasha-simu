@@ -93,6 +93,12 @@ fieldset {
     max-height: 500px; /* 左記の値は暫定、ページ読み込み時にjs高さを取得して再指定する */
     overflow-y: scroll;
 }
+@media (max-width: 767.98px) {
+    #multi-step-form fieldset:nth-of-type(1) {
+        max-height: 500px; /* 左記の値は暫定、ページ読み込み時にjs高さを取得して再指定する */
+        overflow-y: scroll;
+    }
+}
 
 #multi-step-form fieldset:not(:first-of-type) {
     display: none
@@ -334,7 +340,8 @@ select.list-dt:focus {
 
 #gasha-result-table table tr th:nth-child(1),
 #gasha-result-table table tr td:nth-child(1) {
-    width: 220px;
+    width: 16px;
+    height: 16px;
 }
 #gasha-result-table table tr td:nth-child(1) img {
     width: 16px;
@@ -344,11 +351,15 @@ select.list-dt:focus {
 }
 #gasha-result-table table tr th:nth-child(2),
 #gasha-result-table table tr td:nth-child(2) {
-    width: 80px;
+    width: 204px;
 }
 #gasha-result-table table tr th:nth-child(3),
 #gasha-result-table table tr td:nth-child(3) {
-    width: 60px;
+    width: 80px;
+}
+#gasha-result-table table tr th:nth-child(4),
+#gasha-result-table table tr td:nth-child(4) {
+    width: 70px;
 }
 
 .privacy-policy a {
@@ -358,4 +369,98 @@ select.list-dt:focus {
 }
 .privacy-policy a:hover {
 	color: #ff8c00;
+}
+
+/* PACE表示中のオーバーレイ表示CSS */
+body.pace-running:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1500;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+body:before {
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-transition: background-color 200ms;
+  -moz-transtition: background-color 200ms;
+  -ms-transition: background-color 200ms;
+  -o-transition: background-color: 200ms;
+  transition: background-color 200ms;
+}
+
+/* PACEのcss*/
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace .pace-activity {
+  display: block;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: #29d;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  -webkit-transform: translateX(100%) translateY(-100%) rotate(45deg);
+  transform: translateX(100%) translateY(-100%) rotate(45deg);
+  pointer-events: none;
+}
+
+.pace.pace-active .pace-activity {
+  -webkit-transform: translateX(50%) translateY(-50%) rotate(45deg);
+  transform: translateX(50%) translateY(-50%) rotate(45deg);
+}
+
+.pace .pace-activity::before,
+.pace .pace-activity::after {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    display: block;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    content: '';
+}
+
+.pace .pace-activity::before {
+    margin-left: -40px;
+    width: 80px;
+    height: 80px;
+    border-right-color: rgba(0, 0, 0, .2);
+    border-left-color: rgba(0, 0, 0, .2);
+    -webkit-animation: pace-theme-corner-indicator-spin 3s linear infinite;
+    animation: pace-theme-corner-indicator-spin 3s linear infinite;
+}
+
+.pace .pace-activity::after {
+    bottom: 50px;
+    margin-left: -20px;
+    width: 40px;
+    height: 40px;
+    border-top-color: rgba(0, 0, 0, .2);
+    border-bottom-color: rgba(0, 0, 0, .2);
+    -webkit-animation: pace-theme-corner-indicator-spin 1s linear infinite;
+    animation: pace-theme-corner-indicator-spin 1s linear infinite;
+}
+
+@-webkit-keyframes pace-theme-corner-indicator-spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(359deg); }
+}
+@keyframes pace-theme-corner-indicator-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(359deg); }
 }

@@ -55,12 +55,18 @@ class TargetPickGashaController extends ApiController
 	{
 		parent::beforeFilter($event);
 
+		// リクエストタイムアウトの時間を5分に設定
+		set_time_limit(300);
+
 		try {
+			// getDataでパラメータ取れないので別の方法で取得？
+			$request_data = json_decode(file_get_contents('php://input'), true);
+
 			// ガシャID
-			$gasha_id = @$this->request->getQuery('gasha_id');
+			$gasha_id = @$request_data['gasha_id'];
 
 			// ターゲットカードID
-			$this->target_card_ids = @$this->request->getQuery('target_card_ids');
+			$this->target_card_ids = @$request_data['target_card_ids'];
 
 			if (is_null($gasha_id) || !is_numeric($gasha_id)) {
 				throw new Exception('gasha_id is invalid.');
@@ -105,21 +111,24 @@ class TargetPickGashaController extends ApiController
 		while (true) {
 
 			// ガシャを9回引く
+			$pick_ids = [];
 			for ($i = 0; $i < 9; $i++) {
-				$card_ids[] = $this->_pick($this->cards_rate_data);
+				$pick_ids[] = $this->_pick($this->cards_rate_data);
 			}
 
 			// SR以上確定ガシャ
-			$card_ids[] = $this->_pick($ssrsr_cards_rate_data);
+			$pick_ids[] = $this->_pick($ssrsr_cards_rate_data);
+
+			// 10枚のカードIDをマージ
+			$card_ids = array_merge($card_ids, $pick_ids);
 
 			// ピックしたいカードのID配列が空になったらガシャから解放する
-			$this->target_card_ids = array_diff($this->target_card_ids, $card_ids);
+			$this->target_card_ids = array_diff($this->target_card_ids, $pick_ids);
 			if (empty($this->target_card_ids)) {
 				break;
 			}
-
-			// 5000連して出なかったら終わり
-			if (count($card_ids) >= 5000) {
+			// ガシャ上限に到達したら終了
+			else if (count($card_ids) >= TARGET_PICK_ALLOW_MAX_NUM) {
 				break;
 			}
 		}
@@ -142,16 +151,16 @@ class TargetPickGashaController extends ApiController
 		while (true) {
 
 			// ガシャを1回引く
-			$card_ids[] = $this->_pick($this->cards_rate_data);
+			$pick_id = $this->_pick($this->cards_rate_data);
+			$card_ids[] = $pick_id;
 
 			// ピックしたいカードのID配列が空になったらガシャから解放する
-			$this->target_card_ids = array_diff($this->target_card_ids, $card_ids);
+			$this->target_card_ids = array_diff($this->target_card_ids, [$pick_id]);
 			if (empty($this->target_card_ids)) {
 				break;
 			}
-
-			// 5000連して出なかったら終わり
-			if (count($card_ids) >= 5000) {
+			// ガシャ上限に到達したら終了
+			else if (count($card_ids) >= TARGET_PICK_ALLOW_MAX_NUM) {
 				break;
 			}
 		}
