@@ -106,8 +106,6 @@ class TargetPickGashaController extends ApiController
 		$ssrsr_cards_rate_data = GashaUtils::createWeightData(array_merge($this->provision_ratios['SSR'], $this->provision_ratios['SR']));
 
 		$card_ids = [];
-
-		// 狙っているカードが出るまで引き続ける恐怖
 		while (true) {
 
 			// ガシャを9回引く
@@ -144,10 +142,7 @@ class TargetPickGashaController extends ApiController
 	 */
 	public function tanpatsu()
 	{
-
 		$card_ids = [];
-
-		// 狙っているカードが出るまで引き続ける恐怖
 		while (true) {
 
 			// ガシャを1回引く
