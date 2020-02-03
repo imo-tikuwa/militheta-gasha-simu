@@ -7,16 +7,12 @@ $this->assign('title', "ミリシタ ガシャシミュレータ(ピック指定
 ?>
 <?= $this->Html->script('/node_modules/tablesorter/dist/js/jquery.tablesorter.min.js', ['block' => true]) ?>
 <?= $this->Html->css('/node_modules/tablesorter/dist/css/theme.bootstrap_4.min.css', ['block' => true]) ?>
-<?= $this->Html->c?>
 <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
 
 // ajax中にpaceのローディングを行う
 $(document).ajaxStart(function() {
     Pace.restart();
 });
-window.paceOptions = {
-  target: '.card'
-}
 
 $(function(){
 
