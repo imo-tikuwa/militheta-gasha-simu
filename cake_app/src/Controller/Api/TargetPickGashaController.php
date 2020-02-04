@@ -58,8 +58,7 @@ class TargetPickGashaController extends ApiController
 		set_time_limit(300);
 
 		try {
-			// getDataでパラメータ取れないので別の方法で取得？
-			$request_data = json_decode(file_get_contents('php://input'), true);
+			$request_data = $this->request->getData();
 
 			// ガシャID
 			$gasha_id = @$request_data['gasha_id'];

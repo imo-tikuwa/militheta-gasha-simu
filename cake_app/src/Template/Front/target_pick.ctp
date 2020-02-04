@@ -106,14 +106,13 @@ $(function(){
 			$.ajax({
 				type: "POST",
 				url: request_url,
-				contentType: 'application/json',
 				beforeSend: function(xhr){
 					xhr.setRequestHeader('X-CSRF-Token', csrf_token);
 				},
-				data: JSON.stringify({
+				data: {
 					gasha_id: $('#gasha_id').val(),
 					target_card_ids: target_card_ids
-				}),
+				},
 				dataType: 'json',
 				async: false,
 			}).done(function(results, status, jqxhr){
