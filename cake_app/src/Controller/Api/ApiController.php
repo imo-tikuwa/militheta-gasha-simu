@@ -6,8 +6,6 @@ use Cake\ORM\TableRegistry;
 
 /**
  * APIの共通処理をまとめたコントローラ
- *
- * @method \App\Model\Entity\Card[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ApiController extends AppController
 {

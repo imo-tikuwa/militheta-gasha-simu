@@ -11,7 +11,6 @@ use Cake\Core\Exception\Exception;
  * @property \App\Model\Table\GashasTable $Gashas
  * @property \App\Model\Table\CardsTable $Cards
  *
- * @method \App\Model\Entity\Card[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class PickGashaController extends ApiController
 {

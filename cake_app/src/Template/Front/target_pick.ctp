@@ -9,10 +9,8 @@ $this->assign('title', "ミリシタ ガシャシミュレータ(ピック指定
 <?= $this->Html->css('/node_modules/tablesorter/dist/css/theme.bootstrap_4.min.css', ['block' => true]) ?>
 <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
 
-// ajax中にpaceのローディングを行う
-$(document).ajaxStart(function() {
-    Pace.restart();
-});
+// AjaxのPOSTとGETでPace.jsのプログレスバーを出す（初期値はGETだけの模様）
+Pace.options.ajax.trackMethods = ['GET', 'POST'];
 
 $(function(){
 
@@ -24,6 +22,8 @@ $(function(){
 
 		// ガシャ選択→ピック対象選択のとき
 		if ($(this).data("current-tab") == "gasha-select") {
+
+			Pace.restart();
 
 			// 提供割合を取得
 			let request_url = "/api/get-provision-ratio/" + $('#gasha_id').val();
@@ -87,6 +87,8 @@ $(function(){
 				alert("ピック方法で単発、10連のどちらかを選択してください。");
 				return false;
 			}
+
+			Pace.restart();
 
 			// ガシャ処理
 			let request_url = "/api/target-pick-gasha/",
@@ -337,8 +339,11 @@ $(function(){
             </fieldset>
             <fieldset data-gradient-from="#e6d137" data-gradient-to="#f58d7f">
               <h2 class="fs-title text-center">結果</h2>
-              <div class="form-card">
+              <div class="form-card mb-0">
                 <div id="gasha-result-info"><?php // ここにガシャ結果をテーブル表示、1件以上の選択を必須 ?></div>
+              </div>
+              <input type="button" class="action-button-previous" onclick="location.reload();" value="最初からやり直す" />
+              <div class="form-card mb-0">
                 <div id="gasha-result-table"><?php // ここにガシャ結果をテーブル表示、1件以上の選択を必須 ?></div>
               </div>
               <input type="button" class="action-button-previous" onclick="location.reload();" value="最初からやり直す" />
