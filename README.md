@@ -43,6 +43,7 @@ export APP_DEFAULT_TIMEZONE="Asia/Tokyo"
 export SECURITY_SALT="7Tosv70DGOM0SGEJcyS6MjMWOWtsPKawUHc5CgjyxbiiQulIiQZfYCEdbcEY2r1A"
 
 # CakePHP3のデータベース設定
+export DATABASE_HOST="localhost"
 export DATABASE_NAME="millitheta"
 export DATABASE_PORT="33306"
 export DATABASE_USER="millitheta"
