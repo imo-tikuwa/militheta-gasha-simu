@@ -14,30 +14,17 @@ use Cake\Core\Exception\Exception;
  */
 class TargetPickGashaController extends ApiController
 {
-
-	/**
-	 * ガシャ情報
-	 * @var unknown
-	 */
-	private $gasha;
-
-	/**
-	 * カード情報
-	 * @var unknown
-	 */
-	private $cards;
-
-	/**
-	 * 提供割合
-	 * @var unknown
-	 */
-	private $provision_ratios;
-
 	/**
 	 * 1～9連目の重み付けデータ
 	 * @var unknown
 	 */
 	private $cards_rate_data;
+
+	/**
+	 * 10連目の重み付けデータ
+	 * @var unknown
+	 */
+	private $ssrsr_cards_rate_data;
 
 	/**
 	 * ピックしたいカードのID配列
@@ -73,16 +60,24 @@ class TargetPickGashaController extends ApiController
 			}
 
 			// ガシャ情報取得
-			$this->gasha = $this->Gashas->get($gasha_id);
+			$gasha = $this->Gashas->get($gasha_id);
 
 			// カード情報取得
-			$this->cards = $this->Cards->findGashaTargetCards($this->gasha);
+			$cards = $this->Cards->findGashaTargetCards($gasha);
 
 			// 提供割合を取得
-			$this->provision_ratios = GashaUtils::getProvisionRatio($this->gasha, $this->cards);
+			$provision_ratios = GashaUtils::getProvisionRatio($gasha, $cards);
 
 			// 1～9連目の重み付けデータ作成
-			$this->cards_rate_data = GashaUtils::createWeightData(array_merge($this->provision_ratios['SSR'], $this->provision_ratios['SR'], $this->provision_ratios['R']));
+			$this->cards_rate_data = GashaUtils::createWeightData(array_merge($provision_ratios['SSR'], $provision_ratios['SR'], $provision_ratios['R']));
+
+			// 10連目(SR以上確定)の重み付けデータ作成
+			if ($this->request->action === 'jyuren') {
+				unset($cards['R']);
+				$gasha->sr_rate = 100 - $gasha->ssr_rate;
+				$provision_ratios = GashaUtils::getProvisionRatio($gasha, $cards);
+				$this->ssrsr_cards_rate_data = GashaUtils::createWeightData(array_merge($provision_ratios['SSR'], $provision_ratios['SR']));
+			}
 
 		} catch (\Exception $e) {
 
@@ -97,12 +92,6 @@ class TargetPickGashaController extends ApiController
 	 */
 	public function jyuren()
 	{
-		// 10連目(SR以上確定)の重み付けデータ作成
-		unset($this->cards['R']);
-		$this->gasha->sr_rate = 100 - $this->gasha->ssr_rate;
-		$this->provision_ratios = GashaUtils::getProvisionRatio($this->gasha, $this->cards);
-		$ssrsr_cards_rate_data = GashaUtils::createWeightData(array_merge($this->provision_ratios['SSR'], $this->provision_ratios['SR']));
-
 		$card_ids = [];
 		while (true) {
 
@@ -113,7 +102,7 @@ class TargetPickGashaController extends ApiController
 			}
 
 			// SR以上確定ガシャ
-			$pick_ids[] = $this->_pick($ssrsr_cards_rate_data);
+			$pick_ids[] = $this->_pick($this->ssrsr_cards_rate_data);
 
 			// 10枚のカードIDをマージ
 			$card_ids = array_merge($card_ids, $pick_ids);
@@ -173,7 +162,6 @@ class TargetPickGashaController extends ApiController
 	 */
 	private function _pick($entries)
 	{
-
 		$sum  = array_sum($entries);
 		$rand = rand(1, $sum);
 
