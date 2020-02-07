@@ -34,6 +34,7 @@ return [
 						'col_lg_size' => 8,
 						'col_md_size' => 8,
 						'col_sm_size' => 12,
+						'input_type' => 'text',
 						'search_type' => 'LIKE',
 				],
 				'ssr_rate' => [
