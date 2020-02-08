@@ -33,6 +33,7 @@ $(function(){
 				contentType: 'application/json',
 				dataType: 'json',
 				async: false,
+				cache: false,
 			}).done(function(json, status, jqxhr){
 				$("#pick-target-table").empty();
 				let html = "";
@@ -115,6 +116,7 @@ $(function(){
 				},
 				dataType: 'json',
 				async: false,
+				cache: false,
 			}).done(function(results, status, jqxhr){
 
 				// reduceによる集計を行う
