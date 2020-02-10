@@ -21,6 +21,7 @@ use Cake\Http\BaseApplication;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use OperationLogs\Middleware\OperationLogsMiddleware;
 
 /**
  * Application setup class.
@@ -87,7 +88,17 @@ class Application extends BaseApplication
             // Add csrf middleware.
             ->add(new CsrfProtectionMiddleware([
                 'httpOnly' => true
-            ]));
+            ]))
+
+            // Add operation_logs middleware.
+            ->add(new OperationLogsMiddleware([
+                'exclude_urls' => [
+                    '/debug-kit',
+                    '/cake3-admin-baker',
+                    '/api'
+                ]
+            ]))
+            ;
 
         return $middlewareQueue;
     }

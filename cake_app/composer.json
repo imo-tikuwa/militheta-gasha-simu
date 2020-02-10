@@ -9,9 +9,10 @@
         "cakephp/cakephp": "3.6.*",
         "cakephp/migrations": "^2.0.0",
         "cakephp/plugin-installer": "^1.0",
+        "friendsofcake/cakephp-csvview": "3.3.*",
+        "imo-tikuwa/cakephp-operation-logs": "dev-master",
         "josegonzalez/dotenv": "3.*",
-        "mobiledetect/mobiledetectlib": "2.*",
-        "friendsofcake/cakephp-csvview": "3.3.*"
+        "mobiledetect/mobiledetectlib": "2.*"
     },
     "require-dev": {
         "cakephp/bake": "^1.1",
@@ -56,6 +57,10 @@
         "github.com": {
             "type": "vcs",
             "url": "https://github.com/imo-tikuwa/cakephp-admin-baker"
+        },
+        "imo-tikuwa/cakephp-operation-logs": {
+            "type": "vcs",
+            "url": "https://github.com/imo-tikuwa/cakephp-operation-logs"
         }
     }
 }
