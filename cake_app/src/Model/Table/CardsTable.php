@@ -15,6 +15,7 @@ use App\Model\Entity\Gasha;
  *
  * @property \App\Model\Table\CharactersTable|\Cake\ORM\Association\BelongsTo $Characters
  * @property \App\Model\Table\CardReprintsTable|\Cake\ORM\Association\HasMany $CardReprints
+ * @property \App\Model\Table\GashaPickupsTable|\Cake\ORM\Association\HasMany $GashaPickups
  *
  * @method \App\Model\Entity\Card get($primaryKey, $options = [])
  * @method \App\Model\Entity\Card newEntity($data = null, array $options = [])
@@ -49,6 +50,9 @@ class CardsTable extends AppTable
             'foreignKey' => 'character_id'
         ]);
         $this->hasMany('CardReprints', [
+            'foreignKey' => 'card_id'
+        ]);
+        $this->hasMany('GashaPickups', [
             'foreignKey' => 'card_id'
         ]);
     }

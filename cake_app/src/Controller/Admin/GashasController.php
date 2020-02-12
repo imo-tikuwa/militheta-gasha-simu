@@ -221,8 +221,8 @@ class GashasController extends AppController
      * CSVインポート
      * @return \Cake\Http\Response|NULL
      */
-    public function csvImport() {
-
+    public function csvImport()
+    {
         $csv_import_file = @$_FILES["csv_import_file"]["tmp_name"];
         if (is_uploaded_file($csv_import_file)){
             $conn = $this->Gashas->getConnection();

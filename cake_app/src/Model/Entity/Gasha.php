@@ -17,6 +17,7 @@ use Cake\ORM\Entity;
  * @property string $delete_flag
  *
  * @property \App\Model\Entity\CardReprint[] $card_reprints
+ * @property \App\Model\Entity\GashaPickup[] $gasha_pickups
  */
 class Gasha extends Entity
 {
@@ -39,7 +40,8 @@ class Gasha extends Entity
         'created' => true,
         'modified' => true,
         'delete_flag' => true,
-        'card_reprints' => true
+        'card_reprints' => true,
+        'gasha_pickups' => true
     ];
 
     /**
