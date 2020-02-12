@@ -7,7 +7,7 @@ if (!empty($header_links) && count($header_links) > 0) {
 	$html = "";
 	foreach ($header_links as $header_link) {
 
-		if (empty($header_link['title']) && empty($header_link['link'])) {
+		if (empty($header_link['title']) || empty($header_link['link'])) {
 			continue;
 		}
 

@@ -17,6 +17,7 @@ return [
 						'col_md_size' => 6,
 						'col_sm_size' => 6,
 						'input_type' => 'text',
+						'search_type' => '=',
 				],
 				'created' => [
 						'search' => false,

@@ -73,6 +73,7 @@ try {
     Configure::load('bake_codes', 'default');
     Configure::load('left_side_menu', 'default');
     Configure::load('header_menu', 'default');
+    Configure::load('footer_config', 'default');
     Configure::load('admin_config', 'default');
     require_once (__DIR__ . '/functions.php');
 } catch (\Exception $e) {

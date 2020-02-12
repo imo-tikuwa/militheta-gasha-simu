@@ -17,6 +17,7 @@ return [
 						'col_md_size' => 3,
 						'col_sm_size' => 12,
 						'input_type' => 'foreign_key',
+						'search_type' => '=',
 						'foreign_table' => 'characters',
 						'foreign_disp_column' => 'name',
 				],
@@ -38,6 +39,7 @@ return [
 						'col_md_size' => 3,
 						'col_sm_size' => 12,
 						'input_type' => 'select',
+						'search_type' => '=',
 						'selections' => [
 								'01' => 'N',
 								'02' => 'R',
@@ -54,6 +56,7 @@ return [
 						'col_md_size' => 3,
 						'col_sm_size' => 12,
 						'input_type' => 'select',
+						'search_type' => '=',
 						'selections' => [
 								'01' => 'Princess',
 								'02' => 'Fairy',
@@ -69,6 +72,7 @@ return [
 						'col_md_size' => 3,
 						'col_sm_size' => 12,
 						'input_type' => 'date',
+						'search_type' => '=',
 				],
 				'gasha_include' => [
 						'search' => true,
@@ -78,6 +82,7 @@ return [
 						'col_md_size' => 3,
 						'col_sm_size' => 12,
 						'input_type' => 'boolean',
+						'search_type' => '=',
 						'boolean_init_value' => '1',
 				],
 				'limited' => [
@@ -88,6 +93,7 @@ return [
 						'col_md_size' => 3,
 						'col_sm_size' => 12,
 						'input_type' => 'boolean',
+						'search_type' => '=',
 						'boolean_init_value' => '0',
 				],
 				'created' => [

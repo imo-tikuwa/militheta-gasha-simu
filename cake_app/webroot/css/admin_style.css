@@ -154,3 +154,9 @@ table.table td.actions div.btn-group {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
+
+/* アイコンピッカーの右のプレビュー幅固定化 */
+.icon-picker-placeholder {
+	width: 50px;
+	display: inline-grid;
+}

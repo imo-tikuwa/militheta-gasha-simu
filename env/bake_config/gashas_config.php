@@ -17,6 +17,7 @@ return [
 						'col_md_size' => 2,
 						'col_sm_size' => 12,
 						'input_type' => 'date',
+						'search_type' => '=',
 				],
 				'end_date' => [
 						'search' => true,
@@ -26,6 +27,7 @@ return [
 						'col_md_size' => 2,
 						'col_sm_size' => 12,
 						'input_type' => 'date',
+						'search_type' => '=',
 				],
 				'title' => [
 						'search' => true,
