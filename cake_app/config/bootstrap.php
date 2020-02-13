@@ -220,3 +220,4 @@ if (Configure::read('debug')) {
 
 // プラグインのロード
 Plugin::load('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
+Plugin::load('OperationLogs');
