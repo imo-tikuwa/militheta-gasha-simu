@@ -160,3 +160,13 @@ table.table td.actions div.btn-group {
 	width: 50px;
 	display: inline-grid;
 }
+
+/* 日付選択プラグイン(tempusdominus-bootstrap-4)の土日に色を付ける */
+.datepicker-days th.dow:first-child,
+.datepicker-days td:first-child {
+    color: #f00;
+}
+.datepicker-days th.dow:last-child,
+.datepicker-days td:last-child {
+    color: #00f;
+}

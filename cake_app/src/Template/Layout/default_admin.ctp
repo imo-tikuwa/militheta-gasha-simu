@@ -17,7 +17,7 @@
     <?= $this->Html->css('/node_modules/admin-lte/dist/css/adminlte.min.css') ?>
     <?= $this->Html->css('/node_modules/select2/dist/css/select2.min.css') ?>
     <?= $this->Html->css('/node_modules/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css') ?>
-    <?= $this->Html->css('/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') ?>
+    <?= $this->Html->css('/node_modules/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css') ?>
     <?= $this->Html->css('//fonts.googleapis.com/icon?family=Material+Icons') ?>
     <?= $this->Html->css('/node_modules/bootstrap-fileinput/css/fileinput.min.css') ?>
     <?= $this->Html->css('/node_modules/bootstrap-fileinput/themes/explorer-fas/theme.min.css') ?>
@@ -96,8 +96,9 @@
 <?= $this->Html->script('/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') ?>
 <?= $this->Html->script('/node_modules/admin-lte/dist/js/adminlte.min.js') ?>
 <?= $this->Html->script('/node_modules/select2/dist/js/select2.min.js') ?>
-<?= $this->Html->script('/node_modules/moment/min/moment-with-locales.min.js') ?>
-<?= $this->Html->script('/node_modules/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') ?>
+<?= $this->Html->script('/node_modules/moment/min/moment.min.js') ?>
+<?= $this->Html->script('/node_modules/moment/locale/ja.js') ?>
+<?= $this->Html->script('/node_modules/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.js') ?>
 <?= $this->Html->script('/node_modules/bootstrap-fileinput/js/plugins/piexif.min.js') ?>
 <?= $this->Html->script('/node_modules/bootstrap-fileinput/js/plugins/purify.min.js') ?>
 <?= $this->Html->script('/node_modules/bootstrap-fileinput/js/plugins/sortable.min.js') ?>

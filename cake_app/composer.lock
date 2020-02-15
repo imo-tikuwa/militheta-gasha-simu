@@ -370,12 +370,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/imo-tikuwa/cakephp-operation-logs.git",
-                "reference": "8107e8953d2642f2940b4c3f6590385f54208427"
+                "reference": "5b0283ef13fad4e571e8f349a27cb794849ce239"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-operation-logs/zipball/8107e8953d2642f2940b4c3f6590385f54208427",
-                "reference": "8107e8953d2642f2940b4c3f6590385f54208427",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-operation-logs/zipball/5b0283ef13fad4e571e8f349a27cb794849ce239",
+                "reference": "5b0283ef13fad4e571e8f349a27cb794849ce239",
                 "shasum": ""
             },
             "require": {
@@ -404,7 +404,7 @@
                 "source": "https://github.com/imo-tikuwa/cakephp-operation-logs/tree/master",
                 "issues": "https://github.com/imo-tikuwa/cakephp-operation-logs/issues"
             },
-            "time": "2020-02-13T13:33:02+00:00"
+            "time": "2020-02-15T08:16:33+00:00"
         },
         {
             "name": "josegonzalez/dotenv",
@@ -1888,12 +1888,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-admin-baker.git",
-                "reference": "97c5644e321c950e822b1aa734fad03095487681"
+                "reference": "45be4a88998af4b2d99956aa88ac3151a791c9c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/97c5644e321c950e822b1aa734fad03095487681",
-                "reference": "97c5644e321c950e822b1aa734fad03095487681",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/45be4a88998af4b2d99956aa88ac3151a791c9c1",
+                "reference": "45be4a88998af4b2d99956aa88ac3151a791c9c1",
                 "shasum": ""
             },
             "require": {
@@ -1922,7 +1922,7 @@
                 "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/master",
                 "issues": "https://github.com/imo-tikuwa/cakephp-admin-baker/issues"
             },
-            "time": "2020-02-12T12:33:03+00:00"
+            "time": "2020-02-15T07:09:16+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
