@@ -96,15 +96,27 @@ $this->assign('title', "ガシャ");
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('start_date', ['type' => 'text', 'id' => 'start_date-datepicker', 'class' => 'form-control rounded-0', 'label' => 'ガシャ開始日', 'value' => @$params['start_date']]); ?>
+                <?= $this->Form->control('start_date', ['type' => 'text', 'id' => 'start_date-datepicker', 'class' => 'form-control rounded-0', 'label' => 'ガシャ開始日', 'data-toggle' => 'datetimepicker', 'data-target' => '#start_date-datepicker', 'value' => @$params['start_date']]); ?>
                 <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
                 $(function(){
-                  $('#start_date-datepicker').bootstrapMaterialDatePicker({
-                    lang: 'ja',
-                    nowButton: true,
-                    clearButton: true,
+                  $('#start_date-datepicker').datetimepicker({
+                    dayViewHeaderFormat: 'YYYY年 M月',
+                    locale: 'ja',
+                    buttons: {
+                      showClear: true
+                    },
+                    icons: {
+                      time: 'far fa-clock',
+                      date: 'far fa-calendar-alt',
+                      up: 'fas fa-arrow-up',
+                      down: 'fas fa-arrow-down',
+                      previous: 'fas fa-chevron-left',
+                      next: 'fas fa-chevron-right',
+                      today: 'far fa-calendar-alt',
+                      clear: 'far fa-trash-alt',
+                      close: 'fas fa-times'
+                    },
                     format: 'YYYY-MM-DD',
-                    time: false,
                   });
                 });
                 <?= $this->Html->scriptEnd() ?>
@@ -114,15 +126,27 @@ $this->assign('title', "ガシャ");
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('end_date', ['type' => 'text', 'id' => 'end_date-datepicker', 'class' => 'form-control rounded-0', 'label' => 'ガシャ終了日', 'value' => @$params['end_date']]); ?>
+                <?= $this->Form->control('end_date', ['type' => 'text', 'id' => 'end_date-datepicker', 'class' => 'form-control rounded-0', 'label' => 'ガシャ終了日', 'data-toggle' => 'datetimepicker', 'data-target' => '#end_date-datepicker', 'value' => @$params['end_date']]); ?>
                 <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
                 $(function(){
-                  $('#end_date-datepicker').bootstrapMaterialDatePicker({
-                    lang: 'ja',
-                    nowButton: true,
-                    clearButton: true,
+                  $('#end_date-datepicker').datetimepicker({
+                    dayViewHeaderFormat: 'YYYY年 M月',
+                    locale: 'ja',
+                    buttons: {
+                      showClear: true
+                    },
+                    icons: {
+                      time: 'far fa-clock',
+                      date: 'far fa-calendar-alt',
+                      up: 'fas fa-arrow-up',
+                      down: 'fas fa-arrow-down',
+                      previous: 'fas fa-chevron-left',
+                      next: 'fas fa-chevron-right',
+                      today: 'far fa-calendar-alt',
+                      clear: 'far fa-trash-alt',
+                      close: 'fas fa-times'
+                    },
                     format: 'YYYY-MM-DD',
-                    time: false,
                   });
                 });
                 <?= $this->Html->scriptEnd() ?>
