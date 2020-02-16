@@ -15,3 +15,5 @@ if (!empty($functions) && count($functions) > 0) {
 	}
 	echo $html;
 }
+?>
+<li class="nav-item"><a href="/admin/access-logs" class="nav-link"><i class="far fa-chart-bar fa-fw mr-2"></i><p>アクセスログ</p></a></li>
