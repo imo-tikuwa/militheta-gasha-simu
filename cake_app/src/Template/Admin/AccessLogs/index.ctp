@@ -116,8 +116,8 @@ alert("データが見つかりませんでした。");
       <?= $this->Form->end(); ?>
     </div>
     <div class="card-body">
-      <div class="row">
       <?php if (isset($graph_data_all) && !empty($graph_data_all)) { ?>
+      <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
           <label>全体</label>
           <div class="chart">
