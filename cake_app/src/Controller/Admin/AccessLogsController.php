@@ -11,6 +11,24 @@ use OperationLogs\Util\OperationLogsUtils;
 class AccessLogsController extends AppController
 {
 	/**
+	 * バーチャートのカラーコード表
+	 * https://color.adobe.com/ja/create
+	 * で作成
+	 */
+	private $rgb_colors = [
+			'110, 59, 246',
+			'77, 247, 240',
+			'164, 250, 65',
+			'255, 195, 56',
+			'222, 48, 42',
+			'237, 79, 245',
+			'96, 154, 247',
+			'255, 246, 77',
+			'222, 125, 60',
+			'180, 180, 180'
+	];
+
+	/**
 	 * Index method
 	 *
 	 * @return \Cake\Http\Response|void
@@ -65,14 +83,13 @@ class AccessLogsController extends AppController
 		// allのときはKeyが0固定
 		if (isset($result) && !empty($result)) {
 
-			$rgb = rand(0, 255) . "," . rand(0, 255) . "," . rand(0, 255);
 			$graph_data = [];
 			$graph_data['labels'] = array_keys($result[0]);
 			$graph_data['datasets'] = [];
 			$graph_data['datasets'][] = [
 					'label' => _code("OperationLogs.date_type_jp.{$date_type}"),
-					'backgroundColor' => "rgba({$rgb},0.9)",
-					'borderColor' => "rgba({$rgb},0.8)",
+					'backgroundColor' => "rgba({$this->rgb_colors[9]},0.9)",
+					'borderColor' => "rgba({$this->rgb_colors[9]},0.8)",
 					'data' => array_values($result[0])
 			];
 			$graph_data = json_encode($graph_data);
@@ -136,14 +153,15 @@ class AccessLogsController extends AppController
 					break;
 				}
 				$graph_data['datasets'] = [];
+				$chart_index = 0;
 				foreach ($result as $ip => $data) {
-					$rgb = rand(0, 255) . "," . rand(0, 255) . "," . rand(0, 255);
 					$graph_data['datasets'][] = [
 							'label' => $ip,
-							'backgroundColor' => "rgba({$rgb},0.9)",
-							'borderColor' => "rgba({$rgb},0.8)",
+							'backgroundColor' => "rgba({$this->rgb_colors[$chart_index]},0.9)",
+							'borderColor' => "rgba({$this->rgb_colors[$chart_index]},0.8)",
 							'data' => array_values($data)
 					];
+					$chart_index++;
 				}
 
 				$graph_data = json_encode($graph_data);
@@ -209,14 +227,15 @@ class AccessLogsController extends AppController
 					break;
 				}
 				$graph_data['datasets'] = [];
+				$chart_index = 0;
 				foreach ($result as $ua => $data) {
-					$rgb = rand(0, 255) . "," . rand(0, 255) . "," . rand(0, 255);
 					$graph_data['datasets'][] = [
 							'label' => $ua,
-							'backgroundColor' => "rgba({$rgb},0.9)",
-							'borderColor' => "rgba({$rgb},0.8)",
+							'backgroundColor' => "rgba({$this->rgb_colors[$chart_index]},0.9)",
+							'borderColor' => "rgba({$this->rgb_colors[$chart_index]},0.8)",
 							'data' => array_values($data)
 					];
+					$chart_index++;
 				}
 
 				$graph_data = json_encode($graph_data);
@@ -281,14 +300,15 @@ class AccessLogsController extends AppController
 					break;
 				}
 				$graph_data['datasets'] = [];
+				$chart_index = 0;
 				foreach ($result as $url => $data) {
-					$rgb = rand(0, 255) . "," . rand(0, 255) . "," . rand(0, 255);
 					$graph_data['datasets'][] = [
 							'label' => $url,
-							'backgroundColor' => "rgba({$rgb},0.9)",
-							'borderColor' => "rgba({$rgb},0.8)",
+							'backgroundColor' => "rgba({$this->rgb_colors[$chart_index]},0.9)",
+							'borderColor' => "rgba({$this->rgb_colors[$chart_index]},0.8)",
 							'data' => array_values($data)
 					];
+					$chart_index++;
 				}
 
 				$graph_data = json_encode($graph_data);
