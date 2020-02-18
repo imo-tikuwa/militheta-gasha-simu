@@ -370,12 +370,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/imo-tikuwa/cakephp-operation-logs.git",
-                "reference": "d54d026e9a34b36f8dacff100db0c383f97ea9c5"
+                "reference": "63b15e788eb3f9d71ed338fc9d872bcfc7bc1c00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-operation-logs/zipball/d54d026e9a34b36f8dacff100db0c383f97ea9c5",
-                "reference": "d54d026e9a34b36f8dacff100db0c383f97ea9c5",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-operation-logs/zipball/63b15e788eb3f9d71ed338fc9d872bcfc7bc1c00",
+                "reference": "63b15e788eb3f9d71ed338fc9d872bcfc7bc1c00",
                 "shasum": ""
             },
             "require": {
@@ -404,7 +404,7 @@
                 "source": "https://github.com/imo-tikuwa/cakephp-operation-logs/tree/master",
                 "issues": "https://github.com/imo-tikuwa/cakephp-operation-logs/issues"
             },
-            "time": "2020-02-16T08:33:16+00:00"
+            "time": "2020-02-18T12:14:18+00:00"
         },
         {
             "name": "josegonzalez/dotenv",
