@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-02-01 15:44:06
+Date: 2020-02-18 18:43:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -51,7 +51,7 @@ CREATE TABLE `cards` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `delete_flag` char(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=770 DEFAULT CHARSET=utf8 COMMENT='カード';
+) ENGINE=InnoDB AUTO_INCREMENT=784 DEFAULT CHARSET=utf8 COMMENT='カード';
 
 -- ----------------------------
 -- Records of cards
@@ -825,6 +825,20 @@ INSERT INTO `cards` VALUES ('766', '3', 'Love me do♡　星井美希', '04', '0
 INSERT INTO `cards` VALUES ('767', '33', 'プレシャス・ギフト　北沢志保', '04', '02', '2020-01-31', '1', '1', '2020-02-01 15:17:32', '2020-02-01 15:17:32', '0');
 INSERT INTO `cards` VALUES ('768', '20', 'スイートドーナツステージ　所恵美', '03', '02', '2020-01-31', '1', '1', '2020-02-01 15:17:32', '2020-02-01 15:17:32', '0');
 INSERT INTO `cards` VALUES ('769', '14', '制服シリーズ　春日未来', '03', '01', '2020-01-31', '1', '0', '2020-02-01 15:17:32', '2020-02-01 15:17:32', '0');
+INSERT INTO `cards` VALUES ('770', '42', 'タウラス　宮尾美也', '03', '03', '2020-02-02', '0', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('771', '21', 'タウラス　徳川まつり', '03', '01', '2020-02-02', '0', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('772', '36', 'おまじない　矢吹可奈', '04', '01', '2020-02-11', '1', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('773', '44', '...In The Name Of。 ...LOVE？　真壁瑞希', '04', '02', '2020-02-11', '1', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('774', '4', '制服シリーズ　萩原雪歩', '03', '01', '2020-02-11', '1', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('775', '15', '制服シリーズ　最上静香', '03', '02', '2020-02-11', '1', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('776', '24', '電光鳴神ライブ　望月杏奈', '03', '03', '2020-02-11', '0', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('777', '43', 'BIGなご褒美タイム　福田のり子', '03', '01', '2020-02-11', '0', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('778', '46', 'メルティング・キス　百瀬莉緒', '02', '02', '2020-02-11', '0', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('779', '11', '弾けろ青春っ！　双海亜美', '04', '03', '2020-02-18', '1', '1', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('780', '25', 'エマージェンシー・エマージェンス　ロコ', '04', '02', '2020-02-18', '1', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('781', '47', 'ケガの消毒はしっかりと！　永吉昴', '03', '02', '2020-02-18', '1', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('782', '9', '制服シリーズ　秋月律子', '03', '02', '2020-02-18', '1', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
+INSERT INTO `cards` VALUES ('783', '48', '新人マドンナ教師　北上麗花', '02', '03', '2020-02-18', '1', '0', '2020-02-18 18:15:14', '2020-02-18 18:15:14', '0');
 
 -- ----------------------------
 -- Table structure for `card_reprints`
@@ -1019,7 +1033,7 @@ CREATE TABLE `gashas` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `delete_flag` char(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
 
 -- ----------------------------
 -- Records of gashas
@@ -1145,6 +1159,8 @@ INSERT INTO `gashas` VALUES ('118', '2020-01-11', '2020-01-20', '【期間限定
 INSERT INTO `gashas` VALUES ('119', '2020-01-20', '2020-01-28', '【期間限定】寒空と微熱ガシャ', '3', '12', '2020-01-13 21:23:52', '2020-01-13 21:23:52', '0');
 INSERT INTO `gashas` VALUES ('120', '2020-01-28', '2020-01-31', '【限定復刻】限定復刻ガシャ', '3', '12', '2020-02-01 15:25:26', '2020-02-01 15:25:26', '0');
 INSERT INTO `gashas` VALUES ('121', '2020-01-31', '2020-02-11', '【期間限定】想いを込めて♡バレンタインガシャ', '3', '12', '2020-02-01 15:25:26', '2020-02-01 15:25:26', '0');
+INSERT INTO `gashas` VALUES ('122', '2020-02-11', '2020-02-18', 'SONG FOR YOU！ガシャ VOL.1', '3', '12', '2020-02-18 18:25:15', '2020-02-18 18:25:15', '0');
+INSERT INTO `gashas` VALUES ('123', '2020-02-18', '2020-02-26', '【期間限定】青春★ロックンロールガシャ', '3', '12', '2020-02-18 18:25:15', '2020-02-18 18:25:15', '0');
 
 -- ----------------------------
 -- Table structure for `gasha_pickups`
@@ -1158,7 +1174,7 @@ CREATE TABLE `gasha_pickups` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `delete_flag` char(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=437 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
+) ENGINE=InnoDB AUTO_INCREMENT=446 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
 
 -- ----------------------------
 -- Records of gasha_pickups
@@ -1599,3 +1615,12 @@ INSERT INTO `gasha_pickups` VALUES ('433', '121', '766', '2020-02-01 15:38:03', 
 INSERT INTO `gasha_pickups` VALUES ('434', '121', '767', '2020-02-01 15:38:17', '2020-02-01 15:38:17', '0');
 INSERT INTO `gasha_pickups` VALUES ('435', '121', '768', '2020-02-01 15:38:29', '2020-02-01 15:38:29', '0');
 INSERT INTO `gasha_pickups` VALUES ('436', '121', '769', '2020-02-01 15:39:28', '2020-02-01 15:39:28', '0');
+INSERT INTO `gasha_pickups` VALUES ('437', '122', '772', '2020-02-18 18:31:38', '2020-02-18 18:31:38', '0');
+INSERT INTO `gasha_pickups` VALUES ('438', '122', '773', '2020-02-18 18:31:55', '2020-02-18 18:31:55', '0');
+INSERT INTO `gasha_pickups` VALUES ('439', '122', '774', '2020-02-18 18:32:08', '2020-02-18 18:32:08', '0');
+INSERT INTO `gasha_pickups` VALUES ('440', '122', '775', '2020-02-18 18:32:20', '2020-02-18 18:32:20', '0');
+INSERT INTO `gasha_pickups` VALUES ('441', '123', '779', '2020-02-18 18:36:02', '2020-02-18 18:36:02', '0');
+INSERT INTO `gasha_pickups` VALUES ('442', '123', '780', '2020-02-18 18:36:17', '2020-02-18 18:36:17', '0');
+INSERT INTO `gasha_pickups` VALUES ('443', '123', '781', '2020-02-18 18:36:30', '2020-02-18 18:36:30', '0');
+INSERT INTO `gasha_pickups` VALUES ('444', '123', '782', '2020-02-18 18:36:43', '2020-02-18 18:36:43', '0');
+INSERT INTO `gasha_pickups` VALUES ('445', '123', '783', '2020-02-18 18:36:57', '2020-02-18 18:36:57', '0');
