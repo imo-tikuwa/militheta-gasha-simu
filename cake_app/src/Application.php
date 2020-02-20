@@ -95,7 +95,8 @@ class Application extends BaseApplication
                 'exclude_urls' => [
                     '/debug-kit',
                     '/cake3-admin-baker',
-                    '/api'
+                    '/api',
+                    '/admin'
                 ]
             ]))
             ;
