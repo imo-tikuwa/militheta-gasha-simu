@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45c98077b6260e59f89ccf253ee519d2",
+    "content-hash": "59c05e70d6887be303e10aa5833e6149",
     "packages": [
         {
             "name": "aura/intl",
@@ -366,7 +366,7 @@
         },
         {
             "name": "imo-tikuwa/cakephp-operation-logs",
-            "version": "dev-master",
+            "version": "v0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/imo-tikuwa/cakephp-operation-logs.git",
@@ -390,20 +390,11 @@
                     "OperationLogs\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "OperationLogs\\Test\\": "tests/",
-                    "Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "OperationLogs plugin for CakePHP",
-            "support": {
-                "source": "https://github.com/imo-tikuwa/cakephp-operation-logs/tree/master",
-                "issues": "https://github.com/imo-tikuwa/cakephp-operation-logs/issues"
-            },
             "time": "2020-02-21T11:35:32+00:00"
         },
         {
@@ -2793,7 +2784,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "imo-tikuwa/cakephp-operation-logs": 20,
         "imo-tikuwa/cakephp-admin-baker": 20,
         "psy/psysh": 0
     },
