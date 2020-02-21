@@ -97,6 +97,10 @@ class Application extends BaseApplication
                     '/cake3-admin-baker',
                     '/api',
                     '/admin'
+                ],
+                'exclude_ips' => [
+                    '192.168',
+                    '::'
                 ]
             ]))
             ;
