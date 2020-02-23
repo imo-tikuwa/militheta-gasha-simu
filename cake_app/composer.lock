@@ -366,16 +366,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-operation-logs",
-            "version": "v0.1",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/imo-tikuwa/cakephp-operation-logs.git",
-                "reference": "84895df573a0d71c164f53fbc44fbf64eb6abaca"
+                "reference": "f29373f69c76b534396efe3f82727281d43c79dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-operation-logs/zipball/84895df573a0d71c164f53fbc44fbf64eb6abaca",
-                "reference": "84895df573a0d71c164f53fbc44fbf64eb6abaca",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-operation-logs/zipball/f29373f69c76b534396efe3f82727281d43c79dc",
+                "reference": "f29373f69c76b534396efe3f82727281d43c79dc",
                 "shasum": ""
             },
             "require": {
@@ -395,7 +395,7 @@
                 "MIT"
             ],
             "description": "OperationLogs plugin for CakePHP",
-            "time": "2020-02-21T11:35:32+00:00"
+            "time": "2020-02-22T04:26:58+00:00"
         },
         {
             "name": "josegonzalez/dotenv",
