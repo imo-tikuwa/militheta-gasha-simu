@@ -92,6 +92,7 @@ class Application extends BaseApplication
 
             // Add operation_logs middleware.
             ->add(new OperationLogsMiddleware([
+                'mode' => 'exclude',
                 'exclude_urls' => [
                     '/debug-kit',
                     '/cake3-admin-baker',

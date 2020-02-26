@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "59c05e70d6887be303e10aa5833e6149",
+    "content-hash": "bb6fc30c8ee7eb5dd21c4eeca83d357f",
     "packages": [
         {
             "name": "aura/intl",
@@ -366,16 +366,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-operation-logs",
-            "version": "v0.1.1",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/imo-tikuwa/cakephp-operation-logs.git",
-                "reference": "f29373f69c76b534396efe3f82727281d43c79dc"
+                "reference": "f28095233f4cc06d4e03c453ff1d820d859bca89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-operation-logs/zipball/f29373f69c76b534396efe3f82727281d43c79dc",
-                "reference": "f29373f69c76b534396efe3f82727281d43c79dc",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-operation-logs/zipball/f28095233f4cc06d4e03c453ff1d820d859bca89",
+                "reference": "f28095233f4cc06d4e03c453ff1d820d859bca89",
                 "shasum": ""
             },
             "require": {
@@ -395,7 +395,7 @@
                 "MIT"
             ],
             "description": "OperationLogs plugin for CakePHP",
-            "time": "2020-02-22T04:26:58+00:00"
+            "time": "2020-02-26T11:12:19+00:00"
         },
         {
             "name": "josegonzalez/dotenv",
