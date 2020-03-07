@@ -14,7 +14,7 @@ https://milligasha.imo-tikuwa.com/target-pick
 git clone https://github.com/imo-tikuwa/militheta-gasha-simu.git
 cd militheta-gasha-simu/cake_app
 composer install --no-dev
-npm ci
+npm install
 npm run build
 
 mysql < ../env/create_millitheta.sql
