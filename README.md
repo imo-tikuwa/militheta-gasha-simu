@@ -14,12 +14,11 @@ https://milligasha.imo-tikuwa.com/target-pick
 git clone https://github.com/imo-tikuwa/militheta-gasha-simu.git
 cd militheta-gasha-simu/cake_app
 composer install --no-dev
-cd webroot
 npm ci
+npm run build
 
-cd ../..
-mysql < env/create_millitheta.sql
-mysql millitheta < env/millitheta.sql
+mysql < ../env/create_millitheta.sql
+mysql millitheta < ../env/millitheta.sql
 ```
 
 config/bootstrap.phpを開いてCake3AdminBakerプラグインを無効化
