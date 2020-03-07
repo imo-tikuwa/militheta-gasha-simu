@@ -15,13 +15,6 @@ $this->assign('title', "カード");
    <?= $this->Form->create(null, ['id' => 'csv-import-form', 'action' => 'csvImport', 'enctype' => 'multipart/form-data', 'style' => 'display:none;']) ?>
      <input type="file" name="csv_import_file" id="csv-import-file"/>
    <?= $this->Form->end(); ?>
-   <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
-   $(function(){
-     $('#csv-import-file').on('change', function(){
-       $('#csv-import-form').submit();
-     });
-   });
-   <?= $this->Html->scriptEnd() ?>
   </div>
   <div class="card-body table-responsive p-0">
    <table class="table table-hover">
@@ -97,7 +90,7 @@ $this->assign('title', "カード");
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('character_id', ['type' => 'select', 'options' => ["" => "　"] + $characters, 'class' => 'form-control', 'label' => 'キャラクター', 'value' => @$params['character_id']]); ?>
+                <?= $this->Form->control('character_id', ['type' => 'select', 'options' => ["" => "　"] + $characters, 'class' => 'form-control select2', 'label' => 'キャラクター', 'value' => @$params['character_id']]); ?>
               </div>
             </div>
           </div>
@@ -111,14 +104,14 @@ $this->assign('title', "カード");
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('rarity', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.rarity'), 'class' => 'form-control', 'label' => 'レアリティ', 'value' => @$params['rarity']]); ?>
+                <?= $this->Form->control('rarity', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.rarity'), 'class' => 'form-control select2', 'label' => 'レアリティ', 'value' => @$params['rarity']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('type', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.type'), 'class' => 'form-control', 'label' => 'タイプ', 'value' => @$params['type']]); ?>
+                <?= $this->Form->control('type', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.type'), 'class' => 'form-control select2', 'label' => 'タイプ', 'value' => @$params['type']]); ?>
               </div>
             </div>
           </div>
@@ -126,43 +119,20 @@ $this->assign('title', "カード");
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('add_date', ['type' => 'text', 'id' => 'add_date-datepicker', 'class' => 'form-control rounded-0', 'label' => '実装日', 'data-toggle' => 'datetimepicker', 'data-target' => '#add_date-datepicker', 'value' => @$params['add_date']]); ?>
-                <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
-                $(function(){
-                  $('#add_date-datepicker').datetimepicker({
-                    dayViewHeaderFormat: 'YYYY年 M月',
-                    locale: 'ja',
-                    buttons: {
-                      showClear: true
-                    },
-                    icons: {
-                      time: 'far fa-clock',
-                      date: 'far fa-calendar-alt',
-                      up: 'fas fa-arrow-up',
-                      down: 'fas fa-arrow-down',
-                      previous: 'fas fa-chevron-left',
-                      next: 'fas fa-chevron-right',
-                      today: 'far fa-calendar-alt',
-                      clear: 'far fa-trash-alt',
-                      close: 'fas fa-times'
-                    },
-                    format: 'YYYY-MM-DD',
-                  });
-                });
-                <?= $this->Html->scriptEnd() ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('gasha_include', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.gasha_include'), 'class' => 'form-control', 'label' => 'ガシャ対象？', 'value' => @$params['gasha_include']]); ?>
+                <?= $this->Form->control('gasha_include', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.gasha_include'), 'class' => 'form-control select2', 'label' => 'ガシャ対象？', 'value' => @$params['gasha_include']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('limited', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.limited'), 'class' => 'form-control', 'label' => '限定？', 'value' => @$params['limited']]); ?>
+                <?= $this->Form->control('limited', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.limited'), 'class' => 'form-control select2', 'label' => '限定？', 'value' => @$params['limited']]); ?>
               </div>
             </div>
           </div>
@@ -179,3 +149,5 @@ $this->assign('title', "カード");
     </div>
   </div>
 </div>
+
+<?= $this->Html->script('admin/cards_index', ['block' => true, 'charset' => 'UTF-8']) ?>

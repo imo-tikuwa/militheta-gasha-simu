@@ -40,12 +40,15 @@ class AdminsTable extends AppTable
 
     /**
      * auth finder Method.
-     * @param \Cake\ORM\Query $query
-     * @param array $options
+     *
+     * @param \Cake\ORM\Query $query query object
+     * @param array $options option array
      * @return \Cake\ORM\Query
      */
-    public function findAuth(\Cake\ORM\Query $query, array $options) {
+    public function findAuth(\Cake\ORM\Query $query, array $options)
+    {
         $query->select(['id', 'mail', 'password']);
+
         return $query;
     }
 

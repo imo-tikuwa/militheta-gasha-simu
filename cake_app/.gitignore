@@ -7,7 +7,7 @@
 
 # npm files #
 #############
-/webroot/node_modules/*
+/node_modules/*
 
 # OS generated files #
 ######################

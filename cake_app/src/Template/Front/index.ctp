@@ -5,9 +5,7 @@
  */
 $this->assign('title', "ミリシタ ガシャシミュレータ");
 ?>
-<?= $this->Html->script('/node_modules/tablesorter/dist/js/jquery.tablesorter.min.js', ['block' => true]) ?>
-<?= $this->Html->css('/node_modules/tablesorter/dist/css/theme.bootstrap_4.min.css', ['block' => true]) ?>
-<?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
+<?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript', 'defer' => true]) ?>
 $(function(){
 	var gasha_data = <?php echo $gasha_json_data; ?>;
 	var gasha_results = [];

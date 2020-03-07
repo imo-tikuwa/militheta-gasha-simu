@@ -1,4 +1,4 @@
 eclipse.preferences.version=1
-encoding//cake_app/webroot/css/admin_style.css=UTF-8
-encoding//cake_app/webroot/css/style.css=UTF-8
+encoding//cake_app/src/Assets/css/admin_style.css=UTF-8
+encoding//cake_app/src/Assets/css/style.css=UTF-8
 encoding//env/start.bat=SJIS

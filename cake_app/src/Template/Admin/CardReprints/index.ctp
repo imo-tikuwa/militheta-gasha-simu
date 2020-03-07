@@ -75,14 +75,14 @@ $this->assign('title', "復刻情報");
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('gasha_id', ['type' => 'select', 'options' => ["" => "　"] + $gashas, 'class' => 'form-control', 'label' => 'ガシャID', 'value' => @$params['gasha_id']]); ?>
+                <?= $this->Form->control('gasha_id', ['type' => 'select', 'options' => ["" => "　"] + $gashas, 'class' => 'form-control select2', 'label' => 'ガシャID', 'value' => @$params['gasha_id']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('card_id', ['type' => 'select', 'options' => ["" => "　"] + $cards, 'class' => 'form-control', 'label' => 'カードID', 'value' => @$params['card_id']]); ?>
+                <?= $this->Form->control('card_id', ['type' => 'select', 'options' => ["" => "　"] + $cards, 'class' => 'form-control select2', 'label' => 'カードID', 'value' => @$params['card_id']]); ?>
               </div>
             </div>
           </div>
@@ -99,3 +99,4 @@ $this->assign('title', "復刻情報");
     </div>
   </div>
 </div>
+

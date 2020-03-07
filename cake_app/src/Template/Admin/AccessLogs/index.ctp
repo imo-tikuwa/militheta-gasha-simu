@@ -6,7 +6,6 @@ $this->assign('title', "アクセスログ");
 ?>
 
 
-<?= $this->Html->script('/node_modules/admin-lte/plugins/chart.js/Chart.min.js')?>
 <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
 $(function(){
 
@@ -103,7 +102,7 @@ alert("データが見つかりませんでした。");
           <?= $this->Html->scriptEnd() ?>
           <div class="col-lg-1 col-md-3 col-sm-3">
             <div class="form-group">
-              <?= $this->Form->control('date_type', ['type' => 'select', 'label' => '集計間隔', 'options' => _code('OperationLogs.date_type_jp'), 'value' => @$params['date_type']]); ?>
+              <?= $this->Form->control('date_type', ['type' => 'select', 'class' => 'select2', 'label' => '集計間隔', 'options' => _code('OperationLogs.date_type_jp'), 'value' => @$params['date_type']]); ?>
             </div>
           </div>
           <div class="col-md-1 col-md-3 col-sm-3">

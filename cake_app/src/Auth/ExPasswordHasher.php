@@ -10,25 +10,28 @@ use Cake\Auth\AbstractPasswordHasher;
  * @author tikuwa
  *
  */
-class ExPasswordHasher extends AbstractPasswordHasher {
-	protected $_config = array('hashType' => null);
+class ExPasswordHasher extends AbstractPasswordHasher
+{
+    protected $_config = ['hashType' => null];
 
-	/**
-	 * パスワードの暗号化
-	 * {@inheritDoc}
-	 * @see \Cake\Auth\AbstractPasswordHasher::hash()
-	 */
-	public function hash($password) {
-		return encrypt_password($password);
-	}
+    /**
+     * パスワードの暗号化
+     * {@inheritDoc}
+     * @see \Cake\Auth\AbstractPasswordHasher::hash()
+     */
+    public function hash($password)
+    {
+        return encrypt_password($password);
+    }
 
-	/**
-	 * @param $password フォームで入力したパスワード
-	 * @param $hashedPassword DBに登録してあるpassword
-	 * {@inheritDoc}
-	 * @see \Cake\Auth\AbstractPasswordHasher::check()
-	 */
-	public function check($password, $hashedPassword) {
-		return $password === decrypt_password($hashedPassword);
-	}
+    /**
+     * @param $password フォームで入力したパスワード
+     * @param $hashedPassword DBに登録してあるpassword
+     * {@inheritDoc}
+     * @see \Cake\Auth\AbstractPasswordHasher::check()
+     */
+    public function check($password, $hashedPassword)
+    {
+        return $password === decrypt_password($hashedPassword);
+    }
 }

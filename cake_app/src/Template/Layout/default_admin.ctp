@@ -7,26 +7,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $this->fetch('title') ?></title>
-    <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('/node_modules/@fortawesome/fontawesome-free/css/all.css') ?>
-    <?= $this->Html->css('/node_modules/bootstrap/dist/css/bootstrap.min.css') ?>
-    <?= $this->Html->css('/node_modules/admin-lte/dist/css/adminlte.min.css') ?>
-    <?= $this->Html->css('/node_modules/select2/dist/css/select2.min.css') ?>
-    <?= $this->Html->css('/node_modules/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css') ?>
-    <?= $this->Html->css('/node_modules/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css') ?>
-    <?= $this->Html->css('//fonts.googleapis.com/icon?family=Material+Icons') ?>
-    <?= $this->Html->css('/node_modules/bootstrap-fileinput/css/fileinput.min.css') ?>
-    <?= $this->Html->css('/node_modules/bootstrap-fileinput/themes/explorer-fas/theme.min.css') ?>
-    <?= $this->Html->css('/node_modules/summernote/dist/summernote-bs4.css') ?>
-    <?= $this->Html->css('/node_modules/bootstrap4-tagsinput-douglasanpa/tagsinput.css') ?>
-    <?= $this->Html->css('admin_style.css') ?>
-
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
+  <?= $this->Html->charset() ?>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><?= $this->fetch('title') ?></title>
+  <?= $this->Html->meta('icon') ?>
+  <?= $this->Html->css('vendor/bundle') ?>
+  <?= $this->fetch('meta') ?>
+  <?= $this->fetch('css') ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed <?= $sidemenu_toggle_class ?>">
 <div class="wrapper">
@@ -92,24 +79,8 @@
   </footer>
 
 </div>
-<?= $this->Html->script('/node_modules/jquery/dist/jquery.min.js') ?>
-<?= $this->Html->script('/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') ?>
-<?= $this->Html->script('/node_modules/admin-lte/dist/js/adminlte.min.js') ?>
-<?= $this->Html->script('/node_modules/select2/dist/js/select2.min.js') ?>
-<?= $this->Html->script('/node_modules/moment/min/moment.min.js') ?>
-<?= $this->Html->script('/node_modules/moment/locale/ja.js') ?>
-<?= $this->Html->script('/node_modules/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.js') ?>
-<?= $this->Html->script('/node_modules/bootstrap-fileinput/js/plugins/piexif.min.js') ?>
-<?= $this->Html->script('/node_modules/bootstrap-fileinput/js/plugins/purify.min.js') ?>
-<?= $this->Html->script('/node_modules/bootstrap-fileinput/js/plugins/sortable.min.js') ?>
-<?= $this->Html->script('/node_modules/bootstrap-fileinput/js/fileinput.min.js') ?>
-<?= $this->Html->script('/node_modules/bootstrap-fileinput/themes/explorer-fas/theme.min.js') ?>
-<?= $this->Html->script('/node_modules/bootstrap-fileinput/js/locales/ja.js') ?>
-<?= $this->Html->script('/node_modules/summernote/dist/summernote-bs4.min.js') ?>
-<?= $this->Html->script('/node_modules/summernote/dist/lang/summernote-ja-JP.min.js') ?>
-<?= $this->Html->script('/node_modules/bootstrap4-tagsinput-douglasanpa/tagsinput.js') ?>
-<?= $this->Html->script('/node_modules/js-cookie/src/js.cookie.js') ?>
-<?= $this->Html->script('admin_script.js') ?>
+<?= $this->Html->script('jquery-3.4.1.min') ?>
+<?= $this->Html->script('vendor/bundle') ?>
 <?= $this->fetch('script') ?>
 </body>
 </html>

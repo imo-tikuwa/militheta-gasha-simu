@@ -9,25 +9,23 @@ use Cake\ORM\TableRegistry;
  */
 class TopController extends AppController
 {
-	/**
-	 * Index method
-	 *
-	 * @return \Cake\Http\Response|void
-	 */
-	public function index()
-	{
+    /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|void
+     */
+    public function index()
+    {
+        $functions = _code('LeftSideMenu');
+        foreach ($functions as $alias => $function) {
+            $table = TableRegistry::getTableLocator()->get($function['controller']);
 
-		$functions = _code('LeftSideMenu');
-		foreach ($functions as $alias => $function) {
+            // テーブルのデータ登録数を取得する
+            $functions[$alias]['data_count'] = $table->find()->count();
 
-			$table = TableRegistry::getTableLocator()->get($function['controller']);
-
-			// テーブルのデータ登録数を取得する
-			$functions[$alias]['data_count'] = $table->find()->count();
-
-			// コントローラにCSVエクスポート機能があるかをチェックする
-			$functions[$alias]['exist_csv_export'] = method_exists("App\\Controller\\Admin\\{$function['controller']}Controller", 'csvExport');
-		}
-		$this->set(compact('functions'));
-	}
+            // コントローラにCSVエクスポート機能があるかをチェックする
+            $functions[$alias]['exist_csv_export'] = method_exists("App\\Controller\\Admin\\{$function['controller']}Controller", 'csvExport');
+        }
+        $this->set(compact('functions'));
+    }
 }

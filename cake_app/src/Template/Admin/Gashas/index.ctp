@@ -15,13 +15,6 @@ $this->assign('title', "ガシャ");
    <?= $this->Form->create(null, ['id' => 'csv-import-form', 'action' => 'csvImport', 'enctype' => 'multipart/form-data', 'style' => 'display:none;']) ?>
      <input type="file" name="csv_import_file" id="csv-import-file"/>
    <?= $this->Form->end(); ?>
-   <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
-   $(function(){
-     $('#csv-import-file').on('change', function(){
-       $('#csv-import-form').submit();
-     });
-   });
-   <?= $this->Html->scriptEnd() ?>
   </div>
   <div class="card-body table-responsive p-0">
    <table class="table table-hover">
@@ -97,29 +90,6 @@ $this->assign('title', "ガシャ");
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('start_date', ['type' => 'text', 'id' => 'start_date-datepicker', 'class' => 'form-control rounded-0', 'label' => 'ガシャ開始日', 'data-toggle' => 'datetimepicker', 'data-target' => '#start_date-datepicker', 'value' => @$params['start_date']]); ?>
-                <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
-                $(function(){
-                  $('#start_date-datepicker').datetimepicker({
-                    dayViewHeaderFormat: 'YYYY年 M月',
-                    locale: 'ja',
-                    buttons: {
-                      showClear: true
-                    },
-                    icons: {
-                      time: 'far fa-clock',
-                      date: 'far fa-calendar-alt',
-                      up: 'fas fa-arrow-up',
-                      down: 'fas fa-arrow-down',
-                      previous: 'fas fa-chevron-left',
-                      next: 'fas fa-chevron-right',
-                      today: 'far fa-calendar-alt',
-                      clear: 'far fa-trash-alt',
-                      close: 'fas fa-times'
-                    },
-                    format: 'YYYY-MM-DD',
-                  });
-                });
-                <?= $this->Html->scriptEnd() ?>
               </div>
             </div>
           </div>
@@ -127,29 +97,6 @@ $this->assign('title', "ガシャ");
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('end_date', ['type' => 'text', 'id' => 'end_date-datepicker', 'class' => 'form-control rounded-0', 'label' => 'ガシャ終了日', 'data-toggle' => 'datetimepicker', 'data-target' => '#end_date-datepicker', 'value' => @$params['end_date']]); ?>
-                <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
-                $(function(){
-                  $('#end_date-datepicker').datetimepicker({
-                    dayViewHeaderFormat: 'YYYY年 M月',
-                    locale: 'ja',
-                    buttons: {
-                      showClear: true
-                    },
-                    icons: {
-                      time: 'far fa-clock',
-                      date: 'far fa-calendar-alt',
-                      up: 'fas fa-arrow-up',
-                      down: 'fas fa-arrow-down',
-                      previous: 'fas fa-chevron-left',
-                      next: 'fas fa-chevron-right',
-                      today: 'far fa-calendar-alt',
-                      clear: 'far fa-trash-alt',
-                      close: 'fas fa-times'
-                    },
-                    format: 'YYYY-MM-DD',
-                  });
-                });
-                <?= $this->Html->scriptEnd() ?>
               </div>
             </div>
           </div>
@@ -173,3 +120,5 @@ $this->assign('title', "ガシャ");
     </div>
   </div>
 </div>
+
+<?= $this->Html->script('admin/gashas_index', ['block' => true, 'charset' => 'UTF-8']) ?>
