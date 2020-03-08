@@ -43,6 +43,8 @@ use Cake\Log\Log;
 use Cake\Mailer\Email;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
+use Cake\Mailer\TransportFactory;
+use App\Application;
 
 /**
  * Uncomment block of code below if you want to use `.env` file during development.
@@ -153,7 +155,7 @@ if (!Configure::read('App.fullBaseUrl')) {
 
 Cache::setConfig(Configure::consume('Cache'));
 ConnectionManager::setConfig(Configure::consume('Datasources'));
-Email::setConfigTransport(Configure::consume('EmailTransport'));
+TransportFactory::setConfig(Configure::consume('EmailTransport'));
 Email::setConfig(Configure::consume('Email'));
 Log::setConfig(Configure::consume('Log'));
 Security::setSalt(Configure::consume('Security.salt'));
@@ -215,9 +217,11 @@ Configure::write('Session', [
 // DebugKitのロード
 if (Configure::read('debug')) {
 	Configure::write('DebugKit.forceEnable', true);
-	Plugin::load('DebugKit', ['bootstrap' => true, 'routes' => true]);
+	Application::addPlugin('DebugKit', ['bootstrap' => true, 'routes' => true]);
 }
 
 // プラグインのロード
-Plugin::load('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
-Plugin::load('OperationLogs', ['bootstrap' => true]);
+Application::addPlugin('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
+
+// コマンドクラスの呼び出しには以下のプラグインのロードが必要
+Application::addPlugin('OperationLogs', ['bootstrap' => true]);
