@@ -174,3 +174,17 @@ table.table td.actions div.btn-group {
 .datepicker-days td:last-child {
     color: #00f;
 }
+
+/* ログインボックスの幅調整 */
+.login-box,
+.register-box {
+ width:400px;
+}
+
+/* アカウント管理のパスワードを表示のラベル */
+#password-toggle-label {
+	font-weight: inherit;
+}
+#password-toggle-label:hover {
+    text-decoration: underline;
+}

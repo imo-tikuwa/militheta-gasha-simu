@@ -11,13 +11,13 @@ use Cake\ORM\TableRegistry;
 /**
  * Characters Model
  *
- * @property \App\Model\Table\CardsTable|\Cake\ORM\Association\HasMany $Cards
+ * @property \App\Model\Table\CardsTable&\Cake\ORM\Association\HasMany $Cards
  *
  * @method \App\Model\Entity\Character get($primaryKey, $options = [])
  * @method \App\Model\Entity\Character newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Character[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Character|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Character|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Character|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Character saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Character patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Character[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Character findOrCreate($search, callable $callback = null, $options = [])
@@ -43,7 +43,7 @@ class CharactersTable extends AppTable
 
 
         $this->hasMany('Cards', [
-            'foreignKey' => 'character_id'
+            'foreignKey' => 'character_id',
         ]);
     }
 
@@ -57,12 +57,12 @@ class CharactersTable extends AppTable
     {
         $validator
             ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', null, 'create');
 
         $validator
             ->scalar('name')
             ->maxLength('name', 255)
-            ->allowEmpty('name');
+            ->allowEmptyString('name');
 
         return $validator;
     }

@@ -35,6 +35,6 @@ class CardReprint extends Entity
         'modified' => true,
         'delete_flag' => true,
         'gasha' => true,
-        'card' => true
+        'card' => true,
     ];
 }

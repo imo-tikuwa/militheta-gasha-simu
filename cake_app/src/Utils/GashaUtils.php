@@ -57,7 +57,7 @@ class GashaUtils {
 
 		// 結果を返す
 		$provition_ratios = [];
-		foreach (array_reverse(_code("Cards.rarity")) as $rarity_code => $rarity_text) {
+		foreach (array_reverse(_code("Codes.Cards.rarity")) as $rarity_code => $rarity_text) {
 
 			// Nカードはガシャ対象ではないのでスキップ
 			if ($rarity_text == 'N') {

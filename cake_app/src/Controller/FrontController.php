@@ -34,8 +34,8 @@ class FrontController extends AppController
 		$gasha_json_data = $this->Gashas->getGashaJsonData($gasha_datas);
 		$gasha_selections = Hash::combine($gasha_datas, '{n}.id', ['%s　%s', '{n}.start_date', '{n}.title']);
 
-		$rarity_codes = _code("Cards.rarity");
-		$type_codes = _code("Cards.type");
+		$rarity_codes = _code("Codes.Cards.rarity");
+		$type_codes = _code("Codes.Cards.type");
 
 		$this->set(compact(
 				'gasha_json_data',

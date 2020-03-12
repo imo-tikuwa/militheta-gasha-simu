@@ -70,13 +70,8 @@ if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
 try {
     Configure::config('default', new PhpConfig());
     require_once (__DIR__ . '/consts.php');
-    require_once (__DIR__ . '/site_config.php');
     Configure::load('app', 'default', false);
-    Configure::load('bake_codes', 'default');
-    Configure::load('left_side_menu', 'default');
-    Configure::load('header_menu', 'default');
-    Configure::load('footer_config', 'default');
-    Configure::load('admin_config', 'default');
+    Configure::load('application_properties', 'default');
     require_once (__DIR__ . '/functions.php');
 } catch (\Exception $e) {
     exit($e->getMessage() . "\n");

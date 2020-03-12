@@ -31,6 +31,6 @@ class Character extends Entity
         'created' => true,
         'modified' => true,
         'delete_flag' => true,
-        'cards' => true
+        'cards' => true,
     ];
 }

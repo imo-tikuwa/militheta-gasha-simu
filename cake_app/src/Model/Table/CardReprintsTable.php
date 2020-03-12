@@ -1,23 +1,24 @@
 <?php
 namespace App\Model\Table;
 
-use Cake\Datasource\EntityInterface;
+use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
-use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
+use Cake\Datasource\EntityInterface;
+use Cake\ORM\TableRegistry;
 
 /**
  * CardReprints Model
  *
- * @property \App\Model\Table\GashasTable|\Cake\ORM\Association\BelongsTo $Gashas
- * @property \App\Model\Table\CardsTable|\Cake\ORM\Association\BelongsTo $Cards
+ * @property \App\Model\Table\GashasTable&\Cake\ORM\Association\BelongsTo $Gashas
+ * @property \App\Model\Table\CardsTable&\Cake\ORM\Association\BelongsTo $Cards
  *
  * @method \App\Model\Entity\CardReprint get($primaryKey, $options = [])
  * @method \App\Model\Entity\CardReprint newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\CardReprint[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\CardReprint|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\CardReprint|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\CardReprint|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\CardReprint saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\CardReprint patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\CardReprint[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\CardReprint findOrCreate($search, callable $callback = null, $options = [])
@@ -43,10 +44,10 @@ class CardReprintsTable extends AppTable
 
 
         $this->belongsTo('Gashas', [
-            'foreignKey' => 'gasha_id'
+            'foreignKey' => 'gasha_id',
         ]);
         $this->belongsTo('Cards', [
-            'foreignKey' => 'card_id'
+            'foreignKey' => 'card_id',
         ]);
     }
 
@@ -60,7 +61,7 @@ class CardReprintsTable extends AppTable
     {
         $validator
             ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', null, 'create');
 
         return $validator;
     }

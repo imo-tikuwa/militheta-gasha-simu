@@ -11,14 +11,14 @@ use Cake\ORM\TableRegistry;
 /**
  * Gashas Model
  *
- * @property \App\Model\Table\CardReprintsTable|\Cake\ORM\Association\HasMany $CardReprints
- * @property \App\Model\Table\GashaPickupsTable|\Cake\ORM\Association\HasMany $GashaPickups
+ * @property \App\Model\Table\CardReprintsTable&\Cake\ORM\Association\HasMany $CardReprints
+ * @property \App\Model\Table\GashaPickupsTable&\Cake\ORM\Association\HasMany $GashaPickups
  *
  * @method \App\Model\Entity\Gasha get($primaryKey, $options = [])
  * @method \App\Model\Entity\Gasha newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Gasha[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Gasha|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Gasha|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Gasha|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Gasha saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Gasha patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Gasha[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Gasha findOrCreate($search, callable $callback = null, $options = [])
@@ -44,10 +44,10 @@ class GashasTable extends AppTable
 
 
         $this->hasMany('CardReprints', [
-            'foreignKey' => 'gasha_id'
+            'foreignKey' => 'gasha_id',
         ]);
         $this->hasMany('GashaPickups', [
-            'foreignKey' => 'gasha_id'
+            'foreignKey' => 'gasha_id',
         ]);
     }
 
@@ -61,28 +61,28 @@ class GashasTable extends AppTable
     {
         $validator
             ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', null, 'create');
 
         $validator
             ->date('start_date')
-            ->allowEmpty('start_date');
+            ->allowEmptyDate('start_date');
 
         $validator
             ->date('end_date')
-            ->allowEmpty('end_date');
+            ->allowEmptyDate('end_date');
 
         $validator
             ->scalar('title')
             ->maxLength('title', 255)
-            ->allowEmpty('title');
+            ->allowEmptyString('title');
 
         $validator
             ->integer('ssr_rate')
-            ->allowEmpty('ssr_rate');
+            ->allowEmptyString('ssr_rate');
 
         $validator
             ->integer('sr_rate')
-            ->allowEmpty('sr_rate');
+            ->allowEmptyString('sr_rate');
 
         return $validator;
     }

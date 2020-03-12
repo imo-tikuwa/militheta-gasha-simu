@@ -10,34 +10,35 @@ $this->assign('title', "復刻情報詳細");
     <div class="card-body">
       <table class="vertical-table">
         <tr>
-            <th scope="row">ID</th>
-            <td><?= h($cardReprint->id) ?></td>
+          <th scope="row">ID</th>
+          <td><?= h($cardReprint->id) ?></td>
         </tr>
         <tr>
-            <th scope="row">ガシャID</th>
-            <td><?= $cardReprint->has('gasha') ? $cardReprint->gasha->title : '' ?></td>
+          <th scope="row">ガシャID</th>
+          <td><?= $cardReprint->has('gasha') ? $cardReprint->gasha->title : '' ?></td>
         </tr>
         <tr>
-            <th scope="row">カードID</th>
-            <td><?= $cardReprint->has('card') ? $cardReprint->card->name : '' ?></td>
+          <th scope="row">カードID</th>
+          <td><?= $cardReprint->has('card') ? $cardReprint->card->name : '' ?></td>
         </tr>
         <tr>
-            <th scope="row">作成日時</th>
-            <td>
-              <?php if (!is_null($cardReprint->created)) { ?>
-                <?= h($cardReprint->created->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
-              <?php } ?>
-            </td>
+          <th scope="row">作成日時</th>
+          <td>
+            <?php if (!is_null($cardReprint->created)) { ?>
+              <?= h($cardReprint->created->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
+            <?php } ?>
+          </td>
         </tr>
         <tr>
-            <th scope="row">更新日時</th>
-            <td>
-              <?php if (!is_null($cardReprint->modified)) { ?>
-                <?= h($cardReprint->modified->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
-              <?php } ?>
-            </td>
+          <th scope="row">更新日時</th>
+          <td>
+            <?php if (!is_null($cardReprint->modified)) { ?>
+              <?= h($cardReprint->modified->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
+            <?php } ?>
+          </td>
         </tr>
       </table>
     </div>
   </div>
 </div>
+

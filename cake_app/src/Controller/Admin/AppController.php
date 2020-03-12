@@ -49,6 +49,9 @@ class AppController extends \App\Controller\AppController
                                 ],
                         ],
                 ],
+                'authorize' => [
+                        'Admin'
+                ],
                 // ログイン画面
                 'loginAction' => [
                         'controller' => 'Auth',
@@ -73,7 +76,7 @@ class AppController extends \App\Controller\AppController
                         'key' => 'Auth.Admin'
                 ],
                 // 許可されていないアクセスがあったときのエラーメッセージ
-                'authError' => 'ログインでエラーが発生しました',
+                'authError' => MESSAGE_AUTH_ERROR,
         ]);
     }
 }

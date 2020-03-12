@@ -24,3 +24,4 @@ $this->assign('title', "キャラクター{$button_name}");
     </div>
   </div>
 </div>
+

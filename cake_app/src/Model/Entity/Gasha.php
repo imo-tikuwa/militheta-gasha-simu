@@ -41,7 +41,7 @@ class Gasha extends Entity
         'modified' => true,
         'delete_flag' => true,
         'card_reprints' => true,
-        'gasha_pickups' => true
+        'gasha_pickups' => true,
     ];
 
     /**

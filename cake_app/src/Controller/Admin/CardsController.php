@@ -181,14 +181,14 @@ class CardsController extends AppController
             // レアリティ
             function ($row) {
                 if (!empty($row['rarity'])) {
-                    return _code('Cards.rarity.'.$row['rarity']);
+                    return _code('Codes.Cards.rarity.'.$row['rarity']);
                 }
                 return "";
             },
             // タイプ
             function ($row) {
                 if (!empty($row['type'])) {
-                    return _code('Cards.type.'.$row['type']);
+                    return _code('Codes.Cards.type.'.$row['type']);
                 }
                 return "";
             },

@@ -45,7 +45,6 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <?= $this->element('left_side_menu') ?>
-          <li class="nav-item mt-3"><a href="/admin/auth/logout" class="nav-link"><i class="fas fa-sign-out-alt mr-2"></i><p>ログアウト</p></a></li>
         </ul>
       </nav>
     </div>

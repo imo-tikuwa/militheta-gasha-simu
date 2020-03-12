@@ -9,13 +9,13 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $mail
  * @property string $password
+ * @property array|null $privilege
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
  * @property string $delete_flag
  */
 class Admin extends Entity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -28,9 +28,10 @@ class Admin extends Entity
     protected $_accessible = [
         'mail' => true,
         'password' => true,
+        'privilege' => true,
         'created' => true,
         'modified' => true,
-        'delete_flag' => true
+        'delete_flag' => true,
     ];
 
     /**
@@ -39,6 +40,18 @@ class Admin extends Entity
      * @var array
      */
     protected $_hidden = [
-        'password'
+        'password',
     ];
+
+    /**
+     * 生のパスワードを返す
+     * @return string
+     */
+    protected function _getRawPassword() {
+
+        if (empty($this->password)) {
+            return null;
+        }
+        return decrypt_password($this->password);
+    }
 }

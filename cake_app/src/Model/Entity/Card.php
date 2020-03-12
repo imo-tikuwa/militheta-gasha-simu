@@ -47,6 +47,6 @@ class Card extends Entity
         'delete_flag' => true,
         'character' => true,
         'card_reprints' => true,
-        'gasha_pickups' => true
+        'gasha_pickups' => true,
     ];
 }

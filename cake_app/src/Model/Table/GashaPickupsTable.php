@@ -11,14 +11,14 @@ use Cake\ORM\TableRegistry;
 /**
  * GashaPickups Model
  *
- * @property \App\Model\Table\GashasTable|\Cake\ORM\Association\BelongsTo $Gashas
- * @property \App\Model\Table\CardsTable|\Cake\ORM\Association\BelongsTo $Cards
+ * @property \App\Model\Table\GashasTable&\Cake\ORM\Association\BelongsTo $Gashas
+ * @property \App\Model\Table\CardsTable&\Cake\ORM\Association\BelongsTo $Cards
  *
  * @method \App\Model\Entity\GashaPickup get($primaryKey, $options = [])
  * @method \App\Model\Entity\GashaPickup newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\GashaPickup[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\GashaPickup|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\GashaPickup|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\GashaPickup|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\GashaPickup saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\GashaPickup patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\GashaPickup[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\GashaPickup findOrCreate($search, callable $callback = null, $options = [])
@@ -44,10 +44,10 @@ class GashaPickupsTable extends AppTable
 
 
         $this->belongsTo('Gashas', [
-            'foreignKey' => 'gasha_id'
+            'foreignKey' => 'gasha_id',
         ]);
         $this->belongsTo('Cards', [
-            'foreignKey' => 'card_id'
+            'foreignKey' => 'card_id',
         ]);
     }
 
@@ -61,7 +61,7 @@ class GashaPickupsTable extends AppTable
     {
         $validator
             ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', null, 'create');
 
         return $validator;
     }

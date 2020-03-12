@@ -13,15 +13,15 @@ use App\Model\Entity\Gasha;
 /**
  * Cards Model
  *
- * @property \App\Model\Table\CharactersTable|\Cake\ORM\Association\BelongsTo $Characters
- * @property \App\Model\Table\CardReprintsTable|\Cake\ORM\Association\HasMany $CardReprints
- * @property \App\Model\Table\GashaPickupsTable|\Cake\ORM\Association\HasMany $GashaPickups
+ * @property \App\Model\Table\CharactersTable&\Cake\ORM\Association\BelongsTo $Characters
+ * @property \App\Model\Table\CardReprintsTable&\Cake\ORM\Association\HasMany $CardReprints
+ * @property \App\Model\Table\GashaPickupsTable&\Cake\ORM\Association\HasMany $GashaPickups
  *
  * @method \App\Model\Entity\Card get($primaryKey, $options = [])
  * @method \App\Model\Entity\Card newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Card[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Card|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Card|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Card|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Card saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Card patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Card[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Card findOrCreate($search, callable $callback = null, $options = [])
@@ -47,13 +47,13 @@ class CardsTable extends AppTable
 
 
         $this->belongsTo('Characters', [
-            'foreignKey' => 'character_id'
+            'foreignKey' => 'character_id',
         ]);
         $this->hasMany('CardReprints', [
-            'foreignKey' => 'card_id'
+            'foreignKey' => 'card_id',
         ]);
         $this->hasMany('GashaPickups', [
-            'foreignKey' => 'card_id'
+            'foreignKey' => 'card_id',
         ]);
     }
 
@@ -67,32 +67,32 @@ class CardsTable extends AppTable
     {
         $validator
             ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', null, 'create');
 
         $validator
             ->scalar('name')
             ->maxLength('name', 255)
-            ->allowEmpty('name');
+            ->allowEmptyString('name');
 
         $validator
             ->scalar('rarity')
             ->maxLength('rarity', 2)
-            ->allowEmpty('rarity');
+            ->allowEmptyString('rarity');
 
         $validator
             ->scalar('type')
             ->maxLength('type', 2)
-            ->allowEmpty('type');
+            ->allowEmptyString('type');
 
         $validator
             ->date('add_date')
-            ->allowEmpty('add_date');
+            ->allowEmptyDate('add_date');
 
         $validator
-            ->allowEmpty('gasha_include');
+            ->allowEmptyString('gasha_include');
 
         $validator
-            ->allowEmpty('limited');
+            ->allowEmptyString('limited');
 
         return $validator;
     }
@@ -174,14 +174,14 @@ class CardsTable extends AppTable
             $csv_data['character_id'] = null;
         }
         // レアリティ
-        $codes = array_flip(_code("Cards.rarity"));
+        $codes = array_flip(_code("Codes.Cards.rarity"));
         foreach ($codes as $code_value => $code_key) {
             if ($code_value === $csv_data['rarity']) {
                 $csv_data['rarity'] = $code_key;
             }
         }
         // タイプ
-        $codes = array_flip(_code("Cards.type"));
+        $codes = array_flip(_code("Codes.Cards.type"));
         foreach ($codes as $code_value => $code_key) {
             if ($code_value === $csv_data['type']) {
                 $csv_data['type'] = $code_key;

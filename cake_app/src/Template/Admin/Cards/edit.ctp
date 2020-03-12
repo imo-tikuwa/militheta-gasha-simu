@@ -23,12 +23,12 @@ $this->assign('title', "カード{$button_name}");
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('rarity', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.rarity'), 'class' => 'form-control select2 ', 'label' => 'レアリティ']); ?>
+            <?= $this->Form->control('rarity', ['type' => 'select', 'options' => ["" => "　"] + _code('Codes.Cards.rarity'), 'class' => 'form-control select2 ', 'label' => 'レアリティ']); ?>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('type', ['type' => 'select', 'options' => ["" => "　"] + _code('Cards.type'), 'class' => 'form-control select2 ', 'label' => 'タイプ']); ?>
+            <?= $this->Form->control('type', ['type' => 'select', 'options' => ["" => "　"] + _code('Codes.Cards.type'), 'class' => 'form-control select2 ', 'label' => 'タイプ']); ?>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
@@ -38,12 +38,12 @@ $this->assign('title', "カード{$button_name}");
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('gasha_include', ['type' => 'select', 'options' => _code('Cards.gasha_include'), 'default' => '1', 'class' => 'form-control select2 ', 'label' => 'ガシャ対象？']); ?>
+            <?= $this->Form->control('gasha_include', ['type' => 'select', 'options' => _code('Codes.Cards.gasha_include'), 'default' => '1', 'class' => 'form-control select2 ', 'label' => 'ガシャ対象？']); ?>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('limited', ['type' => 'select', 'options' => _code('Cards.limited'), 'default' => '0', 'class' => 'form-control select2 ', 'label' => '限定？']); ?>
+            <?= $this->Form->control('limited', ['type' => 'select', 'options' => _code('Codes.Cards.limited'), 'default' => '0', 'class' => 'form-control select2 ', 'label' => '限定？']); ?>
           </div>
         </div>
         <div class="col-md-12">

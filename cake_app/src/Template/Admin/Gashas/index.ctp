@@ -1,4 +1,6 @@
 <?php
+use App\Utils\AuthUtils;
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Gasha[]|\Cake\Collection\CollectionInterface $gashas
@@ -6,69 +8,81 @@
 $this->assign('title', "ガシャ");
 ?>
 <div class="col-md-12 mb-12">
- <div class="card">
-  <div class="card-header">
-   <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => 'add']) ?>'">新規登録</button>
-   <button type="button" class="btn btn-flat btn-outline-secondary" data-toggle="modal" data-target="#gashas-search-form-modal">検索</button>
-   <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => 'csvExport', '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
-   <button type="button" class="btn btn-flat btn-outline-secondary" onclick="$('#csv-import-file').trigger('click');">CSVインポート</button>
-   <?= $this->Form->create(null, ['id' => 'csv-import-form', 'action' => 'csvImport', 'enctype' => 'multipart/form-data', 'style' => 'display:none;']) ?>
-     <input type="file" name="csv_import_file" id="csv-import-file"/>
-   <?= $this->Form->end(); ?>
-  </div>
-  <div class="card-body table-responsive p-0">
-   <table class="table table-hover">
-    <thead>
+  <div class="card rounded-0">
+    <div class="card-header">
+      <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_ADD])) { ?>
+        <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
+      <?php } ?>
+      <button type="button" class="btn btn-flat btn-outline-secondary" data-toggle="modal" data-target="#gashas-search-form-modal">検索</button>
+      <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_CSV_EXPORT])) { ?>
+        <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
+      <?php } ?>
+      <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_CSV_IMPORT])) { ?>
+        <button type="button" class="btn btn-flat btn-outline-secondary" onclick="$('#csv-import-file').trigger('click');">CSVインポート</button>
+        <?= $this->Form->create(null, ['id' => 'csv-import-form', 'action' => ACTION_CSV_IMPORT, 'enctype' => 'multipart/form-data', 'style' => 'display:none;']) ?>
+          <input type="file" name="csv_import_file" id="csv-import-file"/>
+        <?= $this->Form->end(); ?>
+      <?php } ?>
+    </div>
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col"><?= $this->Paginator->sort('id', 'ID') ?></th>
+            <th scope="col"><?= $this->Paginator->sort('start_date', 'ガシャ開始日') ?></th>
+            <th scope="col"><?= $this->Paginator->sort('end_date', 'ガシャ終了日') ?></th>
+            <th scope="col"><?= $this->Paginator->sort('title', 'ガシャタイトル') ?></th>
+            <th scope="col"><?= $this->Paginator->sort('ssr_rate', 'SSRレート') ?></th>
+            <th scope="col"><?= $this->Paginator->sort('sr_rate', 'SRレート') ?></th>
+            <th scope="col"><?= $this->Paginator->sort('modified', '更新日時') ?></th>
+            <th scope="col" class="actions">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($gashas as $gasha) { ?>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id', 'ID') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('start_date', 'ガシャ開始日') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('end_date', 'ガシャ終了日') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('title', 'ガシャタイトル') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('ssr_rate', 'SSRレート') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sr_rate', 'SRレート') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified', '更新日時') ?></th>
-                <th scope="col" class="actions">操作</th>
-            </tr>
-    </thead>
-    <tbody>
-            <?php foreach ($gashas as $gasha) { ?>
-            <tr>
-                <td><?= $this->Html->link($gasha->id, ['action' => 'view', $gasha->id]) ?></td>
-                <td>
-                  <?php if (!is_null($gasha->start_date)) { ?>
-                    <?= h($gasha->start_date->i18nFormat('yyyy/MM/dd')) ?>
-                  <?php } ?>
-                </td>
-                <td>
-                  <?php if (!is_null($gasha->end_date)) { ?>
-                    <?= h($gasha->end_date->i18nFormat('yyyy/MM/dd')) ?>
-                  <?php } ?>
-                </td>
-                <td><?= h($gasha->title) ?></td>
-                <td><?= $this->Number->format($gasha->ssr_rate) ?>%</td>
-                <td><?= $this->Number->format($gasha->sr_rate) ?>%</td>
-                <td>
-                  <?php if (!is_null($gasha->modified)) { ?>
-                    <?= h($gasha->modified->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
-                  <?php } ?>
-                </td>
-                <td class="actions">
-                  <div class="btn-group" role="group">
-                    <button id="btnGroupDrop<?= $gasha->id ?>" type="button" class="btn btn-flat btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop<?= $gasha->id ?>">
-                      <?= $this->Html->link('詳細', ['action' => 'view', $gasha->id], ['class' => 'dropdown-item']) ?>
-                      <?= $this->Html->link('編集', ['action' => 'edit', $gasha->id], ['class' => 'dropdown-item']) ?>
-                      <?= $this->Form->postLink('削除', ['action' => 'delete', $gasha->id], ['class' => 'dropdown-item', 'confirm' => __('ID {0} を削除します。よろしいですか？', $gasha->id)]) ?>
-                    </div>
+              <td><?= $this->Html->link($gasha->id, ['action' => ACTION_VIEW, $gasha->id]) ?></td>
+              <td>
+                <?php if (!is_null($gasha->start_date)) { ?>
+                  <?= h($gasha->start_date->i18nFormat('yyyy/MM/dd')) ?>
+                <?php } ?>
+              </td>
+              <td>
+                <?php if (!is_null($gasha->end_date)) { ?>
+                  <?= h($gasha->end_date->i18nFormat('yyyy/MM/dd')) ?>
+                <?php } ?>
+              </td>
+              <td><?= h($gasha->title) ?></td>
+              <td><?= $this->Number->format($gasha->ssr_rate) ?>%</td>
+              <td><?= $this->Number->format($gasha->sr_rate) ?>%</td>
+              <td>
+                <?php if (!is_null($gasha->modified)) { ?>
+                  <?= h($gasha->modified->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
+                <?php } ?>
+              </td>
+              <td class="actions">
+                <div class="btn-group" role="group">
+                  <button id="btnGroupDrop<?= $gasha->id ?>" type="button" class="btn btn-flat btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop<?= $gasha->id ?>">
+                    <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_VIEW])) { ?>
+                      <?= $this->Html->link('詳細', ['action' => ACTION_VIEW, $gasha->id], ['class' => 'dropdown-item']) ?>
+                    <?php } ?>
+                    <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_EDIT])) { ?>
+                      <?= $this->Html->link('編集', ['action' => ACTION_EDIT, $gasha->id], ['class' => 'dropdown-item']) ?>
+                    <?php } ?>
+                    <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_DELETE])) { ?>
+                      <?= $this->Form->postLink('削除', ['action' => ACTION_DELETE, $gasha->id], ['class' => 'dropdown-item', 'confirm' => __('ID {0} を削除します。よろしいですか？', $gasha->id)]) ?>
+                    <?php } ?>
                   </div>
-                </td>
+                </div>
+              </td>
             </tr>
           <?php } ?>
-    </tbody>
-   </table>
+        </tbody>
+      </table>
+    </div>
   </div>
- </div>
- <?= $this->element('pager') ?>
+  <?= $this->element('pager') ?>
 </div>
 
 <div class="modal search-form fade" id="gashas-search-form-modal" tabindex="-1" role="dialog" aria-labelledby="gashas-search-form-modal-label" aria-hidden="true">
