@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-02-18 18:43:04
+Date: 2020-03-12 19:24:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,16 +23,18 @@ CREATE TABLE `admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mail` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `privilege` json DEFAULT NULL COMMENT '権限',
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `delete_flag` char(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of admins
 -- ----------------------------
-INSERT INTO `admins` VALUES ('1', 'admin@imo-tikuwa.com', 'lbV+4PEvS9UyIMnM5IbqzQ==:yFiuLMAJMrQO6gsizK5y0w==', '2020-01-03 22:24:33', '2020-01-03 22:24:33', '0');
+INSERT INTO `admins` VALUES ('1', 'admin@imo-tikuwa.com', 'lbV+4PEvS9UyIMnM5IbqzQ==:yFiuLMAJMrQO6gsizK5y0w==', null, '2020-01-03 22:24:33', '2020-01-03 22:24:33');
+INSERT INTO `admins` VALUES ('2', 'user1@imo-tikuwa.com', 'Q5mYbUIO2H/QXvaVOzrfWQ==:5hllsFixcuGYt5n6HjkoHg==', '{\"Cards\": [\"READ\"], \"Gashas\": [\"READ\"], \"Characters\": [\"READ\"], \"CardReprints\": [\"READ\"], \"GashaPickups\": [\"READ\"]}', '2020-03-12 19:22:35', '2020-03-12 19:22:35');
 
 -- ----------------------------
 -- Table structure for `cards`
