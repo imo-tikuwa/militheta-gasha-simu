@@ -20,6 +20,7 @@ CREATE TABLE `admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mail` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `privilege` json DEFAULT NULL COMMENT '権限',
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `delete_flag` char(1) NOT NULL DEFAULT '0',
