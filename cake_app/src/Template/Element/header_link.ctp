@@ -2,7 +2,7 @@
 /**
  * @var \App\View\AppView $this
  */
-$header_links = _code('HeaderLink');
+$header_links = _code('HeaderConfig');
 if (!empty($header_links) && count($header_links) > 0) {
 	$html = "";
 	foreach ($header_links as $header_link) {

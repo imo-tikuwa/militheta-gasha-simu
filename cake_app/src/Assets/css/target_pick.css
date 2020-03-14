@@ -57,7 +57,7 @@ table tr:nth-of-type(even) {
 
 fieldset {
     border: none;
-    padding: 1rem;
+    padding: 1rem !important;
     margin: 1rem 0;
 }
 

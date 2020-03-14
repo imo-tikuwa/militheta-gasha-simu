@@ -1,0 +1,34 @@
+// ---------- bootstrap variables ----------
+// 角丸を取る
+$enable-rounded: false;
+// ベースのフォントサイズ
+$font-size-base:              1rem; // Assumes the browser default, typically `16px`
+$font-size-lg:                $font-size-base * 1.2;
+$font-size-sm:                $font-size-base * .9;
+// h1～h6のサイズ変更
+$h1-font-size:                $font-size-base * 1.6;
+$h2-font-size:                $font-size-base * 1.4;
+$h3-font-size:                $font-size-base * 1.3;
+$h4-font-size:                $font-size-base * 1.2;
+$h5-font-size:                $font-size-base * 1.1;
+$h6-font-size:                $font-size-base;
+// Buttons + Forms
+$input-btn-focus-box-shadow:  none;
+
+
+// ---------- admin-lte variables ----------
+// AdminLTE 3 Variables.less
+// =========================
+// COLORS
+// --------------------------------------------------------
+$blue: #0073b7 !default;
+$navy: #001F3F !default;
+$teal: #39CCCC !default;
+$olive: #3D9970 !default;
+$lime: #01FF70 !default;
+$orange: #FF851B !default;
+$fuchsia: #F012BE !default;
+$purple: #605ca8 !default;
+$maroon: #D81B60 !default;
+$black: #111 !default;
+$gray-x-light: #d2d6de !default;

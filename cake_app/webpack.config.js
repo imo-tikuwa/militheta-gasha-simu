@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const mode = (process.env.NODE_ENV == undefined) ? 'production' : process.env.NODE_ENV;
 const devtool = (mode != 'production') ? 'source-map' : false;
 
@@ -97,9 +98,9 @@ const exportStyle = {
     mode,
     devtool,
     entry: {
-        bundle: path.resolve(__dirname, "src/Assets/js/admin_style.js"),
-        front_index: path.resolve(__dirname, "src/Assets/js/front_style.js"),
-        front_target_pick: path.resolve(__dirname, "src/Assets/js/front_style_target_pick.js"),
+        bundle: path.resolve(__dirname, "src/Assets/scss/admin_style.scss"),
+        front_index: path.resolve(__dirname, "src/Assets/scss/front_style.scss"),
+        front_target_pick: path.resolve(__dirname, "src/Assets/scss/front_style_target_pick.scss"),
     },
     output: {
         path: path.resolve(__dirname, 'webroot/css/vendor'),
@@ -122,13 +123,24 @@ const exportStyle = {
                     }
                 ]
             }
-        })
+        }),
+        new FixStyleOnlyEntriesPlugin()
     ],
     module: {
         rules: [
             {
-                test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                test: /\.(sa|sc|c)ss$/i,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                    },
+                    {
+                        loader: 'css-loader',
+                    },
+                    {
+                        loader: 'sass-loader',
+                    },
+                ],
             },
             {
                 test: /\.(ttf|eot|svg|gif|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
