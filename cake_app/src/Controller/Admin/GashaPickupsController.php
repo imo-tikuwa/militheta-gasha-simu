@@ -26,7 +26,7 @@ class GashaPickupsController extends AppController
         if (!in_array($this->request->action, ['delete', 'csvExport'], true)) {
             // ガシャIDの選択肢
         	$this->Gashas = TableRegistry::getTableLocator()->get('Gashas');
-        	$gashas = $this->Gashas->find()->select(['id', 'title', 'start_date'])->enableHydration(false)->toArray();
+        	$gashas = $this->Gashas->find()->select(['id', 'title', 'start_date'])->enableHydration(false)->order(['id' => 'DESC'])->toArray();
         	if (!empty($gashas)) {
         		$gashas = Hash::combine($gashas, '{n}.id', ['%s　%s', '{n}.start_date', '{n}.title']);
         		$gashas = ["" => "　"] + $gashas;

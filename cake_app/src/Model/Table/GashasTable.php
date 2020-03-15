@@ -159,7 +159,9 @@ class GashasTable extends AppTable
 				'title',
 				'ssr_rate',
 				'sr_rate'
-		])->enableHydration(false)->toArray();
+		])->enableHydration(false)
+		->order(['id' => 'DESC'])
+		->toArray();
 		return $gasha_data;
 	}
 
