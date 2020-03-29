@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-03-14 19:56:49
+Date: 2020-03-29 21:08:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -53,7 +53,7 @@ CREATE TABLE `cards` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `delete_flag` char(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=799 DEFAULT CHARSET=utf8 COMMENT='カード';
+) ENGINE=InnoDB AUTO_INCREMENT=810 DEFAULT CHARSET=utf8 COMMENT='カード';
 
 -- ----------------------------
 -- Records of cards
@@ -856,6 +856,17 @@ INSERT INTO `cards` VALUES ('795', '47', '制服シリーズ　永吉昴', '03',
 INSERT INTO `cards` VALUES ('796', '15', '紅白乱れ梅ライブ　最上静香', '03', '02', '2020-03-11', '0', '0', '2020-03-14 19:37:58', '2020-03-14 19:37:58', '0');
 INSERT INTO `cards` VALUES ('797', '12', 'たいくつお姫様　双海真美', '03', '03', '2020-03-11', '0', '0', '2020-03-14 19:37:58', '2020-03-14 19:37:58', '0');
 INSERT INTO `cards` VALUES ('798', '21', 'キラキラ花道　徳川まつり', '02', '01', '2020-03-11', '0', '0', '2020-03-14 19:37:58', '2020-03-14 19:37:58', '0');
+INSERT INTO `cards` VALUES ('799', '39', 'セクシー雀士…何を斬る？　馬場このみ', '04', '03', '2020-03-18', '1', '1', '2020-03-29 20:41:12', '2020-03-29 20:41:12', '0');
+INSERT INTO `cards` VALUES ('800', '32', 'ヤギさんと郵便屋さん♡　エミリー', '04', '01', '2020-03-18', '1', '0', '2020-03-29 20:41:12', '2020-03-29 20:41:12', '0');
+INSERT INTO `cards` VALUES ('801', '35', '屋上ランチタイム　木下ひなた', '03', '03', '2020-03-18', '1', '0', '2020-03-29 20:41:12', '2020-03-29 20:41:12', '0');
+INSERT INTO `cards` VALUES ('802', '20', '制服シリーズ　所恵美', '03', '02', '2020-03-18', '1', '0', '2020-03-29 20:41:12', '2020-03-29 20:41:12', '0');
+INSERT INTO `cards` VALUES ('803', '42', 'わくわくを乗せて　宮尾美也', '02', '03', '2020-03-18', '1', '0', '2020-03-29 20:41:12', '2020-03-29 20:41:12', '0');
+INSERT INTO `cards` VALUES ('804', '13', 'Deep Blue Mermaid　我那覇響', '03', '01', '2020-03-18', '0', '0', '2020-03-29 20:41:12', '2020-03-29 20:41:12', '0');
+INSERT INTO `cards` VALUES ('805', '16', 'Deep Blue Mermaid　伊吹翼', '03', '03', '2020-03-18', '0', '0', '2020-03-29 20:41:12', '2020-03-29 20:41:12', '0');
+INSERT INTO `cards` VALUES ('806', '54', 'ZWEIGLANZ　玲音', '03', '04', '2020-03-18', '0', '0', '2020-03-29 20:41:12', '2020-03-29 20:41:12', '0');
+INSERT INTO `cards` VALUES ('807', '53', 'ZWEIGLANZ　詩花', '03', '04', '2020-03-18', '0', '0', '2020-03-29 20:41:12', '2020-03-29 20:41:12', '0');
+INSERT INTO `cards` VALUES ('808', '1', 'つながる笑顔　天海春香', '04', '01', '2020-03-29', '1', '2', '2020-03-29 20:41:12', '2020-03-29 20:41:12', '0');
+INSERT INTO `cards` VALUES ('809', '45', 'その先の輝きへ　篠宮可憐', '04', '03', '2020-03-29', '1', '2', '2020-03-29 20:41:12', '2020-03-29 20:41:12', '0');
 
 -- ----------------------------
 -- Table structure for `card_reprints`
@@ -1053,7 +1064,7 @@ CREATE TABLE `gashas` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `delete_flag` char(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
 
 -- ----------------------------
 -- Records of gashas
@@ -1184,6 +1195,8 @@ INSERT INTO `gashas` VALUES ('123', '2020-02-18', '2020-02-26', '【期間限定
 INSERT INTO `gashas` VALUES ('124', '2020-02-26', '2020-02-29', '【限定復刻】限定復刻ガシャ', '3', '12', '2020-03-14 19:42:19', '2020-03-14 19:42:19', '0');
 INSERT INTO `gashas` VALUES ('125', '2020-02-29', '2020-03-11', '【期間限定】はにかみホワイトデー♡デートガシャ', '3', '12', '2020-03-14 19:42:19', '2020-03-14 19:42:19', '0');
 INSERT INTO `gashas` VALUES ('126', '2020-03-11', '2020-03-18', 'SONG FOR YOU！ガシャ VOL.2', '3', '12', '2020-03-14 19:42:19', '2020-03-14 19:42:19', '0');
+INSERT INTO `gashas` VALUES ('127', '2020-03-18', '2020-03-29', '【期間限定】がんばれ！お仕事ガールズガシャ', '3', '12', '2020-03-29 20:44:28', '2020-03-29 20:44:28', '0');
+INSERT INTO `gashas` VALUES ('128', '2020-03-29', '2020-04-02', '【フェス限定】ミリオンフェス', '6', '12', '2020-03-29 20:44:28', '2020-03-29 20:44:28', '0');
 
 -- ----------------------------
 -- Table structure for `gasha_pickups`
@@ -1197,7 +1210,7 @@ CREATE TABLE `gasha_pickups` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `delete_flag` char(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=457 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
+) ENGINE=InnoDB AUTO_INCREMENT=464 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
 
 -- ----------------------------
 -- Records of gasha_pickups
@@ -1658,3 +1671,10 @@ INSERT INTO `gasha_pickups` VALUES ('453', '126', '792', '2020-03-14 19:48:01', 
 INSERT INTO `gasha_pickups` VALUES ('454', '126', '793', '2020-03-14 19:48:14', '2020-03-14 19:48:14', '0');
 INSERT INTO `gasha_pickups` VALUES ('455', '126', '794', '2020-03-14 19:48:42', '2020-03-14 19:48:42', '0');
 INSERT INTO `gasha_pickups` VALUES ('456', '126', '795', '2020-03-14 19:48:59', '2020-03-14 19:48:59', '0');
+INSERT INTO `gasha_pickups` VALUES ('457', '127', '799', '2020-03-29 20:48:45', '2020-03-29 20:48:45', '0');
+INSERT INTO `gasha_pickups` VALUES ('458', '127', '800', '2020-03-29 20:48:56', '2020-03-29 20:48:56', '0');
+INSERT INTO `gasha_pickups` VALUES ('459', '127', '801', '2020-03-29 20:49:13', '2020-03-29 20:49:13', '0');
+INSERT INTO `gasha_pickups` VALUES ('460', '127', '802', '2020-03-29 20:49:29', '2020-03-29 20:49:29', '0');
+INSERT INTO `gasha_pickups` VALUES ('461', '127', '803', '2020-03-29 20:49:39', '2020-03-29 20:49:39', '0');
+INSERT INTO `gasha_pickups` VALUES ('462', '128', '808', '2020-03-29 20:49:48', '2020-03-29 20:49:48', '0');
+INSERT INTO `gasha_pickups` VALUES ('463', '128', '809', '2020-03-29 20:50:00', '2020-03-29 20:50:00', '0');

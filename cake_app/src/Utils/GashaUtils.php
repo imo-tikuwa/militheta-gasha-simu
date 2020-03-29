@@ -42,7 +42,9 @@ class GashaUtils {
 		}
 
 		// ピックアップカード1枚当たりのピック率
-		$per_ssr_pickup_rate = ($ssr_pickup_target_count > 0) ? @(BASE_SSR_PICKUP_RATE / $ssr_pickup_target_count) : 0;
+		// TODO フェスのときはベースの値が2倍になる？2020-03-29のミリオンフェスで新規フェス限が0.99%ずつとなってることを確認、とりあえずの修正を実施
+		$base_ssr_pickup_rate = ($ssr_rate == 6) ? BASE_SSR_PICKUP_RATE * 2 : BASE_SSR_PICKUP_RATE;
+		$per_ssr_pickup_rate = ($ssr_pickup_target_count > 0) ? @($base_ssr_pickup_rate / $ssr_pickup_target_count) : 0;
 		$per_sr_pickup_rate = ($sr_pickup_target_count > 0) ? @(BASE_SR_PICKUP_RATE / $sr_pickup_target_count) : 0;
 		$per_r_pickup_rate = ($r_pickup_target_count > 0) ? (BASE_R_PICKUP_RATE / $r_pickup_target_count) : 0;
 
