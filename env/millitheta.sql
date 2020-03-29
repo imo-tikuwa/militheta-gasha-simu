@@ -33,8 +33,8 @@ CREATE TABLE `admins` (
 -- ----------------------------
 -- Records of admins
 -- ----------------------------
-INSERT INTO `admins` VALUES ('1', 'admin@imo-tikuwa.com', 'lbV+4PEvS9UyIMnM5IbqzQ==:yFiuLMAJMrQO6gsizK5y0w==', null, '2020-01-03 22:24:33', '2020-01-03 22:24:33');
-INSERT INTO `admins` VALUES ('2', 'user1@imo-tikuwa.com', 'Q5mYbUIO2H/QXvaVOzrfWQ==:5hllsFixcuGYt5n6HjkoHg==', '{\"Cards\": [\"READ\"], \"Gashas\": [\"READ\"], \"Characters\": [\"READ\"], \"CardReprints\": [\"READ\"], \"GashaPickups\": [\"READ\"]}', '2020-03-12 19:22:35', '2020-03-12 19:22:35');
+INSERT INTO `admins` VALUES ('1', 'admin@imo-tikuwa.com', 'lbV+4PEvS9UyIMnM5IbqzQ==:yFiuLMAJMrQO6gsizK5y0w==', null, '2020-01-03 22:24:33', '2020-01-03 22:24:33', '0');
+INSERT INTO `admins` VALUES ('2', 'user1@imo-tikuwa.com', 'Q5mYbUIO2H/QXvaVOzrfWQ==:5hllsFixcuGYt5n6HjkoHg==', '{\"Cards\": [\"READ\"], \"Gashas\": [\"READ\"], \"Characters\": [\"READ\"], \"CardReprints\": [\"READ\"], \"GashaPickups\": [\"READ\"]}', '2020-03-12 19:22:35', '2020-03-12 19:22:35', '0');
 
 -- ----------------------------
 -- Table structure for `cards`
