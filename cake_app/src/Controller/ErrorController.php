@@ -33,6 +33,11 @@ class ErrorController extends AppController
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
         ]);
+
+        // ログイン済みのとき管理画面内のエラーはレイアウトを切り替え
+        if ($this->request->getParam('prefix') === 'admin' && !empty($this->request->getSession()->read('Auth'))) {
+            $this->viewBuilder()->setLayout('default_admin');
+        }
     }
 
     /**

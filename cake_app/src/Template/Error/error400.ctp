@@ -2,12 +2,13 @@
 use Cake\Core\Configure;
 use Cake\Error\Debugger;
 
-$this->layout = 'error';
+// $this->layout = 'error';
+
+$this->assign('title', $message);
 
 if (Configure::read('debug')) :
     $this->layout = 'dev_error';
 
-    $this->assign('title', $message);
     $this->assign('templateName', 'error400.ctp');
 
     $this->start('file');
@@ -31,8 +32,11 @@ endif;
 $this->end();
 endif;
 ?>
-<h2><?= h($message) ?></h2>
-<p class="error">
-    <strong><?= __d('cake', 'Error') ?>: </strong>
-    <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
-</p>
+<div class="col-md-12 mb-12">
+  <div class="card">
+    <div class="card-body table-responsive p-0">
+      <?= __d('cake', 'Error') ?>:
+      <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
+    </div>
+  </div>
+</div>
