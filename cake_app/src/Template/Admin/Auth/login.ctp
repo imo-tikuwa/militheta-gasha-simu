@@ -11,6 +11,7 @@ $this->assign('title', "ログイン");
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= $this->fetch('title') ?></title>
   <?= $this->Html->meta('icon') ?>
+  <?= $this->Html->meta('robots', ['content' => 'noindex']) ?>
   <?= $this->Html->css('vendor/bundle') ?>
   <?= $this->fetch('meta') ?>
   <?= $this->fetch('css') ?>
