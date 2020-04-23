@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "21c66a31f439422e93ecd9c282897baf",
+    "content-hash": "83234164bc793359b03d0efdb5b916a0",
     "packages": [
         {
             "name": "aura/intl",
@@ -1926,16 +1926,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-admin-baker",
-            "version": "dev-master",
+            "version": "v0.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-admin-baker.git",
-                "reference": "04eee9ac040e3ff5589ae98f65f1ea5eb9b68790"
+                "reference": "821d7536a5efbfa3aa12b6764f120850bb326644"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/04eee9ac040e3ff5589ae98f65f1ea5eb9b68790",
-                "reference": "04eee9ac040e3ff5589ae98f65f1ea5eb9b68790",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/821d7536a5efbfa3aa12b6764f120850bb326644",
+                "reference": "821d7536a5efbfa3aa12b6764f120850bb326644",
                 "shasum": ""
             },
             "require": {
@@ -1961,10 +1961,10 @@
             ],
             "description": "Cake3AdminBaker plugin for CakePHP",
             "support": {
-                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/master",
+                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v0.1",
                 "issues": "https://github.com/imo-tikuwa/cakephp-admin-baker/issues"
             },
-            "time": "2020-03-14T00:59:28+00:00"
+            "time": "2020-04-22T15:06:53+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -2006,6 +2006,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -2052,6 +2053,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
@@ -2833,7 +2835,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "imo-tikuwa/cakephp-admin-baker": 20,
         "psy/psysh": 0
     },
     "prefer-stable": true,

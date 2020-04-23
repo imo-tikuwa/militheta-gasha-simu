@@ -154,6 +154,14 @@ table.table td.actions div.btn-group {
   .kv-fileinput-caption, .btn-file,
   .file-preview {
     border-radius: 0 !important;
+    .table {
+      table-layout: fixed !important;
+    }
+  }
+  .explorer-caption {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
