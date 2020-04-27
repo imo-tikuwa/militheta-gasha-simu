@@ -5,6 +5,9 @@ const SITE_NAME = 'MilliGashaSimu';
 /** サイト名(短) */
 const SITE_NAME_SHORT = 'Mli';
 
+/** GoogleMapAPIキー */
+const GOOGLEMAP_API_KEY = '';
+
 /** スーパーユーザーのアカウントID(権限チェック不要で全ての機能にアクセス可能) */
 const SUPER_USER_ID = 1;
 

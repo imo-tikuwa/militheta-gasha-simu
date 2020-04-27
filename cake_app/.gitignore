@@ -1,9 +1,11 @@
 # CakePHP specific files #
 ##########################
 /config/.env
+/config/Migrations/schema-dump-default.lock
 /logs/*
 /tmp/*
 /vendor/*
+/phinx.yml
 
 # npm files #
 #############

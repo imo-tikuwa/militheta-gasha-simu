@@ -11,6 +11,7 @@
         "cakephp/plugin-installer": "^1.0",
         "friendsofcake/cakephp-csvview": "3.3.*",
         "imo-tikuwa/cakephp-operation-logs": "^0.2.0",
+        "intervention/image": "^2.5",
         "josegonzalez/dotenv": "3.*",
         "mobiledetect/mobiledetectlib": "2.*"
     },
@@ -18,7 +19,7 @@
         "cakephp/bake": "^1.12",
         "cakephp/cakephp-codesniffer": "^3.0",
         "cakephp/debug_kit": "^3.22",
-        "imo-tikuwa/cakephp-admin-baker": "^0.1.0",
+        "imo-tikuwa/cakephp-admin-baker": "^0.2.0",
         "psy/psysh": "@stable"
     },
     "suggest": {

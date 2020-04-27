@@ -18,6 +18,7 @@ use Cake\Controller\Controller;
 use Cake\Core\Exception\Exception;
 use Cake\Event\Event;
 use Cake\Utility\Inflector;
+use Intervention\Image\ImageManagerStatic;
 
 /**
  * Application Controller
@@ -73,24 +74,45 @@ class AppController extends Controller
             $this->autoRender = false;
 
             if (is_null($input_name)) {
-                throw new Exception("プログラムエラーが発生しました。エラーコード：900100");
+                throw new Exception("プログラムエラーが発生しました。Invalid Request.");
             }
 
             $file = $this->request->getData($input_name);
             if (empty($file) || empty($file['name']) || empty($file['tmp_name'])) {
-                throw new Exception("プログラムエラーが発生しました。エラーコード：900110");
+                throw new Exception("プログラムエラーが発生しました。Empty File.");
             }
 
             $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
             if (empty($extension)) {
-                throw new Exception("プログラムエラーが発生しました。エラーコード：900115");
+                throw new Exception("プログラムエラーが発生しました。Invalid Extension.");
             }
+            $extension = strtolower($extension);
 
+            // ファイルアップロード
             $new_image_key = sha1(uniqid(rand()));
             $cur_name = $new_image_key . "." . $extension;
             $upload_to = UPLOAD_FILE_BASE_DIR . DS . Inflector::underscore($this->name) . DS . $cur_name;
             if (!move_uploaded_file($file['tmp_name'], $upload_to)) {
-                throw new Exception("ファイルのアップロードに失敗しました。エラーコード：900150");
+                throw new Exception("ファイルのアップロードに失敗しました。Upload Failed.");
+            }
+
+            // アップロードされたファイルが画像かつ、サムネイル生成のオプションが存在するときサムネ生成
+            if (in_array($extension, ['png', 'jpg', 'jpeg', 'gif'])) {
+                $thumbnail_options = _code("ThumbnailOptions.{$this->name}.{$input_name}");
+                if (!empty($thumbnail_options)) {
+                    $thumbnail_width = (isset($thumbnail_options['thumbnail_width']) && is_numeric($thumbnail_options['thumbnail_width'])) ? $thumbnail_options['thumbnail_width'] : null;
+                    $thumbnail_height = (isset($thumbnail_options['thumbnail_height']) && is_numeric($thumbnail_options['thumbnail_height'])) ? $thumbnail_options['thumbnail_height'] : null;
+                    $thumbnail_aspect_ratio_keep = (isset($thumbnail_options['thumbnail_aspect_ratio_keep']) && $thumbnail_options['thumbnail_aspect_ratio_keep'] === true) ? true : false;
+                    $thumbnail_quality = (isset($thumbnail_options['thumbnail_quality']) && is_numeric($thumbnail_options['thumbnail_quality'])) ? $thumbnail_options['thumbnail_height'] : 90;
+                    $thumb_to = UPLOAD_FILE_BASE_DIR . DS . Inflector::underscore($this->name) . DS . $new_image_key . "_thumb." . $extension;
+                    if ($thumbnail_aspect_ratio_keep) {
+                        ImageManagerStatic::make($upload_to)->resize($thumbnail_width, $thumbnail_height, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->save($thumb_to, $thumbnail_quality);
+                    } else {
+                        ImageManagerStatic::make($upload_to)->resize($thumbnail_width, $thumbnail_height)->save($thumb_to, $thumbnail_quality);
+                    }
+                }
             }
 
             $delete_action = "";
