@@ -8,7 +8,7 @@ $this->assign('title', "ガシャ詳細");
 <div class="col-md-12 mb-12">
   <div class="card">
     <div class="card-body">
-      <table class="vertical-table">
+      <table class="table table-sm table-hover table-borderless">
         <tr>
           <th scope="row">ID</th>
           <td><?= h($gasha->id) ?></td>
