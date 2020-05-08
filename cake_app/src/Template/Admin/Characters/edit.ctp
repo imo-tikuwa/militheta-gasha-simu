@@ -13,7 +13,7 @@ $this->assign('title', "キャラクター{$button_name}");
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="form-group">
-            <?= $this->Form->control('name', ['class' => 'form-control rounded-0 ', 'label' => '名前']); ?>
+            <?= $this->Form->control('name', ['type' => 'text', 'class' => 'form-control rounded-0 ', 'label' => '名前']); ?>
           </div>
         </div>
         <div class="col-md-12">

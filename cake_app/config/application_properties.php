@@ -42,9 +42,9 @@ return [
 								0 => 'false',
 						],
 						'limited' => [
-								2 => 'フェス限定',
-								1 => '限定',
-								0 => '恒常',
+							2 => 'フェス限定',
+							1 => '限定',
+							0 => '恒常',
 						],
 				],
 		],
@@ -114,6 +114,18 @@ return [
 				'CakeEncryptionSalt' => 'b6j26pq7ghkw88s8',
 		],
 		'AdminRoles' => [
+				'Characters' => [
+						ROLE_READ => 'キャラクター読込',
+						ROLE_WRITE => 'キャラクター書込',
+						ROLE_DELETE => 'キャラクター削除',
+						ROLE_CSV_EXPORT => 'キャラクターCSVエクスポート',
+				],
+				'GashaPickups' => [
+						ROLE_READ => 'ピックアップ情報読込',
+						ROLE_WRITE => 'ピックアップ情報書込',
+						ROLE_DELETE => 'ピックアップ情報削除',
+						ROLE_CSV_EXPORT => 'ピックアップ情報CSVエクスポート',
+				],
 				'CardReprints' => [
 						ROLE_READ => '復刻情報読込',
 						ROLE_WRITE => '復刻情報書込',
@@ -126,18 +138,6 @@ return [
 						ROLE_DELETE => 'カード削除',
 						ROLE_CSV_EXPORT => 'カードCSVエクスポート',
 						ROLE_CSV_IMPORT => 'カードCSVインポート',
-				],
-				'Characters' => [
-						ROLE_READ => 'キャラクター読込',
-						ROLE_WRITE => 'キャラクター書込',
-						ROLE_DELETE => 'キャラクター削除',
-						ROLE_CSV_EXPORT => 'キャラクターCSVエクスポート',
-				],
-				'GashaPickups' => [
-						ROLE_READ => 'ピックアップ情報読込',
-						ROLE_WRITE => 'ピックアップ情報書込',
-						ROLE_DELETE => 'ピックアップ情報削除',
-						ROLE_CSV_EXPORT => 'ピックアップ情報CSVエクスポート',
 				],
 				'Gashas' => [
 						ROLE_READ => 'ガシャ読込',

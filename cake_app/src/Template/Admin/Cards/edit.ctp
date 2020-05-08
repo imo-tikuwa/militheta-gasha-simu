@@ -18,7 +18,7 @@ $this->assign('title', "カード{$button_name}");
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('name', ['class' => 'form-control rounded-0 ', 'label' => 'カード名']); ?>
+            <?= $this->Form->control('name', ['type' => 'text', 'class' => 'form-control rounded-0 ', 'label' => 'カード名']); ?>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">

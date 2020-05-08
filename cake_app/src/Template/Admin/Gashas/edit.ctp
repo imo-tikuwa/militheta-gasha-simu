@@ -23,7 +23,7 @@ $this->assign('title', "ガシャ{$button_name}");
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('title', ['class' => 'form-control rounded-0 ', 'label' => 'ガシャタイトル']); ?>
+            <?= $this->Form->control('title', ['type' => 'text', 'class' => 'form-control rounded-0 ', 'label' => 'ガシャタイトル']); ?>
           </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-12">

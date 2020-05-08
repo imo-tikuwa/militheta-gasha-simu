@@ -51,11 +51,11 @@ return [
 				],
 		],
 		'options' => [
+				'one_record_limited' => false,
 				'is_search_form' => true,
 				'yubinbango' => false,
 				'paging_limit' => 20,
 				'left_side_menu_icon_class' => 'fas fa-table',
-				'google_map_api_key' => '',
 				'delete_function' => true,
 				'csv_export' => true,
 				'csv_import' => false,
