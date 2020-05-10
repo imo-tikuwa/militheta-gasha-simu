@@ -9,24 +9,18 @@ https://milligasha.imo-tikuwa.com/
 https://milligasha.imo-tikuwa.com/target-pick  
 
 ## インストール
-非公開の開発用プラグインを使用しているのでcomposer installの際--no-devを付ける必要あり
+非公開の開発用プラグインを使用しているのでcomposer installの際--no-devを付ける必要あり  
+また、Application.php内に記載のCake3AdminBakerプラグインの読み込みを削除する必要あり
 ```
 git clone https://github.com/imo-tikuwa/militheta-gasha-simu.git
 cd militheta-gasha-simu/cake_app
 composer install --no-dev
+bin\cake plugin unload Cake3AdminBaker
 npm install
 npm run build
 
 mysql < ../env/create_millitheta.sql
 mysql millitheta < ../env/millitheta.sql
-```
-
-config/bootstrap.phpを開いてCake3AdminBakerプラグインを無効化
-```
-// プラグインのロード
-Plugin::load('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
-↓
-// Plugin::load('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
 ```
 
 ## .envについて
