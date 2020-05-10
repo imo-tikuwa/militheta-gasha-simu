@@ -10,7 +10,7 @@ if (!empty($functions) && count($functions) > 0) {
 	foreach ($functions as $alias => $function) {
 		if (AuthUtils::hasRole($this->request, ['controller' => $function['controller'], 'action' => ACTION_INDEX])) {
 			$html .= "<li class=\"nav-item\">";
-			$html .= "<a href=\"" . $this->Url->build(['controller' => "{$function['controller']}", 'action' => ACTION_INDEX]) . "\" class=\"nav-link";
+			$html .= "<a href=\"" . $this->Url->build(['controller' => "{$function['controller']}", 'action' => ACTION_INDEX, '?' => _code("InitialOrders.{$alias}")]) . "\" class=\"nav-link";
 			if ($this->name == $function['controller']) {
 				$html .= " active";
 			}

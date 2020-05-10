@@ -17,7 +17,7 @@ return [
 						'col_md_size' => 2,
 						'col_sm_size' => 12,
 						'input_type' => 'date',
-						'search_type' => '=',
+						'search_type' => '>=',
 				],
 				'end_date' => [
 						'search' => true,
@@ -27,7 +27,7 @@ return [
 						'col_md_size' => 2,
 						'col_sm_size' => 12,
 						'input_type' => 'date',
-						'search_type' => '=',
+						'search_type' => '<=',
 				],
 				'title' => [
 						'search' => true,
@@ -89,6 +89,8 @@ return [
 				'paging_limit' => 20,
 				'left_side_menu_icon_class' => 'fas fa-database',
 				'delete_function' => true,
+				'init_order_column' => 'id',
+				'init_order_direction' => 'desc',
 				'csv_export' => true,
 				'csv_import' => true,
 		],

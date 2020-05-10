@@ -214,9 +214,3 @@ if (Configure::read('debug')) {
 	Configure::write('DebugKit.forceEnable', true);
 	Application::addPlugin('DebugKit', ['bootstrap' => true, 'routes' => true]);
 }
-
-// プラグインのロード
-Application::addPlugin('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
-
-// コマンドクラスの呼び出しには以下のプラグインのロードが必要
-Application::addPlugin('OperationLogs', ['bootstrap' => true]);

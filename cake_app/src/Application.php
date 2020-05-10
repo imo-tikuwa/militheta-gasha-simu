@@ -36,7 +36,12 @@ class Application extends BaseApplication
      */
     public function bootstrap()
     {
-        // CsvViewプラグインの読み込み
+        // プラグインのロード
+
+        $this->addPlugin('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
+
+        $this->addPlugin('OperationLogs', ['bootstrap' => true]);
+
         $this->addPlugin('CsvView');
 
         // Call parent to load bootstrap from files.

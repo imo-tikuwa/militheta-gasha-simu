@@ -120,6 +120,8 @@ return [
 				'paging_limit' => 20,
 				'left_side_menu_icon_class' => 'far fa-id-card',
 				'delete_function' => false,
+				'init_order_column' => 'id',
+				'init_order_direction' => 'desc',
 				'csv_export' => true,
 				'csv_import' => true,
 		],

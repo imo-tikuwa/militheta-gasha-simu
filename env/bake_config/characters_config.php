@@ -43,6 +43,8 @@ return [
 				'paging_limit' => 20,
 				'left_side_menu_icon_class' => 'fas fa-female',
 				'delete_function' => false,
+				'init_order_column' => 'id',
+				'init_order_direction' => 'asc',
 				'csv_export' => true,
 				'csv_import' => false,
 		],

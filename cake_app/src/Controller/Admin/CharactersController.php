@@ -21,7 +21,7 @@ class CharactersController extends AppController
      * Paging setting.
      */
     public $paginate = [
-         'limit' => 20,
+        'limit' => 20,
     ];
 
     /**

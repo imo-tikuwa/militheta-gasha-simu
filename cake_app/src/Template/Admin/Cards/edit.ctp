@@ -23,12 +23,12 @@ $this->assign('title', "カード{$button_name}");
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('rarity', ['type' => 'select', 'options' => ["" => "　"] + _code('Codes.Cards.rarity'), 'class' => 'form-control select2 ', 'label' => 'レアリティ']); ?>
+            <?= $this->Form->control('rarity', ['type' => 'select', 'options' => _code('Codes.Cards.rarity'), 'class' => 'form-control select2 ', 'label' => 'レアリティ', 'empty' => '　']); ?>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('type', ['type' => 'select', 'options' => ["" => "　"] + _code('Codes.Cards.type'), 'class' => 'form-control select2 ', 'label' => 'タイプ']); ?>
+            <?= $this->Form->control('type', ['type' => 'select', 'options' => _code('Codes.Cards.type'), 'class' => 'form-control select2 ', 'label' => 'タイプ', 'empty' => '　']); ?>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">

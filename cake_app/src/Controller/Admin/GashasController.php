@@ -21,7 +21,7 @@ class GashasController extends AppController
      * Paging setting.
      */
     public $paginate = [
-         'limit' => 20,
+        'limit' => 20,
     ];
 
     /**
@@ -52,11 +52,11 @@ class GashasController extends AppController
         }
         // ガシャ開始日
         if (isset($request['start_date']) && !is_null($request['start_date']) && $request['start_date'] !== '') {
-            $query->where([$this->Gashas->aliasField('start_date') => $request['start_date']]);
+            $query->where([$this->Gashas->aliasField('start_date >=') => $request['start_date']]);
         }
         // ガシャ終了日
         if (isset($request['end_date']) && !is_null($request['end_date']) && $request['end_date'] !== '') {
-            $query->where([$this->Gashas->aliasField('end_date') => $request['end_date']]);
+            $query->where([$this->Gashas->aliasField('end_date <=') => $request['end_date']]);
         }
         // ガシャタイトル
         if (isset($request['title']) && !is_null($request['title']) && $request['title'] !== '') {

@@ -57,6 +57,8 @@ return [
 				'paging_limit' => 20,
 				'left_side_menu_icon_class' => 'fas fa-table',
 				'delete_function' => true,
+				'init_order_column' => 'id',
+				'init_order_direction' => 'asc',
 				'csv_export' => true,
 				'csv_import' => false,
 		],
