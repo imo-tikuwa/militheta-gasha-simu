@@ -128,6 +128,8 @@ $this->assign('title', "ガシャ");
               </div>
             </div>
           </div>
+          <?= $this->Form->hidden('sort', ['value' => @$params['sort']]) ?>
+          <?= $this->Form->hidden('direction', ['value' => @$params['direction']]) ?>
         <?= $this->Form->end() ?>
       </div>
       <div class="modal-footer">　</div>
