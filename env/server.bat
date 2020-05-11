@@ -14,8 +14,7 @@ call :Trim %NetworkIP%
 
 echo %NetworkIP% | findstr /B 192.168. > nul
 if %ERRORLEVEL% equ 0 (
-    start bin\cake server -H %NetworkIP% -p 80
-    start npm run watch
+    bin\cake server -H %NetworkIP% -p 80
 )
 
 

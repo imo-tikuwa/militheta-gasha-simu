@@ -38,7 +38,10 @@ class Application extends BaseApplication
     {
         // プラグインのロード
 
-        $this->addPlugin('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
+        try {
+            $this->addPlugin('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
+        } catch (MissingPluginException $e) {
+        }
 
         $this->addPlugin('OperationLogs', ['bootstrap' => true]);
 
