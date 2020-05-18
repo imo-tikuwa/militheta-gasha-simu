@@ -13,7 +13,7 @@ $this->assign('title', "カード{$button_name}");
       <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('character_id', ['type' => 'select', 'class' => 'form-control select2 rounded-0 ', 'label' => 'キャラクター']); ?>
+            <?= $this->Form->control('character_id', ['id' => 'character_id', 'type' => 'select', 'class' => 'form-control rounded-0 ', 'label' => 'キャラクター']); ?>
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -23,12 +23,12 @@ $this->assign('title', "カード{$button_name}");
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('rarity', ['type' => 'select', 'options' => _code('Codes.Cards.rarity'), 'class' => 'form-control select2 ', 'label' => 'レアリティ', 'empty' => '　']); ?>
+            <?= $this->Form->control('rarity', ['id' => 'rarity', 'type' => 'select', 'options' => _code('Codes.Cards.rarity'), 'class' => 'form-control ', 'label' => 'レアリティ', 'empty' => '　']); ?>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('type', ['type' => 'select', 'options' => _code('Codes.Cards.type'), 'class' => 'form-control select2 ', 'label' => 'タイプ', 'empty' => '　']); ?>
+            <?= $this->Form->control('type', ['id' => 'type', 'type' => 'select', 'options' => _code('Codes.Cards.type'), 'class' => 'form-control ', 'label' => 'タイプ', 'empty' => '　']); ?>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
@@ -38,12 +38,12 @@ $this->assign('title', "カード{$button_name}");
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('gasha_include', ['type' => 'select', 'options' => _code('Codes.Cards.gasha_include'), 'default' => '1', 'class' => 'form-control select2 ', 'label' => 'ガシャ対象？']); ?>
+            <?= $this->Form->control('gasha_include', ['id' => 'gasha_include', 'type' => 'select', 'options' => _code('Codes.Cards.gasha_include'), 'default' => '1', 'class' => 'form-control ', 'label' => 'ガシャ対象？']); ?>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('limited', ['type' => 'select', 'options' => _code('Codes.Cards.limited'), 'default' => '0', 'class' => 'form-control select2 ', 'label' => '限定？']); ?>
+            <?= $this->Form->control('limited', ['id' => 'limited', 'type' => 'select', 'options' => _code('Codes.Cards.limited'), 'default' => '0', 'class' => 'form-control ', 'label' => '限定？']); ?>
           </div>
         </div>
         <div class="col-md-12">

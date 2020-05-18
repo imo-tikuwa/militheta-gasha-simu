@@ -13,12 +13,12 @@ $this->assign('title', "復刻情報{$button_name}");
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('gasha_id', ['type' => 'select', 'class' => 'form-control select2 rounded-0 ', 'label' => 'ガシャID']); ?>
+            <?= $this->Form->control('gasha_id', ['id' => 'gasha_id', 'type' => 'select', 'class' => 'form-control rounded-0 ', 'label' => 'ガシャID']); ?>
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="form-group">
-            <?= $this->Form->control('card_id', ['type' => 'select', 'class' => 'form-control select2 rounded-0 ', 'label' => 'カードID']); ?>
+            <?= $this->Form->control('card_id', ['id' => 'card_id', 'type' => 'select', 'class' => 'form-control rounded-0 ', 'label' => 'カードID']); ?>
           </div>
         </div>
         <div class="col-md-12">
@@ -30,3 +30,4 @@ $this->assign('title', "復刻情報{$button_name}");
   </div>
 </div>
 
+<?= $this->Html->script('admin/card_reprints_edit', ['block' => true, 'charset' => 'UTF-8']) ?>

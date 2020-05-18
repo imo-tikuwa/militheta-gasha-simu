@@ -102,7 +102,7 @@ $this->assign('title', "カード");
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('character_id', ['type' => 'select', 'options' => $characters, 'class' => 'form-control select2', 'label' => 'キャラクター', 'value' => @$params['character_id']]); ?>
+                <?= $this->Form->control('character_id', ['id' => 'character_id', 'type' => 'select', 'options' => $characters, 'class' => 'form-control', 'label' => 'キャラクター', 'value' => @$params['character_id']]); ?>
               </div>
             </div>
           </div>
@@ -116,14 +116,14 @@ $this->assign('title', "カード");
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('rarity', ['type' => 'select', 'options' => _code('Codes.Cards.rarity'), 'class' => 'form-control select2', 'label' => 'レアリティ', 'empty' => '　', 'value' => @$params['rarity']]); ?>
+                <?= $this->Form->control('rarity', ['id' => 'rarity', 'type' => 'select', 'options' => _code('Codes.Cards.rarity'), 'class' => 'form-control', 'label' => 'レアリティ', 'empty' => '　', 'value' => @$params['rarity']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('type', ['type' => 'select', 'options' => _code('Codes.Cards.type'), 'class' => 'form-control select2', 'label' => 'タイプ', 'empty' => '　', 'value' => @$params['type']]); ?>
+                <?= $this->Form->control('type', ['id' => 'type', 'type' => 'select', 'options' => _code('Codes.Cards.type'), 'class' => 'form-control', 'label' => 'タイプ', 'empty' => '　', 'value' => @$params['type']]); ?>
               </div>
             </div>
           </div>
@@ -137,14 +137,14 @@ $this->assign('title', "カード");
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('gasha_include', ['type' => 'select', 'options' => _code('Codes.Cards.gasha_include'), 'class' => 'form-control select2', 'label' => 'ガシャ対象？', 'empty' => '　', 'value' => @$params['gasha_include']]); ?>
+                <?= $this->Form->control('gasha_include', ['id' => 'gasha_include', 'type' => 'select', 'options' => _code('Codes.Cards.gasha_include'), 'class' => 'form-control', 'label' => 'ガシャ対象？', 'empty' => '　', 'value' => @$params['gasha_include']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('limited', ['type' => 'select', 'options' => _code('Codes.Cards.limited'), 'class' => 'form-control select2', 'label' => '限定？', 'empty' => '　', 'value' => @$params['limited']]); ?>
+                <?= $this->Form->control('limited', ['id' => 'limited', 'type' => 'select', 'options' => _code('Codes.Cards.limited'), 'class' => 'form-control', 'label' => '限定？', 'empty' => '　', 'value' => @$params['limited']]); ?>
               </div>
             </div>
           </div>

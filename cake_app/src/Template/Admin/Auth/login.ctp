@@ -35,7 +35,7 @@ $this->assign('title', "ログイン");
         </div>
         <div class="row">
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat">ログイン</button>
           </div>
           <!-- /.col -->
         </div>

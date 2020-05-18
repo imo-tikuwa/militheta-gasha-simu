@@ -26,12 +26,6 @@ import 'bootstrap4-tagsinput-douglasanpa/tagsinput.js';
 var Cookies = require('js-cookie');
 
 $(function(){
-	// プルダウンのリプレイス
-	$(".select2").select2({
-		theme: "bootstrap4",
-		width: 'auto',
-		dropdownAutoWidth: true,
-	});
 
 	// サイドメニューの開閉を記憶する
 	$("#sidemenu-toggle").on('click', function (){
@@ -43,7 +37,7 @@ $(function(){
 	$(document).on('mouseup touchend', function (e) {
 		var container = $('.bootstrap-datetimepicker-widget');
 		if (!container.is(e.target) && container.has(e.target).length === 0) {
-		  container.prev().datetimepicker('hide');
+			container.prev().datetimepicker('hide');
 		}
 	});
 });

@@ -87,14 +87,14 @@ $this->assign('title', "ピックアップ情報");
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('gasha_id', ['type' => 'select', 'options' => $gashas, 'class' => 'form-control select2', 'label' => 'ガシャID', 'value' => @$params['gasha_id']]); ?>
+                <?= $this->Form->control('gasha_id', ['id' => 'gasha_id', 'type' => 'select', 'options' => $gashas, 'class' => 'form-control', 'label' => 'ガシャID', 'value' => @$params['gasha_id']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('card_id', ['type' => 'select', 'options' => $cards, 'class' => 'form-control select2', 'label' => 'カードID', 'value' => @$params['card_id']]); ?>
+                <?= $this->Form->control('card_id', ['id' => 'card_id', 'type' => 'select', 'options' => $cards, 'class' => 'form-control', 'label' => 'カードID', 'value' => @$params['card_id']]); ?>
               </div>
             </div>
           </div>
@@ -114,3 +114,4 @@ $this->assign('title', "ピックアップ情報");
   </div>
 </div>
 
+<?= $this->Html->script('admin/gasha_pickups_index', ['block' => true, 'charset' => 'UTF-8']) ?>
