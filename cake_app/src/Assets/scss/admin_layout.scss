@@ -163,6 +163,9 @@ table.table td.actions div.btn-group {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  .file-sortable .file-drag-handle {
+    cursor: n-resize;
+  }
 }
 
 /* エラーメッセージ修飾 */

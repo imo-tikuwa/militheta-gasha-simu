@@ -13,7 +13,7 @@ import 'tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.js';
 
 import 'bootstrap-fileinput/js/plugins/piexif.min.js';
 import 'bootstrap-fileinput/js/plugins/purify.min.js';
-import 'bootstrap-fileinput/js/plugins/sortable.min.js';
+window.KvSortable = require('bootstrap-fileinput/js/plugins/sortable.min.js');
 import 'bootstrap-fileinput/js/fileinput.min.js';
 import 'bootstrap-fileinput/themes/explorer-fas/theme.min.js';
 import 'bootstrap-fileinput/js/locales/ja.js';
