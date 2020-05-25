@@ -28,4 +28,49 @@ $(function(){
 		dropdownAutoWidth: true,
 	});
 
+	// チャート表示
+	var $graph_data = $("#graph_data");
+	if ($graph_data.get(0)) {
+		var chart_options = {
+			responsive : true,
+			maintainAspectRatio : false,
+			scales: {
+				xAxes: [{
+				stacked: true,
+			}],
+			yAxes: [{
+				stacked: true
+			}]
+			}
+		};
+
+		var chart_canvas_all = $('#chart_all').get(0).getContext('2d');
+		var chart_all = new Chart(chart_canvas_all, {
+			type: 'bar',
+			data: $graph_data.data('all'),
+			options: chart_options
+		});
+
+		var chart_canvas_ip = $('#chart_ip').get(0).getContext('2d');
+		var chart_ip = new Chart(chart_canvas_ip, {
+			type: 'bar',
+			data: $graph_data.data('ip'),
+			options: chart_options
+		});
+
+		var chart_canvas_ua = $('#chart_ua').get(0).getContext('2d');
+		var chart_ua = new Chart(chart_canvas_ua, {
+			type: 'bar',
+			data: $graph_data.data('ua'),
+			options: chart_options
+		});
+
+		var chart_canvas_url = $('#chart_url').get(0).getContext('2d');
+		var chart_url = new Chart(chart_canvas_url, {
+			type: 'bar',
+			data: $graph_data.data('url'),
+			options: chart_options
+		});
+	}
+
 });

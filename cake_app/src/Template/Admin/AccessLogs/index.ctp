@@ -5,62 +5,6 @@
 $this->assign('title', "アクセスログ");
 ?>
 
-
-<?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
-$(function(){
-
-  var chart_options = {
-    responsive : true,
-    maintainAspectRatio : false,
-    scales: {
-      xAxes: [{
-        stacked: true,
-      }],
-      yAxes: [{
-        stacked: true
-      }]
-    }
-  };
-
-<?php if (isset($graph_data_all) && !empty($graph_data_all)) { ?>
-  var chart_canvas_all = $('#chart_all').get(0).getContext('2d');
-  var chart_all = new Chart(chart_canvas_all, {
-    type: 'bar',
-    data: <?= $graph_data_all; ?>,
-    options: chart_options
-  });
-<?php } ?>
-
-<?php if (isset($graph_data_ip) && !empty($graph_data_ip)) { ?>
-  var chart_canvas_ip = $('#chart_ip').get(0).getContext('2d');
-  var chart_ip = new Chart(chart_canvas_ip, {
-    type: 'bar',
-    data: <?= $graph_data_ip; ?>,
-    options: chart_options
-  });
-<?php } ?>
-
-<?php if (isset($graph_data_ua) && !empty($graph_data_ua)) { ?>
-  var chart_canvas_ua = $('#chart_ua').get(0).getContext('2d');
-  var chart_ua = new Chart(chart_canvas_ua, {
-    type: 'bar',
-    data: <?= $graph_data_ua; ?>,
-    options: chart_options
-  });
-<?php } ?>
-
-<?php if (isset($graph_data_url) && !empty($graph_data_url)) { ?>
-  var chart_canvas_url = $('#chart_url').get(0).getContext('2d');
-  var chart_url = new Chart(chart_canvas_url, {
-    type: 'bar',
-    data: <?= $graph_data_url; ?>,
-    options: chart_options
-  });
-<?php } ?>
-});
-<?= $this->Html->scriptEnd() ?>
-
-
 <?php if (isset($params['search']) && empty($graph_data_all)) { ?>
 <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
 alert("データが見つかりませんでした。");
@@ -139,4 +83,7 @@ alert("データが見つかりませんでした。");
   </div>
 </div>
 
+<?php if (isset($graph_data_all) && !empty($graph_data_all)) { ?>
+<input type="hidden" id="graph_data" data-all='<?= $graph_data_all ?>' data-ip='<?= $graph_data_ip ?>' data-ua='<?= $graph_data_ua ?>' data-url='<?= $graph_data_url ?>' />
+<?php } ?>
 <?= $this->Html->script('admin/access_logs_index', ['block' => true, 'charset' => 'UTF-8']) ?>
