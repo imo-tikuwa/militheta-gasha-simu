@@ -77,29 +77,6 @@ alert("データが見つかりませんでした。");
               <?= $this->Form->control('target_date', ['type' => 'text', 'id' => 'target_date-datepicker', 'class' => 'form-control rounded-0 ', 'label' => '検索対象日', 'data-toggle' => 'datetimepicker', 'data-target' => '#target_date-datepicker', 'value' => @$params['target_date']]); ?>
             </div>
           </div>
-          <?= $this->Html->scriptStart(['block' => true, 'type' => 'text/javascript']) ?>
-          $(function(){
-            $('#target_date-datepicker').datetimepicker({
-              dayViewHeaderFormat: 'YYYY年 M月',
-              locale: 'ja',
-              buttons: {
-                showClear: true
-              },
-              icons: {
-                time: 'far fa-clock',
-                date: 'far fa-calendar-alt',
-                up: 'fas fa-arrow-up',
-                down: 'fas fa-arrow-down',
-                previous: 'fas fa-chevron-left',
-                next: 'fas fa-chevron-right',
-                today: 'far fa-calendar-alt',
-                clear: 'far fa-trash-alt',
-                close: 'fas fa-times'
-              },
-              format: 'YYYY-MM-DD',
-            });
-          });
-          <?= $this->Html->scriptEnd() ?>
           <div class="col-lg-1 col-md-3 col-sm-3">
             <div class="form-group">
               <?= $this->Form->control('date_type', ['type' => 'select', 'class' => 'select2', 'label' => '集計間隔', 'options' => _code('OperationLogs.date_type_jp'), 'value' => @$params['date_type']]); ?>
@@ -161,3 +138,5 @@ alert("データが見つかりませんでした。");
     </div>
   </div>
 </div>
+
+<?= $this->Html->script('admin/access_logs_index', ['block' => true, 'charset' => 'UTF-8']) ?>
