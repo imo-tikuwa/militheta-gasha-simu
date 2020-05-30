@@ -151,7 +151,7 @@ class CardsController extends AppController
             if ($this->Cards->save($card, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('カードの登録が完了しました。');
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Cards')]);
             }
             $conn->rollback();
             $this->Flash->error('エラーが発生しました。');

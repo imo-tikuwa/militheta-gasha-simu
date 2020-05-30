@@ -400,6 +400,7 @@ class CharactersSeed extends AbstractSeed
         ];
 
         $table = $this->table('characters');
+        $table->truncate();
         $table->insert($data)->save();
     }
 }

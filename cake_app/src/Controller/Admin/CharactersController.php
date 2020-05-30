@@ -114,7 +114,7 @@ class CharactersController extends AppController
             if ($this->Characters->save($character, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('キャラクターの登録が完了しました。');
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Characters')]);
             }
             $conn->rollback();
             $this->Flash->error('エラーが発生しました。');

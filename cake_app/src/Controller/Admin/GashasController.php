@@ -122,7 +122,7 @@ class GashasController extends AppController
             if ($this->Gashas->save($gasha, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('ガシャの登録が完了しました。');
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Gashas')]);
             }
             $conn->rollback();
             $this->Flash->error('エラーが発生しました。');
@@ -147,7 +147,7 @@ class GashasController extends AppController
             $this->Flash->error('エラーが発生しました。');
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Gashas')]);
     }
 
     /**

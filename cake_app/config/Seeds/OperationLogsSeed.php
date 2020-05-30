@@ -2062,6 +2062,7 @@ class OperationLogsSeed extends AbstractSeed
         ];
 
         $table = $this->table('operation_logs');
+        $table->truncate();
         $table->insert($data)->save();
     }
 }

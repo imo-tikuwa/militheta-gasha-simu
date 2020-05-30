@@ -428,6 +428,7 @@ class OperationLogsHourlySeed extends AbstractSeed
         ];
 
         $table = $this->table('operation_logs_hourly');
+        $table->truncate();
         $table->insert($data)->save();
     }
 }

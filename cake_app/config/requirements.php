@@ -37,3 +37,11 @@ if (!extension_loaded('intl')) {
 if (!extension_loaded('mbstring')) {
     trigger_error('You must enable the mbstring extension to use CakePHP.' . PHP_EOL, E_USER_ERROR);
 }
+
+/*
+ * You can remove this if you are confident you have fileinfo installed.
+ * ファイルアップロード項目のサムネイル生成がありの時、intervention/imageを使用するのにfileinfoが必要
+ */
+if (!extension_loaded('fileinfo')) {
+    trigger_error('You must enable the fileinfo extension to use CakePHP.' . PHP_EOL, E_USER_ERROR);
+}

@@ -139,7 +139,7 @@ class GashaPickupsController extends AppController
             if ($this->GashaPickups->save($gasha_pickup, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('ピックアップ情報の登録が完了しました。');
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.GashaPickups')]);
             }
             $conn->rollback();
             $this->Flash->error('エラーが発生しました。');
@@ -164,7 +164,7 @@ class GashaPickupsController extends AppController
             $this->Flash->error('エラーが発生しました。');
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.GashaPickups')]);
     }
 
     /**

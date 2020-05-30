@@ -40,6 +40,7 @@ class AdminsSeed extends AbstractSeed
         ];
 
         $table = $this->table('admins');
+        $table->truncate();
         $table->insert($data)->save();
     }
 }

@@ -393,6 +393,7 @@ class OperationLogsDailySeed extends AbstractSeed
         ];
 
         $table = $this->table('operation_logs_daily');
+        $table->truncate();
         $table->insert($data)->save();
     }
 }

@@ -141,7 +141,7 @@ class CardReprintsController extends AppController
             if ($this->CardReprints->save($card_reprint, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('復刻情報の登録が完了しました。');
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.CardReprints')]);
             }
             $conn->rollback();
             $this->Flash->error('エラーが発生しました。');
@@ -166,7 +166,7 @@ class CardReprintsController extends AppController
             $this->Flash->error('エラーが発生しました。');
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.CardReprints')]);
     }
 
     /**

@@ -3942,6 +3942,7 @@ class GashaPickupsSeed extends AbstractSeed
         ];
 
         $table = $this->table('gasha_pickups');
+        $table->truncate();
         $table->insert($data)->save();
     }
 }

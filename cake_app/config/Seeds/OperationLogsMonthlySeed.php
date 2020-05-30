@@ -197,6 +197,7 @@ class OperationLogsMonthlySeed extends AbstractSeed
         ];
 
         $table = $this->table('operation_logs_monthly');
+        $table->truncate();
         $table->insert($data)->save();
     }
 }
