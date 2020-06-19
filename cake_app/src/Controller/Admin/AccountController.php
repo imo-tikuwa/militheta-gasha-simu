@@ -3,11 +3,11 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Model\Table\DeleteType;
-use Cake\I18n\FrozenTime;
-use Cake\I18n\FrozenDate;
-use Cake\Utility\Hash;
-use Cake\Event\Event;
 use App\Utils\AuthUtils;
+use Cake\Event\Event;
+use Cake\I18n\FrozenDate;
+use Cake\I18n\FrozenTime;
+use Cake\Utility\Hash;
 
 /**
  * Account Controller
@@ -23,7 +23,7 @@ class AccountController extends AppController
      * Paging setting.
      */
     public $paginate = [
-         'limit' => 20,
+        'limit' => 20,
     ];
 
     /**
@@ -37,8 +37,10 @@ class AccountController extends AppController
 
         $this->loadModel('Admins');
 
+        // スーパーユーザー以外はアクセス不可
         if (!AuthUtils::isSuperUser($this->request)) {
             $this->Flash->error(MESSAGE_AUTH_ERROR);
+
             return $this->redirect(['controller' => 'top', 'action' => 'index']);
         }
     }
@@ -60,7 +62,8 @@ class AccountController extends AppController
 
     /**
      * ページネートに渡すクエリオブジェクトを生成する
-     * @param array $request
+     * @param array $request リクエスト情報
+     * @return \Cake\ORM\Query $query
      */
     private function _getQuery($request)
     {
@@ -74,29 +77,29 @@ class AccountController extends AppController
         if (isset($request['mail']) && !is_null($request['mail']) && $request['mail'] !== '') {
             $query->where([$this->Admins->aliasField('mail LIKE') => "%{$request['mail']}%"]);
         }
+
         return $query;
     }
 
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null
      */
     public function add()
     {
-        $this->_form();
+        return $this->_form();
     }
 
     /**
      * Edit method
      *
      * @param string|null $id アカウントID
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @return \Cake\Http\Response|null
      */
     public function edit($id = null)
     {
-        $this->_form($id);
+        return $this->_form($id);
     }
 
     /**
@@ -110,6 +113,7 @@ class AccountController extends AppController
     {
         if (SUPER_USER_ID == $id) {
             $this->Flash->error('エラーが発生しました。');
+
             return $this->redirect(['action' => 'index']);
         }
 
@@ -125,6 +129,7 @@ class AccountController extends AppController
             if ($this->Admins->save($admin, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('アカウントの登録が完了しました。');
+
                 return $this->redirect(['action' => 'index']);
             }
             $conn->rollback();

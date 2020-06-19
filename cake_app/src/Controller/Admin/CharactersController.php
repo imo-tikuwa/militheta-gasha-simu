@@ -3,8 +3,8 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Model\Table\DeleteType;
-use Cake\I18n\FrozenTime;
 use Cake\I18n\FrozenDate;
+use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
 
 /**
@@ -41,7 +41,8 @@ class CharactersController extends AppController
 
     /**
      * ページネートに渡すクエリオブジェクトを生成する
-     * @param array $request
+     * @param array $request リクエスト情報
+     * @return \Cake\ORM\Query $query
      */
     private function _getQuery($request)
     {
@@ -54,6 +55,7 @@ class CharactersController extends AppController
         if (isset($request['name']) && !is_null($request['name']) && $request['name'] !== '') {
             $query->where([$this->Characters->aliasField('name') => $request['name']]);
         }
+
         return $query;
     }
 
@@ -74,23 +76,23 @@ class CharactersController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null
      */
     public function add()
     {
-        $this->_form();
+        return $this->_form();
     }
 
     /**
      * Edit method
      *
      * @param string|null $id キャラクターID
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $this->_form($id);
+        return $this->_form($id);
     }
 
     /**
@@ -114,6 +116,7 @@ class CharactersController extends AppController
             if ($this->Characters->save($character, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('キャラクターの登録が完了しました。');
+
                 return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Characters')]);
             }
             $conn->rollback();
@@ -125,6 +128,7 @@ class CharactersController extends AppController
 
     /**
      * CSVエクスポート
+     * @return void
      */
     public function csvExport()
     {
@@ -142,6 +146,7 @@ class CharactersController extends AppController
                 if ($row['created'] instanceof FrozenTime) {
                     return @$row['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
                 }
+
                 return "";
             },
             // 更新日時
@@ -149,6 +154,7 @@ class CharactersController extends AppController
                 if ($row['modified'] instanceof FrozenTime) {
                     return @$row['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
                 }
+
                 return "";
             },
         ];

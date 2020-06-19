@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d67e0d7332fcfd060737f85203fe4f59",
+    "content-hash": "28204514476b027a6421196471815dfd",
     "packages": [
         {
             "name": "aura/intl",
@@ -439,16 +439,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-operation-logs",
-            "version": "v0.2.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/imo-tikuwa/cakephp-operation-logs.git",
-                "reference": "f28095233f4cc06d4e03c453ff1d820d859bca89"
+                "reference": "b4942a74fdc021a7d5b058cbf0a52a6523c2954e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-operation-logs/zipball/f28095233f4cc06d4e03c453ff1d820d859bca89",
-                "reference": "f28095233f4cc06d4e03c453ff1d820d859bca89",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-operation-logs/zipball/b4942a74fdc021a7d5b058cbf0a52a6523c2954e",
+                "reference": "b4942a74fdc021a7d5b058cbf0a52a6523c2954e",
                 "shasum": ""
             },
             "require": {
@@ -468,7 +468,7 @@
                 "MIT"
             ],
             "description": "OperationLogs plugin for CakePHP",
-            "time": "2020-02-26T11:12:19+00:00"
+            "time": "2020-06-17T10:46:16+00:00"
         },
         {
             "name": "intervention/image",
@@ -2107,16 +2107,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-admin-baker",
-            "version": "v0.8.0",
+            "version": "v0.9.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-admin-baker.git",
-                "reference": "9bcb04176bfd9ae17e64e33c2c5540be43a87837"
+                "reference": "52e11b69856b80b5e541a3f949521682e36833e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/9bcb04176bfd9ae17e64e33c2c5540be43a87837",
-                "reference": "9bcb04176bfd9ae17e64e33c2c5540be43a87837",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/52e11b69856b80b5e541a3f949521682e36833e5",
+                "reference": "52e11b69856b80b5e541a3f949521682e36833e5",
                 "shasum": ""
             },
             "require": {
@@ -2142,10 +2142,10 @@
             ],
             "description": "Cake3AdminBaker plugin for CakePHP",
             "support": {
-                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v0.8.0",
+                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v0.9.1",
                 "issues": "https://github.com/imo-tikuwa/cakephp-admin-baker/issues"
             },
-            "time": "2020-05-30T03:33:19+00:00"
+            "time": "2020-06-19T10:12:46+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",

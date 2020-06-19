@@ -1,10 +1,10 @@
 <?php
 namespace App\Auth;
 
+use App\Utils\AuthUtils;
+use Cake\Auth\BaseAuthorize;
 use Cake\Controller\ComponentRegistry;
 use Cake\Http\ServerRequest;
-use Cake\Auth\BaseAuthorize;
-use App\Utils\AuthUtils;
 
 /**
  * AdminAuthorize
@@ -50,10 +50,12 @@ class AdminAuthorize extends BaseAuthorize
      */
     public function authorize($user, ServerRequest $request)
     {
+        // 権限なしでアクセス可能なログイン後トップページ
         if ($request->controller === 'Top') {
             return true;
         }
 
+        // ユーザーがアクセス中のアクションの権限を持っているかチェック
         $has_role = AuthUtils::hasRole($request);
 
         return $has_role;

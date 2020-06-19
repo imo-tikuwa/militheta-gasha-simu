@@ -1,11 +1,11 @@
 <?php
 namespace App\Model\Table;
 
+use Cake\Datasource\EntityInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Datasource\EntityInterface;
 
 /**
  * Admins Model
@@ -97,7 +97,7 @@ class AdminsTable extends AppTable
         if (isset($data['password']) && !empty($data['password'])) {
             $data['password'] = encrypt_password($data['password']);
         }
+
         return parent::patchEntity($entity, $data, $options);
     }
-
 }

@@ -3,8 +3,8 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Model\Table\DeleteType;
-use Cake\I18n\FrozenTime;
 use Cake\I18n\FrozenDate;
+use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
 
 /**
@@ -41,7 +41,8 @@ class GashasController extends AppController
 
     /**
      * ページネートに渡すクエリオブジェクトを生成する
-     * @param array $request
+     * @param array $request リクエスト情報
+     * @return \Cake\ORM\Query $query
      */
     private function _getQuery($request)
     {
@@ -62,6 +63,7 @@ class GashasController extends AppController
         if (isset($request['title']) && !is_null($request['title']) && $request['title'] !== '') {
             $query->where([$this->Gashas->aliasField('title LIKE') => "%{$request['title']}%"]);
         }
+
         return $query;
     }
 
@@ -82,23 +84,23 @@ class GashasController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null
      */
     public function add()
     {
-        $this->_form();
+        return $this->_form();
     }
 
     /**
      * Edit method
      *
      * @param string|null $id ガシャID
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $this->_form($id);
+        return $this->_form($id);
     }
 
     /**
@@ -122,6 +124,7 @@ class GashasController extends AppController
             if ($this->Gashas->save($gasha, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('ガシャの登録が完了しました。');
+
                 return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Gashas')]);
             }
             $conn->rollback();
@@ -152,6 +155,7 @@ class GashasController extends AppController
 
     /**
      * CSVエクスポート
+     * @return void
      */
     public function csvExport()
     {
@@ -167,6 +171,7 @@ class GashasController extends AppController
                 if ($row['start_date'] instanceof FrozenDate) {
                     return @$row['start_date']->i18nFormat('yyyy-MM-dd');
                 }
+
                 return "";
             },
             // ガシャ終了日
@@ -174,6 +179,7 @@ class GashasController extends AppController
                 if ($row['end_date'] instanceof FrozenDate) {
                     return @$row['end_date']->i18nFormat('yyyy-MM-dd');
                 }
+
                 return "";
             },
             // ガシャタイトル
@@ -181,15 +187,17 @@ class GashasController extends AppController
             // SSRレート
             function ($row) {
                 if (!empty($row['ssr_rate'])) {
-                    return $row['ssr_rate']."%";
+                    return $row['ssr_rate'] . "%";
                 }
+
                 return "";
             },
             // SRレート
             function ($row) {
                 if (!empty($row['sr_rate'])) {
-                    return $row['sr_rate']."%";
+                    return $row['sr_rate'] . "%";
                 }
+
                 return "";
             },
             // 作成日時
@@ -197,6 +205,7 @@ class GashasController extends AppController
                 if ($row['created'] instanceof FrozenTime) {
                     return @$row['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
                 }
+
                 return "";
             },
             // 更新日時
@@ -204,6 +213,7 @@ class GashasController extends AppController
                 if ($row['modified'] instanceof FrozenTime) {
                     return @$row['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
                 }
+
                 return "";
             },
         ];
@@ -224,7 +234,7 @@ class GashasController extends AppController
     public function csvImport()
     {
         $csv_import_file = @$_FILES["csv_import_file"]["tmp_name"];
-        if (is_uploaded_file($csv_import_file)){
+        if (is_uploaded_file($csv_import_file)) {
             $conn = $this->Gashas->getConnection();
             try {
                 if (($handle = fopen($csv_import_file, "r")) !== false) {
@@ -233,7 +243,6 @@ class GashasController extends AppController
                     $insert_count = 0;
                     $update_count = 0;
                     while ($csv_row = fgetcsv($handle)) {
-
                         // ヘッダチェック
                         if ($index == 0) {
                             if ($this->Gashas->getCsvHeaders() != $csv_row) {
@@ -276,6 +285,7 @@ class GashasController extends AppController
                 $conn->rollback();
             }
         }
+
         return $this->redirect(['action' => 'index']);
     }
 }

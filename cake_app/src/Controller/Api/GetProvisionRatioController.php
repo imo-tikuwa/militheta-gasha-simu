@@ -13,27 +13,27 @@ use App\Utils\GashaUtils;
 class GetProvisionRatioController extends ApiController
 {
 
-	/**
-	 * 提供割合情報を返す
-	 *
-	 * @param string $gasha_id
-	 */
-	public function index($gasha_id = null) {
+    /**
+     * 提供割合情報を返す
+     *
+     * @param string $gasha_id ガシャID
+     * @return static
+     */
+    public function index($gasha_id = null)
+    {
+        if (is_null($gasha_id)) {
+            return $this->response->withStringBody(null);
+        }
 
-		if (is_null($gasha_id)) {
-			return $this->response->withStringBody(null);
-		}
+        // ガシャ情報取得
+        $gasha = $this->Gashas->get($gasha_id);
 
-		// ガシャ情報取得
-		$gasha = $this->Gashas->get($gasha_id);
+        // カード情報取得
+        $cards = $this->Cards->findGashaTargetCards($gasha);
 
-		// カード情報取得
-		$cards = $this->Cards->findGashaTargetCards($gasha);
+        // 提供割合を取得
+        $provision_ratios = GashaUtils::getProvisionRatio($gasha, $cards);
 
-		// 提供割合を取得
-		$provision_ratios = GashaUtils::getProvisionRatio($gasha, $cards);
-
-		return $this->response->withStringBody(json_encode($provision_ratios, JSON_UNESCAPED_UNICODE));
-	}
-
+        return $this->response->withType('json')->withStringBody(json_encode($provision_ratios, JSON_UNESCAPED_UNICODE));
+    }
 }

@@ -1,12 +1,12 @@
 <?php
 namespace App\Model\Table;
 
+use Cake\Datasource\EntityInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
-use Cake\Validation\Validator;
-use Cake\Datasource\EntityInterface;
 use Cake\ORM\TableRegistry;
+use Cake\Validation\Validator;
 
 /**
  * GashaPickups Model
@@ -41,8 +41,6 @@ class GashaPickupsTable extends AppTable
         $this->setTable('gasha_pickups');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
-
-
         $this->belongsTo('Gashas', [
             'foreignKey' => 'gasha_id',
         ]);
@@ -86,6 +84,9 @@ class GashaPickupsTable extends AppTable
      * ファイル項目、GoogleMap項目のJSON文字列を配列に変換する
      * {@inheritDoc}
      * @see \Cake\ORM\Table::patchEntity()
+     * @param EntityInterface $entity エンティティ
+     * @param array $data エンティティに上書きするデータ
+     * @param array $options オプション配列
      */
     public function patchEntity(EntityInterface $entity, array $data, array $options = [])
     {
@@ -94,8 +95,10 @@ class GashaPickupsTable extends AppTable
 
     /**
      * CSVヘッダー情報を取得する
+     * @return array
      */
-    public function getCsvHeaders() {
+    public function getCsvHeaders()
+    {
         return [
             'ID',
             'ガシャID',
@@ -107,8 +110,10 @@ class GashaPickupsTable extends AppTable
 
     /**
      * CSVカラム情報を取得する
+     * @return array
      */
-    public function getCsvColumns() {
+    public function getCsvColumns()
+    {
         return [
             'id',
             'gasha_id',
@@ -120,16 +125,18 @@ class GashaPickupsTable extends AppTable
 
     /**
      * CSVの入力情報を取得する
+     * @param array $csv_row CSVの1行辺りの配列データ
+     * @return array データ登録用に変換した配列データ
      */
-    public function getCsvData($csv_row) {
-
+    public function getCsvData($csv_row)
+    {
         $csv_data = array_combine($this->getCsvColumns(), $csv_row);
 
         // ガシャID
         $gashas = TableRegistry::getTableLocator()->get('Gashas');
         $gasha_data = $gashas->find()->select(['id'])->where(['title' => $csv_data['gasha_id']])->first();
         if (!empty($gasha_data)) {
-            $csv_data['gasha_id'] = (string) $gasha_data->id;
+            $csv_data['gasha_id'] = (string)$gasha_data->id;
         } else {
             $csv_data['gasha_id'] = null;
         }
@@ -137,13 +144,13 @@ class GashaPickupsTable extends AppTable
         $cards = TableRegistry::getTableLocator()->get('Cards');
         $card_data = $cards->find()->select(['id'])->where(['name' => $csv_data['card_id']])->first();
         if (!empty($card_data)) {
-            $csv_data['card_id'] = (string) $card_data->id;
+            $csv_data['card_id'] = (string)$card_data->id;
         } else {
             $csv_data['card_id'] = null;
         }
-
         unset($csv_data['created']);
         unset($csv_data['modified']);
+
         return $csv_data;
     }
 }

@@ -111,8 +111,7 @@ class Application extends BaseApplication
                     '192.168',
                     '::'
                 ]
-            ]))
-            ;
+            ]));
 
         return $middlewareQueue;
     }

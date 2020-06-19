@@ -62,7 +62,8 @@ class AppController extends Controller
 
     /**
      * Ajaxファイルアップロード処理
-     * @param unknown $input_name
+     * @param string $input_name input[type=file]の要素名
+     * @return static
      */
     public function fileUpload($input_name = null)
     {
@@ -103,7 +104,7 @@ class AppController extends Controller
                     $thumbnail_width = (isset($thumbnail_options['thumbnail_width']) && is_numeric($thumbnail_options['thumbnail_width'])) ? $thumbnail_options['thumbnail_width'] : null;
                     $thumbnail_height = (isset($thumbnail_options['thumbnail_height']) && is_numeric($thumbnail_options['thumbnail_height'])) ? $thumbnail_options['thumbnail_height'] : null;
                     $thumbnail_aspect_ratio_keep = (isset($thumbnail_options['thumbnail_aspect_ratio_keep']) && $thumbnail_options['thumbnail_aspect_ratio_keep'] === true) ? true : false;
-                    $thumbnail_quality = (isset($thumbnail_options['thumbnail_quality']) && is_numeric($thumbnail_options['thumbnail_quality'])) ? $thumbnail_options['thumbnail_height'] : 90;
+                    $thumbnail_quality = (isset($thumbnail_options['thumbnail_quality']) && is_numeric($thumbnail_options['thumbnail_quality'])) ? $thumbnail_options['thumbnail_quality'] : 90;
                     $thumb_to = UPLOAD_FILE_BASE_DIR . DS . Inflector::underscore($this->name) . DS . $new_image_key . "_thumb." . $extension;
                     if ($thumbnail_aspect_ratio_keep) {
                         ImageManagerStatic::make($upload_to)->resize($thumbnail_width, $thumbnail_height, function ($constraint) {
@@ -153,9 +154,7 @@ class AppController extends Controller
             $response_data['error'] = $error;
         }
 
-        echo json_encode($response_data);
-
-        return;
+        return $this->response->withType('json')->withStringBody(json_encode($response_data));
     }
 
     /**
@@ -164,8 +163,9 @@ class AppController extends Controller
      * ※実際には削除しないので注意
      * 今のところbootstrap-fileinputプラグイン用の削除完了ステータスを返すだけ
      *
-     * @param unknown $input_name
+     * @param string $input_name input[type=file]の要素名
      * @throws Exception
+     * @return static
      */
     public function fileDelete($input_name = null)
     {
@@ -177,11 +177,13 @@ class AppController extends Controller
 
             $key = $this->request->getData('key');
             if (is_null($key)) {
-                throw new Exception("プログラムエラーが発生しました。エラーコード：901100");
+                $this->log('削除対象のファイルキーが存在しません');
+                throw new Exception("プログラムエラーが発生しました。");
             }
 
             if (!file_exists(UPLOAD_FILE_BASE_DIR . DS . Inflector::underscore($this->name) . DS . $key)) {
-                throw new Exception("プログラムエラーが発生しました。エラーコード：901110");
+                $this->log('削除対象の実ファイルが存在しません');
+                throw new Exception("プログラムエラーが発生しました。");
             }
 
             $response_data['status'] = true;
@@ -194,8 +196,6 @@ class AppController extends Controller
             $response_data['error'] = $error;
         }
 
-        echo json_encode($response_data);
-
-        return;
+        return $this->response->withType('json')->withStringBody(json_encode($response_data));
     }
 }

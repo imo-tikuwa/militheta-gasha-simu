@@ -1,12 +1,12 @@
 <?php
 namespace App\Model\Table;
 
+use Cake\Datasource\EntityInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
-use Cake\Validation\Validator;
-use Cake\Datasource\EntityInterface;
 use Cake\ORM\TableRegistry;
+use Cake\Validation\Validator;
 
 /**
  * Characters Model
@@ -40,8 +40,6 @@ class CharactersTable extends AppTable
         $this->setTable('characters');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
-
-
         $this->hasMany('Cards', [
             'foreignKey' => 'character_id',
         ]);
@@ -72,6 +70,9 @@ class CharactersTable extends AppTable
      * ファイル項目、GoogleMap項目のJSON文字列を配列に変換する
      * {@inheritDoc}
      * @see \Cake\ORM\Table::patchEntity()
+     * @param EntityInterface $entity エンティティ
+     * @param array $data エンティティに上書きするデータ
+     * @param array $options オプション配列
      */
     public function patchEntity(EntityInterface $entity, array $data, array $options = [])
     {
@@ -80,8 +81,10 @@ class CharactersTable extends AppTable
 
     /**
      * CSVヘッダー情報を取得する
+     * @return array
      */
-    public function getCsvHeaders() {
+    public function getCsvHeaders()
+    {
         return [
             'ID',
             '名前',
@@ -92,8 +95,10 @@ class CharactersTable extends AppTable
 
     /**
      * CSVカラム情報を取得する
+     * @return array
      */
-    public function getCsvColumns() {
+    public function getCsvColumns()
+    {
         return [
             'id',
             'name',
@@ -104,14 +109,16 @@ class CharactersTable extends AppTable
 
     /**
      * CSVの入力情報を取得する
+     * @param array $csv_row CSVの1行辺りの配列データ
+     * @return array データ登録用に変換した配列データ
      */
-    public function getCsvData($csv_row) {
-
+    public function getCsvData($csv_row)
+    {
         $csv_data = array_combine($this->getCsvColumns(), $csv_row);
-
 
         unset($csv_data['created']);
         unset($csv_data['modified']);
+
         return $csv_data;
     }
 }

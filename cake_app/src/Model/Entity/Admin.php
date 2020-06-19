@@ -47,11 +47,12 @@ class Admin extends Entity
      * 生のパスワードを返す
      * @return string
      */
-    protected function _getRawPassword() {
-
+    protected function _getRawPassword()
+    {
         if (empty($this->password)) {
             return null;
         }
+
         return decrypt_password($this->password);
     }
 }

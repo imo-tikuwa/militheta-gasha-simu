@@ -10,19 +10,19 @@ use Cake\ORM\TableRegistry;
 class ApiController extends AppController
 {
 
-	/**
-	 * Initialize Method.
-	 */
-	public function initialize()
-	{
-		parent::initialize();
-		$this->viewBuilder()->enableAutoLayout(false);
-		$this->autoRender = false;
-		$this->response->withCharset('UTF-8');
-		$this->response->withType('application/json');
+    /**
+     * {@inheritDoc}
+     * Initialize Method.
+     */
+    public function initialize()
+    {
+        parent::initialize();
+        $this->viewBuilder()->enableAutoLayout(false);
+        $this->autoRender = false;
+        $this->response->withCharset('UTF-8');
+        $this->response->withType('application/json');
 
-		$this->Gashas = TableRegistry::getTableLocator()->get("Gashas");
-		$this->Cards = TableRegistry::getTableLocator()->get("Cards");
-	}
-
+        $this->Gashas = TableRegistry::getTableLocator()->get("Gashas");
+        $this->Cards = TableRegistry::getTableLocator()->get("Cards");
+    }
 }

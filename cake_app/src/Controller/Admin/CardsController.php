@@ -3,8 +3,8 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Model\Table\DeleteType;
-use Cake\I18n\FrozenTime;
 use Cake\I18n\FrozenDate;
+use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
 
 /**
@@ -19,6 +19,7 @@ class CardsController extends AppController
 
     /**
      * Initialize Method.
+     * @return void
      */
     public function initialize()
     {
@@ -53,7 +54,8 @@ class CardsController extends AppController
 
     /**
      * ページネートに渡すクエリオブジェクトを生成する
-     * @param array $request
+     * @param array $request リクエスト情報
+     * @return \Cake\ORM\Query $query
      */
     private function _getQuery($request)
     {
@@ -91,6 +93,7 @@ class CardsController extends AppController
             $query->where([$this->Cards->aliasField('limited') => $request['limited']]);
         }
         $query->group('Cards.id');
+
         return $query->contain(['Characters', 'CardReprints']);
     }
 
@@ -111,23 +114,23 @@ class CardsController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null
      */
     public function add()
     {
-        $this->_form();
+        return $this->_form();
     }
 
     /**
      * Edit method
      *
      * @param string|null $id カードID
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $this->_form($id);
+        return $this->_form($id);
     }
 
     /**
@@ -151,6 +154,7 @@ class CardsController extends AppController
             if ($this->Cards->save($card, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('カードの登録が完了しました。');
+
                 return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Cards')]);
             }
             $conn->rollback();
@@ -162,6 +166,7 @@ class CardsController extends AppController
 
     /**
      * CSVエクスポート
+     * @return void
      */
     public function csvExport()
     {
@@ -181,15 +186,17 @@ class CardsController extends AppController
             // レアリティ
             function ($row) {
                 if (!empty($row['rarity'])) {
-                    return _code('Codes.Cards.rarity.'.$row['rarity']);
+                    return _code('Codes.Cards.rarity.' . $row['rarity']);
                 }
+
                 return "";
             },
             // タイプ
             function ($row) {
                 if (!empty($row['type'])) {
-                    return _code('Codes.Cards.type.'.$row['type']);
+                    return _code('Codes.Cards.type.' . $row['type']);
                 }
+
                 return "";
             },
             // 実装日
@@ -197,6 +204,7 @@ class CardsController extends AppController
                 if ($row['add_date'] instanceof FrozenDate) {
                     return @$row['add_date']->i18nFormat('yyyy-MM-dd');
                 }
+
                 return "";
             },
             // ガシャ対象？
@@ -208,6 +216,7 @@ class CardsController extends AppController
                 if ($row['created'] instanceof FrozenTime) {
                     return @$row['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
                 }
+
                 return "";
             },
             // 更新日時
@@ -215,6 +224,7 @@ class CardsController extends AppController
                 if ($row['modified'] instanceof FrozenTime) {
                     return @$row['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
                 }
+
                 return "";
             },
         ];
@@ -235,7 +245,7 @@ class CardsController extends AppController
     public function csvImport()
     {
         $csv_import_file = @$_FILES["csv_import_file"]["tmp_name"];
-        if (is_uploaded_file($csv_import_file)){
+        if (is_uploaded_file($csv_import_file)) {
             $conn = $this->Cards->getConnection();
             try {
                 if (($handle = fopen($csv_import_file, "r")) !== false) {
@@ -244,7 +254,6 @@ class CardsController extends AppController
                     $insert_count = 0;
                     $update_count = 0;
                     while ($csv_row = fgetcsv($handle)) {
-
                         // ヘッダチェック
                         if ($index == 0) {
                             if ($this->Cards->getCsvHeaders() != $csv_row) {
@@ -287,6 +296,7 @@ class CardsController extends AppController
                 $conn->rollback();
             }
         }
+
         return $this->redirect(['action' => 'index']);
     }
 }

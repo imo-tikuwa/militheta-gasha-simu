@@ -46,26 +46,28 @@ class Gasha extends Entity
 
     /**
      * 限定ガチャ？
+     * @return bool
      */
-    public function isLimited() {
-
-    	return starts_with($this->title, '【期間限定】') ;
+    public function isLimited()
+    {
+        return starts_with($this->title, '【期間限定】');
     }
 
     /**
      * フェス限定ガチャ？
+     * @return bool
      */
-    public function isFesLimited() {
-
-    	return starts_with($this->title, '【フェス限定】') ;
+    public function isFesLimited()
+    {
+        return starts_with($this->title, '【フェス限定】');
     }
 
     /**
      * 復刻ガチャ？
+     * @return bool
      */
-    public function isReprintLimited() {
-
-    	return starts_with($this->title, '【限定復刻】') ;
+    public function isReprintLimited()
+    {
+        return starts_with($this->title, '【限定復刻】');
     }
-
 }

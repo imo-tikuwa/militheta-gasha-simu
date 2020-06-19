@@ -12,19 +12,19 @@ use Cake\ORM\TableRegistry;
  */
 class LatestLogsController extends AppController
 {
-	/**
-	 * Index method
-	 *
-	 * @return \Cake\Http\Response|void
-	 */
-	public function index()
-	{
-		// OperationLogsプラグインのOperationLogsテーブルクラス
-		$this->OperationLogs = TableRegistry::getTableLocator()->get('OperationLogs.OperationLogs');
+    /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|void
+     */
+    public function index()
+    {
+        // OperationLogsプラグインのOperationLogsテーブルクラス
+        $this->OperationLogs = TableRegistry::getTableLocator()->get('OperationLogs.OperationLogs');
 
-		// 直近20件を取得
-		$operation_logs = $this->OperationLogs->find()->orderDesc('id')->limit(20)->toArray();
+        // 直近20件を取得
+        $operation_logs = $this->OperationLogs->find()->orderDesc('id')->limit(20)->toArray();
 
-		$this->set(compact('operation_logs'));
-	}
+        $this->set(compact('operation_logs'));
+    }
 }

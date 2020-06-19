@@ -1,12 +1,12 @@
 <?php
 namespace App\Model\Table;
 
+use Cake\Datasource\EntityInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
-use Cake\Validation\Validator;
-use Cake\Datasource\EntityInterface;
 use Cake\ORM\TableRegistry;
+use Cake\Validation\Validator;
 
 /**
  * Gashas Model
@@ -41,8 +41,6 @@ class GashasTable extends AppTable
         $this->setTable('gashas');
         $this->setDisplayField('title');
         $this->setPrimaryKey('id');
-
-
         $this->hasMany('CardReprints', [
             'foreignKey' => 'gasha_id',
         ]);
@@ -92,6 +90,9 @@ class GashasTable extends AppTable
      * ファイル項目、GoogleMap項目のJSON文字列を配列に変換する
      * {@inheritDoc}
      * @see \Cake\ORM\Table::patchEntity()
+     * @param EntityInterface $entity エンティティ
+     * @param array $data エンティティに上書きするデータ
+     * @param array $options オプション配列
      */
     public function patchEntity(EntityInterface $entity, array $data, array $options = [])
     {
@@ -100,8 +101,10 @@ class GashasTable extends AppTable
 
     /**
      * CSVヘッダー情報を取得する
+     * @return array
      */
-    public function getCsvHeaders() {
+    public function getCsvHeaders()
+    {
         return [
             'ID',
             'ガシャ開始日',
@@ -116,8 +119,10 @@ class GashasTable extends AppTable
 
     /**
      * CSVカラム情報を取得する
+     * @return array
      */
-    public function getCsvColumns() {
+    public function getCsvColumns()
+    {
         return [
             'id',
             'start_date',
@@ -132,54 +137,59 @@ class GashasTable extends AppTable
 
     /**
      * CSVの入力情報を取得する
+     * @param array $csv_row CSVの1行辺りの配列データ
+     * @return array データ登録用に変換した配列データ
      */
-    public function getCsvData($csv_row) {
-
+    public function getCsvData($csv_row)
+    {
         $csv_data = array_combine($this->getCsvColumns(), $csv_row);
 
         // SSRレート
         $csv_data['ssr_rate'] = preg_replace('/[^0-9]/', '', $csv_data['ssr_rate']);
         // SRレート
         $csv_data['sr_rate'] = preg_replace('/[^0-9]/', '', $csv_data['sr_rate']);
-
         unset($csv_data['created']);
         unset($csv_data['modified']);
+
         return $csv_data;
     }
 
-	/**
-	 * ガシャ情報を取得
-	 */
-	public function findGashaData() {
-		$query = $this->find();
-		$gasha_data = $query->select([
-				'id',
-				'start_date',
-				'end_date',
-				'title',
-				'ssr_rate',
-				'sr_rate'
-		])->enableHydration(false)
-		->order(['id' => 'DESC'])
-		->toArray();
-		return $gasha_data;
-	}
+    /**
+     * ガシャ情報を取得
+     * @return array ガシャ情報
+     */
+    public function findGashaData()
+    {
+        $query = $this->find();
+        $gasha_data = $query->select([
+            'id',
+            'start_date',
+            'end_date',
+            'title',
+            'ssr_rate',
+            'sr_rate'
+        ])->enableHydration(false)
+        ->order(['id' => 'DESC'])
+        ->toArray();
+        return $gasha_data;
+    }
 
-	/**
-	 * ガシャ情報をjson形式で取得する
-	 * @param unknown $gasha_datas
-	 * @return Key: ガシャID、Value:ガシャ情報なjsonテキスト
-	 */
-	public function getGashaJsonData($gasha_datas = null) {
-		if (is_null($gasha_datas)) {
-			return null;
-		}
-		$json_data = [];
-		foreach ($gasha_datas as $gasha_data) {
-			$gasha_data['start_date'] = $gasha_data['start_date']->format('Y-m-d');
-			$gasha_data['end_date'] = $gasha_data['end_date']->format('Y-m-d');
-			$json_data[$gasha_data['id']] = $gasha_data;
-		}
-		return json_encode($json_data, JSON_UNESCAPED_UNICODE);
-	}
+    /**
+     * ガシャ情報をjson形式で取得する
+     * @param array $gasha_datas ガシャ情報
+     * @return string Key: ガシャID、Value:ガシャ情報なjsonテキスト
+     */
+    public function getGashaJsonData($gasha_datas = null)
+    {
+        if (is_null($gasha_datas)) {
+            return null;
+        }
+        $json_data = [];
+        foreach ($gasha_datas as $gasha_data) {
+            $gasha_data['start_date'] = $gasha_data['start_date']->format('Y-m-d');
+            $gasha_data['end_date'] = $gasha_data['end_date']->format('Y-m-d');
+            $json_data[$gasha_data['id']] = $gasha_data;
+        }
+        return json_encode($json_data, JSON_UNESCAPED_UNICODE);
+    }
 }

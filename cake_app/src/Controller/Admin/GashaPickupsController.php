@@ -3,6 +3,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Model\Table\DeleteType;
+use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
@@ -19,6 +20,7 @@ class GashaPickupsController extends AppController
 
     /**
      * Initialize Method.
+     * @return void
      */
     public function initialize()
     {
@@ -61,7 +63,8 @@ class GashaPickupsController extends AppController
 
     /**
      * ページネートに渡すクエリオブジェクトを生成する
-     * @param array $request
+     * @param array $request リクエスト情報
+     * @return \Cake\ORM\Query $query
      */
     private function _getQuery($request)
     {
@@ -79,6 +82,7 @@ class GashaPickupsController extends AppController
             $query->where(['Cards.id' => $request['card_id']]);
         }
         $query->group('GashaPickups.id');
+
         return $query->contain(['Gashas', 'Cards']);
     }
 
@@ -99,23 +103,23 @@ class GashaPickupsController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null
      */
     public function add()
     {
-        $this->_form();
+        return $this->_form();
     }
 
     /**
      * Edit method
      *
      * @param string|null $id ピックアップ情報ID
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $this->_form($id);
+        return $this->_form($id);
     }
 
     /**
@@ -139,6 +143,7 @@ class GashaPickupsController extends AppController
             if ($this->GashaPickups->save($gasha_pickup, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('ピックアップ情報の登録が完了しました。');
+
                 return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.GashaPickups')]);
             }
             $conn->rollback();
@@ -169,6 +174,7 @@ class GashaPickupsController extends AppController
 
     /**
      * CSVエクスポート
+     * @return void
      */
     public function csvExport()
     {
@@ -192,6 +198,7 @@ class GashaPickupsController extends AppController
                 if ($row['created'] instanceof FrozenTime) {
                     return @$row['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
                 }
+
                 return "";
             },
             // 更新日時
@@ -199,6 +206,7 @@ class GashaPickupsController extends AppController
                 if ($row['modified'] instanceof FrozenTime) {
                     return @$row['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
                 }
+
                 return "";
             },
         ];

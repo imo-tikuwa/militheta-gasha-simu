@@ -105,7 +105,8 @@ class AppView extends View
      * @param array $current_privilege 現在の権限の設定値
      * @return string html
      */
-    public function makePrivilegeEditHtml($current_privilege = null) {
+    public function makePrivilegeEditHtml($current_privilege = null)
+    {
         $html = "";
         foreach (_code('BakedFunctions') as $controller => $function_name) {
             $html .= "<div class=\"row\">";
@@ -136,6 +137,7 @@ class AppView extends View
             $html .= "  </div>";
             $html .= "</div>";
         }
+
         return $html;
     }
 
@@ -144,7 +146,8 @@ class AppView extends View
      * @param array $current_privilege 現在の権限の設定値
      * @return string html
      */
-    public function makePrivilegeListHtml($current_privilege = null) {
+    public function makePrivilegeListHtml($current_privilege = null)
+    {
         $html = "";
         if (is_null($current_privilege)) {
             return $html;
@@ -159,6 +162,7 @@ class AppView extends View
                 $html .= "<br />";
             }
         }
+
         return $html;
     }
 }

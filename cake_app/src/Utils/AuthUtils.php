@@ -2,16 +2,17 @@
 namespace App\Utils;
 
 use Cake\Http\ServerRequest;
-use Cake\Log\LogTrait;
+use Cake\Log\Log;
+use Exception;
+use Psr\Log\LogLevel;
 
-class AuthUtils {
-
-    use LogTrait;
+class AuthUtils
+{
 
     /**
      * Adminsテーブルのスーパーユーザー判定
-     * @param ServerRequest $request
-     * @return boolean
+     * @param ServerRequest $request リクエスト情報
+     * @return bool
      */
     public static function isSuperUser(ServerRequest $request = null)
     {
@@ -21,9 +22,12 @@ class AuthUtils {
         $super_user = false;
         try {
             $super_user = (SUPER_USER_ID === $request->getSession()->read('Auth.Admin.id'));
-        } catch (\Exception $e) {
-            $this->log($e->getMessage());
+        } catch (Exception $e) {
+            Log::write(LogLevel::ERROR, $e->getMessage());
+
+            return false;
         }
+
         return $super_user;
     }
 
@@ -31,13 +35,13 @@ class AuthUtils {
      *
      * リクエスト先へのアクセスに必要な権限を持っているかチェック
      *
-     * @param ServerRequest $request
+     * @param ServerRequest $request リクエスト情報
      * @param string $properties 権限チェックプロパティ $requestオブジェクト以外の権限チェックをしたいとき
      *                           'controller' => '[コントローラ名]',
      *                           'action' => '[アクション名]'
      *                           を配列でセットする
      *
-     * @return boolean
+     * @return bool
      */
     public static function hasRole(ServerRequest $request = null, array $properties = [])
     {
@@ -60,7 +64,7 @@ class AuthUtils {
             $action = $properties['action'];
         }
 
-        $privilegs = $request->getSession()->read('Auth.Admin.privilege.'.$controller);
+        $privilegs = $request->getSession()->read('Auth.Admin.privilege.' . $controller);
         if (empty($privilegs)) {
             return false;
         }
