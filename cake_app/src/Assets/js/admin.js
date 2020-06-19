@@ -34,7 +34,7 @@ $(function(){
     });
 
     // tempusdominus-bootstrap-4のフォーカスが外れたとき、自動で非表示となるようにする
-    $(document).on('mouseup touchend', function (e) {
+    $(document).on('mouseup touchend', function(e){
         var container = $('.bootstrap-datetimepicker-widget');
         if (!container.is(e.target) && container.has(e.target).length === 0) {
             container.prev().datetimepicker('hide');
