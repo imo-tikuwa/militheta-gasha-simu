@@ -137,17 +137,18 @@ class CardReprintsController extends AppController
             $card_reprint = $this->CardReprints->newEntity();
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $conn = $this->CardReprints->getConnection();
-            $conn->begin();
             $card_reprint = $this->CardReprints->patchEntity($card_reprint, $this->request->getData(), ['associated' => ['Gashas', 'Cards']]);
-            if ($this->CardReprints->save($card_reprint, ['atomic' => false])) {
-                $conn->commit();
-                $this->Flash->success('復刻情報の登録が完了しました。');
+            if (!$card_reprint->hasErrors()) {
+                $conn = $this->CardReprints->getConnection();
+                $conn->begin();
+                if ($this->CardReprints->save($card_reprint, ['atomic' => false])) {
+                    $conn->commit();
+                    $this->Flash->success('復刻情報の登録が完了しました。');
 
-                return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.CardReprints')]);
+                    return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.CardReprints')]);
+                }
+                $conn->rollback();
             }
-            $conn->rollback();
-            $this->Flash->error('エラーが発生しました。');
         }
         $this->set(compact('card_reprint'));
         $this->render('edit');

@@ -57,9 +57,46 @@ class GashaPickupsTable extends AppTable
      */
     public function validationDefault(Validator $validator)
     {
+        // ID
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
+
+        // ガシャID
+        $validator
+            ->add('gasha_id', 'integer', [
+                'rule' => 'isInteger',
+                'message' => 'ガシャIDを正しく入力してください。',
+                'last' => true
+            ])
+            ->add('gasha_id', 'existForeignEntity', [
+                'rule' => function ($gasha_id) {
+                    $table = TableRegistry::getTableLocator()->get('Gashas');
+                    $entity = $table->find()->select(['id'])->where(['id' => $gasha_id])->first();
+                    return !empty($entity);
+                },
+                'message' => 'ガシャIDに不正な値が入力されています。',
+                'last' => true
+            ])
+            ->notEmptyString('gasha_id', 'ガシャIDを選択してください。');
+
+        // カードID
+        $validator
+            ->add('card_id', 'integer', [
+                'rule' => 'isInteger',
+                'message' => 'カードIDを正しく入力してください。',
+                'last' => true
+            ])
+            ->add('card_id', 'existForeignEntity', [
+                'rule' => function ($card_id) {
+                    $table = TableRegistry::getTableLocator()->get('Cards');
+                    $entity = $table->find()->select(['id'])->where(['id' => $card_id])->first();
+                    return !empty($entity);
+                },
+                'message' => 'カードIDに不正な値が入力されています。',
+                'last' => true
+            ])
+            ->notEmptyString('card_id', 'カードIDを選択してください。');
 
         return $validator;
     }

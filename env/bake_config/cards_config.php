@@ -5,6 +5,7 @@ return [
 				'id' => [
 						'search' => true,
 						'listview' => true,
+						'require' => false,
 						'col_lg_size' => 6,
 						'col_md_size' => 6,
 						'col_sm_size' => 12,
@@ -12,6 +13,7 @@ return [
 				'character_id' => [
 						'search' => true,
 						'listview' => true,
+						'require' => true,
 						'label' => 'キャラクター',
 						'col_lg_size' => 3,
 						'col_md_size' => 3,
@@ -24,6 +26,7 @@ return [
 				'name' => [
 						'search' => true,
 						'listview' => true,
+						'require' => true,
 						'label' => 'カード名',
 						'col_lg_size' => 6,
 						'col_md_size' => 6,
@@ -34,6 +37,7 @@ return [
 				'rarity' => [
 						'search' => true,
 						'listview' => true,
+						'require' => true,
 						'label' => 'レアリティ',
 						'col_lg_size' => 3,
 						'col_md_size' => 3,
@@ -51,6 +55,7 @@ return [
 				'type' => [
 						'search' => true,
 						'listview' => true,
+						'require' => true,
 						'label' => 'タイプ',
 						'col_lg_size' => 3,
 						'col_md_size' => 3,
@@ -67,6 +72,7 @@ return [
 				'add_date' => [
 						'search' => true,
 						'listview' => true,
+						'require' => true,
 						'label' => '実装日',
 						'col_lg_size' => 3,
 						'col_md_size' => 3,
@@ -77,6 +83,7 @@ return [
 				'gasha_include' => [
 						'search' => true,
 						'listview' => true,
+						'require' => true,
 						'label' => 'ガシャ対象？',
 						'col_lg_size' => 3,
 						'col_md_size' => 3,
@@ -88,6 +95,7 @@ return [
 				'limited' => [
 						'search' => true,
 						'listview' => true,
+						'require' => true,
 						'label' => '限定？',
 						'col_lg_size' => 3,
 						'col_md_size' => 3,
@@ -99,6 +107,7 @@ return [
 				'created' => [
 						'search' => false,
 						'listview' => false,
+						'require' => false,
 						'label' => '作成日時',
 						'col_lg_size' => 6,
 						'col_md_size' => 6,
@@ -107,6 +116,7 @@ return [
 				'modified' => [
 						'search' => false,
 						'listview' => true,
+						'require' => false,
 						'label' => '更新日時',
 						'col_lg_size' => 6,
 						'col_md_size' => 6,

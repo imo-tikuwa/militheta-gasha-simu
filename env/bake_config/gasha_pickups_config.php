@@ -5,6 +5,7 @@ return [
 				'id' => [
 						'search' => true,
 						'listview' => true,
+						'require' => false,
 						'col_lg_size' => 6,
 						'col_md_size' => 6,
 						'col_sm_size' => 12,
@@ -12,6 +13,7 @@ return [
 				'gasha_id' => [
 						'search' => true,
 						'listview' => true,
+						'require' => true,
 						'label' => 'ガシャID',
 						'col_lg_size' => 6,
 						'col_md_size' => 6,
@@ -24,6 +26,7 @@ return [
 				'card_id' => [
 						'search' => true,
 						'listview' => true,
+						'require' => true,
 						'label' => 'カードID',
 						'col_lg_size' => 6,
 						'col_md_size' => 6,
@@ -36,6 +39,7 @@ return [
 				'created' => [
 						'search' => false,
 						'listview' => false,
+						'require' => false,
 						'label' => '作成日時',
 						'col_lg_size' => 6,
 						'col_md_size' => 6,
@@ -44,6 +48,7 @@ return [
 				'modified' => [
 						'search' => false,
 						'listview' => true,
+						'require' => false,
 						'label' => '更新日時',
 						'col_lg_size' => 6,
 						'col_md_size' => 6,

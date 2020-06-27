@@ -137,17 +137,18 @@ class GashaPickupsController extends AppController
             $gasha_pickup = $this->GashaPickups->newEntity();
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $conn = $this->GashaPickups->getConnection();
-            $conn->begin();
             $gasha_pickup = $this->GashaPickups->patchEntity($gasha_pickup, $this->request->getData(), ['associated' => ['Gashas', 'Cards']]);
-            if ($this->GashaPickups->save($gasha_pickup, ['atomic' => false])) {
-                $conn->commit();
-                $this->Flash->success('ピックアップ情報の登録が完了しました。');
+            if (!$gasha_pickup->hasErrors()) {
+                $conn = $this->GashaPickups->getConnection();
+                $conn->begin();
+                if ($this->GashaPickups->save($gasha_pickup, ['atomic' => false])) {
+                    $conn->commit();
+                    $this->Flash->success('ピックアップ情報の登録が完了しました。');
 
-                return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.GashaPickups')]);
+                    return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.GashaPickups')]);
+                }
+                $conn->rollback();
             }
-            $conn->rollback();
-            $this->Flash->error('エラーが発生しました。');
         }
         $this->set(compact('gasha_pickup'));
         $this->render('edit');

@@ -110,17 +110,18 @@ class CharactersController extends AppController
             $character = $this->Characters->newEntity();
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $conn = $this->Characters->getConnection();
-            $conn->begin();
             $character = $this->Characters->patchEntity($character, $this->request->getData(), ['associated' => ['Cards']]);
-            if ($this->Characters->save($character, ['atomic' => false])) {
-                $conn->commit();
-                $this->Flash->success('キャラクターの登録が完了しました。');
+            if (!$character->hasErrors()) {
+                $conn = $this->Characters->getConnection();
+                $conn->begin();
+                if ($this->Characters->save($character, ['atomic' => false])) {
+                    $conn->commit();
+                    $this->Flash->success('キャラクターの登録が完了しました。');
 
-                return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Characters')]);
+                    return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Characters')]);
+                }
+                $conn->rollback();
             }
-            $conn->rollback();
-            $this->Flash->error('エラーが発生しました。');
         }
         $this->set(compact('character'));
         $this->render('edit');

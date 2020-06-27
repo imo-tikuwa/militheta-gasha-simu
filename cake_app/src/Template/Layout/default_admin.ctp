@@ -63,6 +63,7 @@
         </div>
 
         <?= $this->Flash->render() ?>
+        <?= $this->fetch('validation_error') ?>
 
         <div class="row">
           <?= $this->fetch('content') ?>

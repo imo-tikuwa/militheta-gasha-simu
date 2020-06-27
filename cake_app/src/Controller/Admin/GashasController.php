@@ -118,17 +118,18 @@ class GashasController extends AppController
             $gasha = $this->Gashas->newEntity();
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $conn = $this->Gashas->getConnection();
-            $conn->begin();
             $gasha = $this->Gashas->patchEntity($gasha, $this->request->getData(), ['associated' => ['CardReprints']]);
-            if ($this->Gashas->save($gasha, ['atomic' => false])) {
-                $conn->commit();
-                $this->Flash->success('ガシャの登録が完了しました。');
+            if (!$gasha->hasErrors()) {
+                $conn = $this->Gashas->getConnection();
+                $conn->begin();
+                if ($this->Gashas->save($gasha, ['atomic' => false])) {
+                    $conn->commit();
+                    $this->Flash->success('ガシャの登録が完了しました。');
 
-                return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Gashas')]);
+                    return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Gashas')]);
+                }
+                $conn->rollback();
             }
-            $conn->rollback();
-            $this->Flash->error('エラーが発生しました。');
         }
         $this->set(compact('gasha'));
         $this->render('edit');

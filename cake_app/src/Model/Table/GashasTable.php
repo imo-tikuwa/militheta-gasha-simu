@@ -57,30 +57,80 @@ class GashasTable extends AppTable
      */
     public function validationDefault(Validator $validator)
     {
+        // ID
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
 
+        // ガシャ開始日
         $validator
-            ->date('start_date')
-            ->allowEmptyDate('start_date');
+            ->add('start_date', 'date', [
+                'rule' => ['date', ['ymd']],
+                'message' => 'ガシャ開始日を正しく入力してください。',
+                'last' => true
+            ])
+            ->notEmptyDate('start_date', 'ガシャ開始日を入力してください。');
 
+        // ガシャ終了日
         $validator
-            ->date('end_date')
-            ->allowEmptyDate('end_date');
+            ->add('end_date', 'date', [
+                'rule' => ['date', ['ymd']],
+                'message' => 'ガシャ終了日を正しく入力してください。',
+                'last' => true
+            ])
+            ->notEmptyDate('end_date', 'ガシャ終了日を入力してください。');
 
+        // ガシャタイトル
         $validator
-            ->scalar('title')
-            ->maxLength('title', 255)
-            ->allowEmptyString('title');
+            ->add('title', 'scalar', [
+                'rule' => 'isScalar',
+                'message' => 'ガシャタイトルを正しく入力してください。',
+                'last' => true
+            ])
+            ->add('title', 'maxLength', [
+                'rule' => ['maxLength', 255],
+                'message' => 'ガシャタイトルは255文字以内で入力してください。',
+                'last' => true
+            ])
+            ->notEmptyString('title', 'ガシャタイトルを入力してください。');
 
+        // SSRレート
         $validator
-            ->integer('ssr_rate')
-            ->allowEmptyString('ssr_rate');
+            ->add('ssr_rate', 'integer', [
+                'rule' => 'isInteger',
+                'message' => 'SSRレートを正しく入力してください。',
+                'last' => true
+            ])
+            ->add('ssr_rate', 'greaterThanOrEqual', [
+                'rule' => ['comparison', '>=', 0],
+                'message' => 'SSRレートは0以上の値で入力してください。',
+                'last' => true
+            ])
+            ->add('ssr_rate', 'lessThanOrEqual', [
+                'rule' => ['comparison', '<=', 100],
+                'message' => 'SSRレートは100以下の値で入力してください。',
+                'last' => true
+            ])
+            ->notEmptyString('ssr_rate', 'SSRレートを入力してください。');
 
+        // SRレート
         $validator
-            ->integer('sr_rate')
-            ->allowEmptyString('sr_rate');
+            ->add('sr_rate', 'integer', [
+                'rule' => 'isInteger',
+                'message' => 'SRレートを正しく入力してください。',
+                'last' => true
+            ])
+            ->add('sr_rate', 'greaterThanOrEqual', [
+                'rule' => ['comparison', '>=', 0],
+                'message' => 'SRレートは0以上の値で入力してください。',
+                'last' => true
+            ])
+            ->add('sr_rate', 'lessThanOrEqual', [
+                'rule' => ['comparison', '<=', 100],
+                'message' => 'SRレートは100以下の値で入力してください。',
+                'last' => true
+            ])
+            ->notEmptyString('sr_rate', 'SRレートを入力してください。');
 
         return $validator;
     }

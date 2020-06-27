@@ -53,14 +53,24 @@ class CharactersTable extends AppTable
      */
     public function validationDefault(Validator $validator)
     {
+        // ID
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
 
+        // 名前
         $validator
-            ->scalar('name')
-            ->maxLength('name', 255)
-            ->allowEmptyString('name');
+            ->add('name', 'scalar', [
+                'rule' => 'isScalar',
+                'message' => '名前を正しく入力してください。',
+                'last' => true
+            ])
+            ->add('name', 'maxLength', [
+                'rule' => ['maxLength', 255],
+                'message' => '名前は255文字以内で入力してください。',
+                'last' => true
+            ])
+            ->notEmptyString('name', '名前を入力してください。');
 
         return $validator;
     }

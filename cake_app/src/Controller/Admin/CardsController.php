@@ -148,17 +148,18 @@ class CardsController extends AppController
             $card = $this->Cards->newEntity();
         }
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $conn = $this->Cards->getConnection();
-            $conn->begin();
             $card = $this->Cards->patchEntity($card, $this->request->getData(), ['associated' => ['Characters', 'CardReprints']]);
-            if ($this->Cards->save($card, ['atomic' => false])) {
-                $conn->commit();
-                $this->Flash->success('カードの登録が完了しました。');
+            if (!$card->hasErrors()) {
+                $conn = $this->Cards->getConnection();
+                $conn->begin();
+                if ($this->Cards->save($card, ['atomic' => false])) {
+                    $conn->commit();
+                    $this->Flash->success('カードの登録が完了しました。');
 
-                return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Cards')]);
+                    return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Cards')]);
+                }
+                $conn->rollback();
             }
-            $conn->rollback();
-            $this->Flash->error('エラーが発生しました。');
         }
         $this->set(compact('card'));
         $this->render('edit');

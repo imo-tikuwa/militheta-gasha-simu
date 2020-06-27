@@ -63,34 +63,115 @@ class CardsTable extends AppTable
      */
     public function validationDefault(Validator $validator)
     {
+        // ID
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
 
+        // キャラクター
         $validator
-            ->scalar('name')
-            ->maxLength('name', 255)
-            ->allowEmptyString('name');
+            ->add('character_id', 'integer', [
+                'rule' => 'isInteger',
+                'message' => 'キャラクターを正しく入力してください。',
+                'last' => true
+            ])
+            ->add('character_id', 'existForeignEntity', [
+                'rule' => function ($character_id) {
+                    $table = TableRegistry::getTableLocator()->get('Characters');
+                    $entity = $table->find()->select(['id'])->where(['id' => $character_id])->first();
+                    return !empty($entity);
+                },
+                'message' => 'キャラクターに不正な値が入力されています。',
+                'last' => true
+            ])
+            ->notEmptyString('character_id', 'キャラクターを選択してください。');
 
+        // カード名
         $validator
-            ->scalar('rarity')
-            ->maxLength('rarity', 2)
-            ->allowEmptyString('rarity');
+            ->add('name', 'scalar', [
+                'rule' => 'isScalar',
+                'message' => 'カード名を正しく入力してください。',
+                'last' => true
+            ])
+            ->add('name', 'maxLength', [
+                'rule' => ['maxLength', 255],
+                'message' => 'カード名は255文字以内で入力してください。',
+                'last' => true
+            ])
+            ->notEmptyString('name', 'カード名を入力してください。');
 
+        // レアリティ
         $validator
-            ->scalar('type')
-            ->maxLength('type', 2)
-            ->allowEmptyString('type');
+            ->add('rarity', 'scalar', [
+                'rule' => 'isScalar',
+                'message' => 'レアリティを正しく入力してください。',
+                'last' => true
+            ])
+            ->add('rarity', 'maxLength', [
+                'rule' => ['maxLength', 2],
+                'message' => 'レアリティは2文字以内で入力してください。',
+                'last' => true
+            ])
+            ->add('rarity', 'existIn', [
+                'rule' => function ($value) {
+                    return array_key_exists($value, _code('Codes.Cards.rarity'));
+                },
+                'message' => 'レアリティに不正な値が含まれています。',
+                'last' => true
+            ])
+            ->notEmptyString('rarity', 'レアリティを選択してください。');
 
+        // タイプ
         $validator
-            ->date('add_date')
-            ->allowEmptyDate('add_date');
+            ->add('type', 'scalar', [
+                'rule' => 'isScalar',
+                'message' => 'タイプを正しく入力してください。',
+                'last' => true
+            ])
+            ->add('type', 'maxLength', [
+                'rule' => ['maxLength', 2],
+                'message' => 'タイプは2文字以内で入力してください。',
+                'last' => true
+            ])
+            ->add('type', 'existIn', [
+                'rule' => function ($value) {
+                    return array_key_exists($value, _code('Codes.Cards.type'));
+                },
+                'message' => 'タイプに不正な値が含まれています。',
+                'last' => true
+            ])
+            ->notEmptyString('type', 'タイプを選択してください。');
 
+        // 実装日
         $validator
-            ->allowEmptyString('gasha_include');
+            ->add('add_date', 'date', [
+                'rule' => ['date', ['ymd']],
+                'message' => '実装日を正しく入力してください。',
+                'last' => true
+            ])
+            ->notEmptyDate('add_date', '実装日を入力してください。');
 
+        // ガシャ対象？
         $validator
-            ->allowEmptyString('limited');
+            ->add('gasha_include', 'existIn', [
+                'rule' => function ($value) {
+                    return array_key_exists($value, _code('Codes.Cards.gasha_include'));
+                },
+                'message' => 'ガシャ対象？に不正な値が含まれています。',
+                'last' => true
+            ])
+            ->notEmptyString('gasha_include', 'ガシャ対象？を入力してください。');
+
+        // 限定？
+        $validator
+            ->add('limited', 'existIn', [
+                'rule' => function ($value) {
+                    return array_key_exists($value, _code('Codes.Cards.limited'));
+                },
+                'message' => '限定？に不正な値が含まれています。',
+                'last' => true
+            ])
+            ->notEmptyString('limited', '限定？を入力してください。');
 
         return $validator;
     }

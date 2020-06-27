@@ -165,4 +165,43 @@ class AppView extends View
 
         return $html;
     }
+
+    /**
+     * エラーメッセージのHTMLを作成
+     * @param array $errors エラーメッセージ配列
+     * @return string html
+     */
+    public function makeValidationErrorHtml($errors = null)
+    {
+        $html = "";
+        if (is_numeric($errors) || count($errors) <= 0) {
+            return $html;
+        }
+        $html .= "<div class=\"alert alert-primary alert-dismissible fade show\" role=\"alert\">";
+        $error_messages = [];
+        foreach ($errors as $each_error) {
+            $error_messages[] = $this->getEachErrorMessage($each_error);
+        }
+        $html .= implode('<br />', $error_messages);
+        $html .= "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button>";
+        $html .= "</div>";
+
+        return $html;
+    }
+
+    /**
+     * 1個辺りの項目のエラーメッセージを返す
+     * @param array $each_error 1項目辺りのエラー情報
+     * @return string|array
+     */
+    private function getEachErrorMessage($each_error)
+    {
+        foreach ($each_error as $error_obj) {
+            if (is_array($error_obj)) {
+                return $this->getEachErrorMessage($error_obj);
+            } else {
+                return $error_obj;
+            }
+        }
+    }
 }
