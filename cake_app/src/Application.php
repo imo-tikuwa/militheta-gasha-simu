@@ -40,6 +40,8 @@ class Application extends BaseApplication
 
         try {
             $this->addPlugin('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
+
+            $this->addPlugin('Cake3ApiGenerator', ['routes' => true]);
         } catch (MissingPluginException $e) {
         }
 

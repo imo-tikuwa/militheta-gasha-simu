@@ -48,6 +48,14 @@ Router::defaultRouteClass(DashedRoute::class);
 
 Router::scope('/', function (RouteBuilder $routes) {
 
+    /**
+     * info prefix
+     */
+    Router::prefix('info', function (RouteBuilder $routes) {
+        $routes->setExtensions(['json']);
+        $routes->fallbacks(DashedRoute::class);
+    });
+
 	/**
 	 * トップページ
 	 */

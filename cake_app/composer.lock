@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d985de927ac3b7efc166833901b5e0b",
+    "content-hash": "6d87b251b6cda45573bba260249b4f31",
     "packages": [
         {
             "name": "aura/intl",
@@ -2146,6 +2146,39 @@
                 "issues": "https://github.com/imo-tikuwa/cakephp-admin-baker/issues"
             },
             "time": "2020-06-27T13:35:37+00:00"
+        },
+        {
+            "name": "imo-tikuwa/cakephp-api-generator",
+            "version": "v0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/imo-tikuwa/cakephp-api-generator.git",
+                "reference": "51980e579eb8bafdc94c0c3b25598c0221edd642"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-api-generator/zipball/51980e579eb8bafdc94c0c3b25598c0221edd642",
+                "reference": "51980e579eb8bafdc94c0c3b25598c0221edd642",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "^3.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7.14|^6.0"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Cake3ApiGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Cake3ApiGenerator plugin for CakePHP",
+            "time": "2020-07-28T08:54:54+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
