@@ -353,6 +353,8 @@ $(function(){
 
         <div class="privacy-policy">
           <a href="javascript:void(0);" data-toggle="modal" data-target="#privacy-modal">プライバシーポリシー</a>
+          |
+          <?= $this->Html->link('新しいやつ', ['action' => 'targetPick']) ?>
         </div>
       </div>
 

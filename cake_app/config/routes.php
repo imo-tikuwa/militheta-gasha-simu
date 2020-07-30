@@ -59,8 +59,8 @@ Router::scope('/', function (RouteBuilder $routes) {
 	/**
 	 * トップページ
 	 */
-    $routes->connect('/', ['controller' => 'Front']);
-    $routes->connect('/target-pick', ['controller' => 'Front', 'action' => 'targetPick']);
+    $routes->connect('/legacy', ['controller' => 'Front']);
+    $routes->connect('/', ['controller' => 'Front', 'action' => 'targetPick']);
 
     /**
      * 管理者権限

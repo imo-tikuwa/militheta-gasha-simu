@@ -349,6 +349,8 @@ $(function(){
             </fieldset>
             <div class="privacy-policy mt-2">
               <a href="javascript:void(0);" data-toggle="modal" data-target="#privacy-modal">プライバシーポリシー</a>
+			  |
+			  <?= $this->Html->link('古いやつ', ['action' => 'index']) ?>
             </div>
           </div>
         </div>
