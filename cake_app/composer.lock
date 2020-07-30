@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d87b251b6cda45573bba260249b4f31",
+    "content-hash": "bd5ef10dafa6595301e603711d3532bb",
     "packages": [
         {
             "name": "aura/intl",
@@ -2152,7 +2152,7 @@
             "version": "v0.2.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/imo-tikuwa/cakephp-api-generator.git",
+                "url": "git@github.com:imo-tikuwa/cakephp-api-generator.git",
                 "reference": "51980e579eb8bafdc94c0c3b25598c0221edd642"
             },
             "dist": {
@@ -2173,11 +2173,20 @@
                     "Cake3ApiGenerator\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Cake3ApiGenerator\\Test\\": "tests/",
+                    "Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
             "description": "Cake3ApiGenerator plugin for CakePHP",
+            "support": {
+                "source": "https://github.com/imo-tikuwa/cakephp-api-generator/tree/v0.2.2",
+                "issues": "https://github.com/imo-tikuwa/cakephp-api-generator/issues"
+            },
             "time": "2020-07-28T08:54:54+00:00"
         },
         {
