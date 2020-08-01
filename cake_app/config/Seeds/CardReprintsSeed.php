@@ -827,6 +827,30 @@ class CardReprintsSeed extends AbstractSeed
                 'modified' => '2020-07-01 18:23:07',
                 'delete_flag' => '0',
             ],
+            [
+                'id' => '102',
+                'gasha_id' => '144',
+                'card_id' => '631',
+                'created' => '2020-08-01 10:48:17',
+                'modified' => '2020-08-01 10:48:17',
+                'delete_flag' => '0',
+            ],
+            [
+                'id' => '103',
+                'gasha_id' => '144',
+                'card_id' => '650',
+                'created' => '2020-08-01 10:48:27',
+                'modified' => '2020-08-01 10:48:27',
+                'delete_flag' => '0',
+            ],
+            [
+                'id' => '104',
+                'gasha_id' => '144',
+                'card_id' => '669',
+                'created' => '2020-08-01 10:48:37',
+                'modified' => '2020-08-01 10:48:37',
+                'delete_flag' => '0',
+            ],
         ];
 
         $table = $this->table('card_reprints');
