@@ -19,7 +19,7 @@
         "cakephp/bake": "^1.12",
         "cakephp/cakephp-codesniffer": "^3.0",
         "cakephp/debug_kit": "^3.22",
-        "imo-tikuwa/cakephp-admin-baker": "^0.11.0",
+        "imo-tikuwa/cakephp-admin-baker": "^0.12.0",
         "imo-tikuwa/cakephp-api-generator": "^0.2.2",
         "psy/psysh": "@stable"
     },
