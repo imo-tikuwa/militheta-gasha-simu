@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-08-01 11:00:49
+Date: 2020-08-31 20:38:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -53,7 +53,7 @@ CREATE TABLE `cards` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `delete_flag` char(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=945 DEFAULT CHARSET=utf8 COMMENT='カード';
+) ENGINE=InnoDB AUTO_INCREMENT=965 DEFAULT CHARSET=utf8 COMMENT='カード';
 
 -- ----------------------------
 -- Records of cards
@@ -1002,6 +1002,26 @@ INSERT INTO `cards` VALUES ('941', '34', '輝く勲章　舞浜歩', '04', '02',
 INSERT INTO `cards` VALUES ('942', '52', '優美に、軽やかに！　桜守歌織', '04', '03', '2020-07-31', '1', '1', '2020-08-01 10:40:00', '2020-08-01 10:40:00', '0');
 INSERT INTO `cards` VALUES ('943', '39', '海っ子お祭りライブ！　馬場このみ', '03', '03', '2020-07-31', '1', '1', '2020-08-01 10:40:00', '2020-08-01 10:40:00', '0');
 INSERT INTO `cards` VALUES ('944', '32', 'MILLION LIVE CLOSET！　エミリー', '03', '01', '2020-07-31', '1', '0', '2020-08-01 10:40:00', '2020-08-01 10:40:00', '0');
+INSERT INTO `cards` VALUES ('945', '43', 'BORN ON DREAM！　福田のり子', '03', '01', '2020-08-03', '0', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('946', '19', 'BORN ON DREAM！　佐竹美奈子', '03', '01', '2020-08-03', '0', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('947', '22', '夢色トレイン　箱崎星梨花', '04', '03', '2020-08-12', '1', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('948', '28', 'チョー↑元気Show☆アイドルch＠ng！　松田亜利沙', '04', '01', '2020-08-12', '1', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('949', '27', 'MILLION LIVE CLOSET！　高山紗代子', '03', '01', '2020-08-12', '1', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('950', '33', 'MILLION LIVE CLOSET！　北沢志保', '03', '02', '2020-08-12', '1', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('951', '21', '願いをこめて　徳川まつり', '03', '01', '2020-08-12', '0', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('952', '10', '迷子の特等席　三浦あずさ', '03', '03', '2020-08-12', '0', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('953', '25', 'ロコランタン　ロコ', '02', '02', '2020-08-12', '1', '0', '2020-08-31 20:08:21', '2020-08-31 20:32:37', '0');
+INSERT INTO `cards` VALUES ('954', '9', 'エンゲージメント・ダンス　秋月律子', '04', '02', '2020-08-19', '1', '1', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('955', '48', 'ずっと、一緒…　北上麗花', '04', '03', '2020-08-19', '1', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('956', '44', 'MILLION LIVE CLOSET！　真壁瑞希', '03', '02', '2020-08-19', '1', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('957', '50', '在りし日の歌姫　ジュリア', '03', '02', '2020-08-19', '1', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('958', '36', '響き渡る歌声　矢吹可奈', '02', '01', '2020-08-19', '1', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('959', '5', 'ダイヤモンドダイバー◇　高槻やよい', '03', '03', '2020-08-19', '0', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('960', '1', 'ダイヤモンドダイバー◇　天海春香', '03', '01', '2020-08-19', '0', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('961', '16', '選ばれし少女　伊吹翼', '04', '03', '2020-08-31', '1', '1', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('962', '36', '昨日の悪友は今日の、　矢吹可奈', '04', '01', '2020-08-31', '1', '1', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('963', '34', 'ふたりきりの街角　舞浜歩', '03', '02', '2020-08-31', '1', '1', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
+INSERT INTO `cards` VALUES ('964', '20', 'MILLION LIVE CLOSET！　所恵美', '03', '02', '2020-08-31', '1', '0', '2020-08-31 20:08:21', '2020-08-31 20:08:21', '0');
 
 -- ----------------------------
 -- Table structure for `card_reprints`
@@ -1015,7 +1035,7 @@ CREATE TABLE `card_reprints` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `delete_flag` char(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8 COMMENT='復刻';
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8 COMMENT='復刻';
 
 -- ----------------------------
 -- Records of card_reprints
@@ -1124,6 +1144,10 @@ INSERT INTO `card_reprints` VALUES ('101', '136', '665', '2020-07-01 18:23:07', 
 INSERT INTO `card_reprints` VALUES ('102', '144', '631', '2020-08-01 10:48:17', '2020-08-01 10:48:17', '0');
 INSERT INTO `card_reprints` VALUES ('103', '144', '650', '2020-08-01 10:48:27', '2020-08-01 10:48:27', '0');
 INSERT INTO `card_reprints` VALUES ('104', '144', '669', '2020-08-01 10:48:37', '2020-08-01 10:48:37', '0');
+INSERT INTO `card_reprints` VALUES ('105', '148', '687', '2020-08-31 20:13:16', '2020-08-31 20:13:16', '0');
+INSERT INTO `card_reprints` VALUES ('106', '148', '706', '2020-08-31 20:13:30', '2020-08-31 20:13:30', '0');
+INSERT INTO `card_reprints` VALUES ('107', '148', '689', '2020-08-31 20:13:41', '2020-08-31 20:13:41', '0');
+INSERT INTO `card_reprints` VALUES ('108', '148', '708', '2020-08-31 20:13:51', '2020-08-31 20:13:51', '0');
 
 -- ----------------------------
 -- Table structure for `characters`
@@ -1211,7 +1235,7 @@ CREATE TABLE `gashas` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `delete_flag` char(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
+) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
 
 -- ----------------------------
 -- Records of gashas
@@ -1361,6 +1385,10 @@ INSERT INTO `gashas` VALUES ('142', '2020-07-13', '2020-07-20', 'SONG FOR YOU！
 INSERT INTO `gashas` VALUES ('143', '2020-07-20', '2020-07-28', '【期間限定】スイートアイスドリームガシャ', '3', '12', '2020-08-01 10:47:09', '2020-08-01 10:47:09', '0');
 INSERT INTO `gashas` VALUES ('144', '2020-07-28', '2020-07-31', '【限定復刻】日替わりピックアップ！限定復刻ガシャ', '3', '12', '2020-08-01 10:47:09', '2020-08-01 10:47:09', '0');
 INSERT INTO `gashas` VALUES ('145', '2020-07-31', '2020-08-12', '【期間限定】アイドル☆スポーツフェス！ガシャ', '3', '12', '2020-08-01 10:47:09', '2020-08-01 10:47:09', '0');
+INSERT INTO `gashas` VALUES ('146', '2020-08-12', '2020-08-19', 'SONG FOR YOU！ガシャ VOL.7', '3', '12', '2020-08-31 20:11:47', '2020-08-31 20:11:47', '0');
+INSERT INTO `gashas` VALUES ('147', '2020-08-19', '2020-08-29', '【期間限定】戦慄のゴーストレディガシャ', '3', '12', '2020-08-31 20:11:47', '2020-08-31 20:11:47', '0');
+INSERT INTO `gashas` VALUES ('148', '2020-08-29', '2020-08-31', '【限定復刻】日替わりピックアップ！限定復刻ガシャ', '3', '12', '2020-08-31 20:11:47', '2020-08-31 20:11:47', '0');
+INSERT INTO `gashas` VALUES ('149', '2020-08-31', '2020-09-10', '【期間限定】奇跡を起こすよ♪マジカル☆パワー！ガシャ', '3', '12', '2020-08-31 20:11:47', '2020-08-31 20:11:47', '0');
 
 -- ----------------------------
 -- Table structure for `gasha_pickups`
@@ -1374,7 +1402,7 @@ CREATE TABLE `gasha_pickups` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `delete_flag` char(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=533 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
+) ENGINE=InnoDB AUTO_INCREMENT=550 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
 
 -- ----------------------------
 -- Records of gasha_pickups
@@ -1911,3 +1939,20 @@ INSERT INTO `gasha_pickups` VALUES ('529', '145', '942', '2020-08-01 10:58:42', 
 INSERT INTO `gasha_pickups` VALUES ('530', '145', '941', '2020-08-01 10:58:51', '2020-08-01 10:58:51', '0');
 INSERT INTO `gasha_pickups` VALUES ('531', '145', '943', '2020-08-01 10:58:59', '2020-08-01 10:58:59', '0');
 INSERT INTO `gasha_pickups` VALUES ('532', '145', '944', '2020-08-01 10:59:10', '2020-08-01 10:59:10', '0');
+INSERT INTO `gasha_pickups` VALUES ('533', '146', '947', '2020-08-31 20:14:52', '2020-08-31 20:14:52', '0');
+INSERT INTO `gasha_pickups` VALUES ('534', '146', '948', '2020-08-31 20:15:07', '2020-08-31 20:15:07', '0');
+INSERT INTO `gasha_pickups` VALUES ('535', '146', '949', '2020-08-31 20:15:21', '2020-08-31 20:15:21', '0');
+INSERT INTO `gasha_pickups` VALUES ('536', '146', '950', '2020-08-31 20:15:30', '2020-08-31 20:15:30', '0');
+INSERT INTO `gasha_pickups` VALUES ('537', '147', '954', '2020-08-31 20:15:58', '2020-08-31 20:15:58', '0');
+INSERT INTO `gasha_pickups` VALUES ('538', '147', '955', '2020-08-31 20:16:11', '2020-08-31 20:16:11', '0');
+INSERT INTO `gasha_pickups` VALUES ('539', '147', '956', '2020-08-31 20:16:24', '2020-08-31 20:16:24', '0');
+INSERT INTO `gasha_pickups` VALUES ('540', '147', '957', '2020-08-31 20:16:36', '2020-08-31 20:16:36', '0');
+INSERT INTO `gasha_pickups` VALUES ('541', '147', '958', '2020-08-31 20:16:45', '2020-08-31 20:16:45', '0');
+INSERT INTO `gasha_pickups` VALUES ('542', '148', '687', '2020-08-31 20:19:29', '2020-08-31 20:19:29', '0');
+INSERT INTO `gasha_pickups` VALUES ('543', '148', '706', '2020-08-31 20:19:38', '2020-08-31 20:19:38', '0');
+INSERT INTO `gasha_pickups` VALUES ('544', '148', '689', '2020-08-31 20:19:48', '2020-08-31 20:19:48', '0');
+INSERT INTO `gasha_pickups` VALUES ('545', '148', '708', '2020-08-31 20:19:56', '2020-08-31 20:19:56', '0');
+INSERT INTO `gasha_pickups` VALUES ('546', '149', '961', '2020-08-31 20:20:20', '2020-08-31 20:20:20', '0');
+INSERT INTO `gasha_pickups` VALUES ('547', '149', '962', '2020-08-31 20:20:28', '2020-08-31 20:20:28', '0');
+INSERT INTO `gasha_pickups` VALUES ('548', '149', '963', '2020-08-31 20:20:37', '2020-08-31 20:20:37', '0');
+INSERT INTO `gasha_pickups` VALUES ('549', '149', '964', '2020-08-31 20:20:48', '2020-08-31 20:20:48', '0');
