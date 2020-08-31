@@ -68,3 +68,37 @@ function decrypt_password($encrypted_password = '')
     // 複合化
     return openssl_decrypt($encrypted, $method, _code('AdminConfig.CakeEncryptionSalt'), OPENSSL_RAW_DATA, $iv);
 }
+
+/**
+ * 桁数を指定した切り捨て
+ * 参考：https://gotohayato.com/content/491/
+ * @param unknown $value
+ * @param number $precision
+ * @return number
+ */
+function floor_plus($value, $precision = 1)
+{
+	return round($value - 0.5 * pow(0.1, $precision), $precision, PHP_ROUND_HALF_UP);
+}
+
+/**
+ * 文字列$haystackは$needleで始まる？
+ * @param string $haystack
+ * @param string $needle
+ * @return boolean
+ */
+function starts_with($haystack, $needle)
+{
+	return $needle === "" || strpos($haystack, $needle) === 0;
+}
+
+/**
+ * 文字列$haystackは$needleで終わる？
+ * @param string $haystack
+ * @param string $needle
+ * @return boolean
+ */
+function ends_with($haystack, $needle)
+{
+	return $needle === "" || substr($haystack, - strlen($needle)) === $needle;
+}
