@@ -1,8 +1,6 @@
 <?php
 namespace App\Model\Entity;
 
-use Cake\ORM\Entity;
-
 /**
  * CardReprint Entity
  *
@@ -16,7 +14,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Gasha $gasha
  * @property \App\Model\Entity\Card $card
  */
-class CardReprint extends Entity
+class CardReprint extends AppEntity
 {
 
     /**

@@ -68,6 +68,7 @@ return [
                 '03' => 'Angel',
                 '04' => 'Ex',
             ],
+            'default_value' => '01',
         ],
         'add_date' => [
             'search' => true,
@@ -132,6 +133,8 @@ return [
         'delete_function' => false,
         'init_order_column' => 'id',
         'init_order_direction' => 'desc',
+        'label_size' => 'small',
+        'input_size' => 'small',
         'csv_export' => true,
         'csv_import' => true,
     ],

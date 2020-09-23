@@ -1,8 +1,6 @@
 <?php
 namespace App\Model\Entity;
 
-use Cake\ORM\Entity;
-
 /**
  * Character Entity
  *
@@ -14,7 +12,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Card[] $cards
  */
-class Character extends Entity
+class Character extends AppEntity
 {
 
     /**

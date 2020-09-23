@@ -21,7 +21,7 @@ import 'bootstrap-fileinput/js/locales/ja.js';
 import 'summernote/dist/summernote-bs4.min.js';
 import 'summernote/dist/lang/summernote-ja-JP.min.js';
 
-import 'bootstrap4-tagsinput-douglasanpa/tagsinput.js';
+import 'bootstrap4-tagsinput/tagsinput.js';
 
 var Cookies = require('js-cookie');
 

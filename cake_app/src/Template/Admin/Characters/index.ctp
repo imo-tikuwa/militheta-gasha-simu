@@ -6,20 +6,23 @@ use App\Utils\AuthUtils;
  * @var \App\Model\Entity\Character[]|\Cake\Collection\CollectionInterface $characters
  */
 $this->assign('title', "キャラクター");
+$this->Form->setTemplates([
+  'label' => '<label class="col-form-label col-form-label-sm"{{attrs}}>{{text}}</label>',
+]);
 ?>
 <div class="col-md-12 mb-12">
   <div class="card rounded-0">
     <div class="card-header">
       <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_ADD])) { ?>
-        <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
+        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
       <?php } ?>
-      <button type="button" class="btn btn-flat btn-outline-secondary" data-toggle="modal" data-target="#characters-search-form-modal">検索</button>
+      <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" data-toggle="modal" data-target="#characters-search-form-modal">検索</button>
       <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_CSV_EXPORT])) { ?>
-        <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
+        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
       <?php } ?>
     </div>
     <div class="card-body table-responsive p-0">
-      <table class="table table-hover">
+      <table class="table table-sm table-hover text-sm">
         <thead>
           <tr>
             <th scope="col"><?= $this->Paginator->sort('id', 'ID') ?></th>
@@ -40,7 +43,7 @@ $this->assign('title', "キャラクター");
               </td>
               <td class="actions">
                 <div class="btn-group" role="group">
-                  <button id="btnGroupDrop<?= $character->id ?>" type="button" class="btn btn-flat btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                  <button id="btnGroupDrop<?= $character->id ?>" type="button" class="btn btn-sm btn-flat btn-outline-secondary dropdown-toggle index-dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" aria-labelledby="btnGroupDrop<?= $character->id ?>">
                     <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_VIEW])) { ?>
                       <?= $this->Html->link('詳細', ['action' => ACTION_VIEW, $character->id], ['class' => 'dropdown-item']) ?>
@@ -71,21 +74,21 @@ $this->assign('title', "キャラクター");
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('id', ['class' => 'form-control rounded-0', 'label' => 'ID', 'value' => @$params['id']]); ?>
+                <?= $this->Form->control('id', ['class' => 'form-control form-control-sm rounded-0', 'label' => 'ID', 'value' => @$params['id']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('name', ['class' => 'form-control rounded-0', 'label' => '名前', 'value' => @$params['name']]); ?>
+                <?= $this->Form->control('name', ['class' => 'form-control form-control-sm rounded-0', 'label' => '名前', 'value' => @$params['name']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <?= $this->Form->button('検索', ['class' => "btn btn-flat btn-outline-secondary btn-block"]) ?>
+                <?= $this->Form->button('検索', ['class' => "btn btn-sm btn-flat btn-outline-secondary btn-block"]) ?>
               </div>
             </div>
           </div>

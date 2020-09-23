@@ -1,8 +1,6 @@
 <?php
 namespace App\Model\Entity;
 
-use Cake\ORM\Entity;
-
 /**
  * Gasha Entity
  *
@@ -19,7 +17,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\CardReprint[] $card_reprints
  * @property \App\Model\Entity\GashaPickup[] $gasha_pickups
  */
-class Gasha extends Entity
+class Gasha extends AppEntity
 {
 
     /**

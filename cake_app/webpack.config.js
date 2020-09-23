@@ -98,7 +98,7 @@ const exportStyle = {
     mode,
     devtool,
     entry: {
-        bundle: path.resolve(__dirname, "src/Assets/scss/admin.scss"),
+        bundle: path.resolve(__dirname, "src/Assets/scss/style.scss"),
         front_index: path.resolve(__dirname, "src/Assets/scss/front_style.scss"),
         front_target_pick: path.resolve(__dirname, "src/Assets/scss/front_style_target_pick.scss"),
     },

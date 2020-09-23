@@ -6,26 +6,29 @@ use App\Utils\AuthUtils;
  * @var \App\Model\Entity\Card[]|\Cake\Collection\CollectionInterface $cards
  */
 $this->assign('title', "カード");
+$this->Form->setTemplates([
+  'label' => '<label class="col-form-label col-form-label-sm"{{attrs}}>{{text}}</label>',
+]);
 ?>
 <div class="col-md-12 mb-12">
   <div class="card rounded-0">
     <div class="card-header">
       <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_ADD])) { ?>
-        <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
+        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
       <?php } ?>
-      <button type="button" class="btn btn-flat btn-outline-secondary" data-toggle="modal" data-target="#cards-search-form-modal">検索</button>
+      <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" data-toggle="modal" data-target="#cards-search-form-modal">検索</button>
       <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_CSV_EXPORT])) { ?>
-        <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
+        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
       <?php } ?>
       <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_CSV_IMPORT])) { ?>
-        <button type="button" class="btn btn-flat btn-outline-secondary" onclick="$('#csv-import-file').trigger('click');">CSVインポート</button>
+        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="$('#csv-import-file').trigger('click');">CSVインポート</button>
         <?= $this->Form->create(null, ['id' => 'csv-import-form', 'action' => ACTION_CSV_IMPORT, 'enctype' => 'multipart/form-data', 'style' => 'display:none;']) ?>
           <input type="file" name="csv_import_file" id="csv-import-file"/>
         <?= $this->Form->end(); ?>
       <?php } ?>
     </div>
     <div class="card-body table-responsive p-0">
-      <table class="table table-hover">
+      <table class="table table-sm table-hover text-sm">
         <thead>
           <tr>
             <th scope="col"><?= $this->Paginator->sort('id', 'ID') ?></th>
@@ -64,7 +67,7 @@ $this->assign('title', "カード");
               </td>
               <td class="actions">
                 <div class="btn-group" role="group">
-                  <button id="btnGroupDrop<?= $card->id ?>" type="button" class="btn btn-flat btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                  <button id="btnGroupDrop<?= $card->id ?>" type="button" class="btn btn-sm btn-flat btn-outline-secondary dropdown-toggle index-dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" aria-labelledby="btnGroupDrop<?= $card->id ?>">
                     <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_VIEW])) { ?>
                       <?= $this->Html->link('詳細', ['action' => ACTION_VIEW, $card->id], ['class' => 'dropdown-item']) ?>
@@ -95,63 +98,63 @@ $this->assign('title', "カード");
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('id', ['class' => 'form-control rounded-0', 'label' => 'ID', 'value' => @$params['id']]); ?>
+                <?= $this->Form->control('id', ['class' => 'form-control form-control-sm rounded-0', 'label' => 'ID', 'value' => @$params['id']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('character_id', ['id' => 'character_id', 'type' => 'select', 'options' => $characters, 'class' => 'form-control', 'label' => 'キャラクター', 'value' => @$params['character_id']]); ?>
+                <?= $this->Form->control('character_id', ['id' => 'character_id', 'type' => 'select', 'options' => $characters, 'class' => 'form-control form-control-sm', 'label' => 'キャラクター', 'value' => @$params['character_id']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('name', ['class' => 'form-control rounded-0', 'label' => 'カード名', 'value' => @$params['name']]); ?>
+                <?= $this->Form->control('name', ['class' => 'form-control form-control-sm rounded-0', 'label' => 'カード名', 'value' => @$params['name']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('rarity', ['id' => 'rarity', 'type' => 'select', 'options' => _code('Codes.Cards.rarity'), 'class' => 'form-control', 'label' => 'レアリティ', 'empty' => '　', 'value' => @$params['rarity']]); ?>
+                <?= $this->Form->control('rarity', ['id' => 'rarity', 'type' => 'select', 'options' => _code('Codes.Cards.rarity'), 'class' => 'form-control form-control-sm', 'label' => 'レアリティ', 'empty' => '　', 'value' => @$params['rarity']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('type', ['id' => 'type', 'type' => 'select', 'options' => _code('Codes.Cards.type'), 'class' => 'form-control', 'label' => 'タイプ', 'empty' => '　', 'value' => @$params['type']]); ?>
+                <?= $this->Form->control('type', ['id' => 'type', 'type' => 'select', 'options' => _code('Codes.Cards.type'), 'class' => 'form-control form-control-sm', 'label' => 'タイプ', 'empty' => '　', 'value' => @$params['type']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('add_date', ['type' => 'text', 'id' => 'add_date-datepicker', 'class' => 'form-control rounded-0', 'label' => '実装日', 'data-toggle' => 'datetimepicker', 'data-target' => '#add_date-datepicker', 'value' => @$params['add_date']]); ?>
+                <?= $this->Form->control('add_date', ['type' => 'text', 'id' => 'add_date-datepicker', 'class' => 'form-control form-control-sm rounded-0', 'label' => '実装日', 'data-toggle' => 'datetimepicker', 'data-target' => '#add_date-datepicker', 'value' => @$params['add_date']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('gasha_include', ['id' => 'gasha_include', 'type' => 'select', 'options' => _code('Codes.Cards.gasha_include'), 'class' => 'form-control', 'label' => 'ガシャ対象？', 'empty' => '　', 'value' => @$params['gasha_include']]); ?>
+                <?= $this->Form->control('gasha_include', ['id' => 'gasha_include', 'type' => 'select', 'options' => _code('Codes.Cards.gasha_include'), 'class' => 'form-control form-control-sm', 'label' => 'ガシャ対象？', 'empty' => '　', 'value' => @$params['gasha_include']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('limited', ['id' => 'limited', 'type' => 'select', 'options' => _code('Codes.Cards.limited'), 'class' => 'form-control', 'label' => '限定？', 'empty' => '　', 'value' => @$params['limited']]); ?>
+                <?= $this->Form->control('limited', ['id' => 'limited', 'type' => 'select', 'options' => _code('Codes.Cards.limited'), 'class' => 'form-control form-control-sm', 'label' => '限定？', 'empty' => '　', 'value' => @$params['limited']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <?= $this->Form->button('検索', ['class' => "btn btn-flat btn-outline-secondary btn-block"]) ?>
+                <?= $this->Form->button('検索', ['class' => "btn btn-sm btn-flat btn-outline-secondary btn-block"]) ?>
               </div>
             </div>
           </div>

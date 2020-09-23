@@ -1,8 +1,6 @@
 <?php
 namespace App\Model\Entity;
 
-use Cake\ORM\Entity;
-
 /**
  * Admin Entity
  *
@@ -14,7 +12,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime|null $modified
  * @property string $delete_flag
  */
-class Admin extends Entity
+class Admin extends AppEntity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

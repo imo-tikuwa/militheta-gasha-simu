@@ -122,21 +122,6 @@ table.table th {
   white-space: nowrap;
 }
 
-/* bootstrap-taginputのオーバーライド */
-
-.bootstrap-tagsinput {
-  border-radius: .25rem;
-  min-height: calc(2.25rem + 2px);
-  line-height: 1.5 !important;
-  box-shadow: inherit !important;
-  .badge {
-    border-radius: 0;
-  }
-  .badge [data-role="remove"]::after {
-    padding: 0 3px 0 1px;
-  }
-}
-
 /* 操作ボタン */
 
 table.table td.actions div.btn-group {
@@ -233,4 +218,37 @@ label.item-label {
     position: relative;
     top: -2px;
   }
+}
+
+/* 検索一覧画面 */
+.index-dropdown-toggle {
+  padding-left: 0.65rem !important;
+  padding-right: 0.65rem !important;
+}
+
+/* チェックボックスのデザイン */
+.adm-checkbox + .form-check-label {
+  padding: 0 !important;
+}
+.adm-checkbox {
+  display:none;
+}
+.adm-checkbox + label:before {
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  content: '\f14a';
+  color: #ccc;
+  letter-spacing: 5px;
+  font-size: 1.4rem;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  top: 2px;
+}
+.adm-checkbox + label {
+  vertical-align: middle;
+}
+.adm-checkbox:checked + label:before {
+  color: $primary;
 }

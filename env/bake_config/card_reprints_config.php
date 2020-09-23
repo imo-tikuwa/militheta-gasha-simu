@@ -64,6 +64,8 @@ return [
         'delete_function' => true,
         'init_order_column' => 'id',
         'init_order_direction' => 'asc',
+        'label_size' => 'small',
+        'input_size' => 'small',
         'csv_export' => true,
         'csv_import' => false,
     ],

@@ -166,7 +166,7 @@ class CardsController extends AppController
     }
 
     /**
-     * CSVエクスポート
+     * csv export method
      * @return void
      */
     public function csvExport()
@@ -240,7 +240,7 @@ class CardsController extends AppController
     }
 
     /**
-     * CSVインポート
+     * csv import method
      * @return \Cake\Http\Response|NULL
      */
     public function csvImport()

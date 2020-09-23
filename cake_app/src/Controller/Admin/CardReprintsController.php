@@ -174,7 +174,7 @@ class CardReprintsController extends AppController
     }
 
     /**
-     * CSVエクスポート
+     * csv export method
      * @return void
      */
     public function csvExport()

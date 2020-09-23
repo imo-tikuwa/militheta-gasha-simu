@@ -155,7 +155,7 @@ class GashasController extends AppController
     }
 
     /**
-     * CSVエクスポート
+     * csv export method
      * @return void
      */
     public function csvExport()
@@ -229,7 +229,7 @@ class GashasController extends AppController
     }
 
     /**
-     * CSVインポート
+     * csv import method
      * @return \Cake\Http\Response|NULL
      */
     public function csvImport()

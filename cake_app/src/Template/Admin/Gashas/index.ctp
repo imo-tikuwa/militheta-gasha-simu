@@ -6,26 +6,29 @@ use App\Utils\AuthUtils;
  * @var \App\Model\Entity\Gasha[]|\Cake\Collection\CollectionInterface $gashas
  */
 $this->assign('title', "ガシャ");
+$this->Form->setTemplates([
+  'label' => '<label class="col-form-label col-form-label-sm"{{attrs}}>{{text}}</label>',
+]);
 ?>
 <div class="col-md-12 mb-12">
   <div class="card rounded-0">
     <div class="card-header">
       <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_ADD])) { ?>
-        <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
+        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
       <?php } ?>
-      <button type="button" class="btn btn-flat btn-outline-secondary" data-toggle="modal" data-target="#gashas-search-form-modal">検索</button>
+      <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" data-toggle="modal" data-target="#gashas-search-form-modal">検索</button>
       <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_CSV_EXPORT])) { ?>
-        <button type="button" class="btn btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
+        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
       <?php } ?>
       <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_CSV_IMPORT])) { ?>
-        <button type="button" class="btn btn-flat btn-outline-secondary" onclick="$('#csv-import-file').trigger('click');">CSVインポート</button>
+        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="$('#csv-import-file').trigger('click');">CSVインポート</button>
         <?= $this->Form->create(null, ['id' => 'csv-import-form', 'action' => ACTION_CSV_IMPORT, 'enctype' => 'multipart/form-data', 'style' => 'display:none;']) ?>
           <input type="file" name="csv_import_file" id="csv-import-file"/>
         <?= $this->Form->end(); ?>
       <?php } ?>
     </div>
     <div class="card-body table-responsive p-0">
-      <table class="table table-hover">
+      <table class="table table-sm table-hover text-sm">
         <thead>
           <tr>
             <th scope="col"><?= $this->Paginator->sort('id', 'ID') ?></th>
@@ -62,7 +65,7 @@ $this->assign('title', "ガシャ");
               </td>
               <td class="actions">
                 <div class="btn-group" role="group">
-                  <button id="btnGroupDrop<?= $gasha->id ?>" type="button" class="btn btn-flat btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                  <button id="btnGroupDrop<?= $gasha->id ?>" type="button" class="btn btn-sm btn-flat btn-outline-secondary dropdown-toggle index-dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" aria-labelledby="btnGroupDrop<?= $gasha->id ?>">
                     <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_VIEW])) { ?>
                       <?= $this->Html->link('詳細', ['action' => ACTION_VIEW, $gasha->id], ['class' => 'dropdown-item']) ?>
@@ -96,35 +99,35 @@ $this->assign('title', "ガシャ");
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('id', ['class' => 'form-control rounded-0', 'label' => 'ID', 'value' => @$params['id']]); ?>
+                <?= $this->Form->control('id', ['class' => 'form-control form-control-sm rounded-0', 'label' => 'ID', 'value' => @$params['id']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('start_date', ['type' => 'text', 'id' => 'start_date-datepicker', 'class' => 'form-control rounded-0', 'label' => 'ガシャ開始日', 'data-toggle' => 'datetimepicker', 'data-target' => '#start_date-datepicker', 'value' => @$params['start_date']]); ?>
+                <?= $this->Form->control('start_date', ['type' => 'text', 'id' => 'start_date-datepicker', 'class' => 'form-control form-control-sm rounded-0', 'label' => 'ガシャ開始日', 'data-toggle' => 'datetimepicker', 'data-target' => '#start_date-datepicker', 'value' => @$params['start_date']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('end_date', ['type' => 'text', 'id' => 'end_date-datepicker', 'class' => 'form-control rounded-0', 'label' => 'ガシャ終了日', 'data-toggle' => 'datetimepicker', 'data-target' => '#end_date-datepicker', 'value' => @$params['end_date']]); ?>
+                <?= $this->Form->control('end_date', ['type' => 'text', 'id' => 'end_date-datepicker', 'class' => 'form-control form-control-sm rounded-0', 'label' => 'ガシャ終了日', 'data-toggle' => 'datetimepicker', 'data-target' => '#end_date-datepicker', 'value' => @$params['end_date']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('title', ['class' => 'form-control rounded-0', 'label' => 'ガシャタイトル', 'value' => @$params['title']]); ?>
+                <?= $this->Form->control('title', ['class' => 'form-control form-control-sm rounded-0', 'label' => 'ガシャタイトル', 'value' => @$params['title']]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <?= $this->Form->button('検索', ['class' => "btn btn-flat btn-outline-secondary btn-block"]) ?>
+                <?= $this->Form->button('検索', ['class' => "btn btn-sm btn-flat btn-outline-secondary btn-block"]) ?>
               </div>
             </div>
           </div>
