@@ -252,3 +252,36 @@ label.item-label {
 .adm-checkbox:checked + label:before {
   color: $primary;
 }
+
+/* fileinput の入力項目サイズ別のデザイン */
+.theme-explorer-fas {
+  .file-preview.file-preview-sm {
+    tr.explorer-frame {
+      .kv-file-content {
+        width: 68px;
+        height: 68px;
+        padding: 3px 3px 0 3px;
+        .file-other-icon {
+          font-size: 2.4em;
+        }
+      }
+      .file-details-cell {
+        font-size: .9rem;
+      }
+    }
+  }
+  .file-preview.file-preview-lg {
+    tr.explorer-frame {
+      .kv-file-content {
+        width: 92px;
+        height: 92px;
+        .file-other-icon {
+          font-size: 2.8em;
+        }
+      }
+      .file-details-cell {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

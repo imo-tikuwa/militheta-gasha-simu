@@ -28,7 +28,7 @@ $this->Form->setTemplates([
       <?php } ?>
     </div>
     <div class="card-body table-responsive p-0">
-      <table class="table table-sm table-hover text-sm">
+      <table class="table table-sm table-hover text-sm text-nowrap">
         <thead>
           <tr>
             <th scope="col"><?= $this->Paginator->sort('id', 'ID') ?></th>

@@ -8,7 +8,6 @@ use App\Utils\AuthUtils;
 $this->assign('title', "復刻情報");
 $this->Form->setTemplates([
   'label' => '<label class="col-form-label col-form-label-sm"{{attrs}}>{{text}}</label>',
-  'nestingLabel' => '{{hidden}}{{input}}<label class="form-check-label col-form-label col-form-label-sm" {{attrs}}>{{text}}</label>'
 ]);
 ?>
 <div class="col-md-12 mb-12">
@@ -23,7 +22,7 @@ $this->Form->setTemplates([
       <?php } ?>
     </div>
     <div class="card-body table-responsive p-0">
-      <table class="table table-sm table-hover text-sm">
+      <table class="table table-sm table-hover text-sm text-nowrap">
         <thead>
           <tr>
             <th scope="col"><?= $this->Paginator->sort('id', 'ID') ?></th>
