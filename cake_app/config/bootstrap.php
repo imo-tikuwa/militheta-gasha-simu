@@ -214,3 +214,6 @@ if (Configure::read('debug')) {
 	Configure::write('DebugKit.forceEnable', true);
 	Application::addPlugin('DebugKit', ['bootstrap' => true, 'routes' => true]);
 }
+
+// 論理削除プラグイン
+Application::addPlugin('SoftDelete');

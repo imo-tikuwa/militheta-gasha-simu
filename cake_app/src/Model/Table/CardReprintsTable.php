@@ -7,6 +7,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
+use SoftDelete\Model\Table\SoftDeleteTrait;
 
 /**
  * CardReprints Model
@@ -27,6 +28,8 @@ use Cake\Validation\Validator;
  */
 class CardReprintsTable extends AppTable
 {
+    /** 論理削除を行う */
+    use SoftDeleteTrait;
 
     /**
      * Initialize method
@@ -127,6 +130,18 @@ class CardReprintsTable extends AppTable
      */
     public function patchEntity(EntityInterface $entity, array $data, array $options = [])
     {
+        // フリーワード検索のスニペット更新
+        $search_snippet = [];
+        $gasha = TableRegistry::getTableLocator()->get('Gashas')->find()->select(['title'])->where(['id' => $data['gasha_id']])->first();
+        if (!empty($gasha)) {
+            $search_snippet[] = $gasha->title;
+        }
+        $card = TableRegistry::getTableLocator()->get('Cards')->find()->select(['name'])->where(['id' => $data['card_id']])->first();
+        if (!empty($card)) {
+            $search_snippet[] = $card->name;
+        }
+        $data['search_snippet'] = implode(' ', $search_snippet);
+
         return parent::patchEntity($entity, $data, $options);
     }
 

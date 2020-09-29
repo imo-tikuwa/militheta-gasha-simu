@@ -33,10 +33,11 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('delete_flag', 'string', [
-                'default' => '0',
-                'limit' => 1,
-                'null' => false,
+            ->addColumn('deleted', 'datetime', [
+                'comment' => '削除日時',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
             ])
             ->create();
 
@@ -53,6 +54,12 @@ class Initial extends AbstractMigration
                 'limit' => 11,
                 'null' => true,
             ])
+            ->addColumn('search_snippet', 'text', [
+                'comment' => 'フリーワード検索用のスニペット',
+                'default' => null,
+                'limit' => 16777215,
+                'null' => true,
+            ])
             ->addColumn('created', 'datetime', [
                 'comment' => '作成日時',
                 'default' => null,
@@ -65,11 +72,11 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('delete_flag', 'string', [
-                'comment' => '削除フラグ',
-                'default' => '0',
-                'limit' => 1,
-                'null' => false,
+            ->addColumn('deleted', 'datetime', [
+                'comment' => '削除日時',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
             ])
             ->create();
 
@@ -116,6 +123,12 @@ class Initial extends AbstractMigration
                 'limit' => 4,
                 'null' => true,
             ])
+            ->addColumn('search_snippet', 'text', [
+                'comment' => 'フリーワード検索用のスニペット',
+                'default' => null,
+                'limit' => 16777215,
+                'null' => true,
+            ])
             ->addColumn('created', 'datetime', [
                 'comment' => '作成日時',
                 'default' => null,
@@ -128,11 +141,11 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('delete_flag', 'string', [
-                'comment' => '削除フラグ',
-                'default' => '0',
-                'limit' => 1,
-                'null' => false,
+            ->addColumn('deleted', 'datetime', [
+                'comment' => '削除日時',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
             ])
             ->create();
 
@@ -155,12 +168,6 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('delete_flag', 'string', [
-                'comment' => '削除フラグ',
-                'default' => '0',
-                'limit' => 1,
-                'null' => false,
-            ])
             ->create();
 
         $this->table('gasha_pickups')
@@ -176,6 +183,12 @@ class Initial extends AbstractMigration
                 'limit' => 11,
                 'null' => true,
             ])
+            ->addColumn('search_snippet', 'text', [
+                'comment' => 'フリーワード検索用のスニペット',
+                'default' => null,
+                'limit' => 16777215,
+                'null' => true,
+            ])
             ->addColumn('created', 'datetime', [
                 'comment' => '作成日時',
                 'default' => null,
@@ -188,11 +201,11 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('delete_flag', 'string', [
-                'comment' => '削除フラグ',
-                'default' => '0',
-                'limit' => 1,
-                'null' => false,
+            ->addColumn('deleted', 'datetime', [
+                'comment' => '削除日時',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
             ])
             ->create();
 
@@ -227,6 +240,12 @@ class Initial extends AbstractMigration
                 'limit' => 11,
                 'null' => true,
             ])
+            ->addColumn('search_snippet', 'text', [
+                'comment' => 'フリーワード検索用のスニペット',
+                'default' => null,
+                'limit' => 16777215,
+                'null' => true,
+            ])
             ->addColumn('created', 'datetime', [
                 'comment' => '作成日時',
                 'default' => null,
@@ -239,11 +258,11 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('delete_flag', 'string', [
-                'comment' => '削除フラグ',
-                'default' => '0',
-                'limit' => 1,
-                'null' => false,
+            ->addColumn('deleted', 'datetime', [
+                'comment' => '削除日時',
+                'default' => null,
+                'limit' => null,
+                'null' => true,
             ])
             ->create();
 

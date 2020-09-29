@@ -7,8 +7,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
-use Cake\Utility\Hash;
-use App\Model\Entity\Gasha;
+use SoftDelete\Model\Table\SoftDeleteTrait;
 
 /**
  * Cards Model
@@ -30,6 +29,8 @@ use App\Model\Entity\Gasha;
  */
 class CardsTable extends AppTable
 {
+    /** 論理削除を行う */
+    use SoftDeleteTrait;
 
     /**
      * Initialize method
@@ -201,6 +202,21 @@ class CardsTable extends AppTable
      */
     public function patchEntity(EntityInterface $entity, array $data, array $options = [])
     {
+        // フリーワード検索のスニペット更新
+        $search_snippet = [];
+        $character = TableRegistry::getTableLocator()->get('Characters')->find()->select(['name'])->where(['id' => $data['character_id']])->first();
+        if (!empty($character)) {
+            $search_snippet[] = $character->name;
+        }
+        $search_snippet[] = $data['name'];
+        if (isset($data['rarity']) && $data['rarity'] != '') {
+            $search_snippet[] = _code("Codes.Cards.rarity.{$data['rarity']}");
+        }
+        if (isset($data['type']) && $data['type'] != '') {
+            $search_snippet[] = _code("Codes.Cards.type.{$data['type']}");
+        }
+        $data['search_snippet'] = implode(' ', $search_snippet);
+
         return parent::patchEntity($entity, $data, $options);
     }
 

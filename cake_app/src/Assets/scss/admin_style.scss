@@ -285,3 +285,8 @@ label.item-label {
     }
   }
 }
+
+/* フリーワード検索のAND、OR検索のラジオボタンについてANDの後ろの間隔を空ける */
+.freeword-search .input-group-prepend .input-group-text small:first-of-type {
+  margin-right: .25rem !important;
+}

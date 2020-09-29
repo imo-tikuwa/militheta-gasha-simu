@@ -13,13 +13,15 @@ $this->Form->setTemplates([
 <div class="col-md-12 mb-12">
   <div class="card rounded-0">
     <div class="card-header">
-      <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_ADD])) { ?>
-        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
-      <?php } ?>
-      <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" data-toggle="modal" data-target="#characters-search-form-modal">検索</button>
-      <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_CSV_EXPORT])) { ?>
-        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
-      <?php } ?>
+      <div class="form-inline">
+        <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_ADD])) { ?>
+          <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
+        <?php } ?>
+        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" data-toggle="modal" data-target="#characters-search-form-modal">検索</button>
+        <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_CSV_EXPORT])) { ?>
+          <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
+        <?php } ?>
+      </div>
     </div>
     <div class="card-body table-responsive p-0">
       <table class="table table-sm table-hover text-sm text-nowrap">

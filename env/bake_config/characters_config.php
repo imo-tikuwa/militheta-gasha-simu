@@ -43,6 +43,7 @@ return [
     'options' => [
         'one_record_limited' => false,
         'is_search_form' => true,
+        'use_freeword_search' => false,
         'yubinbango' => false,
         'paging_limit' => 20,
         'left_side_menu_icon_class' => 'fas fa-female',

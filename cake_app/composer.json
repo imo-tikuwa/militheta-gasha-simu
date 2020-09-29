@@ -6,11 +6,12 @@
     "license": "MIT",
     "require": {
         "php": ">=5.6",
-        "cakephp/cakephp": "3.8.*",
+        "cakephp/cakephp": "3.9.*",
         "cakephp/migrations": "^2.0.0",
         "cakephp/plugin-installer": "^1.0",
         "friendsofcake/cakephp-csvview": "3.3.*",
         "imo-tikuwa/cakephp-operation-logs": "^0.2.1",
+        "imo-tikuwa/cakephp3-soft-delete": "^1.4",
         "intervention/image": "^2.5",
         "josegonzalez/dotenv": "3.*",
         "mobiledetect/mobiledetectlib": "2.*"
@@ -19,7 +20,7 @@
         "cakephp/bake": "^1.12",
         "cakephp/cakephp-codesniffer": "^3.0",
         "cakephp/debug_kit": "^3.22",
-        "imo-tikuwa/cakephp-admin-baker": "^0.13.7",
+        "imo-tikuwa/cakephp-admin-baker": "^0.15.1",
         "imo-tikuwa/cakephp-api-generator": "^0.2.2",
         "psy/psysh": "@stable"
     },

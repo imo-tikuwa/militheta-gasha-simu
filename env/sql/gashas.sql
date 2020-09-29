@@ -6,8 +6,9 @@ CREATE TABLE `gashas` (
   `title` varchar(255) DEFAULT NULL COMMENT 'ガシャタイトル',
   `ssr_rate` int DEFAULT NULL COMMENT 'SSRレート',
   `sr_rate` int DEFAULT NULL COMMENT 'SRレート',
+  `search_snippet` mediumtext DEFAULT NULL COMMENT 'フリーワード検索用のスニペット',
   `created` datetime DEFAULT NULL COMMENT '作成日時',
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
-  `delete_flag` char(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
+  `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ガシャ';

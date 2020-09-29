@@ -2,7 +2,6 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
-use App\Model\Table\DeleteType;
 use App\Utils\AuthUtils;
 use Cake\Event\Event;
 use Cake\I18n\FrozenDate;
@@ -137,5 +136,30 @@ class AccountController extends AppController
         }
         $this->set(compact('admin'));
         $this->render('edit');
+    }
+
+    /**
+     * Delete method
+     *
+     * @param string|null $id 管理者ID
+     * @return \Cake\Http\Response|null Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function delete($id = null)
+    {
+        if (SUPER_USER_ID == $id) {
+            $this->Flash->error('エラーが発生しました。');
+
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->request->allowMethod(['post', 'delete']);
+        $entity = $this->Admins->get($id);
+        if ($this->Admins->delete($entity)) {
+            $this->Flash->success('管理者の削除が完了しました。');
+        } else {
+            $this->Flash->error('エラーが発生しました。');
+        }
+
+        return $this->redirect(['action' => 'index']);
     }
 }

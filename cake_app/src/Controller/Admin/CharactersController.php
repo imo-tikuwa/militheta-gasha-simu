@@ -2,7 +2,6 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
-use App\Model\Table\DeleteType;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;

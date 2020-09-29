@@ -6,6 +6,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use SoftDelete\Model\Table\SoftDeleteTrait;
 
 /**
  * Admins Model
@@ -23,6 +24,9 @@ use Cake\Validation\Validator;
  */
 class AdminsTable extends AppTable
 {
+    /** 論理削除を行う */
+    use SoftDeleteTrait;
+
     /**
      * Initialize method
      *
@@ -78,11 +82,6 @@ class AdminsTable extends AppTable
 
         $validator
             ->allowEmptyString('privilege');
-
-        $validator
-            ->scalar('delete_flag')
-            ->maxLength('delete_flag', 1)
-            ->notEmptyString('delete_flag');
 
         return $validator;
     }

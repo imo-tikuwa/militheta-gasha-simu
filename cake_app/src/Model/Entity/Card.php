@@ -12,9 +12,10 @@ namespace App\Model\Entity;
  * @property \Cake\I18n\FrozenDate|null $add_date
  * @property int|null $gasha_include
  * @property int|null $limited
+ * @property string|null $search_snippet
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
- * @property string $delete_flag
+ * @property \Cake\I18n\FrozenTime|null $deleted
  *
  * @property \App\Model\Entity\Character $character
  * @property \App\Model\Entity\CardReprint[] $card_reprints
@@ -40,9 +41,10 @@ class Card extends AppEntity
         'add_date' => true,
         'gasha_include' => true,
         'limited' => true,
+        'search_snippet' => true,
         'created' => true,
         'modified' => true,
-        'delete_flag' => true,
+        'deleted' => true,
         'character' => true,
         'card_reprints' => true,
         'gasha_pickups' => true,

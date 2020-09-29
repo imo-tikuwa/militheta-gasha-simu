@@ -2,7 +2,6 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
-use App\Model\Table\DeleteType;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\ORM\TableRegistry;
@@ -80,6 +79,20 @@ class CardReprintsController extends AppController
         // カードID
         if (isset($request['card_id']) && !is_null($request['card_id']) && $request['card_id'] !== '') {
             $query->where(['Cards.id' => $request['card_id']]);
+        }
+        // フリーワード
+        if (isset($request['search_snippet']) && !is_null($request['search_snippet']) && $request['search_snippet'] !== '') {
+            $search_snippet_conditions = [];
+            foreach (explode(' ', str_replace('　', ' ', $request['search_snippet'])) as $search_snippet) {
+                $search_snippet_conditions[] = [$this->CardReprints->aliasField('search_snippet LIKE') => "%{$search_snippet}%"];
+            }
+            if (isset($request['search_snippet_format']) && $request['search_snippet_format'] == 'AND') {
+                $query->where($search_snippet_conditions);
+            } else {
+                $query->where(function($exp) use ($search_snippet_conditions) {
+                    return $exp->or($search_snippet_conditions);
+                });
+            }
         }
         $query->group('CardReprints.id');
 
@@ -164,7 +177,8 @@ class CardReprintsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        if ($this->CardReprints->deleteRecord($id, DeleteType::LOGICAL)) {
+        $entity = $this->CardReprints->get($id);
+        if ($this->CardReprints->delete($entity)) {
             $this->Flash->success('復刻情報の削除が完了しました。');
         } else {
             $this->Flash->error('エラーが発生しました。');

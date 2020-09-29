@@ -10,9 +10,10 @@ namespace App\Model\Entity;
  * @property string|null $title
  * @property int|null $ssr_rate
  * @property int|null $sr_rate
+ * @property string|null $search_snippet
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
- * @property string $delete_flag
+ * @property \Cake\I18n\FrozenTime|null $deleted
  *
  * @property \App\Model\Entity\CardReprint[] $card_reprints
  * @property \App\Model\Entity\GashaPickup[] $gasha_pickups
@@ -35,9 +36,10 @@ class Gasha extends AppEntity
         'title' => true,
         'ssr_rate' => true,
         'sr_rate' => true,
+        'search_snippet' => true,
         'created' => true,
         'modified' => true,
-        'delete_flag' => true,
+        'deleted' => true,
         'card_reprints' => true,
         'gasha_pickups' => true,
     ];

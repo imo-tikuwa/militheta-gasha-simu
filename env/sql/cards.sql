@@ -8,8 +8,9 @@ CREATE TABLE `cards` (
   `add_date` date DEFAULT NULL COMMENT '実装日',
   `gasha_include` tinyint DEFAULT 1 COMMENT 'ガシャ対象？',
   `limited` tinyint DEFAULT 0 COMMENT '限定？',
+  `search_snippet` mediumtext DEFAULT NULL COMMENT 'フリーワード検索用のスニペット',
   `created` datetime DEFAULT NULL COMMENT '作成日時',
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
-  `delete_flag` char(1) NOT NULL DEFAULT '0' COMMENT '削除フラグ',
+  `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='カード';

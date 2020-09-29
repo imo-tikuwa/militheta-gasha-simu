@@ -26,7 +26,7 @@ class AdminsSeed extends AbstractSeed
                 'privilege' => NULL,
                 'created' => '2020-01-03 22:24:33',
                 'modified' => '2020-01-03 22:24:33',
-                'delete_flag' => '0',
+                'deleted' => NULL,
             ],
             [
                 'id' => '2',
@@ -35,7 +35,7 @@ class AdminsSeed extends AbstractSeed
                 'privilege' => '{"Cards": ["READ"], "Gashas": ["READ"], "Characters": ["READ"], "CardReprints": ["READ"], "GashaPickups": ["READ"]}',
                 'created' => '2020-03-12 19:22:35',
                 'modified' => '2020-03-12 19:22:35',
-                'delete_flag' => '0',
+                'deleted' => NULL,
             ],
         ];
 

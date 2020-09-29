@@ -174,4 +174,10 @@ return [
             ROLE_CSV_IMPORT => 'ガシャCSVインポート',
         ],
     ],
+    'Others' => [
+        'search_snippet_format' => [
+            'AND' => ' AND',
+            'OR' => ' OR',
+        ],
+    ],
 ];

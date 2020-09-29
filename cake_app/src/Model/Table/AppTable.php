@@ -1,9 +1,6 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Table\DeleteType;
-use Cake\Event\Event;
-use Cake\ORM\Query;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
@@ -22,90 +19,13 @@ class AppTable extends Table
 
         /** 作成日時、更新日時の自動付与 */
         $this->addBehavior('Timestamp', [
-                'events' => [
-                        'Model.beforeSave' => [
-                                'created' => 'new',
-                                'modified' => 'always'
-                        ]
+            'events' => [
+                'Model.beforeSave' => [
+                    'created' => 'new',
+                    'modified' => 'always'
                 ]
+            ]
         ]);
-    }
-
-    /**
-     * 検索前処理
-     * @param Event $event event object.
-     * @param Query $query query object.
-     * @param array $options option array.
-     * @param bool $primary root query or association query.
-     * @return void
-     */
-    public function beforeFind(Event $event, Query $query, $options, $primary)
-    {
-        if ($this->checkDeleteFlag) {
-            $query->where([$this->aliasField('delete_flag') => 0]);
-        }
-    }
-
-    /** 削除フラグを参照するかどうかのフラグ */
-    protected $checkDeleteFlag = true;
-
-    /**
-     * 論理削除データを検索結果に含めないようにする（デフォルト）
-     * @return void
-     */
-    public function setCheckDeleteFlag()
-    {
-        $this->checkDeleteFlag = true;
-    }
-
-    /**
-     * 論理削除データを検索結果に含めるようにする
-     * @return void
-     */
-    public function setNotCheckDeleteFlag()
-    {
-        $this->checkDeleteFlag = false;
-    }
-
-    /**
-     * 削除処理
-     * @param string $id テーブルのプライマリキーの値
-     * @param string $delete_type 論理削除(logical) or 物理削除(physical)
-     * @return bool
-     */
-    public function deleteRecord($id = '', $delete_type = DeleteType::LOGICAL)
-    {
-        if (empty($id)) {
-            return false;
-        }
-
-        return $this->deleteRecords([$id], $delete_type);
-    }
-
-    /**
-     * 削除処理
-     * @param array $ids テーブルのプライマリキーの値
-     * @param string $delete_type 論理削除(logical) or 物理削除(physical)
-     * @return bool
-     */
-    public function deleteRecords($ids = [], $delete_type = DeleteType::LOGICAL)
-    {
-        if (empty($ids)) {
-            return false;
-        }
-        $entities = $this->find()->where(['id IN' => $ids])->toArray();
-        foreach ($entities as $entity) {
-            if (DeleteType::PHYSICAL == $delete_type) {
-                // 物理削除
-                parent::delete($entity);
-            } else {
-                // 論理削除
-                $entity = $this->patchEntity($entity, ['delete_flag' => 1], ['validate' => false]);
-                $this->save($entity);
-            }
-        }
-
-        return true;
     }
 
     /**

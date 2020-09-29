@@ -10,7 +10,7 @@ namespace App\Model\Entity;
  * @property array|null $privilege
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
- * @property string $delete_flag
+ * @property \Cake\I18n\FrozenTime|null $deleted
  */
 class Admin extends AppEntity
 {
@@ -29,7 +29,7 @@ class Admin extends AppEntity
         'privilege' => true,
         'created' => true,
         'modified' => true,
-        'delete_flag' => true,
+        'deleted' => true,
     ];
 
     /**

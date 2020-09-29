@@ -2,7 +2,6 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
-use App\Model\Table\DeleteType;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
@@ -92,6 +91,20 @@ class CardsController extends AppController
         if (isset($request['limited']) && !is_null($request['limited']) && $request['limited'] !== '') {
             $query->where([$this->Cards->aliasField('limited') => $request['limited']]);
         }
+        // フリーワード
+        if (isset($request['search_snippet']) && !is_null($request['search_snippet']) && $request['search_snippet'] !== '') {
+            $search_snippet_conditions = [];
+            foreach (explode(' ', str_replace('　', ' ', $request['search_snippet'])) as $search_snippet) {
+                $search_snippet_conditions[] = [$this->Cards->aliasField('search_snippet LIKE') => "%{$search_snippet}%"];
+            }
+            if (isset($request['search_snippet_format']) && $request['search_snippet_format'] == 'AND') {
+                $query->where($search_snippet_conditions);
+            } else {
+                $query->where(function($exp) use ($search_snippet_conditions) {
+                    return $exp->or($search_snippet_conditions);
+                });
+            }
+        }
         $query->group('Cards.id');
 
         return $query->contain(['Characters', 'CardReprints']);
@@ -163,6 +176,26 @@ class CardsController extends AppController
         }
         $this->set(compact('card'));
         $this->render('edit');
+    }
+
+    /**
+     * Delete method
+     *
+     * @param string|null $id カードID
+     * @return \Cake\Http\Response|null Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $entity = $this->Cards->get($id);
+        if ($this->Cards->delete($entity)) {
+            $this->Flash->success('カードの削除が完了しました。');
+        } else {
+            $this->Flash->error('エラーが発生しました。');
+        }
+
+        return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Cards')]);
     }
 
     /**

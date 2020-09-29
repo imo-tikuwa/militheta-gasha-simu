@@ -2,7 +2,6 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
-use App\Model\Table\DeleteType;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
@@ -62,6 +61,20 @@ class GashasController extends AppController
         // ガシャタイトル
         if (isset($request['title']) && !is_null($request['title']) && $request['title'] !== '') {
             $query->where([$this->Gashas->aliasField('title LIKE') => "%{$request['title']}%"]);
+        }
+        // フリーワード
+        if (isset($request['search_snippet']) && !is_null($request['search_snippet']) && $request['search_snippet'] !== '') {
+            $search_snippet_conditions = [];
+            foreach (explode(' ', str_replace('　', ' ', $request['search_snippet'])) as $search_snippet) {
+                $search_snippet_conditions[] = [$this->Gashas->aliasField('search_snippet LIKE') => "%{$search_snippet}%"];
+            }
+            if (isset($request['search_snippet_format']) && $request['search_snippet_format'] == 'AND') {
+                $query->where($search_snippet_conditions);
+            } else {
+                $query->where(function($exp) use ($search_snippet_conditions) {
+                    return $exp->or($search_snippet_conditions);
+                });
+            }
         }
 
         return $query;
@@ -145,7 +158,8 @@ class GashasController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        if ($this->Gashas->deleteRecord($id, DeleteType::LOGICAL)) {
+        $entity = $this->Gashas->get($id);
+        if ($this->Gashas->delete($entity)) {
             $this->Flash->success('ガシャの削除が完了しました。');
         } else {
             $this->Flash->error('エラーが発生しました。');

@@ -13,13 +13,32 @@ $this->Form->setTemplates([
 <div class="col-md-12 mb-12">
   <div class="card rounded-0">
     <div class="card-header">
-      <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_ADD])) { ?>
-        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
-      <?php } ?>
-      <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" data-toggle="modal" data-target="#card_reprints-search-form-modal">検索</button>
-      <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_CSV_EXPORT])) { ?>
-        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
-      <?php } ?>
+      <div class="form-inline">
+        <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_ADD])) { ?>
+          <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
+        <?php } ?>
+        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" data-toggle="modal" data-target="#card_reprints-search-form-modal">検索</button>
+        <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_CSV_EXPORT])) { ?>
+          <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
+        <?php } ?>
+        <div class="freeword-search input-group input-group-sm">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <?= $this->Form->control('search_snippet_format', ['type' => 'radio', 'options' => _code('Others.search_snippet_format'), 'class' => 'form-check-label col-form-label col-form-label-sm card_reprints-freeword-search-snippet-format', 'default' => 'AND', 'value' => @$params['search_snippet_format'], 'label' => false, 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>', 'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}']]) ?>
+            </div>
+          </div>
+          <?= $this->Form->text('search_snippet', ['id' => 'card_reprints-freeword-search-snippet', 'class' => 'form-control form-control-sm rounded-0', 'value' => @$params['search_snippet'], 'style' => 'width: 200px;', 'placeholder' => 'フリーワード']) ?>
+          <div class="input-group-append">
+            <button type="button" id="card_reprints-freeword-search-btn" class="btn btn-sm btn-flat btn-outline-secondary"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <?= $this->Form->create(null, ['type' => 'get', 'id' => 'card_reprints-freeword-search-form', 'class' => 'd-none']) ?>
+          <?= $this->Form->hidden('search_snippet', ['id' => 'card_reprints-freeword-hidden-search-snippet', 'value' => @$params['search_snippet']]) ?>
+          <?= $this->Form->hidden('search_snippet_format', ['id' => 'card_reprints-freeword-hidden-search-snippet-format', 'value' => @$params['search_snippet_format']]) ?>
+          <?= $this->Form->hidden('sort', ['value' => @$params['sort']]) ?>
+          <?= $this->Form->hidden('direction', ['value' => @$params['direction']]) ?>
+        <?= $this->Form->end(); ?>
+      </div>
     </div>
     <div class="card-body table-responsive p-0">
       <table class="table table-sm table-hover text-sm text-nowrap">
@@ -98,6 +117,21 @@ $this->Form->setTemplates([
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('card_id', ['id' => 'card_id', 'type' => 'select', 'options' => $cards, 'class' => 'form-control form-control-sm', 'label' => 'カードID', 'value' => @$params['card_id']]); ?>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <label for="search_snippet" class="col-form-label col-form-label-sm">フリーワード</label>
+                <div class="freeword-search form-inline input-group input-group-sm">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <?= $this->Form->control('search_snippet_format', ['type' => 'radio', 'id' => 'modal-search_snippet-format', 'options' => _code('Others.search_snippet_format'), 'class' => 'form-check-label col-form-label col-form-label-sm', 'default' => 'AND', 'value' => @$params['search_snippet_format'], 'label' => false, 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>', 'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}']]) ?>
+                    </div>
+                  </div>
+                  <?= $this->Form->text('search_snippet', ['class' => 'form-control form-control-sm rounded-0', 'value' => @$params['search_snippet'], 'placeholder' => 'フリーワード']) ?>
+                </div>
               </div>
             </div>
           </div>

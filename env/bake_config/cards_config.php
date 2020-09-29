@@ -127,10 +127,12 @@ return [
     'options' => [
         'one_record_limited' => false,
         'is_search_form' => true,
+        'use_freeword_search' => true,
         'yubinbango' => false,
         'paging_limit' => 20,
         'left_side_menu_icon_class' => 'far fa-id-card',
-        'delete_function' => false,
+        'delete_function' => true,
+        'delete_type' => 'logical',
         'init_order_column' => 'id',
         'init_order_direction' => 'desc',
         'text_size' => 'small',

@@ -7,9 +7,10 @@ namespace App\Model\Entity;
  * @property int $id
  * @property int|null $gasha_id
  * @property int|null $card_id
+ * @property string|null $search_snippet
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
- * @property string $delete_flag
+ * @property \Cake\I18n\FrozenTime|null $deleted
  *
  * @property \App\Model\Entity\Gasha $gasha
  * @property \App\Model\Entity\Card $card
@@ -29,9 +30,10 @@ class GashaPickup extends AppEntity
     protected $_accessible = [
         'gasha_id' => true,
         'card_id' => true,
+        'search_snippet' => true,
         'created' => true,
         'modified' => true,
-        'delete_flag' => true,
+        'deleted' => true,
         'gasha' => true,
         'card' => true,
     ];

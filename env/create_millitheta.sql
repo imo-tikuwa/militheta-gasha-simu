@@ -17,12 +17,12 @@ FLUSH PRIVILEGES;
 -- 管理者テーブルを作成する
 use millitheta;
 CREATE TABLE `admins` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mail` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `mail` varchar(255) NOT NULL COMMENT 'メールアドレス',
+  `password` varchar(255) NOT NULL COMMENT 'パスワード',
   `privilege` json DEFAULT NULL COMMENT '権限',
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL,
-  `delete_flag` char(1) NOT NULL DEFAULT '0',
+  `created` datetime DEFAULT NULL COMMENT '作成日時',
+  `modified` datetime DEFAULT NULL COMMENT '更新日時',
+  `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

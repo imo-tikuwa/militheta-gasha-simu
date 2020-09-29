@@ -8,7 +8,6 @@ namespace App\Model\Entity;
  * @property string|null $name
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
- * @property string $delete_flag
  *
  * @property \App\Model\Entity\Card[] $cards
  */
@@ -28,7 +27,6 @@ class Character extends AppEntity
         'name' => true,
         'created' => true,
         'modified' => true,
-        'delete_flag' => true,
         'cards' => true,
     ];
 }

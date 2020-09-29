@@ -7,6 +7,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
+use SoftDelete\Model\Table\SoftDeleteTrait;
 
 /**
  * Gashas Model
@@ -27,6 +28,8 @@ use Cake\Validation\Validator;
  */
 class GashasTable extends AppTable
 {
+    /** 論理削除を行う */
+    use SoftDeleteTrait;
 
     /**
      * Initialize method
@@ -146,6 +149,11 @@ class GashasTable extends AppTable
      */
     public function patchEntity(EntityInterface $entity, array $data, array $options = [])
     {
+        // フリーワード検索のスニペット更新
+        $search_snippet = [];
+        $search_snippet[] = $data['title'];
+        $data['search_snippet'] = implode(' ', $search_snippet);
+
         return parent::patchEntity($entity, $data, $options);
     }
 
