@@ -1,11 +1,13 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\Entity\Gasha;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
+use Cake\Utility\Hash;
 use Cake\Validation\Validator;
 use SoftDelete\Model\Table\SoftDeleteTrait;
 
