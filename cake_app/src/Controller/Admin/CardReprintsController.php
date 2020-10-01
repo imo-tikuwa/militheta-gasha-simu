@@ -229,9 +229,10 @@ class CardReprintsController extends AppController
         $datetime = new \DateTime();
         $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
 
-        $_csvEncoding = 'UTF-8';
+        $_csvEncoding = 'CP932';
+        $_extension = 'mbstring';
         $this->response = $this->response->withDownload("card_reprints-{$datetime->format('YmdHis')}.csv");
         $this->viewBuilder()->setClassName('CsvView.Csv');
-        $this->set(compact('card_reprints', '_serialize', '_header', '_extract', '_csvEncoding'));
+        $this->set(compact('card_reprints', '_serialize', '_header', '_extract', '_csvEncoding', '_extension'));
     }
 }

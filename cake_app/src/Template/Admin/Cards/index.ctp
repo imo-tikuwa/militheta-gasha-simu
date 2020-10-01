@@ -22,7 +22,7 @@ $this->Form->setTemplates([
           <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->request->getQueryParams()]) ?>'">CSVエクスポート</button>
         <?php } ?>
         <?php if (AuthUtils::hasRole($this->request, ['action' => ACTION_CSV_IMPORT])) { ?>
-          <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="$('#csv-import-file').trigger('click');">CSVインポート</button>
+          <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" id="csv-import-btn">CSVインポート</button>
           <?= $this->Form->create(null, ['id' => 'csv-import-form', 'action' => ACTION_CSV_IMPORT, 'enctype' => 'multipart/form-data', 'style' => 'display:none;']) ?>
             <input type="file" name="csv_import_file" id="csv-import-file"/>
           <?= $this->Form->end(); ?>
