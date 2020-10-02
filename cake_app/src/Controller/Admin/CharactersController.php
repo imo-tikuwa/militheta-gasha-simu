@@ -162,10 +162,9 @@ class CharactersController extends AppController
         $datetime = new \DateTime();
         $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
 
-        $_csvEncoding = 'CP932';
-        $_extension = 'mbstring';
+        $_csvEncoding = 'UTF-8';
         $this->response = $this->response->withDownload("characters-{$datetime->format('YmdHis')}.csv");
         $this->viewBuilder()->setClassName('CsvView.Csv');
-        $this->set(compact('characters', '_serialize', '_header', '_extract', '_csvEncoding', '_extension'));
+        $this->set(compact('characters', '_serialize', '_header', '_extract', '_csvEncoding'));
     }
 }

@@ -267,11 +267,10 @@ class CardsController extends AppController
         $datetime = new \DateTime();
         $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
 
-        $_csvEncoding = 'CP932';
-        $_extension = 'mbstring';
+        $_csvEncoding = 'UTF-8';
         $this->response = $this->response->withDownload("cards-{$datetime->format('YmdHis')}.csv");
         $this->viewBuilder()->setClassName('CsvView.Csv');
-        $this->set(compact('cards', '_serialize', '_header', '_extract', '_csvEncoding', '_extension'));
+        $this->set(compact('cards', '_serialize', '_header', '_extract', '_csvEncoding'));
     }
 
     /**
@@ -285,7 +284,7 @@ class CardsController extends AppController
             $conn = $this->Cards->getConnection();
             $conn->begin();
             try {
-                $csv_data = CsvUtils::parseCsv($csv_import_file);
+                $csv_data = CsvUtils::parseUtf8Csv($csv_import_file);
                 $insert_count = 0;
                 $update_count = 0;
                 foreach ($csv_data as $index => $csv_row) {

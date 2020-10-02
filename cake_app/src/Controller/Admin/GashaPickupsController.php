@@ -229,10 +229,9 @@ class GashaPickupsController extends AppController
         $datetime = new \DateTime();
         $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
 
-        $_csvEncoding = 'CP932';
-        $_extension = 'mbstring';
+        $_csvEncoding = 'UTF-8';
         $this->response = $this->response->withDownload("gasha_pickups-{$datetime->format('YmdHis')}.csv");
         $this->viewBuilder()->setClassName('CsvView.Csv');
-        $this->set(compact('gasha_pickups', '_serialize', '_header', '_extract', '_csvEncoding', '_extension'));
+        $this->set(compact('gasha_pickups', '_serialize', '_header', '_extract', '_csvEncoding'));
     }
 }

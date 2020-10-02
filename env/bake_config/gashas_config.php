@@ -107,5 +107,6 @@ return [
         'table_size' => 'small',
         'csv_export' => true,
         'csv_import' => true,
+        'csv_encoding' => 'utf8',
     ],
 ];
