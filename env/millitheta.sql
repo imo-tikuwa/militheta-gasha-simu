@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-09-29 21:02:21
+Date: 2020-10-03 09:03:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,7 +54,7 @@ CREATE TABLE `cards` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=965 DEFAULT CHARSET=utf8 COMMENT='カード';
+) ENGINE=InnoDB AUTO_INCREMENT=987 DEFAULT CHARSET=utf8 COMMENT='カード';
 
 -- ----------------------------
 -- Records of cards
@@ -1023,6 +1023,28 @@ INSERT INTO `cards` VALUES ('961', '16', '選ばれし少女　伊吹翼', '04',
 INSERT INTO `cards` VALUES ('962', '36', '昨日の悪友は今日の、　矢吹可奈', '04', '01', '2020-08-31', '1', '1', '矢吹可奈 昨日の悪友は今日の、　矢吹可奈 SSR Princess', '2020-08-31 20:08:21', '2020-09-29 20:30:27', null);
 INSERT INTO `cards` VALUES ('963', '34', 'ふたりきりの街角　舞浜歩', '03', '02', '2020-08-31', '1', '1', '舞浜歩 ふたりきりの街角　舞浜歩 SR Fairy', '2020-08-31 20:08:21', '2020-09-29 20:30:27', null);
 INSERT INTO `cards` VALUES ('964', '20', 'MILLION LIVE CLOSET！　所恵美', '03', '02', '2020-08-31', '1', '0', '所恵美 MILLION LIVE CLOSET！　所恵美 SR Fairy', '2020-08-31 20:08:21', '2020-09-29 20:30:27', null);
+INSERT INTO `cards` VALUES ('965', '7', 'Let’s Go！Little Trip！　水瀬伊織', '03', '02', '2020-09-01', '0', '0', '水瀬伊織 Let’s Go！Little Trip！　水瀬伊織 SR Fairy', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('966', '32', 'Let’s Go！Little Trip！　エミリー', '03', '01', '2020-09-01', '0', '0', 'エミリー Let’s Go！Little Trip！　エミリー SR Princess', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('967', '3', '追憶のサンドグラス　星井美希', '04', '03', '2020-09-10', '1', '0', '星井美希 追憶のサンドグラス　星井美希 SSR Angel', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('968', '31', 'Maria Trap　天空橋朋花', '04', '02', '2020-09-10', '1', '0', '天空橋朋花 Maria Trap　天空橋朋花 SSR Fairy', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('969', '22', 'MILLION LIVE CLOSET！　箱崎星梨花', '03', '03', '2020-09-10', '1', '0', '箱崎星梨花 MILLION LIVE CLOSET！　箱崎星梨花 SR Angel', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('970', '6', 'MILLION LIVE CLOSET！　菊地真', '03', '01', '2020-09-10', '1', '0', '菊地真 MILLION LIVE CLOSET！　菊地真 SR Princess', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('971', '24', 'くのいち姫　望月杏奈', '03', '03', '2020-09-10', '0', '0', '望月杏奈 くのいち姫　望月杏奈 SR Angel', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('972', '49', 'ちびっ娘お姫様　周防桃子', '03', '02', '2020-09-10', '0', '0', '周防桃子 ちびっ娘お姫様　周防桃子 SR Fairy', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('973', '28', 'アイドル天下布武　松田亜利沙', '02', '01', '2020-09-10', '1', '0', '松田亜利沙 アイドル天下布武　松田亜利沙 R Princess', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('974', '45', '秘められた正義　篠宮可憐', '04', '03', '2020-09-18', '1', '1', '篠宮可憐 秘められた正義　篠宮可憐 SSR Angel', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('975', '4', 'ウサギたちの夜　萩原雪歩', '04', '01', '2020-09-18', '1', '0', '萩原雪歩 ウサギたちの夜　萩原雪歩 SSR Princess', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('976', '21', 'MILLION LIVE CLOSET！　徳川まつり', '03', '01', '2020-09-18', '1', '0', '徳川まつり MILLION LIVE CLOSET！　徳川まつり SR Princess', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('977', '44', 'かわいく決めポーズ♪　真壁瑞希', '03', '02', '2020-09-18', '1', '0', '真壁瑞希 かわいく決めポーズ♪　真壁瑞希 SR Fairy', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('978', '35', 'ふわもこルームウェア　木下ひなた', '02', '03', '2020-09-18', '1', '0', '木下ひなた ふわもこルームウェア　木下ひなた R Angel', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('979', '40', 'TIntMe！　大神環', '03', '03', '2020-09-18', '0', '0', '大神環 TIntMe！　大神環 SR Angel', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('980', '30', 'TIntMe！　中谷育', '03', '01', '2020-09-18', '0', '0', '中谷育 TIntMe！　中谷育 SR Princess', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('981', '46', 'ライティング・シティ　百瀬莉緒', '04', '02', '2020-09-28', '1', '2', '百瀬莉緒 ライティング・シティ　百瀬莉緒 SSR Fairy', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('982', '41', 'スパンコールの星空に　豊川風花', '04', '03', '2020-09-28', '1', '2', '豊川風花 スパンコールの星空に　豊川風花 SSR Angel', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('983', '37', '満月の夜にはご用心♡　横山奈緒', '04', '01', '2020-10-02', '1', '1', '横山奈緒 満月の夜にはご用心♡　横山奈緒 SSR Princess', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('984', '25', 'ロンリー・ロコナイズ　ロコ', '04', '02', '2020-10-02', '1', '1', 'ロコ ロンリー・ロコナイズ　ロコ SSR Fairy', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('985', '1', 'スイートハロウィン　天海春香', '03', '01', '2020-10-02', '1', '1', '天海春香 スイートハロウィン　天海春香 SR Princess', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
+INSERT INTO `cards` VALUES ('986', '10', 'MILLION LIVE CLOSET！　三浦あずさ', '03', '03', '2020-10-02', '1', '0', '三浦あずさ MILLION LIVE CLOSET！　三浦あずさ SR Angel', '2020-10-03 08:48:56', '2020-10-03 08:48:56', null);
 
 -- ----------------------------
 -- Table structure for `card_reprints`
@@ -1237,7 +1259,7 @@ CREATE TABLE `gashas` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
+) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
 
 -- ----------------------------
 -- Records of gashas
@@ -1391,6 +1413,10 @@ INSERT INTO `gashas` VALUES ('146', '2020-08-12', '2020-08-19', 'SONG FOR YOU！
 INSERT INTO `gashas` VALUES ('147', '2020-08-19', '2020-08-29', '【期間限定】戦慄のゴーストレディガシャ', '3', '12', '【期間限定】戦慄のゴーストレディガシャ', '2020-08-31 20:11:47', '2020-09-29 20:46:48', null);
 INSERT INTO `gashas` VALUES ('148', '2020-08-29', '2020-08-31', '【限定復刻】日替わりピックアップ！限定復刻ガシャ', '3', '12', '【限定復刻】日替わりピックアップ！限定復刻ガシャ', '2020-08-31 20:11:47', '2020-09-29 20:46:48', null);
 INSERT INTO `gashas` VALUES ('149', '2020-08-31', '2020-09-10', '【期間限定】奇跡を起こすよ♪マジカル☆パワー！ガシャ', '3', '12', '【期間限定】奇跡を起こすよ♪マジカル☆パワー！ガシャ', '2020-08-31 20:11:47', '2020-09-29 20:46:48', null);
+INSERT INTO `gashas` VALUES ('150', '2020-09-10', '2020-09-18', 'SONG FOR YOU！ガシャ VOL.8', '3', '12', 'SONG FOR YOU！ガシャ VOL.8', '2020-10-03 08:52:50', '2020-10-03 08:52:50', null);
+INSERT INTO `gashas` VALUES ('151', '2020-09-18', '2020-09-28', '【期間限定】その正体は…！？ラビットガールガシャ', '3', '12', '【期間限定】その正体は…！？ラビットガールガシャ', '2020-10-03 08:52:50', '2020-10-03 08:52:50', null);
+INSERT INTO `gashas` VALUES ('152', '2020-09-28', '2020-10-02', '【フェス限定】ミリオンフェス', '6', '12', '【フェス限定】ミリオンフェス', '2020-10-03 08:52:50', '2020-10-03 08:52:50', null);
+INSERT INTO `gashas` VALUES ('153', '2020-10-02', '2020-10-12', '【期間限定】ナイショの☆ハロウィンモンスターガシャ', '3', '12', '【期間限定】ナイショの☆ハロウィンモンスターガシャ', '2020-10-03 08:52:50', '2020-10-03 08:52:50', null);
 
 -- ----------------------------
 -- Table structure for `gasha_pickups`
@@ -1405,7 +1431,7 @@ CREATE TABLE `gasha_pickups` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=550 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
+) ENGINE=InnoDB AUTO_INCREMENT=565 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
 
 -- ----------------------------
 -- Records of gasha_pickups
@@ -1959,3 +1985,18 @@ INSERT INTO `gasha_pickups` VALUES ('546', '149', '961', '【期間限定】奇�
 INSERT INTO `gasha_pickups` VALUES ('547', '149', '962', '【期間限定】奇跡を起こすよ♪マジカル☆パワー！ガシャ 昨日の悪友は今日の、　矢吹可奈', '2020-08-31 20:20:28', '2020-09-29 20:47:03', null);
 INSERT INTO `gasha_pickups` VALUES ('548', '149', '963', '【期間限定】奇跡を起こすよ♪マジカル☆パワー！ガシャ ふたりきりの街角　舞浜歩', '2020-08-31 20:20:37', '2020-09-29 20:47:03', null);
 INSERT INTO `gasha_pickups` VALUES ('549', '149', '964', '【期間限定】奇跡を起こすよ♪マジカル☆パワー！ガシャ MILLION LIVE CLOSET！　所恵美', '2020-08-31 20:20:48', '2020-09-29 20:47:03', null);
+INSERT INTO `gasha_pickups` VALUES ('550', '150', '967', 'SONG FOR YOU！ガシャ VOL.8 追憶のサンドグラス　星井美希', '2020-10-03 08:54:08', '2020-10-03 08:54:08', null);
+INSERT INTO `gasha_pickups` VALUES ('551', '150', '968', 'SONG FOR YOU！ガシャ VOL.8 Maria Trap　天空橋朋花', '2020-10-03 08:54:17', '2020-10-03 08:54:17', null);
+INSERT INTO `gasha_pickups` VALUES ('552', '150', '969', 'SONG FOR YOU！ガシャ VOL.8 MILLION LIVE CLOSET！　箱崎星梨花', '2020-10-03 08:54:26', '2020-10-03 08:54:26', null);
+INSERT INTO `gasha_pickups` VALUES ('553', '150', '970', 'SONG FOR YOU！ガシャ VOL.8 MILLION LIVE CLOSET！　菊地真', '2020-10-03 08:54:37', '2020-10-03 08:54:37', null);
+INSERT INTO `gasha_pickups` VALUES ('554', '151', '974', '【期間限定】その正体は…！？ラビットガールガシャ 秘められた正義　篠宮可憐', '2020-10-03 08:55:05', '2020-10-03 08:55:05', null);
+INSERT INTO `gasha_pickups` VALUES ('555', '151', '975', '【期間限定】その正体は…！？ラビットガールガシャ ウサギたちの夜　萩原雪歩', '2020-10-03 08:55:14', '2020-10-03 08:55:14', null);
+INSERT INTO `gasha_pickups` VALUES ('556', '151', '976', '【期間限定】その正体は…！？ラビットガールガシャ MILLION LIVE CLOSET！　徳川まつり', '2020-10-03 08:55:24', '2020-10-03 08:55:24', null);
+INSERT INTO `gasha_pickups` VALUES ('557', '151', '977', '【期間限定】その正体は…！？ラビットガールガシャ かわいく決めポーズ♪　真壁瑞希', '2020-10-03 08:55:37', '2020-10-03 08:55:37', null);
+INSERT INTO `gasha_pickups` VALUES ('558', '151', '978', '【期間限定】その正体は…！？ラビットガールガシャ ふわもこルームウェア　木下ひなた', '2020-10-03 08:55:47', '2020-10-03 08:55:47', null);
+INSERT INTO `gasha_pickups` VALUES ('559', '152', '981', '【フェス限定】ミリオンフェス ライティング・シティ　百瀬莉緒', '2020-10-03 08:56:40', '2020-10-03 08:56:40', null);
+INSERT INTO `gasha_pickups` VALUES ('560', '152', '982', '【フェス限定】ミリオンフェス スパンコールの星空に　豊川風花', '2020-10-03 08:56:50', '2020-10-03 08:56:50', null);
+INSERT INTO `gasha_pickups` VALUES ('561', '153', '983', '【期間限定】ナイショの☆ハロウィンモンスターガシャ 満月の夜にはご用心♡　横山奈緒', '2020-10-03 08:57:20', '2020-10-03 08:57:20', null);
+INSERT INTO `gasha_pickups` VALUES ('562', '153', '984', '【期間限定】ナイショの☆ハロウィンモンスターガシャ ロンリー・ロコナイズ　ロコ', '2020-10-03 08:57:28', '2020-10-03 08:57:28', null);
+INSERT INTO `gasha_pickups` VALUES ('563', '153', '985', '【期間限定】ナイショの☆ハロウィンモンスターガシャ スイートハロウィン　天海春香', '2020-10-03 08:57:36', '2020-10-03 08:57:36', null);
+INSERT INTO `gasha_pickups` VALUES ('564', '153', '986', '【期間限定】ナイショの☆ハロウィンモンスターガシャ MILLION LIVE CLOSET！　三浦あずさ', '2020-10-03 08:57:46', '2020-10-03 08:57:46', null);
