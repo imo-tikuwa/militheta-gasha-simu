@@ -20,7 +20,7 @@
     "bootstrap": "^4.3.1",
     "bootstrap-fileinput": "^5.0.6",
     "bootstrap4-tagsinput": "git+https://github.com/imo-tikuwa/bootstrap4-tagsinput.git",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "js-cookie": "^2.2.1",
     "moment": "^2.24.0",
     "select2": "^4.0.7",
