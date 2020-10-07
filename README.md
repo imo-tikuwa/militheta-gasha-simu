@@ -33,7 +33,7 @@ export DEBUG="false"
 export APP_ENCODING="UTF-8"
 export APP_DEFAULT_LOCALE="ja_JP"
 export APP_DEFAULT_TIMEZONE="Asia/Tokyo"
-export SECURITY_SALT="7Tosv70DGOM0SGEJcyS6MjMWOWtsPKawUHc5CgjyxbiiQulIiQZfYCEdbcEY2r1A"
+export SECURITY_SALT="jHRuXqo8amappyTo5GjUFws6iPCX4hGyVZ5zsjdPHWOk3WY9gTjgOwpzZoJYoRES"
 
 # CakePHP3のデータベース設定
 export DATABASE_HOST="localhost"
