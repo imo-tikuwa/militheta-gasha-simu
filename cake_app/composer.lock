@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c310aa652b9133f004ccfda1c0cc487f",
+    "content-hash": "6e35e2b489a4172cecd052222c7d9931",
     "packages": [
         {
             "name": "aura/intl",
@@ -2260,16 +2260,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-admin-baker",
-            "version": "v0.17.1",
+            "version": "v0.17.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-admin-baker.git",
-                "reference": "0fee1ca36a95716bef0171be8c1953131215e191"
+                "reference": "901f5eab5b27fccb36c6d1b882cf0c836552ab37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/0fee1ca36a95716bef0171be8c1953131215e191",
-                "reference": "0fee1ca36a95716bef0171be8c1953131215e191",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/901f5eab5b27fccb36c6d1b882cf0c836552ab37",
+                "reference": "901f5eab5b27fccb36c6d1b882cf0c836552ab37",
                 "shasum": ""
             },
             "require": {
@@ -2295,10 +2295,10 @@
             ],
             "description": "Cake3AdminBaker plugin for CakePHP",
             "support": {
-                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v0.17.1",
+                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v0.17.2",
                 "issues": "https://github.com/imo-tikuwa/cakephp-admin-baker/issues"
             },
-            "time": "2020-10-07T07:06:48+00:00"
+            "time": "2020-10-07T09:12:03+00:00"
         },
         {
             "name": "imo-tikuwa/cakephp-api-generator",

@@ -2,6 +2,8 @@
 
 namespace App\Utils;
 
+use Cake\Utility\Security;
+
 /**
  * 暗号化/複合化を行うクラス
  * @author tikuwa
@@ -28,7 +30,7 @@ class Encrypter {
         $iv = openssl_random_pseudo_bytes($iv_size);
 
         // 暗号化
-        $encrypted_password = openssl_encrypt($plain_password, self::METHOD, _code('Security.salt'), OPENSSL_RAW_DATA, $iv);
+        $encrypted_password = openssl_encrypt($plain_password, self::METHOD, Security::getSalt(), OPENSSL_RAW_DATA, $iv);
 
         return base64_encode($iv) . ':' . base64_encode($encrypted_password);
     }
@@ -46,6 +48,6 @@ class Encrypter {
         $encrypted = base64_decode($password_data[1]);
 
         // 複合化
-        return openssl_decrypt($encrypted, self::METHOD, _code('Security.salt'), OPENSSL_RAW_DATA, $iv);
+        return openssl_decrypt($encrypted, self::METHOD, Security::getSalt(), OPENSSL_RAW_DATA, $iv);
     }
 }
