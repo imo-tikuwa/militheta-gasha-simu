@@ -64,28 +64,28 @@ class AuthUtils
             $action = $properties['action'];
         }
 
-        $privilegs = $request->getSession()->read('Auth.Admin.privilege.' . $controller);
-        if (empty($privilegs)) {
+        $privileges = $request->getSession()->read('Auth.Admin.privilege.' . $controller);
+        if (empty($privileges)) {
             return false;
         }
 
         switch ($action) {
             case ACTION_INDEX:
             case ACTION_VIEW:
-                $has_role = in_array(ROLE_READ, $privilegs, true);
+                $has_role = in_array(ROLE_READ, $privileges, true);
                 break;
             case ACTION_ADD:
             case ACTION_EDIT:
-                $has_role = in_array(ROLE_WRITE, $privilegs, true);
+                $has_role = in_array(ROLE_WRITE, $privileges, true);
                 break;
             case ACTION_DELETE:
-                $has_role = in_array(ROLE_DELETE, $privilegs, true);
+                $has_role = in_array(ROLE_DELETE, $privileges, true);
                 break;
             case ACTION_CSV_EXPORT:
-                $has_role = in_array(ROLE_CSV_EXPORT, $privilegs, true);
+                $has_role = in_array(ROLE_CSV_EXPORT, $privileges, true);
                 break;
             case ACTION_CSV_IMPORT:
-                $has_role = in_array(ROLE_CSV_IMPORT, $privilegs, true);
+                $has_role = in_array(ROLE_CSV_IMPORT, $privileges, true);
                 break;
                 // 上記以外のアクションは一律アクセス可能
             default:

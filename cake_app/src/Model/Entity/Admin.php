@@ -1,6 +1,8 @@
 <?php
 namespace App\Model\Entity;
 
+use App\Utils\Encrypter;
+
 /**
  * Admin Entity
  *
@@ -42,6 +44,16 @@ class Admin extends AppEntity
     ];
 
     /**
+     * 平のパスワードを暗号化する
+     */
+    protected function _setPassword($password)
+    {
+        if (strlen($password) > 0) {
+            return Encrypter::encrypt($password);
+        }
+    }
+
+    /**
      * 生のパスワードを返す
      * @return string
      */
@@ -51,6 +63,6 @@ class Admin extends AppEntity
             return null;
         }
 
-        return decrypt_password($this->password);
+        return Encrypter::decrypt($this->password);
     }
 }

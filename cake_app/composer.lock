@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47f16f4d7cbd455a47a0b8fd164a550b",
+    "content-hash": "c310aa652b9133f004ccfda1c0cc487f",
     "packages": [
         {
             "name": "aura/intl",
@@ -1767,6 +1767,7 @@
                 "extension",
                 "twig"
             ],
+            "abandoned": "twig/cache-extension",
             "time": "2020-01-01T20:47:37+00:00"
         },
         {
@@ -2259,16 +2260,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-admin-baker",
-            "version": "v0.16.1",
+            "version": "v0.17.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-admin-baker.git",
-                "reference": "70e93c808e33d0b89885b6f077a75b2b9899d8c6"
+                "reference": "0fee1ca36a95716bef0171be8c1953131215e191"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/70e93c808e33d0b89885b6f077a75b2b9899d8c6",
-                "reference": "70e93c808e33d0b89885b6f077a75b2b9899d8c6",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/0fee1ca36a95716bef0171be8c1953131215e191",
+                "reference": "0fee1ca36a95716bef0171be8c1953131215e191",
                 "shasum": ""
             },
             "require": {
@@ -2294,10 +2295,10 @@
             ],
             "description": "Cake3AdminBaker plugin for CakePHP",
             "support": {
-                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v0.16.1",
+                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v0.17.1",
                 "issues": "https://github.com/imo-tikuwa/cakephp-admin-baker/issues"
             },
-            "time": "2020-10-02T11:00:41+00:00"
+            "time": "2020-10-07T07:06:48+00:00"
         },
         {
             "name": "imo-tikuwa/cakephp-api-generator",
@@ -3217,5 +3218,6 @@
     "platform": {
         "php": ">=5.6"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

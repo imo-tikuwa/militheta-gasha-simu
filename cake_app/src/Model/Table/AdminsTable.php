@@ -85,18 +85,4 @@ class AdminsTable extends AppTable
 
         return $validator;
     }
-
-    /**
-     * patchEntityのオーバーライド
-     * {@inheritDoc}
-     * @see \Cake\ORM\Table::patchEntity()
-     */
-    public function patchEntity(EntityInterface $entity, array $data, array $options = [])
-    {
-        if (isset($data['password']) && !empty($data['password'])) {
-            $data['password'] = encrypt_password($data['password']);
-        }
-
-        return parent::patchEntity($entity, $data, $options);
-    }
 }

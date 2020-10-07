@@ -1,6 +1,7 @@
 <?php
 namespace App\Auth;
 
+use App\Utils\Encrypter;
 use Cake\Auth\AbstractPasswordHasher;
 
 /**
@@ -21,7 +22,7 @@ class ExPasswordHasher extends AbstractPasswordHasher
      */
     public function hash($password)
     {
-        return encrypt_password($password);
+        return Encrypter::encrypt($password);
     }
 
     /**
@@ -32,6 +33,6 @@ class ExPasswordHasher extends AbstractPasswordHasher
      */
     public function check($password, $hashedPassword)
     {
-        return $password === decrypt_password($hashedPassword);
+        return $password === Encrypter::decrypt($hashedPassword);
     }
 }

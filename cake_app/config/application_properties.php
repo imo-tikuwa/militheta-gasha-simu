@@ -137,9 +137,6 @@ return [
             'direction' => 'desc',
         ],
     ],
-    'AdminConfig' => [
-        'CakeEncryptionSalt' => 'b6j26pq7ghkw88s8',
-    ],
     'AdminRoles' => [
         'Characters' => [
             ROLE_READ => 'キャラクター読込',
