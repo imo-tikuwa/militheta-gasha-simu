@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Model\Table;
 
 use Cake\Datasource\EntityInterface;
@@ -15,14 +17,19 @@ use SoftDelete\Model\Table\SoftDeleteTrait;
  * @property \App\Model\Table\CardReprintsTable&\Cake\ORM\Association\HasMany $CardReprints
  * @property \App\Model\Table\GashaPickupsTable&\Cake\ORM\Association\HasMany $GashaPickups
  *
- * @method \App\Model\Entity\Gasha get($primaryKey, $options = [])
- * @method \App\Model\Entity\Gasha newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Gasha newEmptyEntity()
+ * @method \App\Model\Entity\Gasha newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Gasha[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Gasha get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Gasha findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Gasha patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Gasha[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\Gasha|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Gasha saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Gasha patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Gasha[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Gasha findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Gasha[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Gasha[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Gasha[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Gasha[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
@@ -37,7 +44,7 @@ class GashasTable extends AppTable
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         parent::initialize($config);
 
@@ -58,7 +65,7 @@ class GashasTable extends AppTable
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         // ID
         $validator
@@ -147,7 +154,7 @@ class GashasTable extends AppTable
      * @param array $data エンティティに上書きするデータ
      * @param array $options オプション配列
      */
-    public function patchEntity(EntityInterface $entity, array $data, array $options = [])
+    public function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface
     {
         // フリーワード検索のスニペット更新
         $search_snippet = [];

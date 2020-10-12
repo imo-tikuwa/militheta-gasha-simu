@@ -1,83 +1,64 @@
 <?php
 namespace App\Controller\Admin;
 
-use Cake\Event\Event;
+use App\Utils\AuthUtils;
+use Cake\Event\EventInterface;
+use Cake\Http\Cookie\Cookie;
+use Cake\Http\ServerRequest;
 
 class AppController extends \App\Controller\AppController
 {
     /**
      *
      * {@inheritDoc}
-     * @see \Cake\Controller\Controller::beforeFilter()
+     * @see \App\Controller\AppController::initialize()
      */
-    public function beforeFilter(Event $event)
+    public function initialize(): void
     {
-        parent::beforeFilter($event);
+        parent::initialize();
 
-        // サイドメニューの展開状態をCookie管理する
-        $sidemenu_toggle_class = $this->request->getCookie('sidemenu-toggle-class');
-        if (empty($sidemenu_toggle_class)) {
-            $sidemenu_toggle_class = 'sidebar-collapse';
-            $this->response = $this->response->withCookie('sidemenu-toggle-class', $sidemenu_toggle_class);
-        }
-        $this->set(compact('sidemenu_toggle_class'));
+        /** load \Authentication\Controller\Component\AuthenticationComponent */
+        $this->loadComponent('Authentication.Authentication');
+
+        $this->viewBuilder()->setLayout('default_admin');
     }
 
     /**
      *
      * {@inheritDoc}
-     * @see \App\Controller\AppController::initialize()
+     * @see \Cake\Controller\Controller::beforeFilter()
      */
-    public function initialize()
+    public function beforeFilter(EventInterface $event)
     {
-        parent::initialize();
+        parent::beforeFilter($event);
 
-        $this->viewBuilder()->setLayout('default_admin');
+        // authorizationプラグインで認可エラー時にリダイレクトする場合に、Flashメッセージの設定方法が不明なため使用を中止する
+        if (!$this->authorize($this->getRequest())) {
+            $this->Flash->error(MESSAGE_AUTH_ERROR);
 
-        $this->loadComponent('Auth', [
-            // 認証設定
-            'authenticate' => [
-                'Form' => [
-                    'userModel' => 'Admins',
-                    'fields' => [
-                        'username' => 'mail',
-                        'password' => 'password'
-                    ],
-                    'finder' => 'auth',
-                    'passwordHasher' => [
-                        'className' => 'Ex' // ExPasswordHasherを参照
-                    ],
-                ],
-            ],
-            // AdminAuthorize
-            'authorize' => [
-                'Admin'
-            ],
-            // ログイン画面
-            'loginAction' => [
-                'controller' => 'Auth',
-                'action' => 'login',
-                'prefix' => 'admin',
-            ],
-            // ログイン後のリダイレクト先
-            'loginRedirect' => [
-                'controller' => 'Top',
-                'action' => 'index',
-                'prefix' => 'admin',
-            ],
-            // ログアウト後のリダイレクト先
-            'logoutRedirect' => [
-                'controller' => 'Auth',
-                'action' => 'login',
-                'prefix' => 'admin',
-            ],
-            // sessionストレージ設定
-            'storage' => [
-                'className' => 'Session',
-                'key' => 'Auth.Admin'
-            ],
-            // 許可されていないアクセスがあったときのエラーメッセージ
-            'authError' => MESSAGE_AUTH_ERROR,
-        ]);
+            return $this->redirect(['controller' => 'top', 'action' => 'index']);
+        }
+
+        // サイドメニューの展開状態をCookie管理する
+        $sidemenu_toggle_class = $this->getRequest()->getCookie('sidemenu-toggle-class');
+        if (empty($sidemenu_toggle_class)) {
+            $sidemenu_toggle_class = 'sidebar-collapse';
+            $this->response = $this->response->withCookie(Cookie::create('sidemenu-toggle-class', $sidemenu_toggle_class));
+        }
+        $this->set(compact('sidemenu_toggle_class'));
+    }
+
+    /**
+     * cakephp/authorizationプラグインの代わりの認可処理
+     */
+    private function authorize(ServerRequest $request)
+    {
+        // 権限なしでアクセス可能なコントローラ
+        if (in_array($request->getParam('controller'), ['Auth', 'Top'])) {
+            return true;
+        }
+
+        // ログイン中のユーザーがアクセス中のアクションの権限を持っているかチェック
+        return AuthUtils::hasRole($request);
     }
 }

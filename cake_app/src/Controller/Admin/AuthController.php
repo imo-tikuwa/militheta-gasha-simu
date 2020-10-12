@@ -1,13 +1,14 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
-use Cake\Event\Event;
-use Cake\ORM\TableRegistry;
+use Cake\Event\EventInterface;
 
 /**
  * Auth Controller
  *
- * @property \App\Model\Table\AdminsTable $Admins
+ * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
  */
 class AuthController extends AppController
 {
@@ -16,13 +17,13 @@ class AuthController extends AppController
      * {@inheritDoc}
      * @see \Cake\Controller\Controller::beforeFilter()
      */
-    public function beforeFilter(Event $event)
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Auth->allow(['logout']);
 
-        // ログイン画面はレイアウトを使用しない
-        $this->viewBuilder()->setLayout(false);
+        $this->Authentication->addUnauthenticatedActions(['login']);
+
+        $this->viewBuilder()->disableAutoLayout();
     }
 
     /**
@@ -31,16 +32,18 @@ class AuthController extends AppController
      */
     public function login()
     {
-        if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user) {
-                // 他のユーザーセッションを消す
-                $this->request->getSession()->destroy();
+        $this->getRequest()->allowMethod(['get', 'post']);
+        $result = $this->Authentication->getResult();
+        if ($result->isValid()) {
+            $redirect = $this->getRequest()->getQuery('redirect', [
+                'controller' => 'Top',
+                'action' => 'index',
+            ]);
 
-                $this->Auth->setUser($user);
+            return $this->redirect($redirect);
+        }
 
-                return $this->redirect($this->Auth->redirectUrl());
-            }
+        if ($this->getRequest()->is('post') && !$result->isValid()) {
             $this->Flash->error('ログインIDかパスワードが正しくありません。');
         }
     }
@@ -51,6 +54,10 @@ class AuthController extends AppController
      */
     public function logout()
     {
-        return $this->redirect($this->Auth->logout());
+        $result = $this->Authentication->getResult();
+        if ($result->isValid()) {
+            $this->Authentication->logout();
+            return $this->redirect(['action' => 'login']);
+        }
     }
 }

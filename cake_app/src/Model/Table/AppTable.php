@@ -13,7 +13,7 @@ class AppTable extends Table
      * {@inheritDoc}
      * @see \Cake\ORM\Table::initialize()
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         parent::initialize($config);
 

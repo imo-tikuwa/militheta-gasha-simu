@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
@@ -30,7 +32,7 @@ class CharactersController extends AppController
      */
     public function index()
     {
-        $request = $this->request->getQueryParams();
+        $request = $this->getRequest()->getQueryParams();
         $this->set('params', $request);
         $query = $this->_getQuery($request);
         $characters = $this->paginate($query);
@@ -103,13 +105,13 @@ class CharactersController extends AppController
      */
     private function _form($id = null)
     {
-        if ($this->request->action == 'edit') {
+        if ($this->getRequest()->getParam('action') == 'edit') {
             $character = $this->Characters->get($id);
         } else {
-            $character = $this->Characters->newEntity();
+            $character = $this->Characters->newEmptyEntity();
         }
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $character = $this->Characters->patchEntity($character, $this->request->getData(), ['associated' => ['Cards']]);
+        if ($this->getRequest()->is(['patch', 'post', 'put'])) {
+            $character = $this->Characters->patchEntity($character, $this->getRequest()->getData(), ['associated' => ['Cards']]);
             if (!$character->hasErrors()) {
                 $conn = $this->Characters->getConnection();
                 $conn->begin();
@@ -132,7 +134,7 @@ class CharactersController extends AppController
      */
     public function csvExport()
     {
-        $request = $this->request->getQueryParams();
+        $request = $this->getRequest()->getQueryParams();
         $characters = $this->_getQuery($request)->toArray();
         $_serialize = 'characters';
         $_header = $this->Characters->getCsvHeaders();

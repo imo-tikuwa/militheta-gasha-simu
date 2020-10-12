@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
@@ -21,10 +23,10 @@ class CardsController extends AppController
      * Initialize Method.
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
-        if (!in_array($this->request->action, ['delete', 'csvExport', 'csvImport'], true)) {
+        if (!in_array($this->getRequest()->getParam('action'), ['delete', 'csvExport', 'csvImport'], true)) {
             // キャラクターの選択肢
             $this->set('characters', $this->Cards->findForeignSelectionData('Characters', 'name', true));
         }
@@ -44,7 +46,7 @@ class CardsController extends AppController
      */
     public function index()
     {
-        $request = $this->request->getQueryParams();
+        $request = $this->getRequest()->getQueryParams();
         $this->set('params', $request);
         $query = $this->_getQuery($request);
         $cards = $this->paginate($query);
@@ -156,13 +158,13 @@ class CardsController extends AppController
      */
     private function _form($id = null)
     {
-        if ($this->request->action == 'edit') {
+        if ($this->getRequest()->getParam('action') == 'edit') {
             $card = $this->Cards->get($id);
         } else {
-            $card = $this->Cards->newEntity();
+            $card = $this->Cards->newEmptyEntity();
         }
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $card = $this->Cards->patchEntity($card, $this->request->getData(), ['associated' => ['Characters', 'CardReprints']]);
+        if ($this->getRequest()->is(['patch', 'post', 'put'])) {
+            $card = $this->Cards->patchEntity($card, $this->getRequest()->getData(), ['associated' => ['Characters', 'CardReprints', 'GashaPickups']]);
             if (!$card->hasErrors()) {
                 $conn = $this->Cards->getConnection();
                 $conn->begin();
@@ -188,7 +190,7 @@ class CardsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->getRequest()->allowMethod(['post', 'delete']);
         $entity = $this->Cards->get($id);
         if ($this->Cards->delete($entity)) {
             $this->Flash->success('カードの削除が完了しました。');
@@ -205,7 +207,7 @@ class CardsController extends AppController
      */
     public function csvExport()
     {
-        $request = $this->request->getQueryParams();
+        $request = $this->getRequest()->getQueryParams();
         $cards = $this->_getQuery($request)->toArray();
         $_serialize = 'cards';
         $_header = $this->Cards->getCsvHeaders();
@@ -301,7 +303,7 @@ class CardsController extends AppController
                         $card = $this->Cards->get($csv_data['id']);
                         $update_count++;
                     } else {
-                        $card = $this->Cards->newEntity();
+                        $card = $this->Cards->newEmptyEntity();
                         $insert_count++;
                     }
 

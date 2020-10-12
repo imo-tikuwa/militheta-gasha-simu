@@ -4,7 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 
 /**
  * Front Controller
@@ -18,7 +18,7 @@ class FrontController extends AppController
      * Initialize Method.
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->Gashas = TableRegistry::getTableLocator()->get("Gashas");
@@ -28,10 +28,10 @@ class FrontController extends AppController
     /**
      * {@inheritDoc}
      * 共通処理
-     * @param Event $event
+     * @param EventInterface $event
      * @return void
      */
-    public function beforeFilter(Event $event)
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
 

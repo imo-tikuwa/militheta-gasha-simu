@@ -5,23 +5,25 @@
     "type": "project",
     "license": "MIT",
     "require": {
-        "php": ">=5.6",
-        "cakephp/cakephp": "3.9.*",
-        "cakephp/migrations": "^2.0.0",
-        "cakephp/plugin-installer": "^1.0",
-        "friendsofcake/cakephp-csvview": "3.3.*",
-        "imo-tikuwa/cakephp-operation-logs": "^0.2.1",
-        "imo-tikuwa/cakephp3-soft-delete": "^1.4",
+        "php": ">=7.2",
+        "cakephp/authentication": "2.0",
+        "cakephp/cakephp": "4.1.*",
+        "cakephp/migrations": "^3.0",
+        "cakephp/plugin-installer": "^1.2",
+        "friendsofcake/cakephp-csvview": "4.0.*",
+        "imo-tikuwa/cakephp-operation-logs": "2.*",
+        "imo-tikuwa/cakephp3-soft-delete": "2.*",
         "intervention/image": "^2.5",
         "josegonzalez/dotenv": "3.*",
-        "mobiledetect/mobiledetectlib": "2.*"
+        "mobiledetect/mobiledetectlib": "^2.8"
     },
     "require-dev": {
-        "cakephp/bake": "^1.12",
-        "cakephp/cakephp-codesniffer": "^3.0",
-        "cakephp/debug_kit": "^3.22",
-        "imo-tikuwa/cakephp-admin-baker": "^0.17.3",
-        "imo-tikuwa/cakephp-api-generator": "^0.2.2",
+        "cakephp/bake": "^2.0.3",
+        "cakephp/cakephp-codesniffer": "~4.2.0",
+        "cakephp/debug_kit": "^4.1",
+        "imo-tikuwa/cakephp-admin-baker": "2.*",
+        "imo-tikuwa/cakephp-api-generator": "2.*",
+        "phpunit/phpunit": "~8.5.0",
         "psy/psysh": "@stable"
     },
     "suggest": {
@@ -48,8 +50,9 @@
             "@test",
             "@cs-check"
         ],
-        "cs-check": "phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/ tests/",
-        "cs-fix": "phpcbf --colors --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/ tests/",
+        "cs-check": "phpcs --colors -p  src/ tests/",
+        "cs-fix": "phpcbf --colors -p src/ tests/",
+        "stan": "phpstan analyse src/",
         "test": "phpunit --colors=always"
     },
     "prefer-stable": true,

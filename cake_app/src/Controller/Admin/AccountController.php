@@ -3,7 +3,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Utils\AuthUtils;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
@@ -30,14 +30,14 @@ class AccountController extends AppController
      * {@inheritDoc}
      * @see \App\Controller\Admin\AppController::beforeFilter()
      */
-    public function beforeFilter(Event $event)
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
 
         $this->loadModel('Admins');
 
         // スーパーユーザー以外はアクセス不可
-        if (!AuthUtils::isSuperUser($this->request)) {
+        if (!AuthUtils::isSuperUser($this->getRequest())) {
             $this->Flash->error(MESSAGE_AUTH_ERROR);
 
             return $this->redirect(['controller' => 'top', 'action' => 'index']);
@@ -51,7 +51,7 @@ class AccountController extends AppController
      */
     public function index()
     {
-        $request = $this->request->getQueryParams();
+        $request = $this->getRequest()->getQueryParams();
         $this->set('params', $request);
         $query = $this->_getQuery($request);
         $accounts = $this->paginate($query);
@@ -116,15 +116,15 @@ class AccountController extends AppController
             return $this->redirect(['action' => 'index']);
         }
 
-        if ($this->request->action == 'edit') {
+        if ($this->getRequest()->getParam('action') == 'edit') {
             $admin = $this->Admins->get($id);
         } else {
-            $admin = $this->Admins->newEntity();
+            $admin = $this->Admins->newEmptyEntity();
         }
-        if ($this->request->is(['patch', 'post', 'put'])) {
+        if ($this->getRequest()->is(['patch', 'post', 'put'])) {
             $conn = $this->Admins->getConnection();
             $conn->begin();
-            $admin = $this->Admins->patchEntity($admin, $this->request->getData());
+            $admin = $this->Admins->patchEntity($admin, $this->getRequest()->getData());
             if ($this->Admins->save($admin, ['atomic' => false])) {
                 $conn->commit();
                 $this->Flash->success('アカウントの登録が完了しました。');
@@ -152,7 +152,7 @@ class AccountController extends AppController
 
             return $this->redirect(['action' => 'index']);
         }
-        $this->request->allowMethod(['post', 'delete']);
+        $this->getRequest()->allowMethod(['post', 'delete']);
         $entity = $this->Admins->get($id);
         if ($this->Admins->delete($entity)) {
             $this->Flash->success('管理者の削除が完了しました。');

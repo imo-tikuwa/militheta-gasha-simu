@@ -1,10 +1,13 @@
 <?php
 /**
- * Routes configuration
+ * Routes configuration.
  *
  * In this file, you set up routes to your controllers and their actions.
  * Routes are very important mechanism that allows you to freely connect
  * different URLs to chosen controllers and their actions (functions).
+ *
+ * It's loaded within the context of `Application::routes()` method which
+ * receives a `RouteBuilder` instance `$routes` as method argument.
  *
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -18,10 +21,8 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-use Cake\Core\Plugin;
-use Cake\Routing\RouteBuilder;
-use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
+use Cake\Routing\RouteBuilder;
 
 /**
  * The default class to use for all routes
@@ -44,14 +45,15 @@ use Cake\Routing\Route\DashedRoute;
  * constructor in your `src/Application.php` file to change this behavior.
  *
  */
-Router::defaultRouteClass(DashedRoute::class);
+/** @var \Cake\Routing\RouteBuilder $routes */
+$routes->setRouteClass(DashedRoute::class);
 
-Router::scope('/', function (RouteBuilder $routes) {
+$routes->scope('/', function (RouteBuilder $builder) {
 
     /**
      * info prefix
      */
-    Router::prefix('info', function (RouteBuilder $routes) {
+    $builder->prefix('info', function (RouteBuilder $routes) {
         $routes->setExtensions(['json']);
         $routes->fallbacks(DashedRoute::class);
     });
@@ -59,21 +61,21 @@ Router::scope('/', function (RouteBuilder $routes) {
 	/**
 	 * トップページ
 	 */
-    $routes->connect('/legacy', ['controller' => 'Front']);
-    $routes->connect('/', ['controller' => 'Front', 'action' => 'targetPick']);
+    $builder->connect('/legacy', ['controller' => 'Front']);
+    $builder->connect('/', ['controller' => 'Front', 'action' => 'targetPick']);
 
     /**
      * 管理者権限
      */
-    Router::prefix('admin', function (RouteBuilder $routes) {
+    $builder->prefix('admin', function (RouteBuilder $routes) {
         $routes->connect('/access-logs/*', ['controller' => 'AccessLogs', 'action' => 'index']);
-        $routes->fallbacks(DashedRoute::class);
+        $routes->fallbacks('DashedRoute');
     });
 
     /**
      * ガシャAPIのルーティング
      */
-    Router::prefix('api', function (RouteBuilder $routes) {
+    $builder->prefix('api', function (RouteBuilder $routes) {
         $routes->connect('/get-provision-ratio/*', ['controller' => 'GetProvisionRatio', 'action' => 'index']);
         $routes->fallbacks(DashedRoute::class);
     });
@@ -81,23 +83,32 @@ Router::scope('/', function (RouteBuilder $routes) {
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
-    $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+    $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
     /**
      * Connect catchall routes for all controllers.
      *
-     * Using the argument `DashedRoute`, the `fallbacks` method is a shortcut for
-     *    `$routes->connect('/:controller', ['action' => 'index'], ['routeClass' => 'DashedRoute']);`
-     *    `$routes->connect('/:controller/:action/*', [], ['routeClass' => 'DashedRoute']);`
+     * The `fallbacks` method is a shortcut for
      *
-     * Any route class can be used with this method, such as:
-     * - DashedRoute
-     * - InflectedRoute
-     * - Route
-     * - Or your own route class
+     * ```
+     * $builder->connect('/:controller', ['action' => 'index']);
+     * $builder->connect('/:controller/:action/*', []);
+     * ```
      *
      * You can remove these routes once you've connected the
      * routes you want in your application.
      */
-    $routes->fallbacks(DashedRoute::class);
+    $builder->fallbacks();
 });
+
+/*
+ * If you need a different set of middleware or none at all,
+ * open new scope and define routes there.
+ *
+ * ```
+ * $routes->scope('/api', function (RouteBuilder $builder) {
+ *     // No $builder->applyMiddleware() here.
+ *     // Connect API actions here.
+ * });
+ * ```
+ */

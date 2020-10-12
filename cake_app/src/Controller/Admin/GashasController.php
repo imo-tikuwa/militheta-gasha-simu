@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
@@ -31,7 +33,7 @@ class GashasController extends AppController
      */
     public function index()
     {
-        $request = $this->request->getQueryParams();
+        $request = $this->getRequest()->getQueryParams();
         $this->set('params', $request);
         $query = $this->_getQuery($request);
         $gashas = $this->paginate($query);
@@ -126,13 +128,13 @@ class GashasController extends AppController
      */
     private function _form($id = null)
     {
-        if ($this->request->action == 'edit') {
+        if ($this->getRequest()->getParam('action') == 'edit') {
             $gasha = $this->Gashas->get($id);
         } else {
-            $gasha = $this->Gashas->newEntity();
+            $gasha = $this->Gashas->newEmptyEntity();
         }
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $gasha = $this->Gashas->patchEntity($gasha, $this->request->getData(), ['associated' => ['CardReprints']]);
+        if ($this->getRequest()->is(['patch', 'post', 'put'])) {
+            $gasha = $this->Gashas->patchEntity($gasha, $this->getRequest()->getData(), ['associated' => ['CardReprints', 'GashaPickups']]);
             if (!$gasha->hasErrors()) {
                 $conn = $this->Gashas->getConnection();
                 $conn->begin();
@@ -158,7 +160,7 @@ class GashasController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->getRequest()->allowMethod(['post', 'delete']);
         $entity = $this->Gashas->get($id);
         if ($this->Gashas->delete($entity)) {
             $this->Flash->success('ガシャの削除が完了しました。');
@@ -175,7 +177,7 @@ class GashasController extends AppController
      */
     public function csvExport()
     {
-        $request = $this->request->getQueryParams();
+        $request = $this->getRequest()->getQueryParams();
         $gashas = $this->_getQuery($request)->toArray();
         $_serialize = 'gashas';
         $_header = $this->Gashas->getCsvHeaders();
@@ -271,7 +273,7 @@ class GashasController extends AppController
                         $gasha = $this->Gashas->get($csv_data['id']);
                         $update_count++;
                     } else {
-                        $gasha = $this->Gashas->newEntity();
+                        $gasha = $this->Gashas->newEmptyEntity();
                         $insert_count++;
                     }
 

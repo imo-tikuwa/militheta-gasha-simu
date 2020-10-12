@@ -2,8 +2,8 @@
 namespace App\Controller\Api;
 
 use App\Utils\GashaUtils;
-use Cake\Event\Event;
 use Cake\Core\Exception\Exception;
+use Cake\Event\EventInterface;
 
 /**
  * ガシャ結果を返すコントローラクラス
@@ -35,9 +35,10 @@ class TargetPickGashaController extends ApiController
     /**
      * 共通処理内でガシャに必要なデータを取得
      * {@inheritDoc}
+     * @param EventInterface $event
      * @see \Cake\Controller\Controller::beforeFilter()
      */
-    public function beforeFilter(Event $event)
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
 
@@ -45,7 +46,7 @@ class TargetPickGashaController extends ApiController
         set_time_limit(300);
 
         try {
-            $request_data = $this->request->getData();
+            $request_data = $this->getRequest()->getData();
 
             // ガシャID
             $gasha_id = @$request_data['gasha_id'];
@@ -72,7 +73,7 @@ class TargetPickGashaController extends ApiController
             $this->cards_rate_data = GashaUtils::createWeightData(array_merge($provision_ratios['SSR'], $provision_ratios['SR'], $provision_ratios['R']));
 
             // 10連目(SR以上確定)の重み付けデータ作成
-            if ($this->request->action === 'jyuren') {
+            if ($this->getRequest()->getParam('action') === 'jyuren') {
                 unset($cards['R']);
                 $gasha->sr_rate = 100 - $gasha->ssr_rate;
                 $provision_ratios = GashaUtils::getProvisionRatio($gasha, $cards);

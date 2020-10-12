@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Model\Table;
 
 use Cake\Datasource\EntityInterface;
@@ -13,14 +15,19 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\CardsTable&\Cake\ORM\Association\HasMany $Cards
  *
- * @method \App\Model\Entity\Character get($primaryKey, $options = [])
- * @method \App\Model\Entity\Character newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Character newEmptyEntity()
+ * @method \App\Model\Entity\Character newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Character[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Character get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Character findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Character patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Character[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\Character|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Character saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Character patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Character[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Character findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Character[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Character[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Character[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Character[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
@@ -33,7 +40,7 @@ class CharactersTable extends AppTable
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         parent::initialize($config);
 
@@ -51,7 +58,7 @@ class CharactersTable extends AppTable
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         // ID
         $validator
@@ -84,7 +91,7 @@ class CharactersTable extends AppTable
      * @param array $data エンティティに上書きするデータ
      * @param array $options オプション配列
      */
-    public function patchEntity(EntityInterface $entity, array $data, array $options = [])
+    public function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface
     {
         return parent::patchEntity($entity, $data, $options);
     }

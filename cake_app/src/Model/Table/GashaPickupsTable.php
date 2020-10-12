@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Model\Table;
 
 use Cake\Datasource\EntityInterface;
@@ -15,14 +17,19 @@ use SoftDelete\Model\Table\SoftDeleteTrait;
  * @property \App\Model\Table\GashasTable&\Cake\ORM\Association\BelongsTo $Gashas
  * @property \App\Model\Table\CardsTable&\Cake\ORM\Association\BelongsTo $Cards
  *
- * @method \App\Model\Entity\GashaPickup get($primaryKey, $options = [])
- * @method \App\Model\Entity\GashaPickup newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\GashaPickup newEmptyEntity()
+ * @method \App\Model\Entity\GashaPickup newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\GashaPickup[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\GashaPickup get($primaryKey, $options = [])
+ * @method \App\Model\Entity\GashaPickup findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\GashaPickup patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\GashaPickup[] patchEntities(iterable $entities, array $data, array $options = [])
  * @method \App\Model\Entity\GashaPickup|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\GashaPickup saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\GashaPickup patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\GashaPickup[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\GashaPickup findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\GashaPickup[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\GashaPickup[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\GashaPickup[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\GashaPickup[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
@@ -37,7 +44,7 @@ class GashaPickupsTable extends AppTable
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         parent::initialize($config);
 
@@ -58,7 +65,7 @@ class GashaPickupsTable extends AppTable
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         // ID
         $validator
@@ -111,7 +118,7 @@ class GashaPickupsTable extends AppTable
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
+    public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn(['gasha_id'], 'Gashas'));
         $rules->add($rules->existsIn(['card_id'], 'Cards'));
@@ -128,7 +135,7 @@ class GashaPickupsTable extends AppTable
      * @param array $data エンティティに上書きするデータ
      * @param array $options オプション配列
      */
-    public function patchEntity(EntityInterface $entity, array $data, array $options = [])
+    public function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface
     {
         // フリーワード検索のスニペット更新
         $search_snippet = [];

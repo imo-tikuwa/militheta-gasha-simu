@@ -15,6 +15,7 @@
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Core\Configure;
 use Cake\Core\Exception\Exception;
 use Cake\Event\Event;
 use Cake\Utility\Inflector;
@@ -30,11 +31,6 @@ use Intervention\Image\ImageManagerStatic;
  */
 class AppController extends Controller
 {
-
-    public $helpers = [
-        'Paginator' => ['templates' => 'paginator-templates']
-    ];
-
     /**
      * Initialization hook method.
      *
@@ -44,7 +40,7 @@ class AppController extends Controller
      *
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 
@@ -58,6 +54,11 @@ class AppController extends Controller
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
+
+        $this->viewBuilder()->setHelpers([
+            'Form' => ['templates' => 'form-templates'],
+            'Paginator' => ['templates' => 'paginator-templates']
+        ]);
     }
 
     /**
@@ -67,23 +68,34 @@ class AppController extends Controller
      */
     public function fileUpload($input_name = null)
     {
-        usleep(500000);
         $error = null;
         $response_data = [];
         try {
-            $this->viewBuilder()->setLayout(false);
+            $this->viewBuilder()->disableAutoLayout();
             $this->autoRender = false;
 
             if (is_null($input_name)) {
                 throw new Exception("プログラムエラーが発生しました。Invalid Request.");
             }
 
-            $file = $this->request->getData($input_name);
-            if (empty($file) || empty($file['name']) || empty($file['tmp_name'])) {
+            // App.uploadedFilesAsObjectsの値によってオブジェクトと配列の条件分岐が必要
+            $file = $this->getRequest()->getData($input_name);
+            if (null !== _code('App.uploadedFilesAsObjects') && _code('App.uploadedFilesAsObjects') === false) {
+                $org_name = $file['name'];
+                $file_size = $file['size'];
+                $tmp_name = $file['tmp_name'];
+            } else {
+                /** @var \Laminas\Diactoros\UploadedFile $file */
+                $org_name = $file->getClientFilename();
+                $file_size = $file->getSize();
+                $tmp_name = $file->getStream()->getMetadata('uri');
+            }
+
+            if (empty($org_name) || empty($tmp_name)) {
                 throw new Exception("プログラムエラーが発生しました。Empty File.");
             }
 
-            $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $extension = pathinfo($org_name, PATHINFO_EXTENSION);
             if (empty($extension)) {
                 throw new Exception("プログラムエラーが発生しました。Invalid Extension.");
             }
@@ -93,7 +105,7 @@ class AppController extends Controller
             $new_image_key = sha1(uniqid(rand()));
             $cur_name = $new_image_key . "." . $extension;
             $upload_to = UPLOAD_FILE_BASE_DIR . DS . Inflector::underscore($this->name) . DS . $cur_name;
-            if (!move_uploaded_file($file['tmp_name'], $upload_to)) {
+            if (!move_uploaded_file($tmp_name, $upload_to)) {
                 throw new Exception("ファイルのアップロードに失敗しました。Upload Failed.");
             }
 
@@ -117,7 +129,7 @@ class AppController extends Controller
             }
 
             $delete_action = "";
-            $prefix = $this->request->getParam('prefix');
+            $prefix = $this->getRequest()->getParam('prefix');
             if (!empty($prefix)) {
                 $delete_action .= "/" . Inflector::underscore($prefix);
             }
@@ -129,22 +141,25 @@ class AppController extends Controller
                 $url .= ":" . $_SERVER['SERVER_PORT'];
             }
 
-            $response_data['initialPreview'] = [
-                    $url . "/" . UPLOAD_FILE_BASE_DIR_NAME . "/" . Inflector::underscore($this->name) . "/" . $cur_name,
+            $response_data += [
+                'initialPreview' => [
+                    $url . "/" . UPLOAD_FILE_BASE_DIR_NAME . "/" . Inflector::underscore($this->name) . "/" . $cur_name
+                ],
+                'initialPreviewConfig' => [
+                    0 => [
+                        'caption' => $org_name,
+                        'size' => $file_size,
+                        'url' => $delete_action,
+                        'key' => $cur_name,
+                    ],
+                ],
+                'append' => true,
+                'org_name' => $org_name,
+                'cur_name' => $cur_name,
+                'size' => $file_size,
+                'delete_url' => $delete_action,
+                'key' => $cur_name,
             ];
-            $response_data['initialPreviewConfig'][] = [
-                    'caption' => $file['name'],
-                    'size' => $file['size'],
-                    'url' => $delete_action,
-                    'key' => $cur_name,
-            ];
-            $response_data['append'] = true;
-            // 以下はhiddenフォームのJSON文字列用
-            $response_data['org_name'] = $file['name'];
-            $response_data['cur_name'] = $cur_name;
-            $response_data['size'] = $file['size'];
-            $response_data['delete_url'] = $delete_action;
-            $response_data['key'] = $cur_name;
         } catch (\Exception $e) {
             $this->log($e->getMessage());
             $error = $e->getMessage();
@@ -172,10 +187,10 @@ class AppController extends Controller
         $error = null;
         $response_data = [];
         try {
-            $this->viewBuilder()->setLayout(false);
+            $this->viewBuilder()->disableAutoLayout();
             $this->autoRender = false;
 
-            $key = $this->request->getData('key');
+            $key = $this->getRequest()->getData('key');
             if (is_null($key)) {
                 $this->log('削除対象のファイルキーが存在しません');
                 throw new Exception("プログラムエラーが発生しました。");

@@ -35,7 +35,7 @@ class AccessLogsController extends AppController
      */
     public function index()
     {
-        $params = $this->request->getQueryParams();
+        $params = $this->getRequest()->getQueryParams();
         $this->set(compact('params'));
 
         // 検索対象日

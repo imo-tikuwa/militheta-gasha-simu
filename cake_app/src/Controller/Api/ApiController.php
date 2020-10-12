@@ -14,10 +14,10 @@ class ApiController extends AppController
      * {@inheritDoc}
      * Initialize Method.
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
-        $this->viewBuilder()->enableAutoLayout(false);
+        $this->viewBuilder()->disableAutoLayout();
         $this->autoRender = false;
         $this->response->withCharset('UTF-8');
         $this->response->withType('application/json');

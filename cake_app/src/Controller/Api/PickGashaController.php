@@ -3,8 +3,8 @@ namespace App\Controller\Api;
 
 use App\Model\Entity\Gasha;
 use App\Utils\GashaUtils;
-use Cake\Event\Event;
 use Cake\Core\Exception\Exception;
+use Cake\Event\EventInterface;
 
 /**
  * ガシャ結果を返すコントローラクラス
@@ -43,15 +43,16 @@ class PickGashaController extends ApiController
     /**
      * 共通処理内でガシャに必要なデータを取得
      * {@inheritDoc}
+     * @param EventInterface $event
      * @see \Cake\Controller\Controller::beforeFilter()
      */
-    public function beforeFilter(Event $event)
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
 
         try {
             // ガシャID
-            $gasha_id = @$this->request->getQuery('gasha_id');
+            $gasha_id = @$this->getRequest()->getQuery('gasha_id');
 
             if (is_null($gasha_id) || !is_numeric($gasha_id)) {
                 throw new Exception('gasha_id is invalid.');

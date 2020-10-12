@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
@@ -21,10 +23,10 @@ class CardReprintsController extends AppController
      * Initialize Method.
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
-        if (!in_array($this->request->action, ['delete', 'csvExport'], true)) {
+        if (!in_array($this->getRequest()->getParam('action'), ['delete', 'csvExport'], true)) {
             // ガシャIDの選択肢
             $this->Gashas = TableRegistry::getTableLocator()->get('Gashas');
             $gashas = $this->Gashas->find()->select(['id', 'title', 'start_date'])->where(['title LIKE' => '【限定復刻】%'])->enableHydration(false)->order(['id' => 'DESC'])->toArray();
@@ -52,7 +54,7 @@ class CardReprintsController extends AppController
      */
     public function index()
     {
-        $request = $this->request->getQueryParams();
+        $request = $this->getRequest()->getQueryParams();
         $this->set('params', $request);
         $query = $this->_getQuery($request);
         $card_reprints = $this->paginate($query);
@@ -144,13 +146,13 @@ class CardReprintsController extends AppController
      */
     private function _form($id = null)
     {
-        if ($this->request->action == 'edit') {
+        if ($this->getRequest()->getParam('action') == 'edit') {
             $card_reprint = $this->CardReprints->get($id);
         } else {
-            $card_reprint = $this->CardReprints->newEntity();
+            $card_reprint = $this->CardReprints->newEmptyEntity();
         }
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $card_reprint = $this->CardReprints->patchEntity($card_reprint, $this->request->getData(), ['associated' => ['Gashas', 'Cards']]);
+        if ($this->getRequest()->is(['patch', 'post', 'put'])) {
+            $card_reprint = $this->CardReprints->patchEntity($card_reprint, $this->getRequest()->getData(), ['associated' => ['Gashas', 'Cards']]);
             if (!$card_reprint->hasErrors()) {
                 $conn = $this->CardReprints->getConnection();
                 $conn->begin();
@@ -176,7 +178,7 @@ class CardReprintsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->getRequest()->allowMethod(['post', 'delete']);
         $entity = $this->CardReprints->get($id);
         if ($this->CardReprints->delete($entity)) {
             $this->Flash->success('復刻情報の削除が完了しました。');
@@ -193,7 +195,7 @@ class CardReprintsController extends AppController
      */
     public function csvExport()
     {
-        $request = $this->request->getQueryParams();
+        $request = $this->getRequest()->getQueryParams();
         $card_reprints = $this->_getQuery($request)->toArray();
         $_serialize = 'card_reprints';
         $_header = $this->CardReprints->getCsvHeaders();

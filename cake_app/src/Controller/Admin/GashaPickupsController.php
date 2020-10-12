@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
@@ -21,10 +23,10 @@ class GashaPickupsController extends AppController
      * Initialize Method.
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
-        if (!in_array($this->request->action, ['delete', 'csvExport'], true)) {
+        if (!in_array($this->getRequest()->getParam('action'), ['delete', 'csvExport'], true)) {
             // ガシャIDの選択肢
             $this->Gashas = TableRegistry::getTableLocator()->get('Gashas');
             $gashas = $this->Gashas->find()->select(['id', 'title', 'start_date'])->enableHydration(false)->order(['id' => 'DESC'])->toArray();
@@ -52,7 +54,7 @@ class GashaPickupsController extends AppController
      */
     public function index()
     {
-        $request = $this->request->getQueryParams();
+        $request = $this->getRequest()->getQueryParams();
         $this->set('params', $request);
         $query = $this->_getQuery($request);
         $gasha_pickups = $this->paginate($query);
@@ -144,13 +146,13 @@ class GashaPickupsController extends AppController
      */
     private function _form($id = null)
     {
-        if ($this->request->action == 'edit') {
+        if ($this->getRequest()->getParam('action') == 'edit') {
             $gasha_pickup = $this->GashaPickups->get($id);
         } else {
-            $gasha_pickup = $this->GashaPickups->newEntity();
+            $gasha_pickup = $this->GashaPickups->newEmptyEntity();
         }
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $gasha_pickup = $this->GashaPickups->patchEntity($gasha_pickup, $this->request->getData(), ['associated' => ['Gashas', 'Cards']]);
+        if ($this->getRequest()->is(['patch', 'post', 'put'])) {
+            $gasha_pickup = $this->GashaPickups->patchEntity($gasha_pickup, $this->getRequest()->getData(), ['associated' => ['Gashas', 'Cards']]);
             if (!$gasha_pickup->hasErrors()) {
                 $conn = $this->GashaPickups->getConnection();
                 $conn->begin();
@@ -176,7 +178,7 @@ class GashaPickupsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->getRequest()->allowMethod(['post', 'delete']);
         $entity = $this->GashaPickups->get($id);
         if ($this->GashaPickups->delete($entity)) {
             $this->Flash->success('ピックアップ情報の削除が完了しました。');
@@ -193,7 +195,7 @@ class GashaPickupsController extends AppController
      */
     public function csvExport()
     {
-        $request = $this->request->getQueryParams();
+        $request = $this->getRequest()->getQueryParams();
         $gasha_pickups = $this->_getQuery($request)->toArray();
         $_serialize = 'gasha_pickups';
         $_header = $this->GashaPickups->getCsvHeaders();

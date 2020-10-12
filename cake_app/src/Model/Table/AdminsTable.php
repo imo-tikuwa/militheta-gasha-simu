@@ -33,7 +33,7 @@ class AdminsTable extends AppTable
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         parent::initialize($config);
 
@@ -49,7 +49,7 @@ class AdminsTable extends AppTable
      * @param array $options option array
      * @return \Cake\ORM\Query
      */
-    public function findAuth(\Cake\ORM\Query $query, array $options)
+    public function findAuth(Query $query, array $options): Query
     {
         $query->select(['id', 'mail', 'password', 'privilege']);
 
@@ -62,7 +62,7 @@ class AdminsTable extends AppTable
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): \Cake\Validation\Validator
     {
         $validator
             ->integer('id')
