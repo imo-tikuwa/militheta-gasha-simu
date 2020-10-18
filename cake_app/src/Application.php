@@ -72,7 +72,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             $this->addPlugin(\DebugKit\Plugin::class);
 
             // 開発用プラグインのロード
-            // Cake/TwigViewはPlugin.php内で読み込むとシステム全体が止まるのでここで読み込んでおく
             try {
                 $this->addPlugin('Cake/TwigView');
                 $this->addPlugin('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
@@ -118,7 +117,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 
             // Add csrf middleware.
             ->add(new CsrfProtectionMiddleware([
-                'httpOnly' => true
+                'httponly' => true
             ]))
 
             // Add operation_logs middleware.
@@ -158,9 +157,11 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 
         // Load more plugins here
     }
-
     /**
-     * AuthenticationServiceInterfaceで定義された関数の実装
+     * Gets the successful authenticator instance if one was successful after calling authenticate
+     *
+     * @param ServerRequestInterface $request リクエストインタフェース
+     * @return \Authentication\Authenticator\AuthenticatorInterface|null
      */
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {

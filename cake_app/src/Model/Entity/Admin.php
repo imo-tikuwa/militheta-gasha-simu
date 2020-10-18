@@ -44,7 +44,10 @@ class Admin extends AppEntity
     ];
 
     /**
-     * 平のパスワードを暗号化する
+     * パスワードを暗号化する
+     *
+     * @param string $password 暗号化されていないパスワード文字列
+     * @return string 暗号化されたパスワード文字列
      */
     protected function _setPassword($password)
     {
@@ -54,8 +57,8 @@ class Admin extends AppEntity
     }
 
     /**
-     * 生のパスワードを返す
-     * @return string
+     * 復号化されたパスワードを返す
+     * @return string 暗号化されていないパスワード文字列
      */
     protected function _getRawPassword()
     {

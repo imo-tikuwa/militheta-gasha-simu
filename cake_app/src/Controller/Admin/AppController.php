@@ -50,8 +50,11 @@ class AppController extends \App\Controller\AppController
 
     /**
      * cakephp/authorizationプラグインの代わりの認可処理
+     *
+     * @param ServerRequest $request リクエスト情報
+     * @return bool
      */
-    private function authorize(ServerRequest $request)
+    private function authorize(ServerRequest $request): bool
     {
         // 権限なしでアクセス可能なコントローラ
         if (in_array($request->getParam('controller'), ['Auth', 'Top'])) {

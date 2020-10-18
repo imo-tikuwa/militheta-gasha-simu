@@ -12,6 +12,9 @@ class AppTable extends Table
      * 初期化処理
      * {@inheritDoc}
      * @see \Cake\ORM\Table::initialize()
+     *
+     * @param array $config Configuration options passed to the constructor
+     * @return void
      */
     public function initialize(array $config): void
     {

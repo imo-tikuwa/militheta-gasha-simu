@@ -6,7 +6,7 @@ use Authentication\PasswordHasher\PasswordHasherInterface;
 use Cake\Auth\AbstractPasswordHasher;
 
 /**
- * 暗号化/複合化を行えるようにするために独自定義したクラス
+ * 暗号化/復号化を行えるようにするために独自定義したクラス
  * @author tikuwa
  *
  */
@@ -28,8 +28,11 @@ class ExPasswordHasher extends AbstractPasswordHasher implements PasswordHasherI
 
     /**
      * パスワードの暗号化
-     * {@inheritDoc}
+     *
      * @see \Authentication\PasswordHasher\PasswordHasherInterface::hash()
+     *
+     * @param string $password Plain text password to hash.
+     * @return string|false Either the password hash string or false
      */
     public function hash($password): string
     {
@@ -37,16 +40,19 @@ class ExPasswordHasher extends AbstractPasswordHasher implements PasswordHasherI
     }
 
     /**
-     * @param $password フォームで入力したパスワード
-     * @param $hashedPassword DBに登録してあるpassword
-     * {@inheritDoc}
+     * パスワードの一致チェック
+     *
      * @see \Authentication\PasswordHasher\PasswordHasherInterface::check()
+     *
+     * @param string $password フォームで入力したパスワード
+     * @param string $hashed_password DBに登録してあるpassword
+     * @return bool True if hashes match else false.
      */
-    public function check($password, $hashedPassword): bool
+    public function check($password, $hashed_password): bool
     {
-        if (is_null($hashedPassword) || $hashedPassword === '') {
+        if (is_null($hashed_password) || $hashed_password === '') {
             return false;
         }
-        return $password === Encrypter::decrypt($hashedPassword);
+        return $password === Encrypter::decrypt($hashed_password);
     }
 }

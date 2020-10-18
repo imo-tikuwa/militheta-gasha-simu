@@ -6,7 +6,6 @@ namespace App\Utils;
  */
 class CsvUtils
 {
-
     /**
      * 文字エンコーディングがSJISなCSVファイルを読み込んで配列を返す
      * @param string $file Shift_JIS の csv ファイルパス
@@ -32,7 +31,9 @@ class CsvUtils
         while ($row = fgetcsv($fp)) {
             // windows の場合はSJIS-win → UTF-8 変換
             $result[] = $is_win
-                ? array_map(function($val) { return mb_convert_encoding($val, "UTF-8", "SJIS-win"); }, $row)
+                ? array_map(function ($val) {
+                    return mb_convert_encoding($val, "UTF-8", "SJIS-win");
+                }, $row)
                 : $row;
         }
         fclose($fp);
@@ -54,7 +55,7 @@ class CsvUtils
         }
         $result = [];
         $fp = fopen($file, "r+");
-        while($row = fgetcsv($fp)) {
+        while ($row = fgetcsv($fp)) {
             $result[] = $row;
         }
         fclose($fp);

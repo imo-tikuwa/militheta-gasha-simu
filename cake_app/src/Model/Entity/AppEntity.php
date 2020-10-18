@@ -34,10 +34,8 @@ class AppEntity extends Entity
     {
         foreach ($each_error as $error_obj) {
             if (is_array($error_obj)) {
-
                 return $this->getEachErrorMessage($error_obj);
             } else {
-
                 return $error_obj;
             }
         }
