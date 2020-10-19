@@ -74,7 +74,7 @@ class GashasController extends AppController
             if (isset($request['search_snippet_format']) && $request['search_snippet_format'] == 'AND') {
                 $query->where($search_snippet_conditions);
             } else {
-                $query->where(function($exp) use ($search_snippet_conditions) {
+                $query->where(function ($exp) use ($search_snippet_conditions) {
                     return $exp->or($search_snippet_conditions);
                 });
             }
@@ -260,7 +260,6 @@ class GashasController extends AppController
                 $insert_count = 0;
                 $update_count = 0;
                 foreach ($csv_data as $index => $csv_row) {
-
                     if ($index == 0) {
                         if ($this->Gashas->getCsvHeaders() != $csv_row) {
                             throw new \Exception('HeaderCheckError');

@@ -148,11 +148,12 @@ class GashasTable extends AppTable
     /**
      * patchEntityのオーバーライド
      * ファイル項目、GoogleMap項目のJSON文字列を配列に変換する
-     * {@inheritDoc}
+     *
      * @see \Cake\ORM\Table::patchEntity()
      * @param EntityInterface $entity エンティティ
      * @param array $data エンティティに上書きするデータ
      * @param array $options オプション配列
+     * @return \Cake\Datasource\EntityInterface
      */
     public function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface
     {
