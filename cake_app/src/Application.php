@@ -70,14 +70,13 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
          */
         if (Configure::read('debug')) {
             $this->addPlugin(\DebugKit\Plugin::class);
+        }
 
-            // 開発用プラグインのロード
-            try {
-                $this->addPlugin('Cake/TwigView');
-                $this->addPlugin('Cake3AdminBaker', ['bootstrap' => true, 'routes' => true]);
-                $this->addPlugin('Cake3ApiGenerator', ['routes' => true]);
-            } catch (MissingPluginException $e) {
-            }
+        // 開発用プラグインのロード
+        try {
+            $this->addPlugin('Cake3AdminBaker');
+            $this->addPlugin('Cake3ApiGenerator');
+        } catch (MissingPluginException $e) {
         }
     }
 

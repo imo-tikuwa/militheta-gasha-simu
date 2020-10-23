@@ -3229,16 +3229,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-admin-baker",
-            "version": "v2.0.4",
+            "version": "v2.0.5",
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-admin-baker.git",
-                "reference": "70a6ed874e3b5166c0cf5113076670a4d0f7c828"
+                "reference": "5d37ff5aa817504980647b1e58512485439b8841"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/70a6ed874e3b5166c0cf5113076670a4d0f7c828",
-                "reference": "70a6ed874e3b5166c0cf5113076670a4d0f7c828",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/5d37ff5aa817504980647b1e58512485439b8841",
+                "reference": "5d37ff5aa817504980647b1e58512485439b8841",
                 "shasum": ""
             },
             "require": {
@@ -3265,23 +3265,23 @@
             ],
             "description": "Cake3AdminBaker plugin for CakePHP",
             "support": {
-                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v2.0.4",
+                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v2.0.5",
                 "issues": "https://github.com/imo-tikuwa/cakephp-admin-baker/issues"
             },
-            "time": "2020-10-16T23:54:20+00:00"
+            "time": "2020-10-23T11:54:11+00:00"
         },
         {
             "name": "imo-tikuwa/cakephp-api-generator",
-            "version": "v2.0.2",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-api-generator.git",
-                "reference": "c974861fa77152a21d7993ff675eeba0fc2cde9c"
+                "reference": "daa9babd85bce42ed24527af6d279141a9c6837f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-api-generator/zipball/c974861fa77152a21d7993ff675eeba0fc2cde9c",
-                "reference": "c974861fa77152a21d7993ff675eeba0fc2cde9c",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-api-generator/zipball/daa9babd85bce42ed24527af6d279141a9c6837f",
+                "reference": "daa9babd85bce42ed24527af6d279141a9c6837f",
                 "shasum": ""
             },
             "require": {
@@ -3304,10 +3304,10 @@
             ],
             "description": "Cake3ApiGenerator plugin for CakePHP",
             "support": {
-                "source": "https://github.com/imo-tikuwa/cakephp-api-generator/tree/v2.0.2",
+                "source": "https://github.com/imo-tikuwa/cakephp-api-generator/tree/v2.0.3",
                 "issues": "https://github.com/imo-tikuwa/cakephp-api-generator/issues"
             },
-            "time": "2020-10-15T09:50:01+00:00"
+            "time": "2020-10-23T11:54:09+00:00"
         },
         {
             "name": "jasny/twig-extensions",
