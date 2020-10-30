@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9af32200857bcaf14293960de83668f3",
+    "content-hash": "dca693dcf469e69da9d47e15ac725547",
     "packages": [
         {
             "name": "aura/intl",
@@ -608,6 +608,37 @@
             ],
             "description": "OperationLogs plugin for CakePHP",
             "time": "2020-10-15T09:33:36+00:00"
+        },
+        {
+            "name": "imo-tikuwa/cakephp-utils",
+            "version": "v0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/imo-tikuwa/cakephp-utils.git",
+                "reference": "a08de2ecaa2a897f0b40da5195beac8f9d1a5c77"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-utils/zipball/a08de2ecaa2a897f0b40da5195beac8f9d1a5c77",
+                "reference": "a08de2ecaa2a897f0b40da5195beac8f9d1a5c77",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "4.1.*",
+                "php": ">=7.2"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Utilities\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Utilities plugin for CakePHP",
+            "time": "2020-10-27T12:26:09+00:00"
         },
         {
             "name": "imo-tikuwa/cakephp3-soft-delete",
