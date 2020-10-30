@@ -31,7 +31,6 @@ require __DIR__ . '/paths.php';
  */
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
-use App\Application;
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
@@ -225,12 +224,3 @@ Configure::write('Session', [
     'defaults' => 'cake',
     'timeout' => 1440 // 1 days
 ]);
-
-// DebugKitのロード
-if (Configure::read('debug')) {
-	Configure::write('DebugKit.forceEnable', true);
-	Application::addPlugin('DebugKit', ['bootstrap' => true, 'routes' => true]);
-}
-
-// 論理削除プラグイン
-Application::addPlugin('SoftDelete');

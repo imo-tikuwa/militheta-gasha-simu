@@ -44,24 +44,20 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     public function bootstrap(): void
     {
         // プラグインのロード
-
-        $this->addPlugin('Authentication');
-
-        $this->addPlugin('OperationLogs', ['bootstrap' => true]);
-
-        $this->addPlugin('CsvView');
+        try {
+            $this->addPlugin('SoftDelete');
+            $this->addPlugin('Authentication');
+            $this->addPlugin('Utilities');
+            $this->addPlugin('OperationLogs', ['bootstrap' => true]);
+            $this->addPlugin('CsvView');
+        } catch (MissingPluginException $e) {
+        }
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
 
         if (PHP_SAPI === 'cli') {
-            try {
-                $this->addPlugin('Bake');
-            } catch (MissingPluginException $e) {
-                // Do not halt if the plugin is missing
-            }
-
-            $this->addPlugin('Migrations');
+            $this->bootstrapCli();
         }
 
         /*
@@ -69,7 +65,8 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
          * Debug Kit should not be installed on a production system
          */
         if (Configure::read('debug')) {
-            $this->addPlugin(\DebugKit\Plugin::class);
+            Configure::write('DebugKit.forceEnable', true);
+            $this->addPlugin('DebugKit', ['bootstrap' => true, 'routes' => true]);
         }
 
         // 開発用プラグインのロード

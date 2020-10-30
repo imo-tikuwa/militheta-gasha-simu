@@ -61,7 +61,7 @@ class Installer
         static::createWritableDirectories($rootDir, $io);
 
         static::setFolderPermissions($rootDir, $io);
-        static::setSecuritySalt($rootDir, $io);
+        // static::setSecuritySalt($rootDir, $io);
 
         $class = 'Cake\Codeception\Console\Installer';
         if (class_exists($class)) {

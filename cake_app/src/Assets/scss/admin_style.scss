@@ -290,3 +290,8 @@ label.item-label {
 .freeword-search .input-group-prepend .input-group-text small:first-of-type {
   margin-right: .25rem !important;
 }
+
+/* ラベル太くするのやめる */
+label:not(.form-check-label):not(.custom-file-label) {
+  font-weight: inherit;
+}
