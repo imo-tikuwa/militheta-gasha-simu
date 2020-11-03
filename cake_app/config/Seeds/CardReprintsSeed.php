@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 use Migrations\AbstractSeed;
 
 /**
@@ -12,7 +14,7 @@ class CardReprintsSeed extends AbstractSeed
      * Write your database seeder using this method.
      *
      * More information on writing seeds is available here:
-     * http://docs.phinx.org/en/latest/seeding.html
+     * https://book.cakephp.org/phinx/0/en/seeding.html
      *
      * @return void
      */
@@ -989,6 +991,33 @@ class CardReprintsSeed extends AbstractSeed
                 'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 悩ましダンス　豊川風花',
                 'created' => '2020-08-31 20:13:51',
                 'modified' => '2020-09-29 20:46:38',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '109',
+                'gasha_id' => '156',
+                'card_id' => '639',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ くのいち見参！　エミリー',
+                'created' => '2020-11-03 15:01:22',
+                'modified' => '2020-11-03 15:01:22',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '110',
+                'gasha_id' => '156',
+                'card_id' => '658',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 夏祭りの楽しみ方　望月杏奈',
+                'created' => '2020-11-03 15:01:32',
+                'modified' => '2020-11-03 15:01:32',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '111',
+                'gasha_id' => '156',
+                'card_id' => '720',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 私だけの運命を探して　三浦あずさ',
+                'created' => '2020-11-03 15:01:42',
+                'modified' => '2020-11-03 15:01:42',
                 'deleted' => NULL,
             ],
         ];

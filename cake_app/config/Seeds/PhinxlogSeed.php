@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 use Migrations\AbstractSeed;
 
 /**
@@ -12,7 +14,7 @@ class PhinxlogSeed extends AbstractSeed
      * Write your database seeder using this method.
      *
      * More information on writing seeds is available here:
-     * http://docs.phinx.org/en/latest/seeding.html
+     * https://book.cakephp.org/phinx/0/en/seeding.html
      *
      * @return void
      */
@@ -115,6 +117,13 @@ class PhinxlogSeed extends AbstractSeed
                 'migration_name' => 'Initial',
                 'start_time' => '2020-10-07 07:14:48',
                 'end_time' => '2020-10-07 07:14:48',
+                'breakpoint' => '0',
+            ],
+            [
+                'version' => '20201103061532',
+                'migration_name' => 'Initial',
+                'start_time' => '2020-11-03 15:15:32',
+                'end_time' => '2020-11-03 15:15:32',
                 'breakpoint' => '0',
             ],
         ];

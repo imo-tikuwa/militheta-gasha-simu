@@ -1,11 +1,19 @@
 <?php
+declare(strict_types=1);
+
 use Migrations\AbstractMigration;
 
 class Initial extends AbstractMigration
 {
+    /**
+     * Up Method.
+     *
+     * More information on this method is available here:
+     * https://book.cakephp.org/phinx/0/en/migrations.html#the-up-method
+     * @return void
+     */
     public function up()
     {
-
         $this->table('admins')
             ->addColumn('mail', 'string', [
                 'default' => null,
@@ -45,13 +53,13 @@ class Initial extends AbstractMigration
             ->addColumn('gasha_id', 'integer', [
                 'comment' => 'ガシャID',
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => true,
             ])
             ->addColumn('card_id', 'integer', [
                 'comment' => 'カードID',
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => true,
             ])
             ->addColumn('search_snippet', 'text', [
@@ -84,7 +92,7 @@ class Initial extends AbstractMigration
             ->addColumn('character_id', 'integer', [
                 'comment' => 'キャラクター',
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => true,
             ])
             ->addColumn('name', 'string', [
@@ -93,13 +101,13 @@ class Initial extends AbstractMigration
                 'limit' => 255,
                 'null' => true,
             ])
-            ->addColumn('rarity', 'string', [
+            ->addColumn('rarity', 'char', [
                 'comment' => 'レアリティ',
                 'default' => null,
                 'limit' => 2,
                 'null' => true,
             ])
-            ->addColumn('type', 'string', [
+            ->addColumn('type', 'char', [
                 'comment' => 'タイプ',
                 'default' => null,
                 'limit' => 2,
@@ -114,13 +122,13 @@ class Initial extends AbstractMigration
             ->addColumn('gasha_include', 'tinyinteger', [
                 'comment' => 'ガシャ限定？',
                 'default' => '1',
-                'limit' => 4,
+                'limit' => null,
                 'null' => true,
             ])
             ->addColumn('limited', 'tinyinteger', [
                 'comment' => '限定？',
                 'default' => '0',
-                'limit' => 4,
+                'limit' => null,
                 'null' => true,
             ])
             ->addColumn('search_snippet', 'text', [
@@ -174,13 +182,13 @@ class Initial extends AbstractMigration
             ->addColumn('gasha_id', 'integer', [
                 'comment' => 'ガシャID',
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => true,
             ])
             ->addColumn('card_id', 'integer', [
                 'comment' => 'カードID',
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => true,
             ])
             ->addColumn('search_snippet', 'text', [
@@ -231,13 +239,13 @@ class Initial extends AbstractMigration
             ->addColumn('ssr_rate', 'integer', [
                 'comment' => 'SSRレート',
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => true,
             ])
             ->addColumn('sr_rate', 'integer', [
                 'comment' => 'SRレート',
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => true,
             ])
             ->addColumn('search_snippet', 'text', [
@@ -285,17 +293,21 @@ class Initial extends AbstractMigration
                 'limit' => 255,
                 'null' => false,
             ])
-            ->addColumn('request_time', 'datetime', [
+            ->addColumn('request_time', 'datetimefractional', [
                 'comment' => 'リクエスト日時',
                 'default' => null,
                 'limit' => null,
                 'null' => false,
+                'precision' => 3,
+                'scale' => 3,
             ])
-            ->addColumn('response_time', 'datetime', [
+            ->addColumn('response_time', 'datetimefractional', [
                 'comment' => 'レスポンス日時',
                 'default' => null,
                 'limit' => null,
                 'null' => false,
+                'precision' => 3,
+                'scale' => 3,
             ])
             ->create();
 
@@ -321,7 +333,7 @@ class Initial extends AbstractMigration
             ->addColumn('counter', 'integer', [
                 'comment' => 'カウンタ',
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => false,
             ])
             ->create();
@@ -348,7 +360,7 @@ class Initial extends AbstractMigration
             ->addColumn('counter', 'integer', [
                 'comment' => 'カウンタ',
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => false,
             ])
             ->create();
@@ -357,7 +369,7 @@ class Initial extends AbstractMigration
             ->addColumn('target_ym', 'integer', [
                 'comment' => '対象年月',
                 'default' => null,
-                'limit' => 6,
+                'limit' => null,
                 'null' => false,
             ])
             ->addColumn('summary_type', 'string', [
@@ -375,12 +387,19 @@ class Initial extends AbstractMigration
             ->addColumn('counter', 'integer', [
                 'comment' => 'カウンタ',
                 'default' => null,
-                'limit' => 11,
+                'limit' => null,
                 'null' => false,
             ])
             ->create();
     }
 
+    /**
+     * Down Method.
+     *
+     * More information on this method is available here:
+     * https://book.cakephp.org/phinx/0/en/migrations.html#the-down-method
+     * @return void
+     */
     public function down()
     {
         $this->table('admins')->drop()->save();

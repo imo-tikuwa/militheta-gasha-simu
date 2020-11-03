@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 use Migrations\AbstractSeed;
 
 /**
@@ -12,7 +14,7 @@ class GashasSeed extends AbstractSeed
      * Write your database seeder using this method.
      *
      * More information on writing seeds is available here:
-     * http://docs.phinx.org/en/latest/seeding.html
+     * https://book.cakephp.org/phinx/0/en/seeding.html
      *
      * @return void
      */
@@ -1853,6 +1855,54 @@ class GashasSeed extends AbstractSeed
                 'search_snippet' => '【期間限定】ナイショの☆ハロウィンモンスターガシャ',
                 'created' => '2020-10-03 08:52:50',
                 'modified' => '2020-10-03 08:52:50',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '154',
+                'start_date' => '2020-10-12',
+                'end_date' => '2020-10-20',
+                'title' => 'SONG FOR YOU！ガシャ VOL.9',
+                'ssr_rate' => '3',
+                'sr_rate' => '12',
+                'search_snippet' => 'SONG FOR YOU！ガシャ VOL.9',
+                'created' => '2020-11-03 15:00:12',
+                'modified' => '2020-11-03 15:00:12',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '155',
+                'start_date' => '2020-10-20',
+                'end_date' => '2020-10-28',
+                'title' => '【期間限定】大暴れ！熱血アイドル学園ガシャ',
+                'ssr_rate' => '3',
+                'sr_rate' => '12',
+                'search_snippet' => '【期間限定】大暴れ！熱血アイドル学園ガシャ',
+                'created' => '2020-11-03 15:00:12',
+                'modified' => '2020-11-03 15:00:12',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '156',
+                'start_date' => '2020-10-28',
+                'end_date' => '2020-10-31',
+                'title' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ',
+                'ssr_rate' => '3',
+                'sr_rate' => '12',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ',
+                'created' => '2020-11-03 15:00:12',
+                'modified' => '2020-11-03 15:00:12',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '157',
+                'start_date' => '2020-10-31',
+                'end_date' => '2020-11-11',
+                'title' => '【期間限定】フォーチュンガールズⅡガシャ',
+                'ssr_rate' => '3',
+                'sr_rate' => '12',
+                'search_snippet' => '【期間限定】フォーチュンガールズⅡガシャ',
+                'created' => '2020-11-03 15:00:12',
+                'modified' => '2020-11-03 15:00:12',
                 'deleted' => NULL,
             ],
         ];

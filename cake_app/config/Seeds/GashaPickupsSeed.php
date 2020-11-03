@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 use Migrations\AbstractSeed;
 
 /**
@@ -12,7 +14,7 @@ class GashaPickupsSeed extends AbstractSeed
      * Write your database seeder using this method.
      *
      * More information on writing seeds is available here:
-     * http://docs.phinx.org/en/latest/seeding.html
+     * https://book.cakephp.org/phinx/0/en/seeding.html
      *
      * @return void
      */
@@ -5093,6 +5095,150 @@ class GashaPickupsSeed extends AbstractSeed
                 'search_snippet' => '【期間限定】ナイショの☆ハロウィンモンスターガシャ MILLION LIVE CLOSET！　三浦あずさ',
                 'created' => '2020-10-03 08:57:46',
                 'modified' => '2020-10-03 08:57:46',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '565',
+                'gasha_id' => '154',
+                'card_id' => '989',
+                'search_snippet' => 'SONG FOR YOU！ガシャ VOL.9 マイペース☆マイウェイ　福田のり子',
+                'created' => '2020-11-03 15:02:16',
+                'modified' => '2020-11-03 15:02:16',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '566',
+                'gasha_id' => '154',
+                'card_id' => '990',
+                'search_snippet' => 'SONG FOR YOU！ガシャ VOL.9 あのね、聞いてほしいことがあるんだ　木下ひなた',
+                'created' => '2020-11-03 15:02:25',
+                'modified' => '2020-11-03 15:02:25',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '567',
+                'gasha_id' => '154',
+                'card_id' => '991',
+                'search_snippet' => 'SONG FOR YOU！ガシャ VOL.9 MILLION LIVE CLOSET！　白石紬',
+                'created' => '2020-11-03 15:02:43',
+                'modified' => '2020-11-03 15:02:43',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '568',
+                'gasha_id' => '154',
+                'card_id' => '992',
+                'search_snippet' => 'SONG FOR YOU！ガシャ VOL.9 MILLION LIVE CLOSET！　高坂海美',
+                'created' => '2020-11-03 15:02:51',
+                'modified' => '2020-11-03 15:02:51',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '569',
+                'gasha_id' => '155',
+                'card_id' => '996',
+                'search_snippet' => '【期間限定】大暴れ！熱血アイドル学園ガシャ 守るためのチカラ　永吉昴',
+                'created' => '2020-11-03 15:04:00',
+                'modified' => '2020-11-03 15:04:00',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '570',
+                'gasha_id' => '155',
+                'card_id' => '997',
+                'search_snippet' => '【期間限定】大暴れ！熱血アイドル学園ガシャ これが私のやり方！　馬場このみ',
+                'created' => '2020-11-03 15:04:10',
+                'modified' => '2020-11-03 15:04:10',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '571',
+                'gasha_id' => '155',
+                'card_id' => '998',
+                'search_snippet' => '【期間限定】大暴れ！熱血アイドル学園ガシャ MILLION LIVE CLOSET！　我那覇響',
+                'created' => '2020-11-03 15:04:19',
+                'modified' => '2020-11-03 15:04:19',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '572',
+                'gasha_id' => '155',
+                'card_id' => '999',
+                'search_snippet' => '【期間限定】大暴れ！熱血アイドル学園ガシャ 涙輝く表彰台　宮尾美也',
+                'created' => '2020-11-03 15:04:29',
+                'modified' => '2020-11-03 15:04:29',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '573',
+                'gasha_id' => '155',
+                'card_id' => '1000',
+                'search_snippet' => '【期間限定】大暴れ！熱血アイドル学園ガシャ 学校のアイドル　伊吹翼',
+                'created' => '2020-11-03 15:04:38',
+                'modified' => '2020-11-03 15:04:38',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '574',
+                'gasha_id' => '156',
+                'card_id' => '639',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ くのいち見参！　エミリー',
+                'created' => '2020-11-03 15:01:22',
+                'modified' => '2020-11-03 15:01:22',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '575',
+                'gasha_id' => '156',
+                'card_id' => '658',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 夏祭りの楽しみ方　望月杏奈',
+                'created' => '2020-11-03 15:01:32',
+                'modified' => '2020-11-03 15:01:32',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '576',
+                'gasha_id' => '156',
+                'card_id' => '720',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 私だけの運命を探して　三浦あずさ',
+                'created' => '2020-11-03 15:01:42',
+                'modified' => '2020-11-03 15:01:42',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '577',
+                'gasha_id' => '157',
+                'card_id' => '1003',
+                'search_snippet' => '【期間限定】フォーチュンガールズⅡガシャ フォーチュンガール　天海春香',
+                'created' => '2020-11-03 15:06:57',
+                'modified' => '2020-11-03 15:06:57',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '578',
+                'gasha_id' => '157',
+                'card_id' => '1004',
+                'search_snippet' => '【期間限定】フォーチュンガールズⅡガシャ フォーチュンガール　大神環',
+                'created' => '2020-11-03 15:07:05',
+                'modified' => '2020-11-03 15:07:05',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '579',
+                'gasha_id' => '157',
+                'card_id' => '1005',
+                'search_snippet' => '【期間限定】フォーチュンガールズⅡガシャ フォーチュンガール　木下ひなた',
+                'created' => '2020-11-03 15:07:13',
+                'modified' => '2020-11-03 15:07:13',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '580',
+                'gasha_id' => '157',
+                'card_id' => '1006',
+                'search_snippet' => '【期間限定】フォーチュンガールズⅡガシャ MILLION LIVE CLOSET！　二階堂千鶴',
+                'created' => '2020-11-03 15:07:26',
+                'modified' => '2020-11-03 15:07:26',
                 'deleted' => NULL,
             ],
         ];
