@@ -3,12 +3,12 @@
 ミリシタのサービス開始からこれまでに実装されたカードのデータを元にガシャのシミュレートを行うことが可能です。
 
 ## デモサイト
-最初に作ったシミュレータ  
-https://milligasha.imo-tikuwa.com/  
-ターゲットを複数指定してすべてそろうまでガシャを引き続けるシミュレータ  
-https://milligasha.imo-tikuwa.com/target-pick  
+https://milligasha.imo-tikuwa.com/
 
-## インストール
+## Dockerを使った環境構築
+https://github.com/imo-tikuwa/docker-militheta-gasha-simu
+
+## Dockerを使わない環境構築
 非公開の開発用プラグインを使用しているのでcomposer installの際--no-devを付ける必要あり  
 また、Application.php内に記載のCake3AdminBakerプラグインの読み込みを削除する必要あり
 ```
@@ -27,7 +27,7 @@ mysql millitheta < ../env/millitheta.sql
 ```
 #!/usr/bin/env bash
 
-# CakePHP3の標準の設定
+# CakePHPの標準の設定
 export APP_NAME="MillithetaGashaSimu"
 export DEBUG="false"
 export APP_ENCODING="UTF-8"
@@ -35,7 +35,7 @@ export APP_DEFAULT_LOCALE="ja_JP"
 export APP_DEFAULT_TIMEZONE="Asia/Tokyo"
 export SECURITY_SALT="jHRuXqo8amappyTo5GjUFws6iPCX4hGyVZ5zsjdPHWOk3WY9gTjgOwpzZoJYoRES"
 
-# CakePHP3のデータベース設定
+# CakePHPのデータベース設定
 export DATABASE_HOST="localhost"
 export DATABASE_NAME="millitheta"
 export DATABASE_PORT="33306"
