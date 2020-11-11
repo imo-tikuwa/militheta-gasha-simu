@@ -5,6 +5,8 @@ use Migrations\AbstractMigration;
 
 class Initial extends AbstractMigration
 {
+    public $autoId = false;
+
     /**
      * Up Method.
      *
@@ -15,6 +17,14 @@ class Initial extends AbstractMigration
     public function up()
     {
         $this->table('admins')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'comment' => 'ID',
+                'default' => null,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addPrimaryKey(['id'])
             ->addColumn('mail', 'string', [
                 'default' => null,
                 'limit' => 255,
@@ -50,6 +60,14 @@ class Initial extends AbstractMigration
             ->create();
 
         $this->table('card_reprints')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'comment' => 'ID',
+                'default' => null,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addPrimaryKey(['id'])
             ->addColumn('gasha_id', 'integer', [
                 'comment' => 'ガシャID',
                 'default' => null,
@@ -89,6 +107,14 @@ class Initial extends AbstractMigration
             ->create();
 
         $this->table('cards')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'comment' => 'ID',
+                'default' => null,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addPrimaryKey(['id'])
             ->addColumn('character_id', 'integer', [
                 'comment' => 'キャラクター',
                 'default' => null,
@@ -120,7 +146,7 @@ class Initial extends AbstractMigration
                 'null' => true,
             ])
             ->addColumn('gasha_include', 'tinyinteger', [
-                'comment' => 'ガシャ限定？',
+                'comment' => 'ガシャ対象？',
                 'default' => '1',
                 'limit' => null,
                 'null' => true,
@@ -158,6 +184,14 @@ class Initial extends AbstractMigration
             ->create();
 
         $this->table('characters')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'comment' => 'ID',
+                'default' => null,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addPrimaryKey(['id'])
             ->addColumn('name', 'string', [
                 'comment' => '名前',
                 'default' => null,
@@ -179,6 +213,14 @@ class Initial extends AbstractMigration
             ->create();
 
         $this->table('gasha_pickups')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'comment' => 'ID',
+                'default' => null,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addPrimaryKey(['id'])
             ->addColumn('gasha_id', 'integer', [
                 'comment' => 'ガシャID',
                 'default' => null,
@@ -218,6 +260,14 @@ class Initial extends AbstractMigration
             ->create();
 
         $this->table('gashas')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'comment' => 'ID',
+                'default' => null,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addPrimaryKey(['id'])
             ->addColumn('start_date', 'date', [
                 'comment' => 'ガシャ開始日',
                 'default' => null,
@@ -275,6 +325,14 @@ class Initial extends AbstractMigration
             ->create();
 
         $this->table('operation_logs')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'comment' => 'ID',
+                'default' => null,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addPrimaryKey(['id'])
             ->addColumn('client_ip', 'text', [
                 'comment' => 'クライアントIP',
                 'default' => null,
@@ -293,25 +351,33 @@ class Initial extends AbstractMigration
                 'limit' => 255,
                 'null' => false,
             ])
-            ->addColumn('request_time', 'datetimefractional', [
+            ->addColumn('request_time', 'datetime', [
                 'comment' => 'リクエスト日時',
                 'default' => null,
                 'limit' => null,
                 'null' => false,
                 'precision' => 3,
-                'scale' => 3,
+                // 'scale' => 3
             ])
-            ->addColumn('response_time', 'datetimefractional', [
+            ->addColumn('response_time', 'datetime', [
                 'comment' => 'レスポンス日時',
                 'default' => null,
                 'limit' => null,
                 'null' => false,
                 'precision' => 3,
-                'scale' => 3,
+                // 'scale' => 3
             ])
             ->create();
 
         $this->table('operation_logs_daily')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'comment' => 'ID',
+                'default' => null,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addPrimaryKey(['id'])
             ->addColumn('target_ymd', 'date', [
                 'comment' => '対象日',
                 'default' => null,
@@ -339,6 +405,14 @@ class Initial extends AbstractMigration
             ->create();
 
         $this->table('operation_logs_hourly')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'comment' => 'ID',
+                'default' => null,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addPrimaryKey(['id'])
             ->addColumn('target_time', 'datetime', [
                 'comment' => '対象日時',
                 'default' => null,
@@ -366,6 +440,14 @@ class Initial extends AbstractMigration
             ->create();
 
         $this->table('operation_logs_monthly')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'comment' => 'ID',
+                'default' => null,
+                'limit' => null,
+                'null' => false,
+            ])
+            ->addPrimaryKey(['id'])
             ->addColumn('target_ym', 'integer', [
                 'comment' => '対象年月',
                 'default' => null,

@@ -6,6 +6,7 @@ return [
             'search' => true,
             'listview' => true,
             'require' => false,
+            'label' => 'ID',
             'col_lg_size' => 6,
             'col_md_size' => 6,
             'col_sm_size' => 12,

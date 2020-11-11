@@ -1023,7 +1023,6 @@ class CardReprintsSeed extends AbstractSeed
         ];
 
         $table = $this->table('card_reprints');
-        $table->truncate();
         $table->insert($data)->save();
     }
 }

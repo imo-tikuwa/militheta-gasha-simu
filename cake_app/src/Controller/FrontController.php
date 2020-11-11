@@ -23,6 +23,8 @@ class FrontController extends AppController
         parent::initialize();
         $this->Gashas = TableRegistry::getTableLocator()->get("Gashas");
         $this->Cards = TableRegistry::getTableLocator()->get("Cards");
+
+        $this->viewBuilder()->setLayout('default_front');
     }
 
     /**

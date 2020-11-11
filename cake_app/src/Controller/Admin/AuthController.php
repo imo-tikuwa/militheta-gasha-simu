@@ -35,12 +35,10 @@ class AuthController extends AppController
         $this->getRequest()->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
         if ($result->isValid()) {
-            $redirect = $this->getRequest()->getQuery('redirect', [
+            return $this->redirect([
                 'controller' => 'Top',
                 'action' => 'index',
             ]);
-
-            return $this->redirect($redirect);
         }
 
         if ($this->getRequest()->is('post') && !$result->isValid()) {

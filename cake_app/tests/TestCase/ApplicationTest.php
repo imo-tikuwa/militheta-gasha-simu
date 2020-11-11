@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -15,9 +17,9 @@
 namespace App\Test\TestCase;
 
 use App\Application;
+use Cake\Core\Configure;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\MiddlewareQueue;
-use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use Cake\TestSuite\IntegrationTestCase;
@@ -28,7 +30,6 @@ use InvalidArgumentException;
  */
 class ApplicationTest extends IntegrationTestCase
 {
-
     /**
      * testBootstrap
      *
@@ -40,10 +41,24 @@ class ApplicationTest extends IntegrationTestCase
         $app->bootstrap();
         $plugins = $app->getPlugins();
 
-        $this->assertCount(3, $plugins);
-        $this->assertSame('Bake', $plugins->get('Bake')->getName());
-        $this->assertSame('Migrations', $plugins->get('Migrations')->getName());
-        $this->assertSame('DebugKit', $plugins->get('DebugKit')->getName());
+        $testPlugins = [
+            'Bake',
+            'Migrations',
+            'SoftDelete',
+            'Authentication',
+            'Utilities',
+            'OperationLogs',
+            'CsvView',
+            'Cake3AdminBaker',
+            'Cake3ApiGenerator'
+        ];
+        if (Configure::read('debug')) {
+            $testPlugins[] = 'DebugKit';
+        }
+        $this->assertCount(count($testPlugins), $plugins);
+        foreach ($testPlugins as $testPlugin) {
+            $this->assertSame($testPlugin, $plugins->get($testPlugin)->getName());
+        }
     }
 
     /**
@@ -51,13 +66,13 @@ class ApplicationTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testBootstrapPluginWitoutHalt()
+    public function testBootstrapPluginWithoutHalt()
     {
         $this->expectException(InvalidArgumentException::class);
 
         $app = $this->getMockBuilder(Application::class)
             ->setConstructorArgs([dirname(dirname(__DIR__)) . '/config'])
-            ->setMethods(['addPlugin'])
+            ->onlyMethods(['addPlugin'])
             ->getMock();
 
         $app->method('addPlugin')
@@ -78,9 +93,10 @@ class ApplicationTest extends IntegrationTestCase
 
         $middleware = $app->middleware($middleware);
 
-        $this->assertInstanceOf(ErrorHandlerMiddleware::class, $middleware->get(0));
-        $this->assertInstanceOf(AssetMiddleware::class, $middleware->get(1));
-        $this->assertInstanceOf(RoutingMiddleware::class, $middleware->get(2));
-        $this->assertInstanceOf(CsrfProtectionMiddleware::class, $middleware->get(3));
+        $this->assertInstanceOf(ErrorHandlerMiddleware::class, $middleware->current());
+        $middleware->seek(1);
+        $this->assertInstanceOf(AssetMiddleware::class, $middleware->current());
+        $middleware->seek(2);
+        $this->assertInstanceOf(RoutingMiddleware::class, $middleware->current());
     }
 }

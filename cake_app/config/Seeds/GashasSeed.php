@@ -1908,7 +1908,6 @@ class GashasSeed extends AbstractSeed
         ];
 
         $table = $this->table('gashas');
-        $table->truncate();
         $table->insert($data)->save();
     }
 }

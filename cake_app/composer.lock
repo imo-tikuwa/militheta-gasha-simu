@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36ce6991ec54028131e83527667c93b6",
+    "content-hash": "c059281210868171fc2d599601f4de35",
     "packages": [
         {
             "name": "aura/intl",
@@ -115,16 +115,16 @@
         },
         {
             "name": "cakephp/cakephp",
-            "version": "4.1.5",
+            "version": "4.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "3d409286a21a4b95106426ab383b89050d561585"
+                "reference": "d8c526bb3e5640235282d189fb071e9c800b4f49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/3d409286a21a4b95106426ab383b89050d561585",
-                "reference": "3d409286a21a4b95106426ab383b89050d561585",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/d8c526bb3e5640235282d189fb071e9c800b4f49",
+                "reference": "d8c526bb3e5640235282d189fb071e9c800b4f49",
                 "shasum": ""
             },
             "require": {
@@ -208,7 +208,7 @@
                 "rapid-development",
                 "validation"
             ],
-            "time": "2020-10-05T01:00:40+00:00"
+            "time": "2020-11-08T02:26:32+00:00"
         },
         {
             "name": "cakephp/chronos",
@@ -581,16 +581,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-operation-logs",
-            "version": "v2.0.1",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/imo-tikuwa/cakephp-operation-logs.git",
-                "reference": "9a5b937594379074df9ffa6af1b7cbc4103ec9e5"
+                "reference": "9e6310ccf2226f4f4a06dd7024e23c6b23f98055"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-operation-logs/zipball/9a5b937594379074df9ffa6af1b7cbc4103ec9e5",
-                "reference": "9a5b937594379074df9ffa6af1b7cbc4103ec9e5",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-operation-logs/zipball/9e6310ccf2226f4f4a06dd7024e23c6b23f98055",
+                "reference": "9e6310ccf2226f4f4a06dd7024e23c6b23f98055",
                 "shasum": ""
             },
             "require": {
@@ -607,7 +607,7 @@
                 "MIT"
             ],
             "description": "OperationLogs plugin for CakePHP",
-            "time": "2020-10-15T09:33:36+00:00"
+            "time": "2020-11-10T07:29:59+00:00"
         },
         {
             "name": "imo-tikuwa/cakephp-utils",
@@ -2774,16 +2774,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "1.10.16",
+            "version": "1.10.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "217f0272673c72087862c40cf91ac07eb438d778"
+                "reference": "09d42e18394d8594be24e37923031c4b7442a1cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/217f0272673c72087862c40cf91ac07eb438d778",
-                "reference": "217f0272673c72087862c40cf91ac07eb438d778",
+                "url": "https://api.github.com/repos/composer/composer/zipball/09d42e18394d8594be24e37923031c4b7442a1cb",
+                "reference": "09d42e18394d8594be24e37923031c4b7442a1cb",
                 "shasum": ""
             },
             "require": {
@@ -2864,7 +2864,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T07:55:59+00:00"
+            "time": "2020-10-30T21:31:58+00:00"
         },
         {
             "name": "composer/semver",
@@ -3244,16 +3244,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-admin-baker",
-            "version": "v2.1.2",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-admin-baker.git",
-                "reference": "6cc7a2c2fb83f5455cfbfe882f98d5b12b8b209d"
+                "reference": "3d5b814c7a3dbd7a5d11d356398d8fb2972df1ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/6cc7a2c2fb83f5455cfbfe882f98d5b12b8b209d",
-                "reference": "6cc7a2c2fb83f5455cfbfe882f98d5b12b8b209d",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/3d5b814c7a3dbd7a5d11d356398d8fb2972df1ad",
+                "reference": "3d5b814c7a3dbd7a5d11d356398d8fb2972df1ad",
                 "shasum": ""
             },
             "require": {
@@ -3280,10 +3280,10 @@
             ],
             "description": "Cake3AdminBaker plugin for CakePHP",
             "support": {
-                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v2.1.2",
+                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v2.2.2",
                 "issues": "https://github.com/imo-tikuwa/cakephp-admin-baker/issues"
             },
-            "time": "2020-11-05T07:29:15+00:00"
+            "time": "2020-11-11T07:17:41+00:00"
         },
         {
             "name": "imo-tikuwa/cakephp-api-generator",
@@ -4221,39 +4221,39 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.5.8",
+            "version": "8.5.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "34c18baa6a44f1d1fbf0338907139e9dce95b997"
+                "reference": "f5c8a5dd5e7e8d68d7562bfb48d47287d33937d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/34c18baa6a44f1d1fbf0338907139e9dce95b997",
-                "reference": "34c18baa6a44f1d1fbf0338907139e9dce95b997",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f5c8a5dd5e7e8d68d7562bfb48d47287d33937d6",
+                "reference": "f5c8a5dd5e7e8d68d7562bfb48d47287d33937d6",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "^1.2.0",
+                "doctrine/instantiator": "^1.3.1",
                 "ext-dom": "*",
                 "ext-json": "*",
                 "ext-libxml": "*",
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "ext-xmlwriter": "*",
-                "myclabs/deep-copy": "^1.9.1",
+                "myclabs/deep-copy": "^1.10.0",
                 "phar-io/manifest": "^1.0.3",
                 "phar-io/version": "^2.0.1",
                 "php": "^7.2",
-                "phpspec/prophecy": "^1.8.1",
-                "phpunit/php-code-coverage": "^7.0.7",
+                "phpspec/prophecy": "^1.10.3",
+                "phpunit/php-code-coverage": "^7.0.10",
                 "phpunit/php-file-iterator": "^2.0.2",
                 "phpunit/php-text-template": "^1.2.1",
                 "phpunit/php-timer": "^2.1.2",
                 "sebastian/comparator": "^3.0.2",
                 "sebastian/diff": "^3.0.2",
-                "sebastian/environment": "^4.2.2",
-                "sebastian/exporter": "^3.1.1",
+                "sebastian/environment": "^4.2.3",
+                "sebastian/exporter": "^3.1.2",
                 "sebastian/global-state": "^3.0.0",
                 "sebastian/object-enumerator": "^3.0.3",
                 "sebastian/resource-operations": "^2.0.1",
@@ -4310,7 +4310,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-06-22T07:06:58+00:00"
+            "time": "2020-11-10T12:51:38+00:00"
         },
         {
             "name": "psy/psysh",

@@ -1,15 +1,17 @@
 <?php
+/**
+ * @var \App\View\AppView $this
+ */
 use Cake\Core\Configure;
 use Cake\Error\Debugger;
 
-// $this->layout = 'error';
-
-$this->assign('title', $message);
+$this->layout = 'error';
 
 if (Configure::read('debug')) :
     $this->layout = 'dev_error';
 
-    $this->assign('templateName', 'error400.ctp');
+    $this->assign('title', $message);
+    $this->assign('templateName', 'error400.php');
 
     $this->start('file');
 ?>
@@ -25,18 +27,12 @@ if (Configure::read('debug')) :
 <?php endif; ?>
 <?= $this->element('auto_table_warning') ?>
 <?php
-if (extension_loaded('xdebug')) :
-    xdebug_print_function_stack();
-endif;
 
 $this->end();
 endif;
 ?>
-<div class="col-md-12 mb-12">
-  <div class="card">
-    <div class="card-body table-responsive p-0">
-      <?= __d('cake', 'Error') ?>:
-      <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
-    </div>
-  </div>
-</div>
+<h2><?= h($message) ?></h2>
+<p class="error">
+    <strong><?= __d('cake', 'Error') ?>: </strong>
+    <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
+</p>

@@ -24,7 +24,7 @@
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
 
-/**
+/*
  * The default class to use for all routes
  *
  * The following route classes are supplied with CakePHP and are appropriate
@@ -40,10 +40,6 @@ use Cake\Routing\RouteBuilder;
  * Note that `Route` does not do any inflections on URLs which will result in
  * inconsistently cased URLs when used with `:plugin`, `:controller` and
  * `:action` markers.
- *
- * Cache: Routes are cached to improve performance, check the RoutingMiddleware
- * constructor in your `src/Application.php` file to change this behavior.
- *
  */
 /** @var \Cake\Routing\RouteBuilder $routes */
 $routes->setRouteClass(DashedRoute::class);
@@ -80,12 +76,12 @@ $routes->scope('/', function (RouteBuilder $builder) {
         $routes->fallbacks(DashedRoute::class);
     });
 
-    /**
+    /*
      * ...and connect the rest of 'Pages' controller's URLs.
      */
-    $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+    $builder->connect('/pages/*', 'Pages::display');
 
-    /**
+    /*
      * Connect catchall routes for all controllers.
      *
      * The `fallbacks` method is a shortcut for
@@ -108,6 +104,10 @@ $routes->scope('/', function (RouteBuilder $builder) {
  * ```
  * $routes->scope('/api', function (RouteBuilder $builder) {
  *     // No $builder->applyMiddleware() here.
+ *
+ *     // Parse specified extensions from URLs
+ *     // $builder->setExtensions(['json', 'xml']);
+ *
  *     // Connect API actions here.
  * });
  * ```

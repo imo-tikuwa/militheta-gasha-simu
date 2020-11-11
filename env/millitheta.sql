@@ -47,7 +47,7 @@ CREATE TABLE `cards` (
   `rarity` char(2) DEFAULT NULL COMMENT 'レアリティ',
   `type` char(2) DEFAULT NULL COMMENT 'タイプ',
   `add_date` date DEFAULT NULL COMMENT '実装日',
-  `gasha_include` tinyint(4) DEFAULT '1' COMMENT 'ガシャ限定？',
+  `gasha_include` tinyint(4) DEFAULT '1' COMMENT 'ガシャ対象？',
   `limited` tinyint(4) DEFAULT '0' COMMENT '限定？',
   `search_snippet` mediumtext COMMENT 'フリーワード検索用のスニペット',
   `created` datetime DEFAULT NULL COMMENT '作成日時',

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -30,9 +32,7 @@ class ErrorController extends AppController
      */
     public function initialize(): void
     {
-        $this->loadComponent('RequestHandler', [
-            'enableBeforeRedirect' => false,
-        ]);
+        $this->loadComponent('RequestHandler');
 
         // ログイン済みのとき管理画面内のエラーはレイアウトを切り替え
         if ($this->getRequest()->getParam('prefix') === 'admin' && !empty($this->getRequest()->getSession()->read('Auth'))) {

@@ -14136,7 +14136,6 @@ class CardsSeed extends AbstractSeed
         ];
 
         $table = $this->table('cards');
-        $table->truncate();
         $table->insert($data)->save();
     }
 }

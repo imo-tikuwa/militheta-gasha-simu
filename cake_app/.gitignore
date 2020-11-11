@@ -8,6 +8,10 @@
 /vendor/*
 /phinx.yml
 
+# phpunit files #
+#################
+.phpunit.result.cache
+
 # npm files #
 #############
 /node_modules/*
