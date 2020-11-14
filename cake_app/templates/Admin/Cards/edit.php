@@ -53,7 +53,7 @@ if ($card->hasErrors()) {
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
             <?= $this->element('Parts/label', ['field' => 'limited', 'label' => '限定？', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
-            <?= $this->Form->control('limited', ['id' => 'limited', 'type' => 'select', 'options' => _code('Codes.Cards.limited'), 'default' => '0', 'class' => 'form-control form-control-sm ', 'label' => false, 'required' => false, 'error' => false]); ?>
+            <?= $this->Form->control('limited', ['id' => 'limited', 'type' => 'select', 'options' => _code('Codes.Cards.limited'), 'class' => 'form-control form-control-sm ', 'label' => false, 'required' => false, 'error' => false, 'default' => '01', 'empty' => '　']); ?>
           </div>
         </div>
         <div class="col-md-12">

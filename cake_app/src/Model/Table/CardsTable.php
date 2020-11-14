@@ -174,6 +174,16 @@ class CardsTable extends AppTable
 
         // 限定？
         $validator
+            ->add('limited', 'scalar', [
+                'rule' => 'isScalar',
+                'message' => '限定？を正しく入力してください。',
+                'last' => true
+            ])
+            ->add('limited', 'maxLength', [
+                'rule' => ['maxLength', 2],
+                'message' => '限定？は2文字以内で入力してください。',
+                'last' => true
+            ])
             ->add('limited', 'existIn', [
                 'rule' => function ($value) {
                     return array_key_exists($value, _code('Codes.Cards.limited'));
@@ -181,7 +191,7 @@ class CardsTable extends AppTable
                 'message' => '限定？に不正な値が含まれています。',
                 'last' => true
             ])
-            ->notEmptyString('limited', '限定？を入力してください。');
+            ->notEmptyString('limited', '限定？を選択してください。');
 
         return $validator;
     }
@@ -224,6 +234,9 @@ class CardsTable extends AppTable
         }
         if (isset($data['type']) && $data['type'] != '') {
             $search_snippet[] = _code("Codes.Cards.type.{$data['type']}");
+        }
+        if (isset($data['limited']) && $data['limited'] != '') {
+            $search_snippet[] = _code("Codes.Cards.limited.{$data['limited']}");
         }
         $data['search_snippet'] = implode(' ', $search_snippet);
 
@@ -301,6 +314,13 @@ class CardsTable extends AppTable
                 $csv_data['type'] = $code_key;
             }
         }
+        // 限定？
+        $codes = array_flip(_code("Codes.Cards.limited"));
+        foreach ($codes as $code_value => $code_key) {
+            if ($code_value === $csv_data['limited']) {
+                $csv_data['limited'] = $code_key;
+            }
+        }
         unset($csv_data['created']);
         unset($csv_data['modified']);
 
@@ -340,7 +360,7 @@ class CardsTable extends AppTable
         // 恒常カード情報を取得
         $cards = $query->where([
             'gasha_include' => 1,
-            'limited' => 0,
+            'limited' => '01',
             'add_date <=' => $start_date
         ])->toArray();
 
@@ -348,7 +368,7 @@ class CardsTable extends AppTable
             // 限定カードを取得
             $limited_cards = $query->where([
                 'gasha_include' => 1,
-                'limited' => 1,
+                'limited' => '02',
                 'add_date' => $start_date
             ], [], true)->toArray();
             $cards = array_merge($limited_cards, $cards);
@@ -356,7 +376,7 @@ class CardsTable extends AppTable
             // フェス限定カードを取得
             $fes_limited_cards = $query->where([
                 'gasha_include' => 1,
-                'limited' => 2,
+                'limited' => '03',
                 'add_date <=' => $start_date, // 過去のフェス限を含める
             ], [], true)->toArray();
             $cards = array_merge($fes_limited_cards, $cards);
@@ -368,7 +388,7 @@ class CardsTable extends AppTable
             $reprint_limited_cards = $query->where([
                 'Cards.id IN' => $sub_query,
                 'Cards.gasha_include' => 1,
-                'Cards.limited' => 1,
+                'Cards.limited' => '02',
             ], [], true)->toArray();
             $cards = array_merge($reprint_limited_cards, $cards);
         }

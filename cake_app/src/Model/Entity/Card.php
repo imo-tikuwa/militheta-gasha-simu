@@ -13,7 +13,7 @@ namespace App\Model\Entity;
  * @property string|null $type
  * @property \Cake\I18n\FrozenDate|null $add_date
  * @property int|null $gasha_include
- * @property int|null $limited
+ * @property string|null $limited
  * @property string|null $search_snippet
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified

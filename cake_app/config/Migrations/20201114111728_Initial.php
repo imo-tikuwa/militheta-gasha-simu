@@ -151,10 +151,10 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('limited', 'tinyinteger', [
+            ->addColumn('limited', 'char', [
                 'comment' => '限定？',
-                'default' => '0',
-                'limit' => null,
+                'default' => null,
+                'limit' => 2,
                 'null' => true,
             ])
             ->addColumn('search_snippet', 'text', [

@@ -102,9 +102,14 @@ return [
             'col_lg_size' => 3,
             'col_md_size' => 3,
             'col_sm_size' => 12,
-            'input_type' => 'boolean',
+            'input_type' => 'select',
             'search_type' => '=',
-            'boolean_init_value' => '0',
+            'selections' => [
+                '01' => '恒常',
+                '02' => '限定',
+                '03' => 'フェス限定',
+            ],
+            'default_value' => '01',
         ],
         'created' => [
             'search' => false,

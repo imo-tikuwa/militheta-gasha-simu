@@ -247,7 +247,13 @@ class CardsController extends AppController
             // ガシャ対象？
             'gasha_include',
             // 限定？
-            'limited',
+            function ($row) {
+                if (!empty($row['limited'])) {
+                    return _code('Codes.Cards.limited.' . $row['limited']);
+                }
+
+                return "";
+            },
             // 作成日時
             function ($row) {
                 if ($row['created'] instanceof FrozenTime) {

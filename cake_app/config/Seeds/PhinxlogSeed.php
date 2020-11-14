@@ -22,10 +22,10 @@ class PhinxlogSeed extends AbstractSeed
     {
         $data = [
             [
-                'version' => '20201110131338',
+                'version' => '20201114111728',
                 'migration_name' => 'Initial',
-                'start_time' => '2020-11-10 22:13:38',
-                'end_time' => '2020-11-10 22:13:38',
+                'start_time' => '2020-11-14 20:17:28',
+                'end_time' => '2020-11-14 20:17:28',
                 'breakpoint' => '0',
             ],
         ];
