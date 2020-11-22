@@ -109,5 +109,7 @@ return [
         'csv_export' => true,
         'csv_import' => true,
         'csv_encoding' => 'utf8',
+        'excel_export' => true,
+        'excel_import' => false,
     ],
 ];

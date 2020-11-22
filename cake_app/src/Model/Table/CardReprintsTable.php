@@ -74,6 +74,7 @@ class CardReprintsTable extends AppTable
 
         // ガシャID
         $validator
+            ->requirePresence('gasha_id', true, 'ガシャIDを選択してください。')
             ->add('gasha_id', 'integer', [
                 'rule' => 'isInteger',
                 'message' => 'ガシャIDを正しく入力してください。',
@@ -92,6 +93,7 @@ class CardReprintsTable extends AppTable
 
         // カードID
         $validator
+            ->requirePresence('card_id', true, 'カードIDを選択してください。')
             ->add('card_id', 'integer', [
                 'rule' => 'isInteger',
                 'message' => 'カードIDを正しく入力してください。',
@@ -140,13 +142,17 @@ class CardReprintsTable extends AppTable
     {
         // フリーワード検索のスニペット更新
         $search_snippet = [];
-        $gasha = TableRegistry::getTableLocator()->get('Gashas')->find()->select(['title'])->where(['id' => $data['gasha_id']])->first();
-        if (!empty($gasha)) {
-            $search_snippet[] = $gasha->title;
+        if (isset($data['gasha_id'])) {
+            $gasha = TableRegistry::getTableLocator()->get('Gashas')->find()->select(['title'])->where(['id' => $data['gasha_id']])->first();
+            if (!empty($gasha)) {
+                $search_snippet[] = $gasha->title;
+            }
         }
-        $card = TableRegistry::getTableLocator()->get('Cards')->find()->select(['name'])->where(['id' => $data['card_id']])->first();
-        if (!empty($card)) {
-            $search_snippet[] = $card->name;
+        if (isset($data['card_id'])) {
+            $card = TableRegistry::getTableLocator()->get('Cards')->find()->select(['name'])->where(['id' => $data['card_id']])->first();
+            if (!empty($card)) {
+                $search_snippet[] = $card->name;
+            }
         }
         $data['search_snippet'] = implode(' ', $search_snippet);
 
@@ -184,33 +190,17 @@ class CardReprintsTable extends AppTable
     }
 
     /**
-     * CSVの入力情報を取得する
-     * @param array $csv_row CSVの1行辺りの配列データ
-     * @return array データ登録用に変換した配列データ
+     * Excelカラム情報を取得する
+     * @return array
      */
-    public function getCsvData($csv_row)
+    public function getExcelColumns()
     {
-        $csv_data = array_combine($this->getCsvColumns(), $csv_row);
-
-        // ガシャID
-        $gashas = TableRegistry::getTableLocator()->get('Gashas');
-        $gasha_data = $gashas->find()->select(['id'])->where(['title' => $csv_data['gasha_id']])->first();
-        if (!empty($gasha_data)) {
-            $csv_data['gasha_id'] = (string)$gasha_data->id;
-        } else {
-            $csv_data['gasha_id'] = null;
-        }
-        // カードID
-        $cards = TableRegistry::getTableLocator()->get('Cards');
-        $card_data = $cards->find()->select(['id'])->where(['name' => $csv_data['card_id']])->first();
-        if (!empty($card_data)) {
-            $csv_data['card_id'] = (string)$card_data->id;
-        } else {
-            $csv_data['card_id'] = null;
-        }
-        unset($csv_data['created']);
-        unset($csv_data['modified']);
-
-        return $csv_data;
+        return [
+            'id',
+            'gasha_id',
+            'card_id',
+            'created',
+            'modified',
+        ];
     }
 }

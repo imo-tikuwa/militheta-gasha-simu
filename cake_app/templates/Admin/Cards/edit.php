@@ -17,7 +17,7 @@ if ($card->hasErrors()) {
         <div class="col-lg-3 col-md-3 col-sm-12">
           <div class="form-group">
             <?= $this->element('Parts/label', ['field' => 'character_id', 'label' => 'キャラクター', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
-            <?= $this->Form->control('character_id', ['id' => 'character_id', 'type' => 'select', 'class' => 'form-control form-control-sm rounded-0 ', 'label' => false, 'required' => false, 'error' => false]); ?>
+            <?= $this->Form->control('character_id', ['id' => 'character_id', 'type' => 'select', 'class' => 'form-control form-control-sm rounded-0 ', 'label' => false, 'required' => false, 'error' => false, 'empty' => '　']); ?>
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">

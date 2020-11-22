@@ -4,9 +4,14 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
+use App\Utils\ExcelUtils;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
 
 /**
  * Characters Controller
@@ -107,6 +112,7 @@ class CharactersController extends AppController
     {
         if ($this->getRequest()->getParam('action') == 'edit') {
             $character = $this->Characters->get($id);
+            $this->Characters->touch($character);
         } else {
             $character = $this->Characters->newEmptyEntity();
         }
@@ -168,5 +174,56 @@ class CharactersController extends AppController
         $this->response = $this->response->withDownload("characters-{$datetime->format('YmdHis')}.csv");
         $this->viewBuilder()->setClassName('CsvView.Csv');
         $this->set(compact('characters', '_serialize', '_header', '_extract', '_csvEncoding'));
+    }
+
+    /**
+     * excel export method
+     * @return void
+     */
+    public function excelExport()
+    {
+        $request = $this->getRequest()->getQueryParams();
+        $characters = $this->_getQuery($request)->toArray();
+
+        $reader = new XlsxReader();
+        $spreadsheet = $reader->load(EXCEL_TEMPLATE_DIR . 'characters_template.xlsx');
+        $data_sheet = $spreadsheet->getSheetByName('DATA');
+        $row_num = 2;
+
+        // 取得したデータをExcelに書き込む
+        foreach ($characters as $character) {
+            // ID
+            $data_sheet->setCellValue("A{$row_num}", $character['id']);
+            // 名前
+            $data_sheet->setCellValue("B{$row_num}", $character['name']);
+            // 作成日時
+            $cell_value = @$character['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $data_sheet->setCellValue("C{$row_num}", $cell_value);
+            // 更新日時
+            $cell_value = @$character['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $data_sheet->setCellValue("D{$row_num}", $cell_value);
+            $row_num++;
+        }
+
+        // データ入力行のフォーマットを文字列に設定
+        $characters_row_num = count($characters) + 100;
+        $data_sheet->getStyle("A2:D{$characters_row_num}")->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
+
+
+        // 罫線設定、A2セルを選択、1行目固定、DATAシートをアクティブ化
+        $data_sheet->getStyle("A1:D{$characters_row_num}")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+        $data_sheet->setSelectedCell('A2');
+        $data_sheet->freezePane('A2');
+        $spreadsheet->setActiveSheetIndexByName('DATA');
+
+        $datetime = new \DateTime();
+        $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;');
+        header("Content-Disposition: attachment; filename=\"characters-{$datetime->format('YmdHis')}.xlsx\"");
+        header('Cache-Control: max-age=0');
+        $writer = new XlsxWriter($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 }

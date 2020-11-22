@@ -7,13 +7,10 @@ $fa-font-path: "../../../node_modules/@fortawesome/fontawesome-free/webfonts";
 @import "../../../node_modules/@fortawesome/fontawesome-free/scss/brands";
 @import "../../../node_modules/@fortawesome/fontawesome-free/scss/regular";
 
-
-@import "../../../node_modules/bootstrap/scss/bootstrap";
-
 @import "../../../node_modules/admin-lte/build/scss/AdminLTE";
 
 @import "../../../node_modules/select2/src/scss/core";
-@import "../../../node_modules/select2-bootstrap4-theme/src/layout";
+@import "../../../node_modules/@ttskch/select2-bootstrap4-theme/src/layout";
 
 @import "../../../node_modules/tempusdominus-bootstrap-4/src/sass/tempusdominus-bootstrap-4-build";
 

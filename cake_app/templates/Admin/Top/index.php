@@ -28,6 +28,9 @@ $this->assign('title', '管理画面TOP');
               <?php if ($function['exist_csv_export'] === true && AuthUtils::hasRole($this->getRequest(), ['controller' => $function['controller'], 'action' => ACTION_CSV_EXPORT])) { ?>
                 <?= $this->Html->link('CSVエクスポート', ['controller' => "{$function['controller']}", 'action' => ACTION_CSV_EXPORT], ['class' => 'btn btn-sm btn-flat btn-outline-secondary']) ?>
               <?php } ?>
+              <?php if ($function['exist_excel_export'] === true && AuthUtils::hasRole($this->getRequest(), ['controller' => $function['controller'], 'action' => ACTION_EXCEL_EXPORT])) { ?>
+                <?= $this->Html->link('Excelエクスポート', ['controller' => "{$function['controller']}", 'action' => ACTION_EXCEL_EXPORT], ['class' => 'btn btn-sm btn-flat btn-outline-secondary']) ?>
+              <?php } ?>
             <?php } ?>
           </div>
         </div>

@@ -15,11 +15,11 @@ $this->assign('title', "復刻情報詳細");
         </tr>
         <tr>
           <th scope="row">ガシャID</th>
-          <td><?= $cardReprint->has('gasha') ? $cardReprint->gasha->title : '' ?></td>
+          <td><?= $cardReprint->has('gasha') ? h($cardReprint->gasha->title) : '' ?></td>
         </tr>
         <tr>
           <th scope="row">カードID</th>
-          <td><?= $cardReprint->has('card') ? $cardReprint->card->name : '' ?></td>
+          <td><?= $cardReprint->has('card') ? h($cardReprint->card->name) : '' ?></td>
         </tr>
         <tr>
           <th scope="row">作成日時</th>

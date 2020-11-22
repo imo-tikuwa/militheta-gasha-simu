@@ -15,7 +15,7 @@ $this->assign('title', "カード詳細");
         </tr>
         <tr>
           <th scope="row">キャラクター</th>
-          <td><?= $card->has('character') ? $card->character->name : '' ?></td>
+          <td><?= $card->has('character') ? h($card->character->name) : '' ?></td>
         </tr>
         <tr>
           <th scope="row">カード名</th>

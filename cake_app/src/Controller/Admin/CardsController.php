@@ -5,9 +5,14 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Utils\CsvUtils;
+use App\Utils\ExcelUtils;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
 
 /**
  * Cards Controller
@@ -26,7 +31,7 @@ class CardsController extends AppController
     public function initialize(): void
     {
         parent::initialize();
-        if (!in_array($this->getRequest()->getParam('action'), ['delete', 'csvExport', 'csvImport'], true)) {
+        if (!in_array($this->getRequest()->getParam('action'), ['delete', 'csvExport', 'csvImport', 'excelExport'], true)) {
             // キャラクターの選択肢
             $this->set('characters', $this->Cards->findForeignSelectionData('Characters', 'name', true));
         }
@@ -110,7 +115,7 @@ class CardsController extends AppController
         }
         $query->group('Cards.id');
 
-        return $query->contain(['Characters', 'CardReprints']);
+        return $query->contain(['Characters', 'CardReprints', 'GashaPickups']);
     }
 
     /**
@@ -122,7 +127,7 @@ class CardsController extends AppController
      */
     public function view($id = null)
     {
-        $card = $this->Cards->get($id, ['contain' => ['Characters', 'CardReprints']]);
+        $card = $this->Cards->get($id, ['contain' => ['Characters', 'CardReprints', 'GashaPickups']]);
 
         $this->set('card', $card);
     }
@@ -160,6 +165,7 @@ class CardsController extends AppController
     {
         if ($this->getRequest()->getParam('action') == 'edit') {
             $card = $this->Cards->get($id);
+            $this->Cards->touch($card);
         } else {
             $card = $this->Cards->newEmptyEntity();
         }
@@ -303,16 +309,12 @@ class CardsController extends AppController
                         continue;
                     }
 
-                    $csv_data = $this->Cards->getCsvData($csv_row);
-                    if (!empty($csv_data['id'])) {
-                        $card = $this->Cards->get($csv_data['id']);
-                        $update_count++;
-                    } else {
-                        $card = $this->Cards->newEmptyEntity();
+                    $card = $this->Cards->createEntityByCsvRow($csv_row);
+                    if ($card->isNew()) {
                         $insert_count++;
+                    } else {
+                        $update_count++;
                     }
-
-                    $card = $this->Cards->patchEntity($card, $csv_data);
                     if (!$this->Cards->save($card, ['atomic' => false])) {
                         throw new \Exception('SaveError');
                     }
@@ -332,5 +334,108 @@ class CardsController extends AppController
         }
 
         return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Cards')]);
+    }
+
+    /**
+     * excel export method
+     * @return void
+     */
+    public function excelExport()
+    {
+        $request = $this->getRequest()->getQueryParams();
+        $cards = $this->_getQuery($request)->toArray();
+
+        $reader = new XlsxReader();
+        $spreadsheet = $reader->load(EXCEL_TEMPLATE_DIR . 'cards_template.xlsx');
+        $data_sheet = $spreadsheet->getSheetByName('DATA');
+        $list_sheet = $spreadsheet->getSheetByName('LIST');
+        $row_num = 2;
+
+        // 取得したデータをExcelに書き込む
+        foreach ($cards as $card) {
+            // ID
+            $data_sheet->setCellValue("A{$row_num}", $card['id']);
+            // キャラクター
+            $cell_value = "";
+            if (isset($card['character']['id']) && isset($card['character']['name'])) {
+                $cell_value = "{$card['character']['id']}:{$card['character']['name']}";
+            }
+            $data_sheet->setCellValue("B{$row_num}", $cell_value);
+            // カード名
+            $data_sheet->setCellValue("C{$row_num}", $card['name']);
+            // レアリティ
+            $cell_value = "";
+            if (isset($card['rarity']) && array_key_exists($card['rarity'], _code('Codes.Cards.rarity'))) {
+                $cell_value = $card['rarity'] . ':' . _code('Codes.Cards.rarity.' . $card['rarity']);
+            }
+            $data_sheet->setCellValue("D{$row_num}", $cell_value);
+            // タイプ
+            $cell_value = "";
+            if (isset($card['type']) && array_key_exists($card['type'], _code('Codes.Cards.type'))) {
+                $cell_value = $card['type'] . ':' . _code('Codes.Cards.type.' . $card['type']);
+            }
+            $data_sheet->setCellValue("E{$row_num}", $cell_value);
+            // 実装日
+            $cell_value = @$card['add_date']->i18nFormat('yyyy-MM-dd');
+            $data_sheet->setCellValue("F{$row_num}", $cell_value);
+            // ガシャ対象？
+            $cell_value = _code('Codes.Cards.gasha_include.' . $card['gasha_include'], 'false');
+            $data_sheet->setCellValue("G{$row_num}", $cell_value);
+            // 限定？
+            $cell_value = "";
+            if (isset($card['limited']) && array_key_exists($card['limited'], _code('Codes.Cards.limited'))) {
+                $cell_value = $card['limited'] . ':' . _code('Codes.Cards.limited.' . $card['limited']);
+            }
+            $data_sheet->setCellValue("H{$row_num}", $cell_value);
+            // 作成日時
+            $cell_value = @$card['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $data_sheet->setCellValue("I{$row_num}", $cell_value);
+            // 更新日時
+            $cell_value = @$card['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $data_sheet->setCellValue("J{$row_num}", $cell_value);
+            $row_num++;
+        }
+
+        // キャラクターの一覧を取得、選択肢情報を設定
+        $characters = $this->Cards->findForeignSelectionData('Characters', 'name');
+        if (!is_null($characters) && count($characters) > 0) {
+            $row_num = 2;
+            foreach ($characters as $selection_key => $selection_value) {
+                $list_sheet->setCellValue("A{$row_num}", "{$selection_key}:{$selection_value}");
+                $row_num++;
+            }
+        }
+
+        // データ入力行のフォーマットを文字列に設定
+        $cards_row_num = count($cards) + 100;
+        $data_sheet->getStyle("A2:J{$cards_row_num}")->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
+
+        // データ入力行に入力規則を設定（1048576はExcelの最大行数）
+        // キャラクター
+        $data_sheet->setDataValidation("B2:B1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$A\$2,0,0,COUNTA('LIST'!\$A:\$A)-1,1)"));
+        // レアリティ
+        $data_sheet->setDataValidation("D2:D1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$B\$2,0,0,COUNTA('LIST'!\$B:\$B)-1,1)"));
+        // タイプ
+        $data_sheet->setDataValidation("E2:E1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$C\$2,0,0,COUNTA('LIST'!\$C:\$C)-1,1)"));
+        // ガシャ対象？
+        $data_sheet->setDataValidation("G2:G1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$D\$2,0,0,COUNTA('LIST'!\$D:\$D)-1,1)"));
+        // 限定？
+        $data_sheet->setDataValidation("H2:H1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$E\$2,0,0,COUNTA('LIST'!\$E:\$E)-1,1)"));
+
+        // 罫線設定、A2セルを選択、1行目固定、DATAシートをアクティブ化
+        $data_sheet->getStyle("A1:J{$cards_row_num}")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+        $data_sheet->setSelectedCell('A2');
+        $data_sheet->freezePane('A2');
+        $spreadsheet->setActiveSheetIndexByName('DATA');
+
+        $datetime = new \DateTime();
+        $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;');
+        header("Content-Disposition: attachment; filename=\"cards-{$datetime->format('YmdHis')}.xlsx\"");
+        header('Cache-Control: max-age=0');
+        $writer = new XlsxWriter($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 }

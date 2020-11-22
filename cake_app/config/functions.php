@@ -4,11 +4,12 @@ use Cake\Core\Configure;
 /**
  * コード定義を取得する
  * @param $code_key
+ * @param $default
  * @return bool|mixed
  */
-function _code($code_key)
+function _code($code_key, $default = null)
 {
-    return Configure::read($code_key);
+    return Configure::read($code_key, $default);
 }
 
 /**

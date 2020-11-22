@@ -80,6 +80,7 @@ class CardsTable extends AppTable
 
         // キャラクター
         $validator
+            ->requirePresence('character_id', true, 'キャラクターを選択してください。')
             ->add('character_id', 'integer', [
                 'rule' => 'isInteger',
                 'message' => 'キャラクターを正しく入力してください。',
@@ -98,6 +99,7 @@ class CardsTable extends AppTable
 
         // カード名
         $validator
+            ->requirePresence('name', true, 'カード名を入力してください。')
             ->add('name', 'scalar', [
                 'rule' => 'isScalar',
                 'message' => 'カード名を正しく入力してください。',
@@ -112,6 +114,7 @@ class CardsTable extends AppTable
 
         // レアリティ
         $validator
+            ->requirePresence('rarity', true, 'レアリティを選択してください。')
             ->add('rarity', 'scalar', [
                 'rule' => 'isScalar',
                 'message' => 'レアリティを正しく入力してください。',
@@ -133,6 +136,7 @@ class CardsTable extends AppTable
 
         // タイプ
         $validator
+            ->requirePresence('type', true, 'タイプを選択してください。')
             ->add('type', 'scalar', [
                 'rule' => 'isScalar',
                 'message' => 'タイプを正しく入力してください。',
@@ -154,6 +158,7 @@ class CardsTable extends AppTable
 
         // 実装日
         $validator
+            ->requirePresence('add_date', true, '実装日を入力してください。')
             ->add('add_date', 'date', [
                 'rule' => ['date', ['ymd']],
                 'message' => '実装日を正しく入力してください。',
@@ -163,6 +168,7 @@ class CardsTable extends AppTable
 
         // ガシャ対象？
         $validator
+            ->requirePresence('gasha_include', true, 'ガシャ対象？を選択してください。')
             ->add('gasha_include', 'existIn', [
                 'rule' => function ($value) {
                     return array_key_exists($value, _code('Codes.Cards.gasha_include'));
@@ -170,10 +176,11 @@ class CardsTable extends AppTable
                 'message' => 'ガシャ対象？に不正な値が含まれています。',
                 'last' => true
             ])
-            ->notEmptyString('gasha_include', 'ガシャ対象？を入力してください。');
+            ->notEmptyString('gasha_include', 'ガシャ対象？を選択してください。');
 
         // 限定？
         $validator
+            ->requirePresence('limited', true, '限定？を選択してください。')
             ->add('limited', 'scalar', [
                 'rule' => 'isScalar',
                 'message' => '限定？を正しく入力してください。',
@@ -192,6 +199,19 @@ class CardsTable extends AppTable
                 'last' => true
             ])
             ->notEmptyString('limited', '限定？を選択してください。');
+
+        return $validator;
+    }
+
+    /**
+     * CSV import validation rules.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationCsv(Validator $validator): Validator
+    {
+        $validator = $this->validationDefault($validator);
 
         return $validator;
     }
@@ -224,9 +244,11 @@ class CardsTable extends AppTable
     {
         // フリーワード検索のスニペット更新
         $search_snippet = [];
-        $character = TableRegistry::getTableLocator()->get('Characters')->find()->select(['name'])->where(['id' => $data['character_id']])->first();
-        if (!empty($character)) {
-            $search_snippet[] = $character->name;
+        if (isset($data['character_id'])) {
+            $character = TableRegistry::getTableLocator()->get('Characters')->find()->select(['name'])->where(['id' => $data['character_id']])->first();
+            if (!empty($character)) {
+                $search_snippet[] = $character->name;
+            }
         }
         $search_snippet[] = $data['name'];
         if (isset($data['rarity']) && $data['rarity'] != '') {
@@ -284,11 +306,11 @@ class CardsTable extends AppTable
     }
 
     /**
-     * CSVの入力情報を取得する
+     * CSVの入力情報を元にエンティティを作成する
      * @param array $csv_row CSVの1行辺りの配列データ
-     * @return array データ登録用に変換した配列データ
+     * @return \App\Model\Entity\Card エンティティ
      */
-    public function getCsvData($csv_row)
+    public function createEntityByCsvRow($csv_row)
     {
         $csv_data = array_combine($this->getCsvColumns(), $csv_row);
 
@@ -298,7 +320,7 @@ class CardsTable extends AppTable
         if (!empty($character_data)) {
             $csv_data['character_id'] = (string)$character_data->id;
         } else {
-            $csv_data['character_id'] = null;
+            $csv_data['character_id'] = '';
         }
         // レアリティ
         $codes = array_flip(_code("Codes.Cards.rarity"));
@@ -314,6 +336,12 @@ class CardsTable extends AppTable
                 $csv_data['type'] = $code_key;
             }
         }
+        // ガシャ対象？
+        $gasha_include = 0;
+        if (array_key_exists($csv_data['gasha_include'], _code("Codes.Cards.gasha_include"))) {
+            $gasha_include = $csv_data['gasha_include'];
+        }
+        $csv_data['gasha_include'] = $gasha_include;
         // 限定？
         $codes = array_flip(_code("Codes.Cards.limited"));
         foreach ($codes as $code_value => $code_key) {
@@ -321,10 +349,40 @@ class CardsTable extends AppTable
                 $csv_data['limited'] = $code_key;
             }
         }
+
         unset($csv_data['created']);
         unset($csv_data['modified']);
 
-        return $csv_data;
+        // Csvの入力情報を元にエンティティを作成
+        if (!empty($csv_data['id'])) {
+            $card = $this->get($csv_data['id']);
+            $this->touch($card);
+        } else {
+            $card = $this->newEmptyEntity();
+        }
+        $card = $this->patchEntity($card, $csv_data, ['validate' => 'csv']);
+
+        return $card;
+    }
+
+    /**
+     * Excelカラム情報を取得する
+     * @return array
+     */
+    public function getExcelColumns()
+    {
+        return [
+            'id',
+            'character_id',
+            'name',
+            'rarity',
+            'type',
+            'add_date',
+            'gasha_include',
+            'limited',
+            'created',
+            'modified',
+        ];
     }
 
     /**

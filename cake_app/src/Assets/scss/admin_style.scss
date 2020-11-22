@@ -295,3 +295,28 @@ label.item-label {
 label:not(.form-check-label):not(.custom-file-label) {
   font-weight: inherit;
 }
+
+// imo-tikuwa/select2-bootstrap4-themeのlayout.cssに追加した内容
+// https://github.com/imo-tikuwa/select2-bootstrap4-theme/blob/master/src/layout.scss#L28-L49
+// フォークするのではなくここでscssを追加する
+// form-control-sm
+.form-control-sm + .select2-container--bootstrap4 {
+  .select2-selection {
+    height: $input-height-sm !important;
+    @include font-size($input-font-size-sm);
+    .select2-selection__rendered {
+      margin-top: -0.2em;
+    }
+  }
+}
+
+// form-control-lg
+.form-control-lg + .select2-container--bootstrap4 {
+  .select2-selection {
+    height: $input-height-lg !important;
+    @include font-size($input-font-size-lg);
+    .select2-selection__rendered {
+      margin-top: -0.2em;
+    }
+  }
+}

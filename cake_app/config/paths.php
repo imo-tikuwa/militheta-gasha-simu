@@ -98,6 +98,11 @@ define('RESOURCES', ROOT . DS . 'resources' . DS);
 define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'vendor' . DS . 'cakephp' . DS . 'cakephp');
 
 /**
+ * excel template dir.
+ */
+define('EXCEL_TEMPLATE_DIR', dirname(__DIR__) . DS . 'templates' . DS . 'excel' . DS);
+
+/**
  * Path to the cake directory.
  */
 define('CORE_PATH', CAKE_CORE_INCLUDE_PATH . DS);

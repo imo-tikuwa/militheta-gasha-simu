@@ -15,11 +15,11 @@ $this->assign('title', "ピックアップ情報詳細");
         </tr>
         <tr>
           <th scope="row">ガシャID</th>
-          <td><?= $gashaPickup->has('gasha') ? $gashaPickup->gasha->title : '' ?></td>
+          <td><?= $gashaPickup->has('gasha') ? h($gashaPickup->gasha->title) : '' ?></td>
         </tr>
         <tr>
           <th scope="row">カードID</th>
-          <td><?= $gashaPickup->has('card') ? $gashaPickup->card->name : '' ?></td>
+          <td><?= $gashaPickup->has('card') ? h($gashaPickup->card->name) : '' ?></td>
         </tr>
         <tr>
           <th scope="row">作成日時</th>

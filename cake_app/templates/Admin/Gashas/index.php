@@ -24,8 +24,11 @@ $this->Form->setTemplates([
         <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_CSV_IMPORT])) { ?>
           <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" id="csv-import-btn">CSVインポート</button>
           <?= $this->Form->create(null, ['id' => 'csv-import-form', 'url' => ['action' => ACTION_CSV_IMPORT], 'enctype' => 'multipart/form-data', 'style' => 'display:none;']) ?>
-            <input type="file" name="csv_import_file" id="csv-import-file"/>
+            <input type="file" name="csv_import_file" id="csv-import-file" accept=".csv"/>
           <?= $this->Form->end(); ?>
+        <?php } ?>
+        <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_EXCEL_EXPORT])) { ?>
+          <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="location.href='<?= $this->Url->build(['action' => ACTION_EXCEL_EXPORT, '?' => $this->getRequest()->getQueryParams()]) ?>'">Excelエクスポート</button>
         <?php } ?>
         <div class="freeword-search input-group input-group-sm">
           <div class="input-group-prepend">

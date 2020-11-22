@@ -74,6 +74,7 @@ class GashasTable extends AppTable
 
         // ガシャ開始日
         $validator
+            ->requirePresence('start_date', true, 'ガシャ開始日を入力してください。')
             ->add('start_date', 'date', [
                 'rule' => ['date', ['ymd']],
                 'message' => 'ガシャ開始日を正しく入力してください。',
@@ -83,6 +84,7 @@ class GashasTable extends AppTable
 
         // ガシャ終了日
         $validator
+            ->requirePresence('end_date', true, 'ガシャ終了日を入力してください。')
             ->add('end_date', 'date', [
                 'rule' => ['date', ['ymd']],
                 'message' => 'ガシャ終了日を正しく入力してください。',
@@ -92,6 +94,7 @@ class GashasTable extends AppTable
 
         // ガシャタイトル
         $validator
+            ->requirePresence('title', true, 'ガシャタイトルを入力してください。')
             ->add('title', 'scalar', [
                 'rule' => 'isScalar',
                 'message' => 'ガシャタイトルを正しく入力してください。',
@@ -106,6 +109,7 @@ class GashasTable extends AppTable
 
         // SSRレート
         $validator
+            ->requirePresence('ssr_rate', true, 'SSRレートを入力してください。')
             ->add('ssr_rate', 'integer', [
                 'rule' => 'isInteger',
                 'message' => 'SSRレートを正しく入力してください。',
@@ -125,6 +129,7 @@ class GashasTable extends AppTable
 
         // SRレート
         $validator
+            ->requirePresence('sr_rate', true, 'SRレートを入力してください。')
             ->add('sr_rate', 'integer', [
                 'rule' => 'isInteger',
                 'message' => 'SRレートを正しく入力してください。',
@@ -141,6 +146,19 @@ class GashasTable extends AppTable
                 'last' => true
             ])
             ->notEmptyString('sr_rate', 'SRレートを入力してください。');
+
+        return $validator;
+    }
+
+    /**
+     * CSV import validation rules.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationCsv(Validator $validator): Validator
+    {
+        $validator = $this->validationDefault($validator);
 
         return $validator;
     }
@@ -202,11 +220,11 @@ class GashasTable extends AppTable
     }
 
     /**
-     * CSVの入力情報を取得する
+     * CSVの入力情報を元にエンティティを作成する
      * @param array $csv_row CSVの1行辺りの配列データ
-     * @return array データ登録用に変換した配列データ
+     * @return \App\Model\Entity\Gasha エンティティ
      */
-    public function getCsvData($csv_row)
+    public function createEntityByCsvRow($csv_row)
     {
         $csv_data = array_combine($this->getCsvColumns(), $csv_row);
 
@@ -214,10 +232,38 @@ class GashasTable extends AppTable
         $csv_data['ssr_rate'] = preg_replace('/[^0-9]/', '', $csv_data['ssr_rate']);
         // SRレート
         $csv_data['sr_rate'] = preg_replace('/[^0-9]/', '', $csv_data['sr_rate']);
+
         unset($csv_data['created']);
         unset($csv_data['modified']);
 
-        return $csv_data;
+        // Csvの入力情報を元にエンティティを作成
+        if (!empty($csv_data['id'])) {
+            $gasha = $this->get($csv_data['id']);
+            $this->touch($gasha);
+        } else {
+            $gasha = $this->newEmptyEntity();
+        }
+        $gasha = $this->patchEntity($gasha, $csv_data, ['validate' => 'csv']);
+
+        return $gasha;
+    }
+
+    /**
+     * Excelカラム情報を取得する
+     * @return array
+     */
+    public function getExcelColumns()
+    {
+        return [
+            'id',
+            'start_date',
+            'end_date',
+            'title',
+            'ssr_rate',
+            'sr_rate',
+            'created',
+            'modified',
+        ];
     }
 
     /**

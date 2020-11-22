@@ -67,6 +67,7 @@ class CharactersTable extends AppTable
 
         // 名前
         $validator
+            ->requirePresence('name', true, '名前を入力してください。')
             ->add('name', 'scalar', [
                 'rule' => 'isScalar',
                 'message' => '名前を正しく入力してください。',
@@ -126,17 +127,16 @@ class CharactersTable extends AppTable
     }
 
     /**
-     * CSVの入力情報を取得する
-     * @param array $csv_row CSVの1行辺りの配列データ
-     * @return array データ登録用に変換した配列データ
+     * Excelカラム情報を取得する
+     * @return array
      */
-    public function getCsvData($csv_row)
+    public function getExcelColumns()
     {
-        $csv_data = array_combine($this->getCsvColumns(), $csv_row);
-
-        unset($csv_data['created']);
-        unset($csv_data['modified']);
-
-        return $csv_data;
+        return [
+            'id',
+            'name',
+            'created',
+            'modified',
+        ];
     }
 }

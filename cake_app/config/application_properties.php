@@ -115,6 +115,23 @@ return [
     ],
     'ThumbnailOptions' => [
     ],
+    'ExcelOptions' => [
+        'CardReprints' => [
+            'version' => '8934a00438cc7b41b85f418f348904549f48cce2f9c2bda85676d982319a2875a36c3740bc79c1a7aa712f21e667ff8c91b4e101fbad64aff051a835fd2bcb48',
+        ],
+        'Cards' => [
+            'version' => '0c3a4ef8a0555dccd9f6fb30bfe867a7f7c63f1cf3430894d17710ca486c42a5c14ec348f14253fbe9146e597b2e0bc6f15c4af3e5bc1a55c17693609b2fe0fd',
+        ],
+        'Characters' => [
+            'version' => 'b25b294cb4deb69ea00a4c3cf3113904801b6015e5956bd019a8570b1fe1d6040e944ef3cdee16d0a46503ca6e659a25f21cf9ceddc13f352a3c98138c15d6af',
+        ],
+        'GashaPickups' => [
+            'version' => '8934a00438cc7b41b85f418f348904549f48cce2f9c2bda85676d982319a2875a36c3740bc79c1a7aa712f21e667ff8c91b4e101fbad64aff051a835fd2bcb48',
+        ],
+        'Gashas' => [
+            'version' => 'b25b294cb4deb69ea00a4c3cf3113904801b6015e5956bd019a8570b1fe1d6040e944ef3cdee16d0a46503ca6e659a25f21cf9ceddc13f352a3c98138c15d6af',
+        ],
+    ],
     'InitialOrders' => [
         'CardReprints' => [
             'sort' => 'id',

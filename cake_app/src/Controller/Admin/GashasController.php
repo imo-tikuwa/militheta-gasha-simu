@@ -5,9 +5,14 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Utils\CsvUtils;
+use App\Utils\ExcelUtils;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
 
 /**
  * Gashas Controller
@@ -130,6 +135,7 @@ class GashasController extends AppController
     {
         if ($this->getRequest()->getParam('action') == 'edit') {
             $gasha = $this->Gashas->get($id);
+            $this->Gashas->touch($gasha);
         } else {
             $gasha = $this->Gashas->newEmptyEntity();
         }
@@ -267,16 +273,12 @@ class GashasController extends AppController
                         continue;
                     }
 
-                    $csv_data = $this->Gashas->getCsvData($csv_row);
-                    if (!empty($csv_data['id'])) {
-                        $gasha = $this->Gashas->get($csv_data['id']);
-                        $update_count++;
-                    } else {
-                        $gasha = $this->Gashas->newEmptyEntity();
+                    $gasha = $this->Gashas->createEntityByCsvRow($csv_row);
+                    if ($gasha->isNew()) {
                         $insert_count++;
+                    } else {
+                        $update_count++;
                     }
-
-                    $gasha = $this->Gashas->patchEntity($gasha, $csv_data);
                     if (!$this->Gashas->save($gasha, ['atomic' => false])) {
                         throw new \Exception('SaveError');
                     }
@@ -296,5 +298,66 @@ class GashasController extends AppController
         }
 
         return $this->redirect(['action' => 'index', '?' => _code('InitialOrders.Gashas')]);
+    }
+
+    /**
+     * excel export method
+     * @return void
+     */
+    public function excelExport()
+    {
+        $request = $this->getRequest()->getQueryParams();
+        $gashas = $this->_getQuery($request)->toArray();
+
+        $reader = new XlsxReader();
+        $spreadsheet = $reader->load(EXCEL_TEMPLATE_DIR . 'gashas_template.xlsx');
+        $data_sheet = $spreadsheet->getSheetByName('DATA');
+        $row_num = 2;
+
+        // 取得したデータをExcelに書き込む
+        foreach ($gashas as $gasha) {
+            // ID
+            $data_sheet->setCellValue("A{$row_num}", $gasha['id']);
+            // ガシャ開始日
+            $cell_value = @$gasha['start_date']->i18nFormat('yyyy-MM-dd');
+            $data_sheet->setCellValue("B{$row_num}", $cell_value);
+            // ガシャ終了日
+            $cell_value = @$gasha['end_date']->i18nFormat('yyyy-MM-dd');
+            $data_sheet->setCellValue("C{$row_num}", $cell_value);
+            // ガシャタイトル
+            $data_sheet->setCellValue("D{$row_num}", $gasha['title']);
+            // SSRレート
+            $data_sheet->setCellValue("E{$row_num}", $gasha['ssr_rate']);
+            // SRレート
+            $data_sheet->setCellValue("F{$row_num}", $gasha['sr_rate']);
+            // 作成日時
+            $cell_value = @$gasha['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $data_sheet->setCellValue("G{$row_num}", $cell_value);
+            // 更新日時
+            $cell_value = @$gasha['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $data_sheet->setCellValue("H{$row_num}", $cell_value);
+            $row_num++;
+        }
+
+        // データ入力行のフォーマットを文字列に設定
+        $gashas_row_num = count($gashas) + 100;
+        $data_sheet->getStyle("A2:H{$gashas_row_num}")->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
+
+
+        // 罫線設定、A2セルを選択、1行目固定、DATAシートをアクティブ化
+        $data_sheet->getStyle("A1:H{$gashas_row_num}")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+        $data_sheet->setSelectedCell('A2');
+        $data_sheet->freezePane('A2');
+        $spreadsheet->setActiveSheetIndexByName('DATA');
+
+        $datetime = new \DateTime();
+        $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;');
+        header("Content-Disposition: attachment; filename=\"gashas-{$datetime->format('YmdHis')}.xlsx\"");
+        header('Cache-Control: max-age=0');
+        $writer = new XlsxWriter($spreadsheet);
+        $writer->save('php://output');
+        exit;
     }
 }

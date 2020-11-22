@@ -24,7 +24,10 @@ class TopController extends AppController
             $functions[$alias]['data_count'] = $table->find()->count();
 
             // コントローラにCSVエクスポート機能があるかをチェックする
-            $functions[$alias]['exist_csv_export'] = method_exists("App\\Controller\\Admin\\{$function['controller']}Controller", 'csvExport');
+            $functions[$alias]['exist_csv_export'] = method_exists("App\\Controller\\Admin\\{$function['controller']}Controller", ACTION_CSV_EXPORT);
+
+            // コントローラにExcelエクスポート機能があるかをチェックする
+            $functions[$alias]['exist_excel_export'] = method_exists("App\\Controller\\Admin\\{$function['controller']}Controller", ACTION_EXCEL_EXPORT);
         }
         $this->set(compact('functions'));
     }
