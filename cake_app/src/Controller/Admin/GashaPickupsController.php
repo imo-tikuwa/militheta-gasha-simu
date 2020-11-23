@@ -303,6 +303,13 @@ class GashaPickupsController extends AppController
             }
         }
 
+        // LISTシートの選択肢項目を罫線で囲む
+        $list_sheet->getStyle("A1:{$list_sheet->getHighestColumn()}{$list_sheet->getHighestRow()}")
+        ->getBorders()
+        ->getAllBorders()
+        ->setBorderStyle(Border::BORDER_THIN);
+        $list_sheet->setSelectedCell('A1');
+
         // データ入力行のフォーマットを文字列に設定
         $gasha_pickups_row_num = count($gasha_pickups) + 100;
         $data_sheet->getStyle("A2:E{$gasha_pickups_row_num}")->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
