@@ -30,6 +30,7 @@ class ExcelUtils
      * Excelインポート機能でアップロードされたExcelファイルが処理可能かチェックする
      * @param Worksheet $spreadsheet phpspreadsheetのSpreadsheet
      * @param string $controller Excelインポートを行おうとしているコントローラ名
+     * @return bool
      */
     public static function checkExcelVersion(Spreadsheet $spreadsheet = null, $controller = null): bool
     {

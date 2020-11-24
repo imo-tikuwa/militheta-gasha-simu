@@ -33,10 +33,10 @@ class AdminsSeed extends AbstractSeed
             [
                 'id' => '2',
                 'mail' => 'user1@imo-tikuwa.com',
-                'password' => 'P/2wmtxVUXCvScejmZrStA==:174gRTsNtTSmarmBSg6P5w==',
-                'privilege' => '{"Cards": ["READ"], "Gashas": ["READ"], "Characters": ["READ"], "CardReprints": ["READ"], "GashaPickups": ["READ"]}',
+                'password' => 'yerFNCGATtp9Cb+O3gAECg==:KJExaS9/APeHbcirsqZVYg==',
+                'privilege' => '{"Cards": ["READ", "CSV_EXPORT", "EXCEL_EXPORT"], "Gashas": ["READ"], "Characters": ["READ"], "CardReprints": ["READ"], "GashaPickups": ["READ"]}',
                 'created' => '2020-10-07 16:14:02',
-                'modified' => '2020-10-07 16:14:02',
+                'modified' => '2020-11-24 18:31:29',
                 'deleted' => NULL,
             ],
         ];

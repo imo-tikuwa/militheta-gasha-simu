@@ -7,6 +7,8 @@ return [
             2 => ROLE_DELETE,
             3 => ROLE_CSV_EXPORT,
             4 => ROLE_CSV_IMPORT,
+            5 => ROLE_EXCEL_EXPORT,
+            6 => ROLE_EXCEL_IMPORT,
         ],
         'RoleBadgeClass' => [
             ROLE_READ => 'badge badge-primary',
@@ -14,6 +16,8 @@ return [
             ROLE_DELETE => 'badge badge-warning text-white',
             ROLE_CSV_EXPORT => 'badge badge-info',
             ROLE_CSV_IMPORT => 'badge badge-success',
+            ROLE_EXCEL_EXPORT => 'badge badge-info',
+            ROLE_EXCEL_IMPORT => 'badge badge-success',
         ],
     ],
     'BakedFunctions' => [
@@ -160,18 +164,21 @@ return [
             ROLE_WRITE => 'キャラクター書込',
             ROLE_DELETE => 'キャラクター削除',
             ROLE_CSV_EXPORT => 'キャラクターCSVエクスポート',
+            ROLE_EXCEL_EXPORT => 'キャラクターExcelエクスポート',
         ],
         'GashaPickups' => [
             ROLE_READ => 'ピックアップ情報読込',
             ROLE_WRITE => 'ピックアップ情報書込',
             ROLE_DELETE => 'ピックアップ情報削除',
             ROLE_CSV_EXPORT => 'ピックアップ情報CSVエクスポート',
+            ROLE_EXCEL_EXPORT => 'ピックアップ情報Excelエクスポート',
         ],
         'CardReprints' => [
             ROLE_READ => '復刻情報読込',
             ROLE_WRITE => '復刻情報書込',
             ROLE_DELETE => '復刻情報削除',
             ROLE_CSV_EXPORT => '復刻情報CSVエクスポート',
+            ROLE_EXCEL_EXPORT => '復刻情報Excelエクスポート',
         ],
         'Cards' => [
             ROLE_READ => 'カード読込',
@@ -179,6 +186,7 @@ return [
             ROLE_DELETE => 'カード削除',
             ROLE_CSV_EXPORT => 'カードCSVエクスポート',
             ROLE_CSV_IMPORT => 'カードCSVインポート',
+            ROLE_EXCEL_EXPORT => 'カードExcelエクスポート',
         ],
         'Gashas' => [
             ROLE_READ => 'ガシャ読込',
@@ -186,6 +194,7 @@ return [
             ROLE_DELETE => 'ガシャ削除',
             ROLE_CSV_EXPORT => 'ガシャCSVエクスポート',
             ROLE_CSV_IMPORT => 'ガシャCSVインポート',
+            ROLE_EXCEL_EXPORT => 'ガシャExcelエクスポート',
         ],
     ],
     'Others' => [

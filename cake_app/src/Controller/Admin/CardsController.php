@@ -31,7 +31,7 @@ class CardsController extends AppController
     public function initialize(): void
     {
         parent::initialize();
-        if (!in_array($this->getRequest()->getParam('action'), ['delete', 'csvExport', 'csvImport', 'excelExport'], true)) {
+        if (!in_array($this->getRequest()->getParam('action'), [ACTION_DELETE, ACTION_CSV_EXPORT, ACTION_CSV_IMPORT, ACTION_EXCEL_EXPORT], true)) {
             // キャラクターの選択肢
             $this->set('characters', $this->Cards->findForeignSelectionData('Characters', 'name', true));
         }

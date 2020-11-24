@@ -31,7 +31,7 @@ class GashaPickupsController extends AppController
     public function initialize(): void
     {
         parent::initialize();
-        if (!in_array($this->getRequest()->getParam('action'), ['delete', 'csvExport', 'excelExport'], true)) {
+        if (!in_array($this->getRequest()->getParam('action'), [ACTION_DELETE, ACTION_CSV_EXPORT, ACTION_EXCEL_EXPORT], true)) {
             // ガシャIDの選択肢
             $this->Gashas = TableRegistry::getTableLocator()->get('Gashas');
             $gashas = $this->Gashas->find()->select(['id', 'title', 'start_date'])->enableHydration(false)->order(['id' => 'DESC'])->toArray();

@@ -23,6 +23,12 @@ const ROLE_CSV_EXPORT = 'CSV_EXPORT';
 /** CsvImport権限 */
 const ROLE_CSV_IMPORT = 'CSV_IMPORT';
 
+/** ExcelExport権限 */
+const ROLE_EXCEL_EXPORT = 'EXCEL_EXPORT';
+
+/** ExcelImport権限 */
+const ROLE_EXCEL_IMPORT = 'EXCEL_IMPORT';
+
 /** indexアクション */
 const ACTION_INDEX = 'index';
 

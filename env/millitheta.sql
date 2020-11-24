@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-11-14 20:21:05
+Date: 2020-11-24 18:42:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,7 +34,7 @@ CREATE TABLE `admins` (
 -- Records of admins
 -- ----------------------------
 INSERT INTO `admins` VALUES ('1', 'admin@imo-tikuwa.com', 'ExkD1/9lm1NHZZt2+phf5w==:QgOAS4fgkguFQ9jZYHL9ow==', null, '2020-10-07 16:13:05', '2020-10-07 16:13:05', null);
-INSERT INTO `admins` VALUES ('2', 'user1@imo-tikuwa.com', 'P/2wmtxVUXCvScejmZrStA==:174gRTsNtTSmarmBSg6P5w==', '{\"Cards\": [\"READ\"], \"Gashas\": [\"READ\"], \"Characters\": [\"READ\"], \"CardReprints\": [\"READ\"], \"GashaPickups\": [\"READ\"]}', '2020-10-07 16:14:02', '2020-10-07 16:14:02', null);
+INSERT INTO `admins` VALUES ('2', 'user1@imo-tikuwa.com', 'yerFNCGATtp9Cb+O3gAECg==:KJExaS9/APeHbcirsqZVYg==', '{\"Cards\": [\"READ\", \"CSV_EXPORT\", \"EXCEL_EXPORT\"], \"Gashas\": [\"READ\"], \"Characters\": [\"READ\"], \"CardReprints\": [\"READ\"], \"GashaPickups\": [\"READ\"]}', '2020-10-07 16:14:02', '2020-11-24 18:31:29', null);
 
 -- ----------------------------
 -- Table structure for `cards`
