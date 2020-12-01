@@ -250,7 +250,9 @@ class CardsTable extends AppTable
                 $search_snippet[] = $character->name;
             }
         }
-        $search_snippet[] = $data['name'];
+        if (isset($data['name']) && $data['name'] != '') {
+            $search_snippet[] = $data['name'];
+        }
         if (isset($data['rarity']) && $data['rarity'] != '') {
             $search_snippet[] = _code("Codes.Cards.rarity.{$data['rarity']}");
         }

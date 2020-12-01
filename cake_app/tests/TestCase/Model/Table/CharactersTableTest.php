@@ -32,6 +32,7 @@ class CharactersTableTest extends TestCase
      * character valid data.
      */
     protected $valid_data;
+
     /**
      * setUp method
      *

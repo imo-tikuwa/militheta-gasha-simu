@@ -88,10 +88,10 @@ class AuthUtils
                 $has_role = in_array(ROLE_CSV_IMPORT, $privileges, true);
                 break;
             case ACTION_EXCEL_EXPORT:
-                $has_role = in_array(ROLE_CSV_EXPORT, $privileges, true);
+                $has_role = in_array(ROLE_EXCEL_EXPORT, $privileges, true);
                 break;
             case ACTION_EXCEL_IMPORT:
-                $has_role = in_array(ROLE_CSV_IMPORT, $privileges, true);
+                $has_role = in_array(ROLE_EXCEL_IMPORT, $privileges, true);
                 break;
                 // 上記以外のアクションは一律アクセス可能
             default:

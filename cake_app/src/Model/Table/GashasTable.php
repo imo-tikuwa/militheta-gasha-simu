@@ -177,7 +177,9 @@ class GashasTable extends AppTable
     {
         // フリーワード検索のスニペット更新
         $search_snippet = [];
-        $search_snippet[] = $data['title'];
+        if (isset($data['title']) && $data['title'] != '') {
+            $search_snippet[] = $data['title'];
+        }
         $data['search_snippet'] = implode(' ', $search_snippet);
 
         return parent::patchEntity($entity, $data, $options);

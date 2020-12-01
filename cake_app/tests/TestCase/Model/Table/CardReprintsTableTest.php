@@ -33,6 +33,7 @@ class CardReprintsTableTest extends TestCase
      * card_reprint valid data.
      */
     protected $valid_data;
+
     /**
      * setUp method
      *

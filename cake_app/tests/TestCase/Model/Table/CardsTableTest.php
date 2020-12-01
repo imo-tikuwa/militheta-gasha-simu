@@ -39,6 +39,7 @@ class CardsTableTest extends TestCase
      * card valid csv data.
      */
     protected $valid_csv_data;
+
     /**
      * setUp method
      *

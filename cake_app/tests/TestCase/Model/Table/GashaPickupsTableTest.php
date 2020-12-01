@@ -33,6 +33,7 @@ class GashaPickupsTableTest extends TestCase
      * gasha_pickup valid data.
      */
     protected $valid_data;
+
     /**
      * setUp method
      *

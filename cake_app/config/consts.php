@@ -59,6 +59,9 @@ const ACTION_EXCEL_IMPORT = 'excelImport';
 /** 権限エラーメッセージ */
 const MESSAGE_AUTH_ERROR = '権限エラーが発生しました';
 
+/** エクセルファイル(.xlsx)のContent-Type */
+const EXCEL_CONTENT_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+
 /** SSRピックアップレートの初期値 */
 const BASE_SSR_PICKUP_RATE = 0.99;
 

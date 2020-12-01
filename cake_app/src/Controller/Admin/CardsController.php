@@ -6,6 +6,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AppController;
 use App\Utils\CsvUtils;
 use App\Utils\ExcelUtils;
+use Cake\Http\CallbackStream;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
@@ -215,8 +216,6 @@ class CardsController extends AppController
     {
         $request = $this->getRequest()->getQueryParams();
         $cards = $this->_getQuery($request)->toArray();
-        $_serialize = 'cards';
-        $_header = $this->Cards->getCsvHeaders();
         $_extract = [
             // ID
             'id',
@@ -281,10 +280,15 @@ class CardsController extends AppController
         $datetime = new \DateTime();
         $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
 
-        $_csvEncoding = 'UTF-8';
         $this->response = $this->response->withDownload("cards-{$datetime->format('YmdHis')}.csv");
         $this->viewBuilder()->setClassName('CsvView.Csv');
-        $this->set(compact('cards', '_serialize', '_header', '_extract', '_csvEncoding'));
+        $this->viewBuilder()->setOptions([
+            'serialize' => 'cards',
+            'header' => $this->Cards->getCsvHeaders(),
+            'extract' => $_extract,
+            'csvEncoding' => 'UTF-8'
+        ]);
+        $this->set(compact('cards'));
     }
 
     /**
@@ -293,12 +297,12 @@ class CardsController extends AppController
      */
     public function csvImport()
     {
-        $csv_import_file = @$_FILES["csv_import_file"]["tmp_name"];
-        if (is_uploaded_file($csv_import_file)) {
+        $csv_import_file = $this->getRequest()->getUploadedFile('csv_import_file');
+        if (!is_null($csv_import_file)) {
             $conn = $this->Cards->getConnection();
             $conn->begin();
             try {
-                $csv_data = CsvUtils::parseUtf8Csv($csv_import_file);
+                $csv_data = CsvUtils::parseUtf8Csv($csv_import_file->getStream()->getMetadata('uri'));
                 $insert_count = 0;
                 $update_count = 0;
                 foreach ($csv_data as $index => $csv_row) {
@@ -437,12 +441,14 @@ class CardsController extends AppController
 
         $datetime = new \DateTime();
         $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
-
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;');
-        header("Content-Disposition: attachment; filename=\"cards-{$datetime->format('YmdHis')}.xlsx\"");
-        header('Cache-Control: max-age=0');
         $writer = new XlsxWriter($spreadsheet);
-        $writer->save('php://output');
-        exit;
+        $stream = new CallbackStream(function () use ($writer) {
+            $writer->save('php://output');
+        });
+
+        return $this->response->withHeader('Content-Type', EXCEL_CONTENT_TYPE)
+        ->withHeader('Content-Disposition', "attachment; filename=\"cards-{$datetime->format('YmdHis')}.xlsx\"")
+        ->withHeader('Cache-Control', 'max-age=0')
+        ->withBody($stream);
     }
 }
