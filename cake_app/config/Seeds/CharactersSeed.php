@@ -345,6 +345,18 @@ class CharactersSeed extends AbstractSeed
                 'created' => '2020-01-03 13:00:00',
                 'modified' => '2020-01-03 13:00:00',
             ],
+            [
+                'id' => '55',
+                'name' => '一ノ瀬志希',
+                'created' => '2020-12-02 22:03:16',
+                'modified' => '2020-12-02 22:03:16',
+            ],
+            [
+                'id' => '56',
+                'name' => '宮本フレデリカ',
+                'created' => '2020-12-02 22:03:24',
+                'modified' => '2020-12-02 22:03:24',
+            ],
         ];
 
         $table = $this->table('characters');

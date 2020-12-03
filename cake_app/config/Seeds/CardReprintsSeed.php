@@ -1020,6 +1020,33 @@ class CardReprintsSeed extends AbstractSeed
                 'modified' => '2020-11-03 15:01:42',
                 'deleted' => NULL,
             ],
+            [
+                'id' => '112',
+                'gasha_id' => '160',
+                'card_id' => '693',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 小さなオーケストラ　ジュリア',
+                'created' => '2020-12-02 22:28:19',
+                'modified' => '2020-12-02 22:28:19',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '113',
+                'gasha_id' => '160',
+                'card_id' => '712',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 晴れ晴れと、華麗に　水瀬伊織',
+                'created' => '2020-12-02 22:28:30',
+                'modified' => '2020-12-02 22:28:30',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '114',
+                'gasha_id' => '160',
+                'card_id' => '732',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ パワフルレッド・ステージ　北上麗花',
+                'created' => '2020-12-02 22:28:42',
+                'modified' => '2020-12-02 22:28:42',
+                'deleted' => NULL,
+            ],
         ];
 
         $table = $this->table('card_reprints');
