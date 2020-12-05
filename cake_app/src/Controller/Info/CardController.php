@@ -9,6 +9,10 @@ use Cake\Database\Query;
  */
 class CardController extends ApiController
 {
+    /**
+     *
+     * @return void
+     */
     public function index()
     {
         $this->loadModel('Cards');

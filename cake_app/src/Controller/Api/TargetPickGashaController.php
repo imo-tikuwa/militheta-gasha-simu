@@ -34,9 +34,10 @@ class TargetPickGashaController extends ApiController
 
     /**
      * 共通処理内でガシャに必要なデータを取得
-     * {@inheritDoc}
-     * @param EventInterface $event
+     *
+     * @param EventInterface $event EventInterface
      * @see \Cake\Controller\Controller::beforeFilter()
+     * @return \Cake\Http\Response|void
      */
     public function beforeFilter(EventInterface $event)
     {

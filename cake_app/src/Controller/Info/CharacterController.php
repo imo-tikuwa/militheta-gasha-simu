@@ -8,6 +8,10 @@ use App\Controller\Info\ApiController;
  */
 class CharacterController extends ApiController
 {
+    /**
+     *
+     * @return void
+     */
     public function index()
     {
         $this->loadModel('Characters');

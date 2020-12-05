@@ -2,14 +2,19 @@
 namespace App\Controller\Info;
 
 use App\Controller\AppController;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 
 /**
  * Api Controller
  */
 class ApiController extends AppController
 {
-    public function beforeFilter(Event $event)
+    /**
+     *
+     * {@inheritDoc}
+     * @see \Cake\Controller\Controller::beforeFilter()
+     */
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
         $this->loadComponent('RequestHandler');

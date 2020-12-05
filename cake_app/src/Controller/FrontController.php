@@ -28,9 +28,9 @@ class FrontController extends AppController
     }
 
     /**
-     * {@inheritDoc}
      * 共通処理
-     * @param EventInterface $event
+     *
+     * @param EventInterface $event EventInterface
      * @return void
      */
     public function beforeFilter(EventInterface $event)

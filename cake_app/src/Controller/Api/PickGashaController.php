@@ -15,7 +15,6 @@ use Cake\Event\EventInterface;
  */
 class PickGashaController extends ApiController
 {
-
     /**
      * ガシャ情報
      * @var Gasha
@@ -42,9 +41,10 @@ class PickGashaController extends ApiController
 
     /**
      * 共通処理内でガシャに必要なデータを取得
-     * {@inheritDoc}
-     * @param EventInterface $event
+     *
+     * @param EventInterface $event EventInterface
      * @see \Cake\Controller\Controller::beforeFilter()
+     * @return \Cake\Http\Response|void
      */
     public function beforeFilter(EventInterface $event)
     {

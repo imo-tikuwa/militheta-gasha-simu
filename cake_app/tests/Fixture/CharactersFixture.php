@@ -15,21 +15,58 @@ class CharactersFixture extends TestFixture
      *
      * @var array
      */
-    // phpcs:disable
     public $fields = [
-        'id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => 'ID', 'autoIncrement' => true, 'precision' => null],
-        'name' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '名前', 'precision' => null],
-        'created' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => true, 'default' => null, 'comment' => '作成日時'],
-        'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => true, 'default' => null, 'comment' => '更新日時'],
+        'id' => [
+            'type' => 'integer',
+            'length' => null,
+            'unsigned' => false,
+            'null' => false,
+            'default' => null,
+            'comment' => 'ID',
+            'autoIncrement' => true,
+            'precision' => null,
+        ],
+        'name' => [
+            'type' => 'string',
+            'length' => 255,
+            'null' => true,
+            'default' => null,
+            'collate' => 'utf8_general_ci',
+            'comment' => '名前',
+            'precision' => null,
+        ],
+        'created' => [
+            'type' => 'datetime',
+            'length' => null,
+            'precision' => null,
+            'null' => true,
+            'default' => null,
+            'comment' => '作成日時',
+        ],
+        'modified' => [
+            'type' => 'datetime',
+            'length' => null,
+            'precision' => null,
+            'null' => true,
+            'default' => null,
+            'comment' => '更新日時',
+        ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'primary' => [
+                'type' => 'primary',
+                'columns' => [
+                    'id',
+                ],
+                'length' => [
+                ],
+            ],
         ],
         '_options' => [
             'engine' => 'InnoDB',
-            'collation' => 'utf8_general_ci'
+            'collation' => 'utf8_general_ci',
         ],
     ];
-    // phpcs:enable
+
     /**
      * Init method
      *
@@ -41,8 +78,8 @@ class CharactersFixture extends TestFixture
             [
                 'id' => 1,
                 'name' => 'Lorem ipsum dolor sit amet',
-                'created' => '2020-12-01 20:28:40',
-                'modified' => '2020-12-01 20:28:40',
+                'created' => '2020-12-05 13:17:54',
+                'modified' => '2020-12-05 13:17:54',
             ],
         ];
         parent::init();
