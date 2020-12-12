@@ -3,7 +3,7 @@ use App\Utils\AuthUtils;
 
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Gasha[]|\Cake\Collection\CollectionInterface $gashas
+ * @var \App\Model\Entity\Gasha[] $gashas
  */
 $this->assign('title', "ガシャ");
 $this->Form->setTemplates([

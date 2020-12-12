@@ -3,7 +3,7 @@ use App\Utils\AuthUtils;
 
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\CardReprint[]|\Cake\Collection\CollectionInterface $card_reprints
+ * @var \App\Model\Entity\CardReprint[] $card_reprints
  */
 $this->assign('title', "復刻情報");
 $this->Form->setTemplates([

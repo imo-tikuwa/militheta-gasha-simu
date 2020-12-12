@@ -553,15 +553,8 @@ class CardsControllerTest extends TestCase
         $this->post('/admin/cards/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
-    }
 
-    /**
-     * Test to throw an exception in get request with "delete method"
-     *
-     * @return void
-     */
-    public function testDeleteIfGetRequest(): void
-    {
+        $this->cleanup();
         $this->expectException(\Cake\Http\Exception\MethodNotAllowedException::class);
         $this->expectExceptionCode(405);
         $url = new \Cake\Http\ServerRequest([

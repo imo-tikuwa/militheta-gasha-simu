@@ -16,16 +16,17 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@ttskch/select2-bootstrap4-theme": "^1.3.4",
-    "admin-lte": "git+https://github.com/imo-tikuwa/AdminLTE.git#v3.0.5-modify",
+    "admin-lte": "^3.0.5",
+    "bootstrap": "4.4.1",
     "bootstrap-fileinput": "^5.1.3",
-    "bootstrap4-tagsinput": "git+https://github.com/imo-tikuwa/bootstrap4-tagsinput.git#master",
+    "bootstrap4-tagsinput": "git+https://github.com/imo-tikuwa/bootstrap4-tagsinput.git",
     "jquery": "^3.5.1",
     "js-cookie": "^2.2.1",
     "moment": "^2.29.1",
     "select2": "^4.0.13",
     "summernote": "^0.8.18",
     "tablesorter": "^2.31.2",
-    "tempusdominus-bootstrap-4": "git+https://github.com/imo-tikuwa/bootstrap-4.git#master"
+    "tempusdominus-bootstrap-4": "git+https://github.com/imo-tikuwa/bootstrap-4.git"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",

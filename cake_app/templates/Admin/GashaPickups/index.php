@@ -3,7 +3,7 @@ use App\Utils\AuthUtils;
 
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\GashaPickup[]|\Cake\Collection\CollectionInterface $gasha_pickups
+ * @var \App\Model\Entity\GashaPickup[] $gasha_pickups
  */
 $this->assign('title', "ピックアップ情報");
 $this->Form->setTemplates([

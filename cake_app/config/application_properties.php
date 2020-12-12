@@ -121,19 +121,19 @@ return [
     ],
     'ExcelOptions' => [
         'CardReprints' => [
-            'version' => '8934a00438cc7b41b85f418f348904549f48cce2f9c2bda85676d982319a2875a36c3740bc79c1a7aa712f21e667ff8c91b4e101fbad64aff051a835fd2bcb48',
+            'version' => 'd0ccdd75726cc23169aac6d2d14d87e1a5dfc2a624aba346ef9c77079c9e4607b87f088e4ac3f6bbd039a21198776518e81b66ef0adf8f8359e3124389200e59',
         ],
         'Cards' => [
-            'version' => '0c3a4ef8a0555dccd9f6fb30bfe867a7f7c63f1cf3430894d17710ca486c42a5c14ec348f14253fbe9146e597b2e0bc6f15c4af3e5bc1a55c17693609b2fe0fd',
+            'version' => 'e8ed847a2b4dee52f1049c2b5e6df0d4ae2b8849f2fb927a2dc6e59cc93fc8c8c73c90bbd7781859e9555ad1a57e31e4b6140527a39033ee6343bf8c98f0e02d',
         ],
         'Characters' => [
-            'version' => 'b25b294cb4deb69ea00a4c3cf3113904801b6015e5956bd019a8570b1fe1d6040e944ef3cdee16d0a46503ca6e659a25f21cf9ceddc13f352a3c98138c15d6af',
+            'version' => '73842c4534be22815ce74e9bf7c0dfd147f4c39b83ef1137c2c9a80066383bbc8093679ad2923d6e653c38581e34540ca7a9b0e6dabdd79f674a7225a5bc2fd3',
         ],
         'GashaPickups' => [
-            'version' => '8934a00438cc7b41b85f418f348904549f48cce2f9c2bda85676d982319a2875a36c3740bc79c1a7aa712f21e667ff8c91b4e101fbad64aff051a835fd2bcb48',
+            'version' => '82948b6d6a0c2474be1e4b0ea0c94b5a77e0cabf51acb9918b4d4e0fd3547630e8b7f119701bb6094cd409af1509893ba25f5b8f0bf7199798f490dfb8603fd7',
         ],
         'Gashas' => [
-            'version' => 'b25b294cb4deb69ea00a4c3cf3113904801b6015e5956bd019a8570b1fe1d6040e944ef3cdee16d0a46503ca6e659a25f21cf9ceddc13f352a3c98138c15d6af',
+            'version' => '1383522d3e3ac395762bb2e0e86a4f60c115fae6c6bc028e57329add671c5c2d73e31b7609d899b3afc1e631afae3facba8d78f8a923fbc51736ab452fd64367',
         ],
     ],
     'InitialOrders' => [

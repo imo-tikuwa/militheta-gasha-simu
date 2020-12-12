@@ -3,7 +3,7 @@ use App\Utils\AuthUtils;
 
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Card[]|\Cake\Collection\CollectionInterface $cards
+ * @var \App\Model\Entity\Card[] $cards
  */
 $this->assign('title', "カード");
 $this->Form->setTemplates([
