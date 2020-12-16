@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\CardReprint $cardReprint
+ * @var \App\Model\Entity\CardReprint $card_reprint
  */
 $this->assign('title', "復刻情報詳細");
 ?>
@@ -11,31 +11,23 @@ $this->assign('title', "復刻情報詳細");
       <table class="table table-sm table-hover table-borderless text-sm">
         <tr>
           <th scope="row">ID</th>
-          <td><?= h($cardReprint->id) ?></td>
+          <td><?= h($card_reprint->id) ?></td>
         </tr>
         <tr>
           <th scope="row">ガシャID</th>
-          <td><?= $cardReprint->has('gasha') ? h($cardReprint->gasha->title) : '' ?></td>
+          <td><?= $card_reprint->has('gasha') ? h($card_reprint->gasha->title) : '' ?></td>
         </tr>
         <tr>
           <th scope="row">カードID</th>
-          <td><?= $cardReprint->has('card') ? h($cardReprint->card->name) : '' ?></td>
+          <td><?= $card_reprint->has('card') ? h($card_reprint->card->name) : '' ?></td>
         </tr>
         <tr>
           <th scope="row">作成日時</th>
-          <td>
-            <?php if (!is_null($cardReprint->created)) { ?>
-              <?= h($cardReprint->created->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
-            <?php } ?>
-          </td>
+          <td><?= h($this->formatDate($card_reprint->created, 'yyyy/MM/dd HH:mm:ss')) ?></td>
         </tr>
         <tr>
           <th scope="row">更新日時</th>
-          <td>
-            <?php if (!is_null($cardReprint->modified)) { ?>
-              <?= h($cardReprint->modified->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
-            <?php } ?>
-          </td>
+          <td><?= h($this->formatDate($card_reprint->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
         </tr>
       </table>
     </div>

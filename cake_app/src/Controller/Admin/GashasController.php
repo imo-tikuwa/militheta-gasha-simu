@@ -142,7 +142,13 @@ class GashasController extends AppController
         }
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
             $gasha = $this->Gashas->patchEntity($gasha, $this->getRequest()->getData(), ['associated' => ['CardReprints', 'GashaPickups']]);
-            if (!$gasha->hasErrors()) {
+            if ($gasha->hasErrors()) {
+                $this->Flash->set(implode('<br />', $gasha->getErrorMessages()), [
+                    'escape' => false,
+                    'element' => 'validation_error',
+                    'params' => ['alert-class' => 'text-sm']
+                ]);
+            } else {
                 $conn = $this->Gashas->getConnection();
                 $conn->begin();
                 if ($this->Gashas->save($gasha, ['atomic' => false])) {

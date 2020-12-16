@@ -172,7 +172,13 @@ class CardsController extends AppController
         }
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
             $card = $this->Cards->patchEntity($card, $this->getRequest()->getData(), ['associated' => ['Characters', 'CardReprints', 'GashaPickups']]);
-            if (!$card->hasErrors()) {
+            if ($card->hasErrors()) {
+                $this->Flash->set(implode('<br />', $card->getErrorMessages()), [
+                    'escape' => false,
+                    'element' => 'validation_error',
+                    'params' => ['alert-class' => 'text-sm']
+                ]);
+            } else {
                 $conn = $this->Cards->getConnection();
                 $conn->begin();
                 if ($this->Cards->save($card, ['atomic' => false])) {

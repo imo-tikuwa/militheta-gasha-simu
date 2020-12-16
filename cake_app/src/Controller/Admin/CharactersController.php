@@ -119,7 +119,13 @@ class CharactersController extends AppController
         }
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
             $character = $this->Characters->patchEntity($character, $this->getRequest()->getData(), ['associated' => ['Cards']]);
-            if (!$character->hasErrors()) {
+            if ($character->hasErrors()) {
+                $this->Flash->set(implode('<br />', $character->getErrorMessages()), [
+                    'escape' => false,
+                    'element' => 'validation_error',
+                    'params' => ['alert-class' => 'text-sm']
+                ]);
+            } else {
                 $conn = $this->Characters->getConnection();
                 $conn->begin();
                 if ($this->Characters->save($character, ['atomic' => false])) {

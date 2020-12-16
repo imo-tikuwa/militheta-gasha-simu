@@ -5,9 +5,6 @@
  */
 $button_name = (!empty($gasha) && !$gasha->isNew()) ? "更新" : "登録";
 $this->assign('title', "ガシャ{$button_name}");
-if ($gasha->hasErrors()) {
-  $this->assign('validation_error', $this->makeValidationErrorHtml($gasha->getErrorMessages(), 'text-sm'));
-}
 ?>
 <div class="col-md-12 mb-12">
   <div class="card">

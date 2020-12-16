@@ -5,9 +5,6 @@
  */
 $button_name = (!empty($card_reprint) && !$card_reprint->isNew()) ? "更新" : "登録";
 $this->assign('title', "復刻情報{$button_name}");
-if ($card_reprint->hasErrors()) {
-  $this->assign('validation_error', $this->makeValidationErrorHtml($card_reprint->getErrorMessages(), 'text-sm'));
-}
 ?>
 <div class="col-md-12 mb-12">
   <div class="card">

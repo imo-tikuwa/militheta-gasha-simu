@@ -15,19 +15,11 @@ $this->assign('title', "ガシャ詳細");
         </tr>
         <tr>
           <th scope="row">ガシャ開始日</th>
-          <td>
-            <?php if (!is_null($gasha->start_date)) { ?>
-              <?= h($gasha->start_date->i18nFormat('yyyy/MM/dd')) ?>
-            <?php } ?>
-          </td>
+          <td><?= h($this->formatDate($gasha->start_date, 'yyyy/MM/dd')) ?></td>
         </tr>
         <tr>
           <th scope="row">ガシャ終了日</th>
-          <td>
-            <?php if (!is_null($gasha->end_date)) { ?>
-              <?= h($gasha->end_date->i18nFormat('yyyy/MM/dd')) ?>
-            <?php } ?>
-          </td>
+          <td><?= h($this->formatDate($gasha->end_date, 'yyyy/MM/dd')) ?></td>
         </tr>
         <tr>
           <th scope="row">ガシャタイトル</th>
@@ -43,19 +35,11 @@ $this->assign('title', "ガシャ詳細");
         </tr>
         <tr>
           <th scope="row">作成日時</th>
-          <td>
-            <?php if (!is_null($gasha->created)) { ?>
-              <?= h($gasha->created->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
-            <?php } ?>
-          </td>
+          <td><?= h($this->formatDate($gasha->created, 'yyyy/MM/dd HH:mm:ss')) ?></td>
         </tr>
         <tr>
           <th scope="row">更新日時</th>
-          <td>
-            <?php if (!is_null($gasha->modified)) { ?>
-              <?= h($gasha->modified->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
-            <?php } ?>
-          </td>
+          <td><?= h($this->formatDate($gasha->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
         </tr>
       </table>
     </div>

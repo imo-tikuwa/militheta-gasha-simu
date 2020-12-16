@@ -1,10 +1,8 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Admin[]|\Cake\Collection\CollectionInterface $accounts
+ * @var \App\Model\Entity\Admin[] $accounts
  */
-
-use App\Utils\AuthUtils;
 
 $this->assign('title', "アカウント/権限");
 // $text_class = '';
@@ -37,16 +35,8 @@ $btn_class = 'btn btn-sm btn-flat btn-outline-secondary';
               <td><?= h($account->id) ?></td>
               <td><?= h($account->mail) ?></td>
               <td><?= $this->makePrivilegeListHtml($account->privilege)?></td>
-              <td>
-                <?php if (!is_null($account->created)) { ?>
-                  <?= h($account->created->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
-                <?php } ?>
-              </td>
-              <td>
-                <?php if (!is_null($account->modified)) { ?>
-                  <?= h($account->modified->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
-                <?php } ?>
-              </td>
+              <td><?= h($this->formatDate($account->created, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+              <td><?= h($this->formatDate($account->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
               <td class="actions">
                 <div class="btn-group" role="group">
                   <button id="btnGroupDrop<?= $account->id ?>" type="button" class="<?= h($btn_class) ?> dropdown-toggle index-dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"></button>

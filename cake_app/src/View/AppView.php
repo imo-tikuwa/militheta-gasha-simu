@@ -41,51 +41,6 @@ class AppView extends View
     }
 
     /**
-     * チェックボックスのエンティティ配列とvalue値を元にチェックボックスが初期表示用のboolを返す
-     * @param array $child_entities チェックボックス項目のテーブルデータの配列
-     * @param string $column_name 参照するカラム名
-     * @param string $this_value value値
-     * @return bool
-     */
-    public function isCheckboxChecked($child_entities = null, $column_name = null, $this_value = null)
-    {
-        if (is_null($column_name) || is_null($this_value)) {
-            return false;
-        }
-        if (!is_null($child_entities) && count($child_entities) > 0) {
-            foreach ($child_entities as $child_entity) {
-                if ($child_entity[$column_name] == $this_value) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * 一覧画面や詳細画面でチェックボックス項目の値を表示する
-     * @param array $child_entities チェックボックス項目のテーブルデータの配列
-     * @param array $selections 選択肢情報
-     * @param string $column_name 参照するカラム名
-     * @param string $delimiter 区切り文字
-     * @return string
-     */
-    public function displayCheckboxItem($child_entities = null, $selections = null, $column_name = null, $delimiter = "、")
-    {
-        if (!is_null($child_entities) && count($child_entities) > 0 && !is_null($selections) && count($selections) > 0) {
-            $values = [];
-            foreach ($child_entities as $child_entity) {
-                $values[] = @$selections[$child_entity[$column_name]];
-            }
-
-            return implode($delimiter, $values);
-        }
-
-        return "";
-    }
-
-    /**
      * FrozenDateもしくはFrozenTimeを指定のフォーマットに変換して返す
      * @param FrozenDate|FrozenTime $obj FrozenDate、もしくはFrozenTimeオブジェクト
      * @param string $format 日付フォーマット
@@ -162,29 +117,6 @@ class AppView extends View
                 $html .= "<br />";
             }
         }
-
-        return $html;
-    }
-
-    /**
-     * エラーメッセージのHTMLを作成
-     * @param array $errors エラーメッセージ配列
-     * @param string $append_class 追加するCSSクラス
-     * @return string html
-     */
-    public function makeValidationErrorHtml($errors = null, $append_class = null)
-    {
-        $html = "";
-        if (is_numeric($errors) || count($errors) <= 0) {
-            return $html;
-        }
-        if (!is_null($append_class)) {
-            $append_class = " ${append_class}";
-        }
-        $html .= "<div class=\"alert alert-primary alert-dismissible fade show${append_class}\" role=\"alert\">";
-        $html .= implode('<br />', $errors);
-        $html .= "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button>";
-        $html .= "</div>";
 
         return $html;
     }

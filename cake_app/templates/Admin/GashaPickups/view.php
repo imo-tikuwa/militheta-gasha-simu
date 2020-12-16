@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\GashaPickup $gashaPickup
+ * @var \App\Model\Entity\GashaPickup $gasha_pickup
  */
 $this->assign('title', "ピックアップ情報詳細");
 ?>
@@ -11,31 +11,23 @@ $this->assign('title', "ピックアップ情報詳細");
       <table class="table table-sm table-hover table-borderless text-sm">
         <tr>
           <th scope="row">ID</th>
-          <td><?= h($gashaPickup->id) ?></td>
+          <td><?= h($gasha_pickup->id) ?></td>
         </tr>
         <tr>
           <th scope="row">ガシャID</th>
-          <td><?= $gashaPickup->has('gasha') ? h($gashaPickup->gasha->title) : '' ?></td>
+          <td><?= $gasha_pickup->has('gasha') ? h($gasha_pickup->gasha->title) : '' ?></td>
         </tr>
         <tr>
           <th scope="row">カードID</th>
-          <td><?= $gashaPickup->has('card') ? h($gashaPickup->card->name) : '' ?></td>
+          <td><?= $gasha_pickup->has('card') ? h($gasha_pickup->card->name) : '' ?></td>
         </tr>
         <tr>
           <th scope="row">作成日時</th>
-          <td>
-            <?php if (!is_null($gashaPickup->created)) { ?>
-              <?= h($gashaPickup->created->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
-            <?php } ?>
-          </td>
+          <td><?= h($this->formatDate($gasha_pickup->created, 'yyyy/MM/dd HH:mm:ss')) ?></td>
         </tr>
         <tr>
           <th scope="row">更新日時</th>
-          <td>
-            <?php if (!is_null($gashaPickup->modified)) { ?>
-              <?= h($gashaPickup->modified->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
-            <?php } ?>
-          </td>
+          <td><?= h($this->formatDate($gasha_pickup->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
         </tr>
       </table>
     </div>

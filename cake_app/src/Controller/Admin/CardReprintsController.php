@@ -116,9 +116,9 @@ class CardReprintsController extends AppController
      */
     public function view($id = null)
     {
-        $cardReprint = $this->CardReprints->get($id, ['contain' => ['Gashas', 'Cards']]);
+        $card_reprint = $this->CardReprints->get($id, ['contain' => ['Gashas', 'Cards']]);
 
-        $this->set('cardReprint', $cardReprint);
+        $this->set('card_reprint', $card_reprint);
     }
 
     /**
@@ -160,7 +160,13 @@ class CardReprintsController extends AppController
         }
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
             $card_reprint = $this->CardReprints->patchEntity($card_reprint, $this->getRequest()->getData(), ['associated' => ['Gashas', 'Cards']]);
-            if (!$card_reprint->hasErrors()) {
+            if ($card_reprint->hasErrors()) {
+                $this->Flash->set(implode('<br />', $card_reprint->getErrorMessages()), [
+                    'escape' => false,
+                    'element' => 'validation_error',
+                    'params' => ['alert-class' => 'text-sm']
+                ]);
+            } else {
                 $conn = $this->CardReprints->getConnection();
                 $conn->begin();
                 if ($this->CardReprints->save($card_reprint, ['atomic' => false])) {

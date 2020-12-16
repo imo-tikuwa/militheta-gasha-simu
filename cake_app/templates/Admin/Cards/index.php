@@ -75,18 +75,10 @@ $this->Form->setTemplates([
               <td><?= h($card->name) ?></td>
               <td><?= @h(_code("Codes.Cards.rarity.{$card->rarity}")) ?></td>
               <td><?= @h(_code("Codes.Cards.type.{$card->type}")) ?></td>
-              <td>
-                <?php if (!is_null($card->add_date)) { ?>
-                  <?= h($card->add_date->i18nFormat('yyyy/MM/dd')) ?>
-                <?php } ?>
-              </td>
+              <td><?= h($this->formatDate($card->add_date, 'yyyy/MM/dd')) ?></td>
               <td><?= @h(_code("Codes.Cards.gasha_include.{$card->gasha_include}")) ?></td>
               <td><?= @h(_code("Codes.Cards.limited.{$card->limited}")) ?></td>
-              <td>
-                <?php if (!is_null($card->modified)) { ?>
-                  <?= h($card->modified->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?>
-                <?php } ?>
-              </td>
+              <td><?= h($this->formatDate($card->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
               <td class="actions">
                 <div class="btn-group" role="group">
                   <button id="btnGroupDrop<?= $card->id ?>" type="button" class="btn btn-sm btn-flat btn-outline-secondary dropdown-toggle index-dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"></button>

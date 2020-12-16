@@ -5,9 +5,6 @@
  */
 $button_name = (!empty($card) && !$card->isNew()) ? "更新" : "登録";
 $this->assign('title', "カード{$button_name}");
-if ($card->hasErrors()) {
-  $this->assign('validation_error', $this->makeValidationErrorHtml($card->getErrorMessages(), 'text-sm'));
-}
 ?>
 <div class="col-md-12 mb-12">
   <div class="card">

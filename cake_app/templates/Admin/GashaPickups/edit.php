@@ -5,9 +5,6 @@
  */
 $button_name = (!empty($gasha_pickup) && !$gasha_pickup->isNew()) ? "更新" : "登録";
 $this->assign('title', "ピックアップ情報{$button_name}");
-if ($gasha_pickup->hasErrors()) {
-  $this->assign('validation_error', $this->makeValidationErrorHtml($gasha_pickup->getErrorMessages(), 'text-sm'));
-}
 ?>
 <div class="col-md-12 mb-12">
   <div class="card">

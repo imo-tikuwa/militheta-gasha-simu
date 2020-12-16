@@ -116,9 +116,9 @@ class GashaPickupsController extends AppController
      */
     public function view($id = null)
     {
-        $gashaPickup = $this->GashaPickups->get($id, ['contain' => ['Gashas', 'Cards']]);
+        $gasha_pickup = $this->GashaPickups->get($id, ['contain' => ['Gashas', 'Cards']]);
 
-        $this->set('gashaPickup', $gashaPickup);
+        $this->set('gasha_pickup', $gasha_pickup);
     }
 
     /**
@@ -160,7 +160,13 @@ class GashaPickupsController extends AppController
         }
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
             $gasha_pickup = $this->GashaPickups->patchEntity($gasha_pickup, $this->getRequest()->getData(), ['associated' => ['Gashas', 'Cards']]);
-            if (!$gasha_pickup->hasErrors()) {
+            if ($gasha_pickup->hasErrors()) {
+                $this->Flash->set(implode('<br />', $gasha_pickup->getErrorMessages()), [
+                    'escape' => false,
+                    'element' => 'validation_error',
+                    'params' => ['alert-class' => 'text-sm']
+                ]);
+            } else {
                 $conn = $this->GashaPickups->getConnection();
                 $conn->begin();
                 if ($this->GashaPickups->save($gasha_pickup, ['atomic' => false])) {
