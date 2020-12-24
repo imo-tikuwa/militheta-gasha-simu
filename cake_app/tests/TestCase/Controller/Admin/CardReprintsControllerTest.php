@@ -29,6 +29,14 @@ class CardReprintsControllerTest extends TestCase
     ];
 
     /**
+     * By default, all fixtures attached to this class will be truncated and reloaded after each test.
+     * Set this to false to handle manually
+     *
+     * @var bool
+     */
+    public $autoFixtures = false;
+
+    /**
      * card_reprints table.
      * @var \App\Model\Table\CardReprintsTable $CardReprints
      */
@@ -82,6 +90,8 @@ class CardReprintsControllerTest extends TestCase
      */
     public function setUp(): void
     {
+        $this->loadFixtures();
+
         parent::setUp();
         $CardReprints_config = $this->getTableLocator()->exists('CardReprints') ? [] : ['className' => \App\Model\Table\CardReprintsTable::class];
         /** @var \App\Model\Table\CardReprintsTable $CardReprints */
@@ -471,7 +481,7 @@ class CardReprintsControllerTest extends TestCase
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
-        $this->loadFixtures('CardReprints');
+        $this->loadFixtures();
         $this->session([
             'Auth.Admin' => $this->delete_admin
         ]);

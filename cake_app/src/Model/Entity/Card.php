@@ -12,7 +12,7 @@ namespace App\Model\Entity;
  * @property string|null $rarity
  * @property string|null $type
  * @property \Cake\I18n\FrozenDate|null $add_date
- * @property int|null $gasha_include
+ * @property bool|null $gasha_include
  * @property string|null $limited
  * @property string|null $search_snippet
  * @property \Cake\I18n\FrozenTime|null $created

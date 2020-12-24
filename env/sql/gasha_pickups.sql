@@ -7,5 +7,7 @@ CREATE TABLE `gasha_pickups` (
   `created` datetime DEFAULT NULL COMMENT '作成日時',
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  INDEX `gasha_id` (`gasha_id`),
+  INDEX `card_id` (`card_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';

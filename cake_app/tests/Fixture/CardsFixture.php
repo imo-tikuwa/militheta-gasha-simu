@@ -72,9 +72,8 @@ class CardsFixture extends TestFixture
             'precision' => null,
         ],
         'gasha_include' => [
-            'type' => 'tinyinteger',
+            'type' => 'boolean',
             'length' => null,
-            'unsigned' => false,
             'null' => true,
             'default' => '1',
             'comment' => 'ガシャ対象？',
@@ -122,6 +121,16 @@ class CardsFixture extends TestFixture
             'default' => null,
             'comment' => '削除日時',
         ],
+        '_indexes' => [
+            'character_id' => [
+                'type' => 'index',
+                'columns' => [
+                    'character_id',
+                ],
+                'length' => [
+                ],
+            ],
+        ],
         '_constraints' => [
             'primary' => [
                 'type' => 'primary',
@@ -152,12 +161,12 @@ class CardsFixture extends TestFixture
                 'name' => 'Lorem ipsum dolor sit amet',
                 'rarity' => '01',
                 'type' => '01',
-                'add_date' => '2020-12-12',
+                'add_date' => '2020-12-23',
                 'gasha_include' => 1,
                 'limited' => '01',
                 'search_snippet' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'created' => '2020-12-12 15:46:02',
-                'modified' => '2020-12-12 15:46:02',
+                'created' => '2020-12-23 18:44:27',
+                'modified' => '2020-12-23 18:44:27',
                 'deleted' => null,
             ],
         ];

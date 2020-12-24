@@ -78,8 +78,8 @@ class CharactersFixture extends TestFixture
             [
                 'id' => 1,
                 'name' => 'Lorem ipsum dolor sit amet',
-                'created' => '2020-12-12 15:45:58',
-                'modified' => '2020-12-12 15:45:58',
+                'created' => '2020-12-23 18:44:24',
+                'modified' => '2020-12-23 18:44:24',
             ],
         ];
         parent::init();

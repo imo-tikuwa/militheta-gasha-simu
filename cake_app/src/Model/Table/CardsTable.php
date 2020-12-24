@@ -419,7 +419,7 @@ class CardsTable extends AppTable
 
         // 恒常カード情報を取得
         $cards = $query->where([
-            'gasha_include' => 1,
+            'gasha_include' => true,
             'limited' => '01',
             'add_date <=' => $start_date
         ])->toArray();
@@ -427,7 +427,7 @@ class CardsTable extends AppTable
         if ($gasha->isLimited()) {
             // 限定カードを取得
             $limited_cards = $query->where([
-                'gasha_include' => 1,
+                'gasha_include' => true,
                 'limited' => '02',
                 'add_date' => $start_date
             ], [], true)->toArray();
@@ -435,7 +435,7 @@ class CardsTable extends AppTable
         } elseif ($gasha->isFesLimited()) {
             // フェス限定カードを取得
             $fes_limited_cards = $query->where([
-                'gasha_include' => 1,
+                'gasha_include' => true,
                 'limited' => '03',
                 'add_date <=' => $start_date, // 過去のフェス限を含める
             ], [], true)->toArray();
@@ -447,7 +447,7 @@ class CardsTable extends AppTable
 
             $reprint_limited_cards = $query->where([
                 'Cards.id IN' => $sub_query,
-                'Cards.gasha_include' => 1,
+                'Cards.gasha_include' => true,
                 'Cards.limited' => '02',
             ], [], true)->toArray();
             $cards = array_merge($reprint_limited_cards, $cards);

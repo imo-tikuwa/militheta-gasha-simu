@@ -79,6 +79,24 @@ class CardReprintsFixture extends TestFixture
             'default' => null,
             'comment' => '削除日時',
         ],
+        '_indexes' => [
+            'card_id' => [
+                'type' => 'index',
+                'columns' => [
+                    'card_id',
+                ],
+                'length' => [
+                ],
+            ],
+            'gasha_id' => [
+                'type' => 'index',
+                'columns' => [
+                    'gasha_id',
+                ],
+                'length' => [
+                ],
+            ],
+        ],
         '_constraints' => [
             'primary' => [
                 'type' => 'primary',
@@ -108,8 +126,8 @@ class CardReprintsFixture extends TestFixture
                 'gasha_id' => 1,
                 'card_id' => 1,
                 'search_snippet' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'created' => '2020-12-12 15:45:48',
-                'modified' => '2020-12-12 15:45:48',
+                'created' => '2020-12-23 18:44:17',
+                'modified' => '2020-12-23 18:44:17',
                 'deleted' => null,
             ],
         ];

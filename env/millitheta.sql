@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-12-02 22:41:09
+Date: 2020-12-24 12:24:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,13 +47,14 @@ CREATE TABLE `cards` (
   `rarity` char(2) DEFAULT NULL COMMENT 'レアリティ',
   `type` char(2) DEFAULT NULL COMMENT 'タイプ',
   `add_date` date DEFAULT NULL COMMENT '実装日',
-  `gasha_include` tinyint(4) DEFAULT '1' COMMENT 'ガシャ対象？',
+  `gasha_include` tinyint(1) DEFAULT '1' COMMENT 'ガシャ対象？',
   `limited` char(2) DEFAULT NULL COMMENT '限定？',
   `search_snippet` mediumtext COMMENT 'フリーワード検索用のスニペット',
   `created` datetime DEFAULT NULL COMMENT '作成日時',
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `character_id` (`character_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1029 DEFAULT CHARSET=utf8 COMMENT='カード';
 
 -- ----------------------------
@@ -1100,7 +1101,9 @@ CREATE TABLE `card_reprints` (
   `created` datetime DEFAULT NULL COMMENT '作成日時',
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `card_id` (`card_id`),
+  KEY `gasha_id` (`gasha_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8 COMMENT='復刻情報';
 
 -- ----------------------------
@@ -1488,7 +1491,9 @@ CREATE TABLE `gasha_pickups` (
   `created` datetime DEFAULT NULL COMMENT '作成日時',
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `card_id` (`card_id`),
+  KEY `gasha_id` (`gasha_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=597 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
 
 -- ----------------------------

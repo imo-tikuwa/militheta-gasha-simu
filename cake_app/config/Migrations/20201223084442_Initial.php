@@ -104,6 +104,16 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
+            ->addIndex(
+                [
+                    'card_id',
+                ]
+            )
+            ->addIndex(
+                [
+                    'gasha_id',
+                ]
+            )
             ->create();
 
         $this->table('cards')
@@ -145,9 +155,9 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addColumn('gasha_include', 'tinyinteger', [
+            ->addColumn('gasha_include', 'boolean', [
                 'comment' => 'ガシャ対象？',
-                'default' => '1',
+                'default' => true,
                 'limit' => null,
                 'null' => true,
             ])
@@ -181,6 +191,11 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
+            ->addIndex(
+                [
+                    'character_id',
+                ]
+            )
             ->create();
 
         $this->table('characters')
@@ -257,6 +272,16 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
+            ->addIndex(
+                [
+                    'card_id',
+                ]
+            )
+            ->addIndex(
+                [
+                    'gasha_id',
+                ]
+            )
             ->create();
 
         $this->table('gashas')
