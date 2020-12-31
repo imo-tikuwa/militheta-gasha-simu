@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Utils\CsvUtils;
+use App\Form\SearchForm;
 use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
 use Cake\I18n\FrozenDate;
@@ -14,6 +15,8 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
+use DateTime;
+use DateTimeZone;
 
 /**
  * Cards Controller
@@ -53,11 +56,12 @@ class CardsController extends AppController
     public function index()
     {
         $request = $this->getRequest()->getQueryParams();
-        $this->set('params', $request);
         $query = $this->_getQuery($request);
         $cards = $this->paginate($query);
+        $search_form = new SearchForm();
+        $search_form->setData($request);
 
-        $this->set(compact('cards'));
+        $this->set(compact('cards', 'search_form'));
     }
 
     /**
@@ -332,7 +336,7 @@ class CardsController extends AppController
                 if (!$conn->commit()) {
                     throw new \Exception('CommitError');
                 }
-                $this->Flash->success("カードCSVの登録が完了しました。<br />新規：{$insert_count}件<br />更新：{$update_count}件", ['params' => ['escape' => false]]);
+                $this->Flash->success("カードCSVの登録が完了しました。<br />新規：{$insert_count}件<br />更新：{$update_count}件", ['escape' => false]);
             } catch (\Exception $e) {
                 $error_message = 'カードCSVの登録でエラーが発生しました。';
                 if (!empty($e->getMessage())) {
@@ -353,6 +357,7 @@ class CardsController extends AppController
     public function excelExport()
     {
         $request = $this->getRequest()->getQueryParams();
+        /** @var \App\Model\Entity\Card[] $cards */
         $cards = $this->_getQuery($request)->toArray();
 
         $reader = new XlsxReader();
@@ -364,44 +369,44 @@ class CardsController extends AppController
         // 取得したデータをExcelに書き込む
         foreach ($cards as $card) {
             // ID
-            $data_sheet->setCellValue("A{$row_num}", $card['id']);
+            $data_sheet->setCellValue("A{$row_num}", $card->id);
             // キャラクター
-            $cell_value = "";
-            if (isset($card['character']['id']) && isset($card['character']['name'])) {
-                $cell_value = "{$card['character']['id']}:{$card['character']['name']}";
+            $cell_value = '';
+            if (isset($card->character->id) && isset($card->character->name)) {
+                $cell_value = "{$card->character->id}:{$card->character->name}";
             }
             $data_sheet->setCellValue("B{$row_num}", $cell_value);
             // カード名
-            $data_sheet->setCellValue("C{$row_num}", $card['name']);
+            $data_sheet->setCellValue("C{$row_num}", $card->name);
             // レアリティ
-            $cell_value = "";
-            if (isset($card['rarity']) && array_key_exists($card['rarity'], _code('Codes.Cards.rarity'))) {
-                $cell_value = $card['rarity'] . ':' . _code('Codes.Cards.rarity.' . $card['rarity']);
+            $cell_value = '';
+            if (isset($card->rarity) && array_key_exists($card->rarity, _code('Codes.Cards.rarity'))) {
+                $cell_value = $card->rarity . ':' . _code('Codes.Cards.rarity.' . $card->rarity);
             }
             $data_sheet->setCellValue("D{$row_num}", $cell_value);
             // タイプ
-            $cell_value = "";
-            if (isset($card['type']) && array_key_exists($card['type'], _code('Codes.Cards.type'))) {
-                $cell_value = $card['type'] . ':' . _code('Codes.Cards.type.' . $card['type']);
+            $cell_value = '';
+            if (isset($card->type) && array_key_exists($card->type, _code('Codes.Cards.type'))) {
+                $cell_value = $card->type . ':' . _code('Codes.Cards.type.' . $card->type);
             }
             $data_sheet->setCellValue("E{$row_num}", $cell_value);
             // 実装日
-            $cell_value = @$card['add_date']->i18nFormat('yyyy-MM-dd');
+            $cell_value = @$card->add_date->i18nFormat('yyyy-MM-dd');
             $data_sheet->setCellValue("F{$row_num}", $cell_value);
             // ガシャ対象？
-            $cell_value = _code('Codes.Cards.gasha_include.' . $card['gasha_include'], 'false');
+            $cell_value = _code('Codes.Cards.gasha_include.' . $card->gasha_include, 'false');
             $data_sheet->setCellValue("G{$row_num}", $cell_value);
             // 限定？
-            $cell_value = "";
-            if (isset($card['limited']) && array_key_exists($card['limited'], _code('Codes.Cards.limited'))) {
-                $cell_value = $card['limited'] . ':' . _code('Codes.Cards.limited.' . $card['limited']);
+            $cell_value = '';
+            if (isset($card->limited) && array_key_exists($card->limited, _code('Codes.Cards.limited'))) {
+                $cell_value = $card->limited . ':' . _code('Codes.Cards.limited.' . $card->limited);
             }
             $data_sheet->setCellValue("H{$row_num}", $cell_value);
             // 作成日時
-            $cell_value = @$card['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = @$card->created->i18nFormat('yyyy-MM-dd HH:mm:ss');
             $data_sheet->setCellValue("I{$row_num}", $cell_value);
             // 更新日時
-            $cell_value = @$card['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = @$card->modified->i18nFormat('yyyy-MM-dd HH:mm:ss');
             $data_sheet->setCellValue("J{$row_num}", $cell_value);
             $row_num++;
         }
@@ -429,15 +434,15 @@ class CardsController extends AppController
 
         // データ入力行に入力規則を設定（1048576はExcelの最大行数）
         // キャラクター
-        $data_sheet->setDataValidation("B2:B1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$A\$2,0,0,COUNTA('LIST'!\$A:\$A)-1,1)"));
+        $data_sheet->setDataValidation('B2:B1048576', ExcelUtils::getDataValidation("=OFFSET('LIST'!\$A\$2,0,0,COUNTA('LIST'!\$A:\$A)-1,1)"));
         // レアリティ
-        $data_sheet->setDataValidation("D2:D1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$B\$2,0,0,COUNTA('LIST'!\$B:\$B)-1,1)"));
+        $data_sheet->setDataValidation('D2:D1048576', ExcelUtils::getDataValidation("=OFFSET('LIST'!\$B\$2,0,0,COUNTA('LIST'!\$B:\$B)-1,1)"));
         // タイプ
-        $data_sheet->setDataValidation("E2:E1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$C\$2,0,0,COUNTA('LIST'!\$C:\$C)-1,1)"));
+        $data_sheet->setDataValidation('E2:E1048576', ExcelUtils::getDataValidation("=OFFSET('LIST'!\$C\$2,0,0,COUNTA('LIST'!\$C:\$C)-1,1)"));
         // ガシャ対象？
-        $data_sheet->setDataValidation("G2:G1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$D\$2,0,0,COUNTA('LIST'!\$D:\$D)-1,1)"));
+        $data_sheet->setDataValidation('G2:G1048576', ExcelUtils::getDataValidation("=OFFSET('LIST'!\$D\$2,0,0,COUNTA('LIST'!\$D:\$D)-1,1)"));
         // 限定？
-        $data_sheet->setDataValidation("H2:H1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$E\$2,0,0,COUNTA('LIST'!\$E:\$E)-1,1)"));
+        $data_sheet->setDataValidation('H2:H1048576', ExcelUtils::getDataValidation("=OFFSET('LIST'!\$E\$2,0,0,COUNTA('LIST'!\$E:\$E)-1,1)"));
 
         // 罫線設定、A2セルを選択、1行目固定、DATAシートをアクティブ化
         $data_sheet->getStyle("A1:J{$cards_row_num}")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
@@ -445,15 +450,14 @@ class CardsController extends AppController
         $data_sheet->freezePane('A2');
         $spreadsheet->setActiveSheetIndexByName('DATA');
 
-        $datetime = new \DateTime();
-        $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
+        $datetime = (new DateTime('now', new DateTimeZone('Asia/Tokyo')))->format('YmdHis');
         $writer = new XlsxWriter($spreadsheet);
         $stream = new CallbackStream(function () use ($writer) {
             $writer->save('php://output');
         });
 
         return $this->response->withHeader('Content-Type', EXCEL_CONTENT_TYPE)
-        ->withHeader('Content-Disposition', "attachment; filename=\"cards-{$datetime->format('YmdHis')}.xlsx\"")
+        ->withHeader('Content-Disposition', "attachment; filename=\"cards-{$datetime}.xlsx\"")
         ->withHeader('Cache-Control', 'max-age=0')
         ->withBody($stream);
     }

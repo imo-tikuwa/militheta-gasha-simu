@@ -64,22 +64,42 @@ class AdminsTable extends AppTable
      */
     public function validationDefault(Validator $validator): \Cake\Validation\Validator
     {
+        // ID
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
 
+        // メールアドレス
         $validator
-            ->scalar('mail')
-            ->maxLength('mail', 255)
-            ->requirePresence('mail', 'create')
-            ->notEmptyString('mail');
+            ->requirePresence('mail', true, 'メールアドレスを入力してください。')
+            ->add('mail', 'email', [
+                'rule' => 'email',
+                'message' => 'メールアドレスを正しく入力してください。',
+                'last' => true
+            ])
+            ->add('mail', 'maxLength', [
+                'rule' => ['maxLength', 255],
+                'message' => 'メールアドレスは255文字以内で入力してください。',
+                'last' => true
+            ])
+            ->notEmptyString('mail', 'メールアドレスを入力してください。');
 
+        // パスワード
         $validator
-            ->scalar('password')
-            ->maxLength('password', 255)
-            ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->requirePresence('password', true, 'パスワードを入力してください。')
+            ->add('password', 'scalar', [
+                'rule' => 'isScalar',
+                'message' => 'パスワードを正しく入力してください。',
+                'last' => true
+            ])
+            ->add('password', 'lengthBetween', [
+                'rule' => ['lengthBetween', 8, 20],
+                'message' => 'パスワードは8文字以上20文字以下で入力してください。',
+                'last' => true
+            ])
+            ->notEmptyString('password', 'パスワードを入力してください。');
 
+        // 権限
         $validator
             ->allowEmptyString('privilege');
 

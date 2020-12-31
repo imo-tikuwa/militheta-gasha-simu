@@ -37,7 +37,7 @@ class AppTable extends Table
      * @param string $display_column 画面表示する値を持つカラム名
      * @param bool $add_empty_selection 空の選択肢を加えるか
      * @throws \Exception
-     * @return NULL
+     * @return null|array
      */
     public function findForeignSelectionData($table_class_name = null, $display_column = 'id', $add_empty_selection = false)
     {

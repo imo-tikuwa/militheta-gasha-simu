@@ -4,6 +4,7 @@ use App\Utils\AuthUtils;
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\CardReprint[] $card_reprints
+ * @var \App\Form\SearchForm $search_form
  */
 $this->assign('title', "復刻情報");
 $this->Form->setTemplates([
@@ -24,22 +25,20 @@ $this->Form->setTemplates([
         <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_EXCEL_EXPORT])) { ?>
           <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="location.href='<?= $this->Url->build(['action' => ACTION_EXCEL_EXPORT, '?' => $this->getRequest()->getQueryParams()]) ?>'">Excelエクスポート</button>
         <?php } ?>
-        <div class="freeword-search input-group input-group-sm">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <?= $this->Form->control('search_snippet_format', ['type' => 'radio', 'options' => _code('Others.search_snippet_format'), 'class' => 'form-check-label col-form-label col-form-label-sm card_reprints-freeword-search-snippet-format', 'default' => 'AND', 'value' => @$params['search_snippet_format'], 'label' => false, 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>', 'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}']]) ?>
+        <?= $this->Form->create($search_form, ['type' => 'get', 'id' => 'card_reprints-freeword-search-form']) ?>
+          <div class="freeword-search input-group input-group-sm">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <?= $this->Form->control('search_snippet_format', ['type' => 'radio', 'options' => _code('Others.search_snippet_format'), 'class' => 'form-check-label col-form-label col-form-label-sm card_reprints-freeword-search-snippet-format', 'default' => 'AND', 'label' => false, 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>', 'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}']]) ?>
+              </div>
+            </div>
+            <?= $this->Form->text('search_snippet', ['id' => 'card_reprints-freeword-search-snippet', 'class' => 'form-control form-control-sm rounded-0', 'style' => 'width: 200px;', 'placeholder' => 'フリーワード']) ?>
+            <div class="input-group-append">
+              <button type="submit" id="card_reprints-freeword-search-btn" class="btn btn-sm btn-flat btn-outline-secondary"><i class="fas fa-search"></i></button>
             </div>
           </div>
-          <?= $this->Form->text('search_snippet', ['id' => 'card_reprints-freeword-search-snippet', 'class' => 'form-control form-control-sm rounded-0', 'value' => @$params['search_snippet'], 'style' => 'width: 200px;', 'placeholder' => 'フリーワード']) ?>
-          <div class="input-group-append">
-            <button type="button" id="card_reprints-freeword-search-btn" class="btn btn-sm btn-flat btn-outline-secondary"><i class="fas fa-search"></i></button>
-          </div>
-        </div>
-        <?= $this->Form->create(null, ['type' => 'get', 'id' => 'card_reprints-freeword-search-form', 'class' => 'd-none']) ?>
-          <?= $this->Form->hidden('search_snippet', ['id' => 'card_reprints-freeword-hidden-search-snippet', 'value' => @$params['search_snippet']]) ?>
-          <?= $this->Form->hidden('search_snippet_format', ['id' => 'card_reprints-freeword-hidden-search-snippet-format', 'value' => @$params['search_snippet_format']]) ?>
-          <?= $this->Form->hidden('sort', ['value' => @$params['sort']]) ?>
-          <?= $this->Form->hidden('direction', ['value' => @$params['direction']]) ?>
+          <?= $this->Form->hidden('sort') ?>
+          <?= $this->Form->hidden('direction') ?>
         <?= $this->Form->end(); ?>
       </div>
     </div>
@@ -58,12 +57,8 @@ $this->Form->setTemplates([
           <?php foreach ($card_reprints as $card_reprint) { ?>
             <tr>
               <td><?= $this->Html->link($card_reprint->id, ['action' => ACTION_VIEW, $card_reprint->id]) ?></td>
-              <td>
-                <?= $card_reprint->has('gasha') ? $this->Html->link($card_reprint->gasha->title, ['controller' => 'Gashas', 'action' => ACTION_VIEW, $card_reprint->gasha->id]) : '' ?>
-              </td>
-              <td>
-                <?= $card_reprint->has('card') ? $this->Html->link($card_reprint->card->name, ['controller' => 'Cards', 'action' => ACTION_VIEW, $card_reprint->card->id]) : '' ?>
-              </td>
+              <td><?= $card_reprint->has('gasha') ? $this->Html->link($card_reprint->gasha->title, ['controller' => 'Gashas', 'action' => ACTION_VIEW, $card_reprint->gasha->id]) : '' ?></td>
+              <td><?= $card_reprint->has('card') ? $this->Html->link($card_reprint->card->name, ['controller' => 'Cards', 'action' => ACTION_VIEW, $card_reprint->card->id]) : '' ?></td>
               <td><?= h($this->formatDate($card_reprint->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
               <td class="actions">
                 <div class="btn-group" role="group">
@@ -91,31 +86,46 @@ $this->Form->setTemplates([
 </div>
 
 <div class="modal search-form fade" id="card_reprints-search-form-modal" tabindex="-1" role="dialog" aria-labelledby="card_reprints-search-form-modal-label" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">復刻情報検索</h5>
       </div>
       <div class="modal-body">
-        <?= $this->Form->create(null, ['type' => 'get', 'id' => 'card_reprints-search-form']) ?>
+        <?= $this->Form->create($search_form, ['type' => 'get', 'id' => 'card_reprints-search-form']) ?>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('id', ['class' => 'form-control form-control-sm rounded-0', 'label' => 'ID', 'value' => @$params['id']]); ?>
+                <?= $this->Form->control('id', [
+                  'class' => 'form-control form-control-sm rounded-0',
+                  'label' => 'ID',
+                ]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('gasha_id', ['id' => 'gasha_id', 'type' => 'select', 'options' => $gashas, 'class' => 'form-control form-control-sm', 'label' => 'ガシャID', 'value' => @$params['gasha_id']]); ?>
+                <?= $this->Form->control('gasha_id', [
+                  'id' => 'gasha_id',
+                  'type' => 'select',
+                  'options' => $gashas,
+                  'class' => 'form-control form-control-sm',
+                  'label' => 'ガシャID',
+                ]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('card_id', ['id' => 'card_id', 'type' => 'select', 'options' => $cards, 'class' => 'form-control form-control-sm', 'label' => 'カードID', 'value' => @$params['card_id']]); ?>
+                <?= $this->Form->control('card_id', [
+                  'id' => 'card_id',
+                  'type' => 'select',
+                  'options' => $cards,
+                  'class' => 'form-control form-control-sm',
+                  'label' => 'カードID',
+                ]); ?>
               </div>
             </div>
           </div>
@@ -126,10 +136,23 @@ $this->Form->setTemplates([
                 <div class="freeword-search form-inline input-group input-group-sm">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
-                      <?= $this->Form->control('search_snippet_format', ['type' => 'radio', 'id' => 'modal-search_snippet-format', 'options' => _code('Others.search_snippet_format'), 'class' => 'form-check-label col-form-label col-form-label-sm', 'default' => 'AND', 'value' => @$params['search_snippet_format'], 'label' => false, 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>', 'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}']]) ?>
+                      <?= $this->Form->control('search_snippet_format', [
+                        'id' => 'modal-search_snippet-format',
+                        'type' => 'radio',
+                        'options' => _code('Others.search_snippet_format'),
+                        'class' => 'form-check-label col-form-label col-form-label-sm',
+                        'label' => false,
+                        'default' => 'AND',
+                        'templates' => [
+                          'nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>',
+                          'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}'
+                        ],
+                      ]) ?>
                     </div>
                   </div>
-                  <?= $this->Form->text('search_snippet', ['class' => 'form-control form-control-sm rounded-0', 'value' => @$params['search_snippet']]) ?>
+                  <?= $this->Form->text('search_snippet', [
+                    'class' => 'form-control form-control-sm rounded-0',
+                  ]) ?>
                 </div>
               </div>
             </div>
@@ -137,12 +160,12 @@ $this->Form->setTemplates([
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <?= $this->Form->button('検索', ['class' => "btn btn-sm btn-flat btn-outline-secondary btn-block"]) ?>
+                <?= $this->Form->button('検索', ['class' => 'btn btn-sm btn-flat btn-outline-secondary btn-block']) ?>
               </div>
             </div>
           </div>
-          <?= $this->Form->hidden('sort', ['value' => @$params['sort']]) ?>
-          <?= $this->Form->hidden('direction', ['value' => @$params['direction']]) ?>
+          <?= $this->Form->hidden('sort') ?>
+          <?= $this->Form->hidden('direction') ?>
         <?= $this->Form->end() ?>
       </div>
       <div class="modal-footer">　</div>

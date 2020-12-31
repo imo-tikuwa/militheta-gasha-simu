@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
+use App\Form\SearchForm;
 use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
 use Cake\I18n\FrozenDate;
@@ -13,6 +14,8 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
+use DateTime;
+use DateTimeZone;
 
 /**
  * Characters Controller
@@ -39,11 +42,12 @@ class CharactersController extends AppController
     public function index()
     {
         $request = $this->getRequest()->getQueryParams();
-        $this->set('params', $request);
         $query = $this->_getQuery($request);
         $characters = $this->paginate($query);
+        $search_form = new SearchForm();
+        $search_form->setData($request);
 
-        $this->set(compact('characters'));
+        $this->set(compact('characters', 'search_form'));
     }
 
     /**
@@ -193,6 +197,7 @@ class CharactersController extends AppController
     public function excelExport()
     {
         $request = $this->getRequest()->getQueryParams();
+        /** @var \App\Model\Entity\Character[] $characters */
         $characters = $this->_getQuery($request)->toArray();
 
         $reader = new XlsxReader();
@@ -203,14 +208,14 @@ class CharactersController extends AppController
         // 取得したデータをExcelに書き込む
         foreach ($characters as $character) {
             // ID
-            $data_sheet->setCellValue("A{$row_num}", $character['id']);
+            $data_sheet->setCellValue("A{$row_num}", $character->id);
             // 名前
-            $data_sheet->setCellValue("B{$row_num}", $character['name']);
+            $data_sheet->setCellValue("B{$row_num}", $character->name);
             // 作成日時
-            $cell_value = @$character['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = @$character->created->i18nFormat('yyyy-MM-dd HH:mm:ss');
             $data_sheet->setCellValue("C{$row_num}", $cell_value);
             // 更新日時
-            $cell_value = @$character['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = @$character->modified->i18nFormat('yyyy-MM-dd HH:mm:ss');
             $data_sheet->setCellValue("D{$row_num}", $cell_value);
             $row_num++;
         }
@@ -226,15 +231,14 @@ class CharactersController extends AppController
         $data_sheet->freezePane('A2');
         $spreadsheet->setActiveSheetIndexByName('DATA');
 
-        $datetime = new \DateTime();
-        $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
+        $datetime = (new DateTime('now', new DateTimeZone('Asia/Tokyo')))->format('YmdHis');
         $writer = new XlsxWriter($spreadsheet);
         $stream = new CallbackStream(function () use ($writer) {
             $writer->save('php://output');
         });
 
         return $this->response->withHeader('Content-Type', EXCEL_CONTENT_TYPE)
-        ->withHeader('Content-Disposition', "attachment; filename=\"characters-{$datetime->format('YmdHis')}.xlsx\"")
+        ->withHeader('Content-Disposition', "attachment; filename=\"characters-{$datetime}.xlsx\"")
         ->withHeader('Cache-Control', 'max-age=0')
         ->withBody($stream);
     }

@@ -4,6 +4,7 @@ use App\Utils\AuthUtils;
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Card[] $cards
+ * @var \App\Form\SearchForm $search_form
  */
 $this->assign('title', "カード");
 $this->Form->setTemplates([
@@ -30,22 +31,20 @@ $this->Form->setTemplates([
         <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_EXCEL_EXPORT])) { ?>
           <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="location.href='<?= $this->Url->build(['action' => ACTION_EXCEL_EXPORT, '?' => $this->getRequest()->getQueryParams()]) ?>'">Excelエクスポート</button>
         <?php } ?>
-        <div class="freeword-search input-group input-group-sm">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <?= $this->Form->control('search_snippet_format', ['type' => 'radio', 'options' => _code('Others.search_snippet_format'), 'class' => 'form-check-label col-form-label col-form-label-sm cards-freeword-search-snippet-format', 'default' => 'AND', 'value' => @$params['search_snippet_format'], 'label' => false, 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>', 'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}']]) ?>
+        <?= $this->Form->create($search_form, ['type' => 'get', 'id' => 'cards-freeword-search-form']) ?>
+          <div class="freeword-search input-group input-group-sm">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <?= $this->Form->control('search_snippet_format', ['type' => 'radio', 'options' => _code('Others.search_snippet_format'), 'class' => 'form-check-label col-form-label col-form-label-sm cards-freeword-search-snippet-format', 'default' => 'AND', 'label' => false, 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>', 'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}']]) ?>
+              </div>
+            </div>
+            <?= $this->Form->text('search_snippet', ['id' => 'cards-freeword-search-snippet', 'class' => 'form-control form-control-sm rounded-0', 'style' => 'width: 200px;', 'placeholder' => 'フリーワード']) ?>
+            <div class="input-group-append">
+              <button type="submit" id="cards-freeword-search-btn" class="btn btn-sm btn-flat btn-outline-secondary"><i class="fas fa-search"></i></button>
             </div>
           </div>
-          <?= $this->Form->text('search_snippet', ['id' => 'cards-freeword-search-snippet', 'class' => 'form-control form-control-sm rounded-0', 'value' => @$params['search_snippet'], 'style' => 'width: 200px;', 'placeholder' => 'フリーワード']) ?>
-          <div class="input-group-append">
-            <button type="button" id="cards-freeword-search-btn" class="btn btn-sm btn-flat btn-outline-secondary"><i class="fas fa-search"></i></button>
-          </div>
-        </div>
-        <?= $this->Form->create(null, ['type' => 'get', 'id' => 'cards-freeword-search-form', 'class' => 'd-none']) ?>
-          <?= $this->Form->hidden('search_snippet', ['id' => 'cards-freeword-hidden-search-snippet', 'value' => @$params['search_snippet']]) ?>
-          <?= $this->Form->hidden('search_snippet_format', ['id' => 'cards-freeword-hidden-search-snippet-format', 'value' => @$params['search_snippet_format']]) ?>
-          <?= $this->Form->hidden('sort', ['value' => @$params['sort']]) ?>
-          <?= $this->Form->hidden('direction', ['value' => @$params['direction']]) ?>
+          <?= $this->Form->hidden('sort') ?>
+          <?= $this->Form->hidden('direction') ?>
         <?= $this->Form->end(); ?>
       </div>
     </div>
@@ -69,9 +68,7 @@ $this->Form->setTemplates([
           <?php foreach ($cards as $card) { ?>
             <tr>
               <td><?= $this->Html->link($card->id, ['action' => ACTION_VIEW, $card->id]) ?></td>
-              <td>
-                <?= $card->has('character') ? $this->Html->link($card->character->name, ['controller' => 'Characters', 'action' => ACTION_VIEW, $card->character->id]) : '' ?>
-              </td>
+              <td><?= $card->has('character') ? $this->Html->link($card->character->name, ['controller' => 'Characters', 'action' => ACTION_VIEW, $card->character->id]) : '' ?></td>
               <td><?= h($card->name) ?></td>
               <td><?= @h(_code("Codes.Cards.rarity.{$card->rarity}")) ?></td>
               <td><?= @h(_code("Codes.Cards.type.{$card->type}")) ?></td>
@@ -105,66 +102,113 @@ $this->Form->setTemplates([
 </div>
 
 <div class="modal search-form fade" id="cards-search-form-modal" tabindex="-1" role="dialog" aria-labelledby="cards-search-form-modal-label" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">カード検索</h5>
       </div>
       <div class="modal-body">
-        <?= $this->Form->create(null, ['type' => 'get', 'id' => 'cards-search-form']) ?>
+        <?= $this->Form->create($search_form, ['type' => 'get', 'id' => 'cards-search-form']) ?>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('id', ['class' => 'form-control form-control-sm rounded-0', 'label' => 'ID', 'value' => @$params['id']]); ?>
+                <?= $this->Form->control('id', [
+                  'class' => 'form-control form-control-sm rounded-0',
+                  'label' => 'ID',
+                ]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('character_id', ['id' => 'character_id', 'type' => 'select', 'options' => $characters, 'class' => 'form-control form-control-sm', 'label' => 'キャラクター', 'value' => @$params['character_id']]); ?>
+                <?= $this->Form->control('character_id', [
+                  'id' => 'character_id',
+                  'type' => 'select',
+                  'options' => $characters,
+                  'class' => 'form-control form-control-sm',
+                  'label' => 'キャラクター',
+                ]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('name', ['class' => 'form-control form-control-sm rounded-0', 'label' => 'カード名', 'value' => @$params['name']]); ?>
+                <?= $this->Form->control('name', [
+                  'class' => 'form-control form-control-sm rounded-0',
+                  'label' => 'カード名',
+                ]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('rarity', ['id' => 'rarity', 'type' => 'select', 'options' => _code('Codes.Cards.rarity'), 'class' => 'form-control form-control-sm', 'label' => 'レアリティ', 'empty' => '　', 'value' => @$params['rarity']]); ?>
+                <?= $this->Form->control('rarity', [
+                  'id' => 'rarity',
+                  'type' => 'select',
+                  'options' => _code('Codes.Cards.rarity'),
+                  'class' => 'form-control form-control-sm',
+                  'label' => 'レアリティ',
+                  'empty' => '　',
+                ]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('type', ['id' => 'type', 'type' => 'select', 'options' => _code('Codes.Cards.type'), 'class' => 'form-control form-control-sm', 'label' => 'タイプ', 'empty' => '　', 'value' => @$params['type']]); ?>
+                <?= $this->Form->control('type', [
+                  'id' => 'type',
+                  'type' => 'select',
+                  'options' => _code('Codes.Cards.type'),
+                  'class' => 'form-control form-control-sm',
+                  'label' => 'タイプ',
+                  'empty' => '　',
+                ]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('add_date', ['type' => 'text', 'id' => 'add_date-datepicker', 'class' => 'form-control form-control-sm rounded-0', 'label' => '実装日', 'data-toggle' => 'datetimepicker', 'data-target' => '#add_date-datepicker', 'value' => @$params['add_date']]); ?>
+                <?= $this->Form->control('add_date', [
+                  'id' => 'add_date-datepicker',
+                  'type' => 'text',
+                  'class' => 'form-control form-control-sm rounded-0',
+                  'label' => '実装日',
+                  'data-toggle' => 'datetimepicker',
+                  'data-target' => '#add_date-datepicker',
+                ]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('gasha_include', ['id' => 'gasha_include', 'type' => 'select', 'options' => _code('Codes.Cards.gasha_include'), 'class' => 'form-control form-control-sm', 'label' => 'ガシャ対象？', 'empty' => '　', 'value' => @$params['gasha_include']]); ?>
+                <?= $this->Form->control('gasha_include', [
+                  'id' => 'gasha_include',
+                  'type' => 'select',
+                  'options' => _code('Codes.Cards.gasha_include'),
+                  'class' => 'form-control form-control-sm',
+                  'label' => 'ガシャ対象？',
+                  'empty' => '　',
+                ]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('limited', ['id' => 'limited', 'type' => 'select', 'options' => _code('Codes.Cards.limited'), 'class' => 'form-control form-control-sm', 'label' => '限定？', 'empty' => '　', 'value' => @$params['limited']]); ?>
+                <?= $this->Form->control('limited', [
+                  'id' => 'limited',
+                  'type' => 'select',
+                  'options' => _code('Codes.Cards.limited'),
+                  'class' => 'form-control form-control-sm',
+                  'label' => '限定？',
+                  'empty' => '　',
+                ]); ?>
               </div>
             </div>
           </div>
@@ -175,10 +219,23 @@ $this->Form->setTemplates([
                 <div class="freeword-search form-inline input-group input-group-sm">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
-                      <?= $this->Form->control('search_snippet_format', ['type' => 'radio', 'id' => 'modal-search_snippet-format', 'options' => _code('Others.search_snippet_format'), 'class' => 'form-check-label col-form-label col-form-label-sm', 'default' => 'AND', 'value' => @$params['search_snippet_format'], 'label' => false, 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>', 'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}']]) ?>
+                      <?= $this->Form->control('search_snippet_format', [
+                        'id' => 'modal-search_snippet-format',
+                        'type' => 'radio',
+                        'options' => _code('Others.search_snippet_format'),
+                        'class' => 'form-check-label col-form-label col-form-label-sm',
+                        'label' => false,
+                        'default' => 'AND',
+                        'templates' => [
+                          'nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>',
+                          'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}'
+                        ],
+                      ]) ?>
                     </div>
                   </div>
-                  <?= $this->Form->text('search_snippet', ['class' => 'form-control form-control-sm rounded-0', 'value' => @$params['search_snippet']]) ?>
+                  <?= $this->Form->text('search_snippet', [
+                    'class' => 'form-control form-control-sm rounded-0',
+                  ]) ?>
                 </div>
               </div>
             </div>
@@ -186,12 +243,12 @@ $this->Form->setTemplates([
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <?= $this->Form->button('検索', ['class' => "btn btn-sm btn-flat btn-outline-secondary btn-block"]) ?>
+                <?= $this->Form->button('検索', ['class' => 'btn btn-sm btn-flat btn-outline-secondary btn-block']) ?>
               </div>
             </div>
           </div>
-          <?= $this->Form->hidden('sort', ['value' => @$params['sort']]) ?>
-          <?= $this->Form->hidden('direction', ['value' => @$params['direction']]) ?>
+          <?= $this->Form->hidden('sort') ?>
+          <?= $this->Form->hidden('direction') ?>
         <?= $this->Form->end() ?>
       </div>
       <div class="modal-footer">　</div>

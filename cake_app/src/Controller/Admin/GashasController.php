@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Utils\CsvUtils;
+use App\Form\SearchForm;
 use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
 use Cake\I18n\FrozenDate;
@@ -14,6 +15,8 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
+use DateTime;
+use DateTimeZone;
 
 /**
  * Gashas Controller
@@ -40,11 +43,12 @@ class GashasController extends AppController
     public function index()
     {
         $request = $this->getRequest()->getQueryParams();
-        $this->set('params', $request);
         $query = $this->_getQuery($request);
         $gashas = $this->paginate($query);
+        $search_form = new SearchForm();
+        $search_form->setData($request);
 
-        $this->set(compact('gashas'));
+        $this->set(compact('gashas', 'search_form'));
     }
 
     /**
@@ -296,7 +300,7 @@ class GashasController extends AppController
                 if (!$conn->commit()) {
                     throw new \Exception('CommitError');
                 }
-                $this->Flash->success("ガシャCSVの登録が完了しました。<br />新規：{$insert_count}件<br />更新：{$update_count}件", ['params' => ['escape' => false]]);
+                $this->Flash->success("ガシャCSVの登録が完了しました。<br />新規：{$insert_count}件<br />更新：{$update_count}件", ['escape' => false]);
             } catch (\Exception $e) {
                 $error_message = 'ガシャCSVの登録でエラーが発生しました。';
                 if (!empty($e->getMessage())) {
@@ -317,6 +321,7 @@ class GashasController extends AppController
     public function excelExport()
     {
         $request = $this->getRequest()->getQueryParams();
+        /** @var \App\Model\Entity\Gasha[] $gashas */
         $gashas = $this->_getQuery($request)->toArray();
 
         $reader = new XlsxReader();
@@ -327,24 +332,24 @@ class GashasController extends AppController
         // 取得したデータをExcelに書き込む
         foreach ($gashas as $gasha) {
             // ID
-            $data_sheet->setCellValue("A{$row_num}", $gasha['id']);
+            $data_sheet->setCellValue("A{$row_num}", $gasha->id);
             // ガシャ開始日
-            $cell_value = @$gasha['start_date']->i18nFormat('yyyy-MM-dd');
+            $cell_value = @$gasha->start_date->i18nFormat('yyyy-MM-dd');
             $data_sheet->setCellValue("B{$row_num}", $cell_value);
             // ガシャ終了日
-            $cell_value = @$gasha['end_date']->i18nFormat('yyyy-MM-dd');
+            $cell_value = @$gasha->end_date->i18nFormat('yyyy-MM-dd');
             $data_sheet->setCellValue("C{$row_num}", $cell_value);
             // ガシャタイトル
-            $data_sheet->setCellValue("D{$row_num}", $gasha['title']);
+            $data_sheet->setCellValue("D{$row_num}", $gasha->title);
             // SSRレート
-            $data_sheet->setCellValue("E{$row_num}", $gasha['ssr_rate']);
+            $data_sheet->setCellValue("E{$row_num}", $gasha->ssr_rate);
             // SRレート
-            $data_sheet->setCellValue("F{$row_num}", $gasha['sr_rate']);
+            $data_sheet->setCellValue("F{$row_num}", $gasha->sr_rate);
             // 作成日時
-            $cell_value = @$gasha['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = @$gasha->created->i18nFormat('yyyy-MM-dd HH:mm:ss');
             $data_sheet->setCellValue("G{$row_num}", $cell_value);
             // 更新日時
-            $cell_value = @$gasha['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = @$gasha->modified->i18nFormat('yyyy-MM-dd HH:mm:ss');
             $data_sheet->setCellValue("H{$row_num}", $cell_value);
             $row_num++;
         }
@@ -360,15 +365,14 @@ class GashasController extends AppController
         $data_sheet->freezePane('A2');
         $spreadsheet->setActiveSheetIndexByName('DATA');
 
-        $datetime = new \DateTime();
-        $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
+        $datetime = (new DateTime('now', new DateTimeZone('Asia/Tokyo')))->format('YmdHis');
         $writer = new XlsxWriter($spreadsheet);
         $stream = new CallbackStream(function () use ($writer) {
             $writer->save('php://output');
         });
 
         return $this->response->withHeader('Content-Type', EXCEL_CONTENT_TYPE)
-        ->withHeader('Content-Disposition', "attachment; filename=\"gashas-{$datetime->format('YmdHis')}.xlsx\"")
+        ->withHeader('Content-Disposition', "attachment; filename=\"gashas-{$datetime}.xlsx\"")
         ->withHeader('Cache-Control', 'max-age=0')
         ->withBody($stream);
     }

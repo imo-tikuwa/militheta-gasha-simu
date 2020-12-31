@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
+use App\Form\SearchForm;
 use App\Utils\AuthUtils;
 use Cake\Event\EventInterface;
 use Cake\I18n\FrozenDate;
@@ -52,11 +53,12 @@ class AccountController extends AppController
     public function index()
     {
         $request = $this->getRequest()->getQueryParams();
-        $this->set('params', $request);
         $query = $this->_getQuery($request);
         $accounts = $this->paginate($query);
+        $search_form = new SearchForm();
+        $search_form->setData($request);
 
-        $this->set(compact('accounts'));
+        $this->set(compact('accounts', 'search_form'));
     }
 
     /**
@@ -118,21 +120,30 @@ class AccountController extends AppController
 
         if ($this->getRequest()->getParam('action') == 'edit') {
             $admin = $this->Admins->get($id);
+            $this->Admins->touch($admin);
         } else {
             $admin = $this->Admins->newEmptyEntity();
         }
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
-            $conn = $this->Admins->getConnection();
-            $conn->begin();
             $admin = $this->Admins->patchEntity($admin, $this->getRequest()->getData());
-            if ($this->Admins->save($admin, ['atomic' => false])) {
-                $conn->commit();
-                $this->Flash->success('アカウントの登録が完了しました。');
+            if ($admin->hasErrors()) {
+                $this->Flash->set(implode('<br />', $admin->getErrorMessages()), [
+                    'escape' => false,
+                    'element' => 'validation_error',
+                    'params' => ['alert-class' => 'text-sm']
+                ]);
+            } else {
+                $conn = $this->Admins->getConnection();
+                $conn->begin();
+                $admin = $this->Admins->patchEntity($admin, $this->getRequest()->getData());
+                if ($this->Admins->save($admin, ['atomic' => false])) {
+                    $conn->commit();
+                    $this->Flash->success('アカウントの登録が完了しました。');
 
-                return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'index']);
+                }
+                $conn->rollback();
             }
-            $conn->rollback();
-            $this->Flash->error('エラーが発生しました。');
         }
         $this->set(compact('admin'));
         $this->render('edit');

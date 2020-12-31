@@ -126,8 +126,8 @@ class GashaPickupsFixture extends TestFixture
                 'gasha_id' => 1,
                 'card_id' => 1,
                 'search_snippet' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'created' => '2020-12-23 18:44:27',
-                'modified' => '2020-12-23 18:44:27',
+                'created' => '2020-12-31 15:05:31',
+                'modified' => '2020-12-31 15:05:31',
                 'deleted' => null,
             ],
         ];

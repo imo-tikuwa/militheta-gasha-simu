@@ -14,13 +14,6 @@ $(function(){
             $('#gashas-freeword-search-btn').trigger('click');
         }
     });
-    $('#gashas-freeword-search-btn').on('click', function(){
-        let freeword_snippet = $('#gashas-freeword-search-snippet').val(),
-        freeword_snippet_format = $('.gashas-freeword-search-snippet-format:checked').val();
-        $('#gashas-freeword-hidden-search-snippet').val(freeword_snippet);
-        $('#gashas-freeword-hidden-search-snippet-format').val(freeword_snippet_format);
-        $('#gashas-freeword-search-form').submit();
-    });
 
     // ガシャ開始日
     $('#start_date-datepicker').datetimepicker({

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
+use App\Form\SearchForm;
 use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
 use Cake\I18n\FrozenDate;
@@ -14,6 +15,8 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
+use DateTime;
+use DateTimeZone;
 
 /**
  * CardReprints Controller
@@ -61,11 +64,12 @@ class CardReprintsController extends AppController
     public function index()
     {
         $request = $this->getRequest()->getQueryParams();
-        $this->set('params', $request);
         $query = $this->_getQuery($request);
         $card_reprints = $this->paginate($query);
+        $search_form = new SearchForm();
+        $search_form->setData($request);
 
-        $this->set(compact('card_reprints'));
+        $this->set(compact('card_reprints', 'search_form'));
     }
 
     /**
@@ -260,6 +264,7 @@ class CardReprintsController extends AppController
     public function excelExport()
     {
         $request = $this->getRequest()->getQueryParams();
+        /** @var \App\Model\Entity\CardReprint[] $card_reprints */
         $card_reprints = $this->_getQuery($request)->toArray();
 
         $reader = new XlsxReader();
@@ -271,24 +276,24 @@ class CardReprintsController extends AppController
         // 取得したデータをExcelに書き込む
         foreach ($card_reprints as $card_reprint) {
             // ID
-            $data_sheet->setCellValue("A{$row_num}", $card_reprint['id']);
+            $data_sheet->setCellValue("A{$row_num}", $card_reprint->id);
             // ガシャID
-            $cell_value = "";
-            if (isset($card_reprint['gasha']['id']) && isset($card_reprint['gasha']['title'])) {
-                $cell_value = "{$card_reprint['gasha']['id']}:{$card_reprint['gasha']['title']}";
+            $cell_value = '';
+            if (isset($card_reprint->gasha->id) && isset($card_reprint->gasha->title)) {
+                $cell_value = "{$card_reprint->gasha->id}:{$card_reprint->gasha->title}";
             }
             $data_sheet->setCellValue("B{$row_num}", $cell_value);
             // カードID
-            $cell_value = "";
-            if (isset($card_reprint['card']['id']) && isset($card_reprint['card']['name'])) {
-                $cell_value = "{$card_reprint['card']['id']}:{$card_reprint['card']['name']}";
+            $cell_value = '';
+            if (isset($card_reprint->card->id) && isset($card_reprint->card->name)) {
+                $cell_value = "{$card_reprint->card->id}:{$card_reprint->card->name}";
             }
             $data_sheet->setCellValue("C{$row_num}", $cell_value);
             // 作成日時
-            $cell_value = @$card_reprint['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = @$card_reprint->created->i18nFormat('yyyy-MM-dd HH:mm:ss');
             $data_sheet->setCellValue("D{$row_num}", $cell_value);
             // 更新日時
-            $cell_value = @$card_reprint['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = @$card_reprint->modified->i18nFormat('yyyy-MM-dd HH:mm:ss');
             $data_sheet->setCellValue("E{$row_num}", $cell_value);
             $row_num++;
         }
@@ -326,9 +331,9 @@ class CardReprintsController extends AppController
 
         // データ入力行に入力規則を設定（1048576はExcelの最大行数）
         // ガシャID
-        $data_sheet->setDataValidation("B2:B1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$A\$2,0,0,COUNTA('LIST'!\$A:\$A)-1,1)"));
+        $data_sheet->setDataValidation('B2:B1048576', ExcelUtils::getDataValidation("=OFFSET('LIST'!\$A\$2,0,0,COUNTA('LIST'!\$A:\$A)-1,1)"));
         // カードID
-        $data_sheet->setDataValidation("C2:C1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$B\$2,0,0,COUNTA('LIST'!\$B:\$B)-1,1)"));
+        $data_sheet->setDataValidation('C2:C1048576', ExcelUtils::getDataValidation("=OFFSET('LIST'!\$B\$2,0,0,COUNTA('LIST'!\$B:\$B)-1,1)"));
 
         // 罫線設定、A2セルを選択、1行目固定、DATAシートをアクティブ化
         $data_sheet->getStyle("A1:E{$card_reprints_row_num}")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
@@ -336,15 +341,14 @@ class CardReprintsController extends AppController
         $data_sheet->freezePane('A2');
         $spreadsheet->setActiveSheetIndexByName('DATA');
 
-        $datetime = new \DateTime();
-        $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
+        $datetime = (new DateTime('now', new DateTimeZone('Asia/Tokyo')))->format('YmdHis');
         $writer = new XlsxWriter($spreadsheet);
         $stream = new CallbackStream(function () use ($writer) {
             $writer->save('php://output');
         });
 
         return $this->response->withHeader('Content-Type', EXCEL_CONTENT_TYPE)
-        ->withHeader('Content-Disposition', "attachment; filename=\"card_reprints-{$datetime->format('YmdHis')}.xlsx\"")
+        ->withHeader('Content-Disposition', "attachment; filename=\"card_reprints-{$datetime}.xlsx\"")
         ->withHeader('Cache-Control', 'max-age=0')
         ->withBody($stream);
     }

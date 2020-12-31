@@ -14,13 +14,6 @@ $(function(){
             $('#cards-freeword-search-btn').trigger('click');
         }
     });
-    $('#cards-freeword-search-btn').on('click', function(){
-        let freeword_snippet = $('#cards-freeword-search-snippet').val(),
-        freeword_snippet_format = $('.cards-freeword-search-snippet-format:checked').val();
-        $('#cards-freeword-hidden-search-snippet').val(freeword_snippet);
-        $('#cards-freeword-hidden-search-snippet-format').val(freeword_snippet_format);
-        $('#cards-freeword-search-form').submit();
-    });
 
     // キャラクター
     $('#character_id').select2({

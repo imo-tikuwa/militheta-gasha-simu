@@ -4,6 +4,7 @@ use App\Utils\AuthUtils;
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\GashaPickup[] $gasha_pickups
+ * @var \App\Form\SearchForm $search_form
  */
 $this->assign('title', "ピックアップ情報");
 $this->Form->setTemplates([
@@ -24,22 +25,20 @@ $this->Form->setTemplates([
         <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_EXCEL_EXPORT])) { ?>
           <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="location.href='<?= $this->Url->build(['action' => ACTION_EXCEL_EXPORT, '?' => $this->getRequest()->getQueryParams()]) ?>'">Excelエクスポート</button>
         <?php } ?>
-        <div class="freeword-search input-group input-group-sm">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <?= $this->Form->control('search_snippet_format', ['type' => 'radio', 'options' => _code('Others.search_snippet_format'), 'class' => 'form-check-label col-form-label col-form-label-sm gasha_pickups-freeword-search-snippet-format', 'default' => 'AND', 'value' => @$params['search_snippet_format'], 'label' => false, 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>', 'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}']]) ?>
+        <?= $this->Form->create($search_form, ['type' => 'get', 'id' => 'gasha_pickups-freeword-search-form']) ?>
+          <div class="freeword-search input-group input-group-sm">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <?= $this->Form->control('search_snippet_format', ['type' => 'radio', 'options' => _code('Others.search_snippet_format'), 'class' => 'form-check-label col-form-label col-form-label-sm gasha_pickups-freeword-search-snippet-format', 'default' => 'AND', 'label' => false, 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>', 'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}']]) ?>
+              </div>
+            </div>
+            <?= $this->Form->text('search_snippet', ['id' => 'gasha_pickups-freeword-search-snippet', 'class' => 'form-control form-control-sm rounded-0', 'style' => 'width: 200px;', 'placeholder' => 'フリーワード']) ?>
+            <div class="input-group-append">
+              <button type="submit" id="gasha_pickups-freeword-search-btn" class="btn btn-sm btn-flat btn-outline-secondary"><i class="fas fa-search"></i></button>
             </div>
           </div>
-          <?= $this->Form->text('search_snippet', ['id' => 'gasha_pickups-freeword-search-snippet', 'class' => 'form-control form-control-sm rounded-0', 'value' => @$params['search_snippet'], 'style' => 'width: 200px;', 'placeholder' => 'フリーワード']) ?>
-          <div class="input-group-append">
-            <button type="button" id="gasha_pickups-freeword-search-btn" class="btn btn-sm btn-flat btn-outline-secondary"><i class="fas fa-search"></i></button>
-          </div>
-        </div>
-        <?= $this->Form->create(null, ['type' => 'get', 'id' => 'gasha_pickups-freeword-search-form', 'class' => 'd-none']) ?>
-          <?= $this->Form->hidden('search_snippet', ['id' => 'gasha_pickups-freeword-hidden-search-snippet', 'value' => @$params['search_snippet']]) ?>
-          <?= $this->Form->hidden('search_snippet_format', ['id' => 'gasha_pickups-freeword-hidden-search-snippet-format', 'value' => @$params['search_snippet_format']]) ?>
-          <?= $this->Form->hidden('sort', ['value' => @$params['sort']]) ?>
-          <?= $this->Form->hidden('direction', ['value' => @$params['direction']]) ?>
+          <?= $this->Form->hidden('sort') ?>
+          <?= $this->Form->hidden('direction') ?>
         <?= $this->Form->end(); ?>
       </div>
     </div>
@@ -58,12 +57,8 @@ $this->Form->setTemplates([
           <?php foreach ($gasha_pickups as $gasha_pickup) { ?>
             <tr>
               <td><?= $this->Html->link($gasha_pickup->id, ['action' => ACTION_VIEW, $gasha_pickup->id]) ?></td>
-              <td>
-                <?= $gasha_pickup->has('gasha') ? $this->Html->link($gasha_pickup->gasha->title, ['controller' => 'Gashas', 'action' => ACTION_VIEW, $gasha_pickup->gasha->id]) : '' ?>
-              </td>
-              <td>
-                <?= $gasha_pickup->has('card') ? $this->Html->link($gasha_pickup->card->name, ['controller' => 'Cards', 'action' => ACTION_VIEW, $gasha_pickup->card->id]) : '' ?>
-              </td>
+              <td><?= $gasha_pickup->has('gasha') ? $this->Html->link($gasha_pickup->gasha->title, ['controller' => 'Gashas', 'action' => ACTION_VIEW, $gasha_pickup->gasha->id]) : '' ?></td>
+              <td><?= $gasha_pickup->has('card') ? $this->Html->link($gasha_pickup->card->name, ['controller' => 'Cards', 'action' => ACTION_VIEW, $gasha_pickup->card->id]) : '' ?></td>
               <td><?= h($this->formatDate($gasha_pickup->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
               <td class="actions">
                 <div class="btn-group" role="group">
@@ -91,31 +86,46 @@ $this->Form->setTemplates([
 </div>
 
 <div class="modal search-form fade" id="gasha_pickups-search-form-modal" tabindex="-1" role="dialog" aria-labelledby="gasha_pickups-search-form-modal-label" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">ピックアップ情報検索</h5>
       </div>
       <div class="modal-body">
-        <?= $this->Form->create(null, ['type' => 'get', 'id' => 'gasha_pickups-search-form']) ?>
+        <?= $this->Form->create($search_form, ['type' => 'get', 'id' => 'gasha_pickups-search-form']) ?>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('id', ['class' => 'form-control form-control-sm rounded-0', 'label' => 'ID', 'value' => @$params['id']]); ?>
+                <?= $this->Form->control('id', [
+                  'class' => 'form-control form-control-sm rounded-0',
+                  'label' => 'ID',
+                ]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('gasha_id', ['id' => 'gasha_id', 'type' => 'select', 'options' => $gashas, 'class' => 'form-control form-control-sm', 'label' => 'ガシャID', 'value' => @$params['gasha_id']]); ?>
+                <?= $this->Form->control('gasha_id', [
+                  'id' => 'gasha_id',
+                  'type' => 'select',
+                  'options' => $gashas,
+                  'class' => 'form-control form-control-sm',
+                  'label' => 'ガシャID',
+                ]); ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <?= $this->Form->control('card_id', ['id' => 'card_id', 'type' => 'select', 'options' => $cards, 'class' => 'form-control form-control-sm', 'label' => 'カードID', 'value' => @$params['card_id']]); ?>
+                <?= $this->Form->control('card_id', [
+                  'id' => 'card_id',
+                  'type' => 'select',
+                  'options' => $cards,
+                  'class' => 'form-control form-control-sm',
+                  'label' => 'カードID',
+                ]); ?>
               </div>
             </div>
           </div>
@@ -126,10 +136,23 @@ $this->Form->setTemplates([
                 <div class="freeword-search form-inline input-group input-group-sm">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
-                      <?= $this->Form->control('search_snippet_format', ['type' => 'radio', 'id' => 'modal-search_snippet-format', 'options' => _code('Others.search_snippet_format'), 'class' => 'form-check-label col-form-label col-form-label-sm', 'default' => 'AND', 'value' => @$params['search_snippet_format'], 'label' => false, 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>', 'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}']]) ?>
+                      <?= $this->Form->control('search_snippet_format', [
+                        'id' => 'modal-search_snippet-format',
+                        'type' => 'radio',
+                        'options' => _code('Others.search_snippet_format'),
+                        'class' => 'form-check-label col-form-label col-form-label-sm',
+                        'label' => false,
+                        'default' => 'AND',
+                        'templates' => [
+                          'nestingLabel' => '{{hidden}}{{input}}<small><label {{attrs}}>{{text}}</label></small>',
+                          'radioWrapper' => '{{label}}', 'inputContainer' => '{{content}}'
+                        ],
+                      ]) ?>
                     </div>
                   </div>
-                  <?= $this->Form->text('search_snippet', ['class' => 'form-control form-control-sm rounded-0', 'value' => @$params['search_snippet']]) ?>
+                  <?= $this->Form->text('search_snippet', [
+                    'class' => 'form-control form-control-sm rounded-0',
+                  ]) ?>
                 </div>
               </div>
             </div>
@@ -137,12 +160,12 @@ $this->Form->setTemplates([
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <?= $this->Form->button('検索', ['class' => "btn btn-sm btn-flat btn-outline-secondary btn-block"]) ?>
+                <?= $this->Form->button('検索', ['class' => 'btn btn-sm btn-flat btn-outline-secondary btn-block']) ?>
               </div>
             </div>
           </div>
-          <?= $this->Form->hidden('sort', ['value' => @$params['sort']]) ?>
-          <?= $this->Form->hidden('direction', ['value' => @$params['direction']]) ?>
+          <?= $this->Form->hidden('sort') ?>
+          <?= $this->Form->hidden('direction') ?>
         <?= $this->Form->end() ?>
       </div>
       <div class="modal-footer">　</div>

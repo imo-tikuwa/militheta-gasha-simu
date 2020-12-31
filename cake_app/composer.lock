@@ -76,16 +76,16 @@
         },
         {
             "name": "cakephp/cakephp",
-            "version": "4.2.0",
+            "version": "4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "d4b68a6dd2404d0b8cc7431838a39ec44b3f5f6b"
+                "reference": "9fb456002f603517c658ccf2c3cfdf50ed0d472f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/d4b68a6dd2404d0b8cc7431838a39ec44b3f5f6b",
-                "reference": "d4b68a6dd2404d0b8cc7431838a39ec44b3f5f6b",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/9fb456002f603517c658ccf2c3cfdf50ed0d472f",
+                "reference": "9fb456002f603517c658ccf2c3cfdf50ed0d472f",
                 "shasum": ""
             },
             "require": {
@@ -175,7 +175,7 @@
                 "issues": "https://github.com/cakephp/cakephp/issues",
                 "source": "https://github.com/cakephp/cakephp"
             },
-            "time": "2020-12-21T03:04:22+00:00"
+            "time": "2020-12-27T01:51:39+00:00"
         },
         {
             "name": "cakephp/chronos",
@@ -3894,16 +3894,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-admin-baker",
-            "version": "v2.5.8",
+            "version": "v2.5.12",
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-admin-baker.git",
-                "reference": "d5886fcf437617cb37dd21aa4a6bb2637318f83f"
+                "reference": "8d15298c6766ebcf044d19d862d39b457aa72301"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/d5886fcf437617cb37dd21aa4a6bb2637318f83f",
-                "reference": "d5886fcf437617cb37dd21aa4a6bb2637318f83f",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/8d15298c6766ebcf044d19d862d39b457aa72301",
+                "reference": "8d15298c6766ebcf044d19d862d39b457aa72301",
                 "shasum": ""
             },
             "require": {
@@ -3932,10 +3932,10 @@
             ],
             "description": "Cake3AdminBaker plugin for CakePHP",
             "support": {
-                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v2.5.8",
+                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v2.5.12",
                 "issues": "https://github.com/imo-tikuwa/cakephp-admin-baker/issues"
             },
-            "time": "2020-12-23T09:34:17+00:00"
+            "time": "2020-12-29T00:54:13+00:00"
         },
         {
             "name": "imo-tikuwa/cakephp-api-generator",
@@ -3978,16 +3978,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-erd-generator",
-            "version": "v1.0.6",
+            "version": "v1.0.7",
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-erd-generator.git",
-                "reference": "7508527c299c036ed2df9f514558c822990f7dff"
+                "reference": "8741e91a43746190655c9aabce9ddd39dc1e51b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-erd-generator/zipball/7508527c299c036ed2df9f514558c822990f7dff",
-                "reference": "7508527c299c036ed2df9f514558c822990f7dff",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-erd-generator/zipball/8741e91a43746190655c9aabce9ddd39dc1e51b7",
+                "reference": "8741e91a43746190655c9aabce9ddd39dc1e51b7",
                 "shasum": ""
             },
             "require": {
@@ -4016,10 +4016,10 @@
             ],
             "description": "ErdGenerator plugin for CakePHP",
             "support": {
-                "source": "https://github.com/imo-tikuwa/cakephp-erd-generator/tree/v1.0.6",
+                "source": "https://github.com/imo-tikuwa/cakephp-erd-generator/tree/v1.0.7",
                 "issues": "https://github.com/imo-tikuwa/cakephp-erd-generator/issues"
             },
-            "time": "2020-12-23T08:53:13+00:00"
+            "time": "2020-12-26T02:11:07+00:00"
         },
         {
             "name": "jasny/twig-extensions",

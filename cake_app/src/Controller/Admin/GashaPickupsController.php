@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
+use App\Form\SearchForm;
 use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
 use Cake\I18n\FrozenDate;
@@ -14,6 +15,8 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
+use DateTime;
+use DateTimeZone;
 
 /**
  * GashaPickups Controller
@@ -61,11 +64,12 @@ class GashaPickupsController extends AppController
     public function index()
     {
         $request = $this->getRequest()->getQueryParams();
-        $this->set('params', $request);
         $query = $this->_getQuery($request);
         $gasha_pickups = $this->paginate($query);
+        $search_form = new SearchForm();
+        $search_form->setData($request);
 
-        $this->set(compact('gasha_pickups'));
+        $this->set(compact('gasha_pickups', 'search_form'));
     }
 
     /**
@@ -260,6 +264,7 @@ class GashaPickupsController extends AppController
     public function excelExport()
     {
         $request = $this->getRequest()->getQueryParams();
+        /** @var \App\Model\Entity\GashaPickup[] $gasha_pickups */
         $gasha_pickups = $this->_getQuery($request)->toArray();
 
         $reader = new XlsxReader();
@@ -271,24 +276,24 @@ class GashaPickupsController extends AppController
         // 取得したデータをExcelに書き込む
         foreach ($gasha_pickups as $gasha_pickup) {
             // ID
-            $data_sheet->setCellValue("A{$row_num}", $gasha_pickup['id']);
+            $data_sheet->setCellValue("A{$row_num}", $gasha_pickup->id);
             // ガシャID
-            $cell_value = "";
-            if (isset($gasha_pickup['gasha']['id']) && isset($gasha_pickup['gasha']['title'])) {
-                $cell_value = "{$gasha_pickup['gasha']['id']}:{$gasha_pickup['gasha']['title']}";
+            $cell_value = '';
+            if (isset($gasha_pickup->gasha->id) && isset($gasha_pickup->gasha->title)) {
+                $cell_value = "{$gasha_pickup->gasha->id}:{$gasha_pickup->gasha->title}";
             }
             $data_sheet->setCellValue("B{$row_num}", $cell_value);
             // カードID
-            $cell_value = "";
-            if (isset($gasha_pickup['card']['id']) && isset($gasha_pickup['card']['name'])) {
-                $cell_value = "{$gasha_pickup['card']['id']}:{$gasha_pickup['card']['name']}";
+            $cell_value = '';
+            if (isset($gasha_pickup->card->id) && isset($gasha_pickup->card->name)) {
+                $cell_value = "{$gasha_pickup->card->id}:{$gasha_pickup->card->name}";
             }
             $data_sheet->setCellValue("C{$row_num}", $cell_value);
             // 作成日時
-            $cell_value = @$gasha_pickup['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = @$gasha_pickup->created->i18nFormat('yyyy-MM-dd HH:mm:ss');
             $data_sheet->setCellValue("D{$row_num}", $cell_value);
             // 更新日時
-            $cell_value = @$gasha_pickup['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = @$gasha_pickup->modified->i18nFormat('yyyy-MM-dd HH:mm:ss');
             $data_sheet->setCellValue("E{$row_num}", $cell_value);
             $row_num++;
         }
@@ -326,9 +331,9 @@ class GashaPickupsController extends AppController
 
         // データ入力行に入力規則を設定（1048576はExcelの最大行数）
         // ガシャID
-        $data_sheet->setDataValidation("B2:B1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$A\$2,0,0,COUNTA('LIST'!\$A:\$A)-1,1)"));
+        $data_sheet->setDataValidation('B2:B1048576', ExcelUtils::getDataValidation("=OFFSET('LIST'!\$A\$2,0,0,COUNTA('LIST'!\$A:\$A)-1,1)"));
         // カードID
-        $data_sheet->setDataValidation("C2:C1048576", ExcelUtils::getDataValidation("=OFFSET('LIST'!\$B\$2,0,0,COUNTA('LIST'!\$B:\$B)-1,1)"));
+        $data_sheet->setDataValidation('C2:C1048576', ExcelUtils::getDataValidation("=OFFSET('LIST'!\$B\$2,0,0,COUNTA('LIST'!\$B:\$B)-1,1)"));
 
         // 罫線設定、A2セルを選択、1行目固定、DATAシートをアクティブ化
         $data_sheet->getStyle("A1:E{$gasha_pickups_row_num}")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
@@ -336,15 +341,14 @@ class GashaPickupsController extends AppController
         $data_sheet->freezePane('A2');
         $spreadsheet->setActiveSheetIndexByName('DATA');
 
-        $datetime = new \DateTime();
-        $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
+        $datetime = (new DateTime('now', new DateTimeZone('Asia/Tokyo')))->format('YmdHis');
         $writer = new XlsxWriter($spreadsheet);
         $stream = new CallbackStream(function () use ($writer) {
             $writer->save('php://output');
         });
 
         return $this->response->withHeader('Content-Type', EXCEL_CONTENT_TYPE)
-        ->withHeader('Content-Disposition', "attachment; filename=\"gasha_pickups-{$datetime->format('YmdHis')}.xlsx\"")
+        ->withHeader('Content-Disposition', "attachment; filename=\"gasha_pickups-{$datetime}.xlsx\"")
         ->withHeader('Cache-Control', 'max-age=0')
         ->withBody($stream);
     }
