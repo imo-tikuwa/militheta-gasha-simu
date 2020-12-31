@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-12-24 12:24:34
+Date: 2020-12-31 20:20:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,8 +33,8 @@ CREATE TABLE `admins` (
 -- ----------------------------
 -- Records of admins
 -- ----------------------------
-INSERT INTO `admins` VALUES ('1', 'admin@imo-tikuwa.com', 'ExkD1/9lm1NHZZt2+phf5w==:QgOAS4fgkguFQ9jZYHL9ow==', null, '2020-10-07 16:13:05', '2020-10-07 16:13:05', null);
-INSERT INTO `admins` VALUES ('2', 'user1@imo-tikuwa.com', 'yerFNCGATtp9Cb+O3gAECg==:KJExaS9/APeHbcirsqZVYg==', '{\"Cards\": [\"READ\", \"CSV_EXPORT\", \"EXCEL_EXPORT\"], \"Gashas\": [\"READ\"], \"Characters\": [\"READ\"], \"CardReprints\": [\"READ\"], \"GashaPickups\": [\"READ\"]}', '2020-10-07 16:14:02', '2020-11-24 18:31:29', null);
+INSERT INTO `admins` VALUES ('1', 'admin@imo-tikuwa.com', 'ExkD1/9lm1NHZZt2+phf5w==:QgOAS4fgkguFQ9jZYHL9ow==', null, '2020-10-07 16:13:05', '2020-10-07 16:13:05');
+INSERT INTO `admins` VALUES ('2', 'user1@imo-tikuwa.com', 'yerFNCGATtp9Cb+O3gAECg==:KJExaS9/APeHbcirsqZVYg==', '{\"Cards\": [\"READ\", \"CSV_EXPORT\", \"EXCEL_EXPORT\"], \"Gashas\": [\"READ\"], \"Characters\": [\"READ\"], \"CardReprints\": [\"READ\"], \"GashaPickups\": [\"READ\"]}', '2020-10-07 16:14:02', '2020-11-24 18:31:29');
 
 -- ----------------------------
 -- Table structure for `cards`
@@ -55,7 +55,7 @@ CREATE TABLE `cards` (
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`),
   KEY `character_id` (`character_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1029 DEFAULT CHARSET=utf8 COMMENT='カード';
+) ENGINE=InnoDB AUTO_INCREMENT=1049 DEFAULT CHARSET=utf8 COMMENT='カード';
 
 -- ----------------------------
 -- Records of cards
@@ -1088,6 +1088,26 @@ INSERT INTO `cards` VALUES ('1025', '16', '大好きの笑顔！　伊吹翼', '
 INSERT INTO `cards` VALUES ('1026', '4', 'MILLION LIVE CLOSET！　萩原雪歩', '03', '01', '2020-11-30', '1', '01', '萩原雪歩 MILLION LIVE CLOSET！　萩原雪歩 SR Princess 恒常', '2020-12-02 22:24:05', '2020-12-02 22:24:05', null);
 INSERT INTO `cards` VALUES ('1027', '24', 'カプリコーン　望月杏奈', '03', '03', '2020-12-01', '0', '01', '望月杏奈 カプリコーン　望月杏奈 SR Angel 恒常', '2020-12-02 22:24:05', '2020-12-02 22:24:05', null);
 INSERT INTO `cards` VALUES ('1028', '36', 'カプリコーン　矢吹可奈', '03', '01', '2020-12-01', '0', '01', '矢吹可奈 カプリコーン　矢吹可奈 SR Princess 恒常', '2020-12-02 22:24:05', '2020-12-02 22:24:05', null);
+INSERT INTO `cards` VALUES ('1029', '18', 'ファンタジスタ・カーニバル　島原エレナ', '04', '03', '2020-12-11', '1', '01', '島原エレナ ファンタジスタ・カーニバル　島原エレナ SSR Angel 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1030', '50', '流星群　ジュリア', '04', '02', '2020-12-11', '1', '01', 'ジュリア 流星群　ジュリア SSR Fairy 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1031', '43', 'MILLION LIVE CLOSET！　福田のり子', '03', '01', '2020-12-11', '1', '01', '福田のり子 MILLION LIVE CLOSET！　福田のり子 SR Princess 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1032', '39', 'MILLION LIVE CLOSET！　馬場このみ', '03', '03', '2020-12-11', '1', '01', '馬場このみ MILLION LIVE CLOSET！　馬場このみ SR Angel 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1033', '41', '可愛いプレゼント　豊川風花', '03', '03', '2020-12-11', '0', '01', '豊川風花 可愛いプレゼント　豊川風花 SR Angel 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1034', '21', '姫の宝物　徳川まつり', '03', '01', '2020-12-11', '0', '01', '徳川まつり 姫の宝物　徳川まつり SR Princess 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1035', '9', 'クリスマスのお手伝い　秋月律子', '02', '02', '2020-12-11', '1', '01', '秋月律子 クリスマスのお手伝い　秋月律子 R Fairy 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1036', '3', 'Never forget…You　星井美希', '04', '03', '2020-12-18', '1', '02', '星井美希 Never forget…You　星井美希 SSR Angel 限定', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1037', '17', '研ぎ澄まされたカリスマ　田中琴葉', '04', '01', '2020-12-18', '1', '01', '田中琴葉 研ぎ澄まされたカリスマ　田中琴葉 SSR Princess 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1038', '49', 'MILLION LIVE CLOSET！　周防桃子', '03', '02', '2020-12-18', '1', '01', '周防桃子 MILLION LIVE CLOSET！　周防桃子 SR Fairy 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1039', '30', '運命の再会　中谷育', '03', '01', '2020-12-18', '1', '01', '中谷育 運命の再会　中谷育 SR Princess 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1040', '45', '穏やかな昼下がり　篠宮可憐', '02', '03', '2020-12-18', '1', '01', '篠宮可憐 穏やかな昼下がり　篠宮可憐 R Angel 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1041', '29', '聖ミリオン女学園　高坂海美', '03', '01', '2020-12-18', '0', '01', '高坂海美 聖ミリオン女学園　高坂海美 SR Princess 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1042', '10', '聖ミリオン女学園　三浦あずさ', '03', '03', '2020-12-18', '0', '01', '三浦あずさ 聖ミリオン女学園　三浦あずさ SR Angel 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1043', '19', '小さな燈火　佐竹美奈子', '04', '01', '2020-12-25', '1', '03', '佐竹美奈子 小さな燈火　佐竹美奈子 SSR Princess フェス限定', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1044', '44', '芥の恋　真壁瑞希', '04', '02', '2020-12-25', '1', '03', '真壁瑞希 芥の恋　真壁瑞希 SSR Fairy フェス限定', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1045', '26', 'ご加護はすぐそこに　七尾百合子', '04', '01', '2020-12-31', '1', '02', '七尾百合子 ご加護はすぐそこに　七尾百合子 SSR Princess 限定', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1046', '42', '舞い、捧げて…　宮尾美也', '04', '03', '2020-12-31', '1', '02', '宮尾美也 舞い、捧げて…　宮尾美也 SSR Angel 限定', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1047', '6', 'ワンちゃんとデュエット♪　菊地真', '03', '01', '2020-12-31', '1', '02', '菊地真 ワンちゃんとデュエット♪　菊地真 SR Princess 限定', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
+INSERT INTO `cards` VALUES ('1048', '46', 'MILLION LIVE CLOSET！　百瀬莉緒', '03', '02', '2020-12-31', '1', '01', '百瀬莉緒 MILLION LIVE CLOSET！　百瀬莉緒 SR Fairy 恒常', '2020-12-31 20:13:55', '2020-12-31 20:13:55', null);
 
 -- ----------------------------
 -- Table structure for `card_reprints`
@@ -1312,7 +1332,7 @@ CREATE TABLE `gashas` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
+) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
 
 -- ----------------------------
 -- Records of gashas
@@ -1478,6 +1498,10 @@ INSERT INTO `gashas` VALUES ('158', '2020-11-11', '2020-11-18', 'SONG FOR YOU！
 INSERT INTO `gashas` VALUES ('159', '2020-11-18', '2020-11-27', '【期間限定】天界のプリティエンジェルガシャ', '3', '12', '【期間限定】天界のプリティエンジェルガシャ', '2020-12-02 22:27:36', '2020-12-02 22:27:36', null);
 INSERT INTO `gashas` VALUES ('160', '2020-11-27', '2020-11-30', '【限定復刻】日替わりピックアップ！限定復刻ガシャ', '3', '12', '【限定復刻】日替わりピックアップ！限定復刻ガシャ', '2020-12-02 22:27:36', '2020-12-02 22:27:36', null);
 INSERT INTO `gashas` VALUES ('161', '2020-11-30', '2020-12-11', '【期間限定】聖夜はあなたと…メリークリスマスガシャ', '3', '12', '【期間限定】聖夜はあなたと…メリークリスマスガシャ', '2020-12-02 22:27:36', '2020-12-02 22:27:36', null);
+INSERT INTO `gashas` VALUES ('162', '2020-12-11', '2020-12-18', 'SONG FOR YOU！ガシャ VOL.11', '3', '12', 'SONG FOR YOU！ガシャ VOL.11', '2020-12-31 20:14:14', '2020-12-31 20:14:14', null);
+INSERT INTO `gashas` VALUES ('163', '2020-12-18', '2020-12-25', '【期間限定】愛・ごきげんよう♪聖ミリオン女学園ガシャ', '3', '12', '【期間限定】愛・ごきげんよう♪聖ミリオン女学園ガシャ', '2020-12-31 20:14:14', '2020-12-31 20:14:14', null);
+INSERT INTO `gashas` VALUES ('164', '2020-12-25', '2020-12-31', '【フェス限定】ミリオンフェス', '6', '12', '【フェス限定】ミリオンフェス', '2020-12-31 20:14:14', '2020-12-31 20:14:14', null);
+INSERT INTO `gashas` VALUES ('165', '2020-12-31', '2021-01-11', '【期間限定】心清らかに…神聖新春ガシャ', '3', '12', '【期間限定】心清らかに…神聖新春ガシャ', '2020-12-31 20:14:14', '2020-12-31 20:14:14', null);
 
 -- ----------------------------
 -- Table structure for `gasha_pickups`
@@ -1494,7 +1518,7 @@ CREATE TABLE `gasha_pickups` (
   PRIMARY KEY (`id`),
   KEY `card_id` (`card_id`),
   KEY `gasha_id` (`gasha_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=597 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
+) ENGINE=InnoDB AUTO_INCREMENT=612 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
 
 -- ----------------------------
 -- Records of gasha_pickups
@@ -2095,3 +2119,18 @@ INSERT INTO `gasha_pickups` VALUES ('593', '161', '1023', '【期間限定】聖
 INSERT INTO `gasha_pickups` VALUES ('594', '161', '1024', '【期間限定】聖夜はあなたと…メリークリスマスガシャ 密やかに愛情をこめて　二階堂千鶴', '2020-12-02 22:32:42', '2020-12-02 22:32:42', null);
 INSERT INTO `gasha_pickups` VALUES ('595', '161', '1025', '【期間限定】聖夜はあなたと…メリークリスマスガシャ 大好きの笑顔！　伊吹翼', '2020-12-02 22:32:51', '2020-12-02 22:32:51', null);
 INSERT INTO `gasha_pickups` VALUES ('596', '161', '1026', '【期間限定】聖夜はあなたと…メリークリスマスガシャ MILLION LIVE CLOSET！　萩原雪歩', '2020-12-02 22:33:01', '2020-12-02 22:33:01', null);
+INSERT INTO `gasha_pickups` VALUES ('597', '162', '1029', 'SONG FOR YOU！ガシャ VOL.11 ファンタジスタ・カーニバル　島原エレナ', '2020-12-31 20:14:47', '2020-12-31 20:14:47', null);
+INSERT INTO `gasha_pickups` VALUES ('598', '162', '1030', 'SONG FOR YOU！ガシャ VOL.11 流星群　ジュリア', '2020-12-31 20:15:04', '2020-12-31 20:15:04', null);
+INSERT INTO `gasha_pickups` VALUES ('599', '162', '1031', 'SONG FOR YOU！ガシャ VOL.11 MILLION LIVE CLOSET！　福田のり子', '2020-12-31 20:15:21', '2020-12-31 20:15:21', null);
+INSERT INTO `gasha_pickups` VALUES ('600', '162', '1032', 'SONG FOR YOU！ガシャ VOL.11 MILLION LIVE CLOSET！　馬場このみ', '2020-12-31 20:15:38', '2020-12-31 20:15:38', null);
+INSERT INTO `gasha_pickups` VALUES ('601', '163', '1036', '【期間限定】愛・ごきげんよう♪聖ミリオン女学園ガシャ Never forget…You　星井美希', '2020-12-31 20:15:58', '2020-12-31 20:15:58', null);
+INSERT INTO `gasha_pickups` VALUES ('602', '163', '1037', '【期間限定】愛・ごきげんよう♪聖ミリオン女学園ガシャ 研ぎ澄まされたカリスマ　田中琴葉', '2020-12-31 20:16:14', '2020-12-31 20:16:14', null);
+INSERT INTO `gasha_pickups` VALUES ('603', '163', '1038', '【期間限定】愛・ごきげんよう♪聖ミリオン女学園ガシャ MILLION LIVE CLOSET！　周防桃子', '2020-12-31 20:16:30', '2020-12-31 20:16:30', null);
+INSERT INTO `gasha_pickups` VALUES ('604', '163', '1039', '【期間限定】愛・ごきげんよう♪聖ミリオン女学園ガシャ 運命の再会　中谷育', '2020-12-31 20:16:44', '2020-12-31 20:16:44', null);
+INSERT INTO `gasha_pickups` VALUES ('605', '163', '1040', '【期間限定】愛・ごきげんよう♪聖ミリオン女学園ガシャ 穏やかな昼下がり　篠宮可憐', '2020-12-31 20:17:01', '2020-12-31 20:17:01', null);
+INSERT INTO `gasha_pickups` VALUES ('606', '164', '1043', '【フェス限定】ミリオンフェス 小さな燈火　佐竹美奈子', '2020-12-31 20:17:52', '2020-12-31 20:17:52', null);
+INSERT INTO `gasha_pickups` VALUES ('607', '164', '1044', '【フェス限定】ミリオンフェス 芥の恋　真壁瑞希', '2020-12-31 20:18:08', '2020-12-31 20:18:08', null);
+INSERT INTO `gasha_pickups` VALUES ('608', '165', '1045', '【期間限定】心清らかに…神聖新春ガシャ ご加護はすぐそこに　七尾百合子', '2020-12-31 20:18:32', '2020-12-31 20:18:32', null);
+INSERT INTO `gasha_pickups` VALUES ('609', '165', '1046', '【期間限定】心清らかに…神聖新春ガシャ 舞い、捧げて…　宮尾美也', '2020-12-31 20:18:46', '2020-12-31 20:18:46', null);
+INSERT INTO `gasha_pickups` VALUES ('610', '165', '1047', '【期間限定】心清らかに…神聖新春ガシャ ワンちゃんとデュエット♪　菊地真', '2020-12-31 20:19:00', '2020-12-31 20:19:00', null);
+INSERT INTO `gasha_pickups` VALUES ('611', '165', '1048', '【期間限定】心清らかに…神聖新春ガシャ MILLION LIVE CLOSET！　百瀬莉緒', '2020-12-31 20:19:19', '2020-12-31 20:19:19', null);
