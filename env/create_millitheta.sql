@@ -32,4 +32,4 @@ CREATE TABLE `admins` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理者情報';

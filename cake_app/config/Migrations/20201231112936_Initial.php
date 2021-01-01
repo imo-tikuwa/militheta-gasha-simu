@@ -26,11 +26,13 @@ class Initial extends AbstractMigration
             ])
             ->addPrimaryKey(['id'])
             ->addColumn('mail', 'string', [
+                'comment' => 'メールアドレス',
                 'default' => null,
                 'limit' => 255,
                 'null' => false,
             ])
             ->addColumn('password', 'string', [
+                'comment' => 'パスワード',
                 'default' => null,
                 'limit' => 255,
                 'null' => false,
@@ -42,11 +44,13 @@ class Initial extends AbstractMigration
                 'null' => true,
             ])
             ->addColumn('created', 'datetime', [
+                'comment' => '作成日時',
                 'default' => null,
                 'limit' => null,
                 'null' => true,
             ])
             ->addColumn('modified', 'datetime', [
+                'comment' => '更新日時',
                 'default' => null,
                 'limit' => null,
                 'null' => true,

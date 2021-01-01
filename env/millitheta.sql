@@ -21,20 +21,20 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `admins`;
 CREATE TABLE `admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `mail` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL COMMENT 'メールアドレス',
+  `password` varchar(255) NOT NULL COMMENT 'パスワード',
   `privilege` json DEFAULT NULL COMMENT '権限',
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL,
+  `created` datetime DEFAULT NULL COMMENT '作成日時',
+  `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='管理者情報';
 
 -- ----------------------------
 -- Records of admins
 -- ----------------------------
-INSERT INTO `admins` VALUES ('1', 'admin@imo-tikuwa.com', 'ExkD1/9lm1NHZZt2+phf5w==:QgOAS4fgkguFQ9jZYHL9ow==', null, '2020-10-07 16:13:05', '2020-10-07 16:13:05');
-INSERT INTO `admins` VALUES ('2', 'user1@imo-tikuwa.com', 'yerFNCGATtp9Cb+O3gAECg==:KJExaS9/APeHbcirsqZVYg==', '{\"Cards\": [\"READ\", \"CSV_EXPORT\", \"EXCEL_EXPORT\"], \"Gashas\": [\"READ\"], \"Characters\": [\"READ\"], \"CardReprints\": [\"READ\"], \"GashaPickups\": [\"READ\"]}', '2020-10-07 16:14:02', '2020-11-24 18:31:29');
+INSERT INTO `admins` VALUES ('1', 'admin@imo-tikuwa.com', 'ExkD1/9lm1NHZZt2+phf5w==:QgOAS4fgkguFQ9jZYHL9ow==', null, '2020-10-07 16:13:05', '2020-10-07 16:13:05', null);
+INSERT INTO `admins` VALUES ('2', 'user1@imo-tikuwa.com', 'yerFNCGATtp9Cb+O3gAECg==:KJExaS9/APeHbcirsqZVYg==', '{\"Cards\": [\"READ\", \"CSV_EXPORT\", \"EXCEL_EXPORT\"], \"Gashas\": [\"READ\"], \"Characters\": [\"READ\"], \"CardReprints\": [\"READ\"], \"GashaPickups\": [\"READ\"]}', '2020-10-07 16:14:02', '2020-11-24 18:31:29', null);
 
 -- ----------------------------
 -- Table structure for `cards`
