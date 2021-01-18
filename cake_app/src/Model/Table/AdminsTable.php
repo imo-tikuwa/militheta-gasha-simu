@@ -51,7 +51,7 @@ class AdminsTable extends AppTable
      */
     public function findAuth(Query $query, array $options): Query
     {
-        $query->select(['id', 'mail', 'password', 'privilege']);
+        $query->select(['id', 'name', 'mail', 'password', 'use_otp', 'otp_secret', 'privilege']);
 
         return $query;
     }
@@ -68,6 +68,21 @@ class AdminsTable extends AppTable
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
+
+        // 名前
+        $validator
+            ->requirePresence('name', true, '名前を入力してください。')
+            ->add('name', 'scalar', [
+                'rule' => 'isScalar',
+                'message' => '名前を正しく入力してください。',
+                'last' => true
+            ])
+            ->add('name', 'maxLength', [
+                'rule' => ['maxLength', 255],
+                'message' => '名前は255文字以内で入力してください。',
+                'last' => true
+            ])
+            ->allowEmptyString('name');
 
         // メールアドレス
         $validator
@@ -98,6 +113,22 @@ class AdminsTable extends AppTable
                 'last' => true
             ])
             ->notEmptyString('password', 'パスワードを入力してください。');
+
+        // 二段階認証
+        $validator
+            ->requirePresence('use_otp', true, '二段階認証が不正です。')
+            ->add('use_otp', 'isOn', [
+                'rule' => function ($value) {
+                    return in_array($value, ['0', '1'], true);
+                },
+                'message' => '二段階認証が不正です。',
+                'last' => true
+            ])
+            ->allowEmptyString('use_otp');
+
+        // 二段階認証用シークレットキー
+        $validator
+            ->allowEmptyString('otp_secret');
 
         // 権限
         $validator

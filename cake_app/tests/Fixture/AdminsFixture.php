@@ -15,24 +15,109 @@ class AdminsFixture extends TestFixture
      *
      * @var array
      */
-    // phpcs:disable
     public $fields = [
-        'id' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => 'ID', 'autoIncrement' => true, 'precision' => null],
-        'mail' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null],
-        'password' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null],
-        'privilege' => ['type' => 'json', 'length' => null, 'null' => true, 'default' => null, 'comment' => '権限', 'precision' => null],
-        'created' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => true, 'default' => null, 'comment' => ''],
-        'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => true, 'default' => null, 'comment' => ''],
-        'deleted' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => true, 'default' => null, 'comment' => '削除日時'],
+        'id' => [
+            'type' => 'integer',
+            'length' => null,
+            'unsigned' => false,
+            'null' => false,
+            'default' => null,
+            'comment' => 'ID',
+            'autoIncrement' => true,
+            'precision' => null,
+        ],
+        'name' => [
+            'type' => 'string',
+            'length' => 255,
+            'null' => false,
+            'default' => null,
+            'collate' => 'utf8_general_ci',
+            'comment' => '名前',
+            'precision' => null,
+        ],
+        'mail' => [
+            'type' => 'string',
+            'length' => 255,
+            'null' => false,
+            'default' => null,
+            'collate' => 'utf8_general_ci',
+            'comment' => 'メールアドレス',
+            'precision' => null,
+        ],
+        'password' => [
+            'type' => 'string',
+            'length' => 255,
+            'null' => false,
+            'default' => null,
+            'collate' => 'utf8_general_ci',
+            'comment' => 'パスワード',
+            'precision' => null,
+        ],
+        'use_otp' => [
+            'type' => 'boolean',
+            'length' => null,
+            'null' => true,
+            'default' => '0',
+            'comment' => '二段階認証を使用する？',
+            'precision' => null,
+        ],
+        'otp_secret' => [
+            'type' => 'string',
+            'length' => 255,
+            'null' => true,
+            'default' => null,
+            'collate' => 'utf8_general_ci',
+            'comment' => '二段階認証用シークレットキー',
+            'precision' => null,
+        ],
+        'privilege' => [
+            'type' => 'json',
+            'length' => null,
+            'null' => true,
+            'default' => null,
+            'comment' => '権限',
+            'precision' => null,
+        ],
+        'created' => [
+            'type' => 'datetime',
+            'length' => null,
+            'precision' => null,
+            'null' => true,
+            'default' => null,
+            'comment' => '作成日時',
+        ],
+        'modified' => [
+            'type' => 'datetime',
+            'length' => null,
+            'precision' => null,
+            'null' => true,
+            'default' => null,
+            'comment' => '更新日時',
+        ],
+        'deleted' => [
+            'type' => 'datetime',
+            'length' => null,
+            'precision' => null,
+            'null' => true,
+            'default' => null,
+            'comment' => '削除日時',
+        ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'primary' => [
+                'type' => 'primary',
+                'columns' => [
+                    'id',
+                ],
+                'length' => [
+                ],
+            ],
         ],
         '_options' => [
             'engine' => 'InnoDB',
-            'collation' => 'utf8_general_ci'
+            'collation' => 'utf8_general_ci',
         ],
     ];
-    // phpcs:enable
+
     /**
      * Init method
      *

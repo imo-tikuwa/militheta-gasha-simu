@@ -7,8 +7,11 @@ use App\Utils\Encrypter;
  * Admin Entity
  *
  * @property int $id
+ * @property string $name
  * @property string $mail
  * @property string $password
+ * @property bool $use_otp
+ * @property string $otp_secret
  * @property array|null $privilege
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
@@ -26,8 +29,11 @@ class Admin extends AppEntity
      * @var array
      */
     protected $_accessible = [
+        'name' => true,
         'mail' => true,
         'password' => true,
+        'use_otp' => true,
+        'otp_secret' => true,
         'privilege' => true,
         'created' => true,
         'modified' => true,
@@ -67,5 +73,17 @@ class Admin extends AppEntity
         }
 
         return Encrypter::decrypt($this->password);
+    }
+
+    /**
+     * 二段階認証について有効/無効を返す
+     * @return string 有効 or 無効
+     */
+    protected function _getOtpStatus()
+    {
+        if ($this->use_otp == 1) {
+            return '有効';
+        }
+        return '無効';
     }
 }

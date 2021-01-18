@@ -35,7 +35,7 @@ $this->assign('title', "カード詳細");
         </tr>
         <tr>
           <th scope="row">ガシャ対象？</th>
-          <td><?= @h(_code("Codes.Cards.gasha_include.{$card->gasha_include}")) ?></td>
+          <td><?= @h(_code('Codes.Cards.gasha_include.' . (int)$card->gasha_include)) ?></td>
         </tr>
         <tr>
           <th scope="row">限定？</th>

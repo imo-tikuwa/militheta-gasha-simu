@@ -62,6 +62,12 @@ const MESSAGE_AUTH_ERROR = '権限エラーが発生しました';
 /** エクセルファイル(.xlsx)のContent-Type */
 const EXCEL_CONTENT_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 
+/** Google Authenticatorのシークレットキーの長さ */
+const GOOGLE_AUTHENTICATOR_SECRET_KEY_LEN = 32;
+
+/** 認証コードのinput名 */
+const GOOGLE_AUTHENTICATOR_SECRET_INPUT_NAME = 'secret';
+
 /** SSRピックアップレートの初期値 */
 const BASE_SSR_PICKUP_RATE = 0.99;
 

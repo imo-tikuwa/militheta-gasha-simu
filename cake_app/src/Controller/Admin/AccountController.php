@@ -8,6 +8,7 @@ use Cake\Event\EventInterface;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
+use PHPGangsta_GoogleAuthenticator;
 
 /**
  * Account Controller
@@ -58,6 +59,12 @@ class AccountController extends AppController
         $search_form = new SearchForm();
         $search_form->setData($request);
 
+        // セッションに二段階認証用のQRコードがあればビューに渡す(セッションからは削除)
+        $session = $this->getRequest()->getSession();
+        if ($session->check('qr_url')) {
+            $this->set('qr_url', $session->consume('qr_url'));
+        }
+
         $this->set(compact('accounts', 'search_form'));
     }
 
@@ -69,10 +76,13 @@ class AccountController extends AppController
     private function _getQuery($request)
     {
         $query = $this->Admins->find();
-        $query->where([$this->Admins->aliasField('id <>') => SUPER_USER_ID]);
         // ID
         if (isset($request['id']) && !is_null($request['id']) && $request['id'] !== '') {
             $query->where([$this->Admins->aliasField('id') => $request['id']]);
+        }
+        // 名前
+        if (isset($request['name']) && !is_null($request['name']) && $request['name'] !== '') {
+            $query->where([$this->Admins->aliasField('name LIKE') => "%{$request['name']}%"]);
         }
         // メールアドレス
         if (isset($request['mail']) && !is_null($request['mail']) && $request['mail'] !== '') {
@@ -112,12 +122,6 @@ class AccountController extends AppController
      */
     private function _form($id = null)
     {
-        if (SUPER_USER_ID == $id) {
-            $this->Flash->error('エラーが発生しました。');
-
-            return $this->redirect(['action' => 'index']);
-        }
-
         if ($this->getRequest()->getParam('action') == 'edit') {
             $admin = $this->Admins->get($id);
             $this->Admins->touch($admin);
@@ -135,8 +139,27 @@ class AccountController extends AppController
             } else {
                 $conn = $this->Admins->getConnection();
                 $conn->begin();
-                $admin = $this->Admins->patchEntity($admin, $this->getRequest()->getData());
+
+                // 二段階認証 無効→有効 と切り替えたとき二段階認証用のシークレットキーを生成
+                // 有効→無効 と切り替えたときシークレットキーを削除
+                $is_use_otp_dirty = $admin->isDirty('use_otp');
+                if ($is_use_otp_dirty) {
+                    if ($admin->use_otp === true) {
+                        $google_authenticator = new PHPGangsta_GoogleAuthenticator();
+                        $otp_secret = $google_authenticator->createSecret(GOOGLE_AUTHENTICATOR_SECRET_KEY_LEN);
+                        $admin = $this->Admins->patchEntity($admin, ['otp_secret'=> $otp_secret], ['validate' => false]);
+                    } else {
+                        $admin = $this->Admins->patchEntity($admin, ['otp_secret'=> null], ['validate' => false]);
+                    }
+                }
+
                 if ($this->Admins->save($admin, ['atomic' => false])) {
+                    // 二段階認証 無効→有効 と切り替えたとき二段階認証用のQRコードを生成
+                    if ($is_use_otp_dirty && $admin->use_otp === true) {
+                        $qr_url = $google_authenticator->getQRCodeGoogleUrl(AuthUtils::getTwoFactorQrName($admin), $otp_secret, SITE_NAME);
+                        $this->getRequest()->getSession()->write('qr_url', $qr_url);
+                    }
+
                     $conn->commit();
                     $this->Flash->success('アカウントの登録が完了しました。');
 

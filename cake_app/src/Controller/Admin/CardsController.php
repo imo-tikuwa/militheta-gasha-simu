@@ -287,10 +287,8 @@ class CardsController extends AppController
             },
         ];
 
-        $datetime = new \DateTime();
-        $datetime->setTimezone(new \DateTimeZone('Asia/Tokyo'));
-
-        $this->response = $this->response->withDownload("cards-{$datetime->format('YmdHis')}.csv");
+        $datetime = (new DateTime('now', new DateTimeZone('Asia/Tokyo')))->format('YmdHis');
+        $this->response = $this->response->withDownload("cards-{$datetime}.csv");
         $this->viewBuilder()->setClassName('CsvView.Csv');
         $this->viewBuilder()->setOptions([
             'serialize' => 'cards',

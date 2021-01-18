@@ -63,12 +63,13 @@ class AppView extends View
     public function makePrivilegeEditHtml($current_privilege = null)
     {
         $html = "";
+        $html .= "<table class=\"table table-sm table-borderless\">";
         foreach (_code('BakedFunctions') as $controller => $function_name) {
-            $html .= "<div class=\"row\">";
-            $html .= "  <div class=\"col-lg-1 col-md-2 col-sm-2\">";
-            $html .= "    {$function_name}";
-            $html .= "  </div>";
-            $html .= "  <div class=\"col-lg-11 col-md-10 col-sm-10\">";
+            $html .= "  <tr>";
+            $html .= "    <td class=\"pl-0 text-nowrap col-form-label-sm\">";
+            $html .= "      {$function_name}";
+            $html .= "    </td>";
+            $html .= "    <td>";
             foreach (_code("AdminRoles.{$controller}") as $role_key => $role_name) {
                 $id = strtoupper($controller) . "_" . $role_key;
                 $checked = false;
@@ -89,9 +90,10 @@ class AppView extends View
                 $html .= "</div>";
             }
             $html .= "";
-            $html .= "  </div>";
-            $html .= "</div>";
+            $html .= "    </td>";
+            $html .= "  <tr/>";
         }
+        $html .= "</table>";
 
         return $html;
     }

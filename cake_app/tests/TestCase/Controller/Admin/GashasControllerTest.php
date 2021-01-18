@@ -108,8 +108,10 @@ class GashasControllerTest extends TestCase
 
         $super_admin = $this->Admins->newEntity([
             'id' => SUPER_USER_ID,
+            'name' => '',
             'mail' => 'admin@example.com',
             'password' => 'password',
+            'use_otp' => '0',
         ]);
         $this->Admins->save($super_admin);
         /** @var \App\Model\Entity\Admin $super_admin */
@@ -118,8 +120,10 @@ class GashasControllerTest extends TestCase
         ]);
 
         $read_admin = $this->Admins->newEntity([
+            'name' => '',
             'mail' => 'read@example.com',
             'password' => 'password',
+            'use_otp' => '0',
             'privilege' => [
                 'Gashas' => [ROLE_READ],
             ]
@@ -131,8 +135,10 @@ class GashasControllerTest extends TestCase
         ]);
 
         $write_admin = $this->Admins->newEntity([
+            'name' => '',
             'mail' => 'write@example.com',
             'password' => 'password',
+            'use_otp' => '0',
             'privilege' => [
                 'Gashas' => [ROLE_WRITE],
             ]
@@ -144,8 +150,10 @@ class GashasControllerTest extends TestCase
         ]);
 
         $delete_admin = $this->Admins->newEntity([
+            'name' => '',
             'mail' => 'delete@example.com',
             'password' => 'password',
+            'use_otp' => '0',
             'privilege' => [
                 'Gashas' => [ROLE_DELETE],
             ]
@@ -157,8 +165,10 @@ class GashasControllerTest extends TestCase
         ]);
 
         $csv_export_admin = $this->Admins->newEntity([
+            'name' => '',
             'mail' => 'csv_export@example.com',
             'password' => 'password',
+            'use_otp' => '0',
             'privilege' => [
                 'Gashas' => [ROLE_CSV_EXPORT],
             ]
@@ -170,8 +180,10 @@ class GashasControllerTest extends TestCase
         ]);
 
         $csv_import_admin = $this->Admins->newEntity([
+            'name' => '',
             'mail' => 'csv_import@example.com',
             'password' => 'password',
+            'use_otp' => '0',
             'privilege' => [
                 'Gashas' => [ROLE_CSV_IMPORT],
             ]
@@ -183,8 +195,10 @@ class GashasControllerTest extends TestCase
         ]);
 
         $excel_export_admin = $this->Admins->newEntity([
+            'name' => '',
             'mail' => 'excel_export@example.com',
             'password' => 'password',
+            'use_otp' => '0',
             'privilege' => [
                 'Gashas' => [ROLE_EXCEL_EXPORT],
             ]
@@ -196,8 +210,10 @@ class GashasControllerTest extends TestCase
         ]);
 
         $no_authority_admin = $this->Admins->newEntity([
+            'name' => '',
             'mail' => 'no_authority@example.com',
             'password' => 'password',
+            'use_otp' => '0',
             'privilege' => [
                 'Gashas' => [],
             ]
@@ -218,7 +234,7 @@ class GashasControllerTest extends TestCase
     {
         $this->get('/admin/gashas');
         $this->assertResponseCode(302);
-        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+        $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
             'Auth.Admin' => $this->super_admin
@@ -288,7 +304,7 @@ class GashasControllerTest extends TestCase
     {
         $this->get('/admin/gashas/view/1');
         $this->assertResponseCode(302);
-        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+        $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
             'Auth.Admin' => $this->super_admin
@@ -358,7 +374,7 @@ class GashasControllerTest extends TestCase
     {
         $this->get('/admin/gashas/add');
         $this->assertResponseCode(302);
-        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+        $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
             'Auth.Admin' => $this->super_admin
@@ -428,7 +444,7 @@ class GashasControllerTest extends TestCase
     {
         $this->get('/admin/gashas/edit/1');
         $this->assertResponseCode(302);
-        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+        $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
             'Auth.Admin' => $this->super_admin
@@ -500,7 +516,7 @@ class GashasControllerTest extends TestCase
 
         $this->get('/admin/gashas/delete/1');
         $this->assertResponseCode(302);
-        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+        $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
             'Auth.Admin' => $this->super_admin
@@ -589,7 +605,7 @@ class GashasControllerTest extends TestCase
     {
         $this->get('/admin/gashas/csv-export');
         $this->assertResponseCode(302);
-        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+        $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
             'Auth.Admin' => $this->super_admin
@@ -673,7 +689,7 @@ class GashasControllerTest extends TestCase
 
         $this->get('/admin/gashas/csv-import');
         $this->assertResponseCode(302);
-        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+        $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
             'Auth.Admin' => $this->super_admin
@@ -773,7 +789,7 @@ class GashasControllerTest extends TestCase
     {
         $this->get('/admin/gashas/excel-export');
         $this->assertResponseCode(302);
-        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+        $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
             'Auth.Admin' => $this->super_admin

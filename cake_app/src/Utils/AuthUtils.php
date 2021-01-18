@@ -1,6 +1,7 @@
 <?php
 namespace App\Utils;
 
+use App\Model\Entity\Admin;
 use Cake\Http\ServerRequest;
 use Cake\Log\Log;
 use Exception;
@@ -99,5 +100,21 @@ class AuthUtils
         }
 
         return $has_role;
+    }
+
+    /**
+     * 二段階認証用のQRコード名を返す
+     * アカウントのIDを付加した文字列を返す
+     *
+     * @param Admin $admin アカウント情報
+     * @return string
+     */
+    public static function getTwoFactorQrName(Admin $admin = null)
+    {
+        if (is_null($admin)) {
+            return '';
+        }
+
+        return "admin_id = {$admin->id}";
     }
 }

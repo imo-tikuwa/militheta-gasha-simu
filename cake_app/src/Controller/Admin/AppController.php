@@ -6,6 +6,11 @@ use Cake\Event\EventInterface;
 use Cake\Http\Cookie\Cookie;
 use Cake\Http\ServerRequest;
 
+/**
+ * Admin AppController
+ *
+ * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
+ */
 class AppController extends \App\Controller\AppController
 {
     /**
@@ -32,7 +37,12 @@ class AppController extends \App\Controller\AppController
     {
         parent::beforeFilter($event);
 
-        // authorizationプラグインで認可エラー時にリダイレクトする場合に、Flashメッセージの設定方法が不明なため使用を中止する
+        // ログインチェック
+        if (!$this->Authentication->getResult()->isValid()) {
+            return;
+        }
+
+        // 権限チェック
         if (!$this->authorize($this->getRequest())) {
             $this->Flash->error(MESSAGE_AUTH_ERROR);
 

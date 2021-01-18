@@ -23,8 +23,11 @@ class AdminsSeed extends AbstractSeed
         $data = [
             [
                 'id' => '1',
+                'name' => '',
                 'mail' => 'admin@imo-tikuwa.com',
                 'password' => 'ExkD1/9lm1NHZZt2+phf5w==:QgOAS4fgkguFQ9jZYHL9ow==',
+                'use_otp' => '0',
+                'otp_secret' => NULL,
                 'privilege' => NULL,
                 'created' => '2020-10-07 16:13:05',
                 'modified' => '2020-10-07 16:13:05',
@@ -32,8 +35,11 @@ class AdminsSeed extends AbstractSeed
             ],
             [
                 'id' => '2',
+                'name' => '',
                 'mail' => 'user1@imo-tikuwa.com',
                 'password' => 'yerFNCGATtp9Cb+O3gAECg==:KJExaS9/APeHbcirsqZVYg==',
+                'use_otp' => '0',
+                'otp_secret' => NULL,
                 'privilege' => '{"Cards": ["READ", "CSV_EXPORT", "EXCEL_EXPORT"], "Gashas": ["READ"], "Characters": ["READ"], "CardReprints": ["READ"], "GashaPickups": ["READ"]}',
                 'created' => '2020-10-07 16:14:02',
                 'modified' => '2020-11-24 18:31:29',

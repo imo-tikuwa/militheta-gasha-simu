@@ -73,7 +73,7 @@ $this->Form->setTemplates([
               <td><?= @h(_code("Codes.Cards.rarity.{$card->rarity}")) ?></td>
               <td><?= @h(_code("Codes.Cards.type.{$card->type}")) ?></td>
               <td><?= h($this->formatDate($card->add_date, 'yyyy/MM/dd')) ?></td>
-              <td><?= @h(_code("Codes.Cards.gasha_include.{$card->gasha_include}")) ?></td>
+              <td><?= @h(_code('Codes.Cards.gasha_include.' . (int)$card->gasha_include)) ?></td>
               <td><?= @h(_code("Codes.Cards.limited.{$card->limited}")) ?></td>
               <td><?= h($this->formatDate($card->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
               <td class="actions">
