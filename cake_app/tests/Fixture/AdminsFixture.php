@@ -126,6 +126,18 @@ class AdminsFixture extends TestFixture
     public function init(): void
     {
         $this->records = [
+            [
+                'id' => 1,
+                'name' => '',
+                'mail' => 'admin@imo-tikuwa.com',
+                'password' => 'ExkD1/9lm1NHZZt2+phf5w==:QgOAS4fgkguFQ9jZYHL9ow==',
+                'use_otp' => false,
+                'otp_secret' => null,
+                'privilege' => null,
+                'created' => '2020-10-07 16:13:05',
+                'modified' => '2020-10-07 16:13:05',
+                'deleted' => null,
+            ],
         ];
         parent::init();
     }
