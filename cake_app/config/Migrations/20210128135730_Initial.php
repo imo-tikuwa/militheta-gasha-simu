@@ -16,7 +16,9 @@ class Initial extends AbstractMigration
      */
     public function up()
     {
-        $this->table('admins')
+        $this->table('admins', [
+                'comment' => '管理者情報',
+            ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'comment' => 'ID',
@@ -81,7 +83,9 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
-        $this->table('card_reprints')
+        $this->table('card_reprints', [
+                'comment' => '復刻情報',
+            ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'comment' => 'ID',
@@ -138,7 +142,9 @@ class Initial extends AbstractMigration
             )
             ->create();
 
-        $this->table('cards')
+        $this->table('cards', [
+                'comment' => 'カード',
+            ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'comment' => 'ID',
@@ -220,7 +226,9 @@ class Initial extends AbstractMigration
             )
             ->create();
 
-        $this->table('characters')
+        $this->table('characters', [
+                'comment' => 'キャラクター',
+            ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'comment' => 'ID',
@@ -249,7 +257,9 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
-        $this->table('gasha_pickups')
+        $this->table('gasha_pickups', [
+                'comment' => 'ピックアップ情報',
+            ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'comment' => 'ID',
@@ -306,7 +316,9 @@ class Initial extends AbstractMigration
             )
             ->create();
 
-        $this->table('gashas')
+        $this->table('gashas', [
+                'comment' => 'ガシャ',
+            ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'comment' => 'ID',
@@ -371,7 +383,9 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
-        $this->table('operation_logs')
+        $this->table('operation_logs', [
+                'comment' => '操作ログ',
+            ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'comment' => 'ID',
@@ -416,7 +430,9 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
-        $this->table('operation_logs_daily')
+        $this->table('operation_logs_daily', [
+                'comment' => '操作ログの集計(日毎)',
+            ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'comment' => 'ID',
@@ -451,7 +467,9 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
-        $this->table('operation_logs_hourly')
+        $this->table('operation_logs_hourly', [
+                'comment' => '操作ログの集計(1時間毎)',
+            ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'comment' => 'ID',
@@ -486,7 +504,9 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
-        $this->table('operation_logs_monthly')
+        $this->table('operation_logs_monthly', [
+                'comment' => '操作ログの集計(月毎)',
+            ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
                 'comment' => 'ID',
