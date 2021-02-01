@@ -11,7 +11,7 @@ if (!empty($header_links) && count($header_links) > 0) {
 			continue;
 		}
 
-		$html .= "<li class=\"nav-item d-none d-sm-inline-block header-link\">";
+		$html .= "<li class=\"nav-item d-none d-sm-inline-block\">";
 		$html .= $this->Html->link($header_link['title'], $header_link['link'], ['class' => 'nav-link', 'target' => '_blank']);
 		$html .= "</li>";
 	}

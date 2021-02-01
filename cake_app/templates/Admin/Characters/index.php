@@ -15,16 +15,18 @@ $this->Form->setTemplates([
   <div class="card rounded-0">
     <div class="card-header">
       <div class="form-inline">
-        <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_ADD])) { ?>
-          <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
-        <?php } ?>
-        <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" data-toggle="modal" data-target="#characters-search-form-modal">検索</button>
-        <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_CSV_EXPORT])) { ?>
-          <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->getRequest()->getQueryParams()]) ?>'">CSVエクスポート</button>
-        <?php } ?>
-        <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_EXCEL_EXPORT])) { ?>
-          <button type="button" class="btn btn-sm btn-flat btn-outline-secondary mr-2" onclick="location.href='<?= $this->Url->build(['action' => ACTION_EXCEL_EXPORT, '?' => $this->getRequest()->getQueryParams()]) ?>'">Excelエクスポート</button>
-        <?php } ?>
+        <div class="btn-group mr-2" role="group">
+          <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_ADD])) { ?>
+            <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
+          <?php } ?>
+          <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" data-toggle="modal" data-target="#characters-search-form-modal">検索</button>
+          <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_CSV_EXPORT])) { ?>
+            <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->getRequest()->getQueryParams()]) ?>'">CSVエクスポート</button>
+          <?php } ?>
+          <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_EXCEL_EXPORT])) { ?>
+            <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_EXCEL_EXPORT, '?' => $this->getRequest()->getQueryParams()]) ?>'">Excelエクスポート</button>
+          <?php } ?>
+        </div>
       </div>
     </div>
     <div class="card-body table-responsive p-0">

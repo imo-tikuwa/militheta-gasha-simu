@@ -24,13 +24,11 @@ const exportScript = {
     plugins: [
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
             moment: "moment"
         })
-    ],
-    externals: [
-        {
-            jquery: 'jQuery'
-        }
     ],
     module: {
         rules: [

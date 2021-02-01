@@ -16,7 +16,7 @@
   <?= $this->fetch('meta') ?>
   <?= $this->fetch('css') ?>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed <?= $sidemenu_toggle_class ?>">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -24,10 +24,10 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" id="sidemenu-toggle"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?= $this->Url->build(['controller' => 'Top'])?>" class="nav-link">Home</a>
+      <li class="nav-item">
+        <a href="<?= $this->Url->build(['controller' => 'Top', 'action' => 'index', 'prefix' => 'Admin'])?>" class="nav-link"><i class="fas fa-home"></i></a>
       </li>
       <?= $this->element('header_link'); ?>
     </ul>
@@ -36,7 +36,7 @@
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="javascript:void(0);" class="brand-link">
+    <a href="<?= $this->Url->build(['controller' => 'Top', 'action' => 'index', 'prefix' => 'Admin']) ?>" class="brand-link">
       <span class="brand-text-disp-collapse"><?= SITE_NAME_SHORT ?></span>
       <span class="brand-text font-weight-light brand-text-disp-open"><?= SITE_NAME ?></span>
     </a>
@@ -44,7 +44,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
           <?= $this->element('left_side_menu') ?>
         </ul>
       </nav>
@@ -79,7 +79,6 @@
   </footer>
 
 </div>
-<?= $this->Html->script('jquery-3.4.1.min') ?>
 <?= $this->Html->script('vendor/bundle') ?>
 <?= $this->fetch('script') ?>
 </body>

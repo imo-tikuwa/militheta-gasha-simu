@@ -90,31 +90,26 @@ return [
             'controller' => 'Gashas',
             'label' => 'ガシャ',
             'icon_class' => 'fas fa-database',
-            'one_record_limited' => false,
         ],
         'Characters' => [
             'controller' => 'Characters',
             'label' => 'キャラクター',
             'icon_class' => 'fas fa-female',
-            'one_record_limited' => false,
         ],
         'Cards' => [
             'controller' => 'Cards',
             'label' => 'カード',
             'icon_class' => 'far fa-id-card',
-            'one_record_limited' => false,
         ],
         'CardReprints' => [
             'controller' => 'CardReprints',
             'label' => '復刻情報',
             'icon_class' => 'fas fa-table',
-            'one_record_limited' => false,
         ],
         'GashaPickups' => [
             'controller' => 'GashaPickups',
             'label' => 'ピックアップ情報',
             'icon_class' => 'fas fa-level-up-alt',
-            'one_record_limited' => false,
         ],
     ],
     'ThumbnailOptions' => [

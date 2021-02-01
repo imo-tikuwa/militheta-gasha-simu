@@ -3,7 +3,6 @@ namespace App\Controller\Admin;
 
 use App\Utils\AuthUtils;
 use Cake\Event\EventInterface;
-use Cake\Http\Cookie\Cookie;
 use Cake\Http\ServerRequest;
 
 /**
@@ -48,14 +47,6 @@ class AppController extends \App\Controller\AppController
 
             return $this->redirect(['controller' => 'top', 'action' => 'index']);
         }
-
-        // サイドメニューの展開状態をCookie管理する
-        $sidemenu_toggle_class = $this->getRequest()->getCookie('sidemenu-toggle-class');
-        if (empty($sidemenu_toggle_class)) {
-            $sidemenu_toggle_class = 'sidebar-collapse';
-            $this->response = $this->response->withCookie(Cookie::create('sidemenu-toggle-class', $sidemenu_toggle_class));
-        }
-        $this->set(compact('sidemenu_toggle_class'));
     }
 
     /**

@@ -26,7 +26,6 @@ use DateTimeZone;
  */
 class CharactersController extends AppController
 {
-
     /**
      * Paging setting.
      */

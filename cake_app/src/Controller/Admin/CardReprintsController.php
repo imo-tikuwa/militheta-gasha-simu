@@ -27,7 +27,6 @@ use DateTimeZone;
  */
 class CardReprintsController extends AppController
 {
-
     /**
      * Initialize Method.
      * @return void

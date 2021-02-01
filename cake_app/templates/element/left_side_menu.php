@@ -10,19 +10,16 @@ if (!empty($functions) && count($functions) > 0) {
 	foreach ($functions as $alias => $function) {
 		if (AuthUtils::hasRole($this->getRequest(), ['controller' => $function['controller'], 'action' => ACTION_INDEX])) {
 			$html .= "<li class=\"nav-item\">";
-			if (isset($function['one_record_limited']) && $function['one_record_limited'] === true) {
-				$html .= $this->Html->link(
-					"<i class=\"{$function['icon_class']} fa-fw mr-2\"></i><p>{$function['label']}</p>",
-					['controller' => "{$function['controller']}", 'action' => ACTION_EDIT],
-					['class' => ($this->name == $function['controller']) ? 'nav-link active' : 'nav-link', 'escapeTitle' => false]
-				);
+			if (!method_exists("App\\Controller\\Admin\\{$function['controller']}Controller", 'index')) {
+				$url = $this->Url->build(['controller' => $function['controller'], 'action' => ACTION_EDIT]);
 			} else {
-				$html .= $this->Html->link(
-					"<i class=\"{$function['icon_class']} fa-fw mr-2\"></i><p>{$function['label']}</p>",
-					['controller' => "{$function['controller']}", 'action' => ACTION_INDEX, '?' => _code("InitialOrders.{$alias}")],
-					['class' => ($this->name == $function['controller']) ? 'nav-link active' : 'nav-link', 'escapeTitle' => false]
-				);
+				$url = $this->Url->build(['controller' => $function['controller'], 'action' => ACTION_INDEX, '?' => _code("InitialOrders.{$alias}")]);
 			}
+			$html .= $this->Html->link(
+				"<i class=\"{$function['icon_class']} fa-fw mr-2\"></i><p>{$function['label']}</p>",
+				$url,
+				['class' => ($this->name == $function['controller']) ? 'nav-link active' : 'nav-link', 'escapeTitle' => false]
+			);
 			$html .= "</li>";
 		}
 	}

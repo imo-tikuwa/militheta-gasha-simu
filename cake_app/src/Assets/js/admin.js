@@ -1,4 +1,6 @@
-//import 'jquery/dist/jquery.min.js';
+import jQuery from 'jquery';
+window.$ = jQuery;
+window.jQuery = jQuery;
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -22,16 +24,7 @@ import 'summernote/dist/lang/summernote-ja-JP.min.js';
 
 import 'bootstrap4-tagsinput/tagsinput.js';
 
-var Cookies = require('js-cookie');
-
 $(function(){
-
-    // サイドメニューの開閉を記憶する
-    $("#sidemenu-toggle").on('click', function(){
-        var changed_sidemenu_css_class = $("body").hasClass('sidebar-open') ? "sidebar-collapse" : "sidebar-open";
-        Cookies.set('sidemenu-toggle-class', changed_sidemenu_css_class);
-    });
-
     // tempusdominus-bootstrap-4のフォーカスが外れたとき、自動で非表示となるようにする
     $(document).on('mouseup touchend', function(e){
         var container = $('.bootstrap-datetimepicker-widget');

@@ -27,7 +27,6 @@ use DateTimeZone;
  */
 class GashaPickupsController extends AppController
 {
-
     /**
      * Initialize Method.
      * @return void

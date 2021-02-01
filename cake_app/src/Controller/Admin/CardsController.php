@@ -27,7 +27,6 @@ use DateTimeZone;
  */
 class CardsController extends AppController
 {
-
     /**
      * Initialize Method.
      * @return void

@@ -12,7 +12,7 @@
         "cakephp/plugin-installer": "^1.3",
         "friendsofcake/cakephp-csvview": "4.0.*",
         "imo-tikuwa/cakephp-operation-logs": "2.*",
-        "imo-tikuwa/cakephp-utils": "^0.0.12",
+        "imo-tikuwa/cakephp-utils": "^0.0.13",
         "imo-tikuwa/cakephp3-soft-delete": "2.*",
         "intervention/image": "^2.5",
         "josegonzalez/dotenv": "3.*",

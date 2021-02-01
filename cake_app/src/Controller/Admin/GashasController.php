@@ -27,7 +27,6 @@ use DateTimeZone;
  */
 class GashasController extends AppController
 {
-
     /**
      * Paging setting.
      */
