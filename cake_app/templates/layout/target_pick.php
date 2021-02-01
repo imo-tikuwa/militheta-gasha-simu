@@ -15,9 +15,6 @@
     <?= $this->element('google_analytics'); ?>
     <?= $this->Html->css('vendor/front_target_pick') ?>
     <?= $this->Html->script('pace.min') ?>
-    <?= $this->Html->script('jquery-3.4.1.min') ?>
-    <?= $this->Html->script('vendor/front', ['defer' => true]) ?>
-    <?= $this->fetch('script') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -28,5 +25,7 @@
   <?= $this->fetch('content') ?>
 
 </div>
+<?= $this->Html->script('vendor/front') ?>
+<?= $this->fetch('script') ?>
 </body>
 </html>

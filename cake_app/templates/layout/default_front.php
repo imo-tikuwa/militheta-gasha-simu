@@ -14,9 +14,6 @@
 
     <?= $this->element('google_analytics'); ?>
     <?= $this->Html->css('vendor/front_index') ?>
-    <?= $this->Html->script('jquery-3.4.1.min') ?>
-    <?= $this->Html->script('vendor/front', ['defer' => true]) ?>
-    <?= $this->fetch('script') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -45,5 +42,7 @@
   </div>
 
 </div>
+<?= $this->Html->script('vendor/front') ?>
+<?= $this->fetch('script') ?>
 </body>
 </html>

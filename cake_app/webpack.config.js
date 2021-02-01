@@ -91,6 +91,44 @@ fs.readdirSync(path.resolve(__dirname, 'src/Assets/js/admin')).forEach(function(
     }
 });
 
+const exportFrontPageScripts = {
+    mode,
+    devtool,
+    entry: {
+    },
+    output: {
+        path: path.resolve(__dirname, 'webroot/js/front'),
+        publicPath: '/js/front/',
+        filename: '[name].js'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                '@babel/preset-env',
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    performance: {
+        hints: false
+    }
+};
+// src/Assets/js/front以下のjsファイルをすべてエントリーポイントに追加
+fs.readdirSync(path.resolve(__dirname, 'src/Assets/js/front')).forEach(function(file) {
+    if (file.endsWith('.js')) {
+        exportFrontPageScripts.entry[path.basename(file, '.js')] = path.join(__dirname, `src/Assets/js/front/${file}`);
+    }
+});
+
 // cssのバンドル設定
 const exportStyle = {
     mode,
@@ -159,6 +197,9 @@ const exportStyle = {
 module.exports = [exportScript];
 if (Object.keys(exportPageScripts.entry).length > 0) {
     module.exports.push(exportPageScripts);
+}
+if (Object.keys(exportFrontPageScripts.entry).length > 0) {
+    module.exports.push(exportFrontPageScripts);
 }
 module.exports.push(exportStyle);
 
