@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use Cake\Core\Exception\Exception;
+use Cake\Core\Exception\CakeException;
 use Cake\Utility\Inflector;
 use Intervention\Image\ImageManagerStatic;
 
@@ -27,9 +27,9 @@ trait FormFileTrait
             $this->viewBuilder()->disableAutoLayout();
             $this->autoRender = false;
             if (!$this->getRequest()->is(['post'])) {
-                throw new Exception("不正なリクエストです。Invalid Request.");
+                throw new CakeException("不正なリクエストです。Invalid Request.");
             } elseif (is_null($input_name)) {
-                throw new Exception("プログラムエラーが発生しました。Invalid Request.");
+                throw new CakeException("プログラムエラーが発生しました。Invalid Request.");
             }
 
             // App.uploadedFilesAsObjectsの値によってオブジェクトと配列の条件分岐が必要
@@ -46,19 +46,19 @@ trait FormFileTrait
             }
 
             if (empty($org_name) || empty($tmp_name)) {
-                throw new Exception("プログラムエラーが発生しました。Empty File.");
+                throw new CakeException("プログラムエラーが発生しました。Empty File.");
             }
 
             $extension = pathinfo($org_name, PATHINFO_EXTENSION);
             if (empty($extension)) {
-                throw new Exception("プログラムエラーが発生しました。Invalid Extension.");
+                throw new CakeException("プログラムエラーが発生しました。Invalid Extension.");
             }
             $extension = strtolower($extension);
 
             // 拡張子チェック
             $allow_file_extensions = _code("FileUploadOptions.{$this->name}.{$input_name}.allow_file_extensions", null);
             if (!is_null($allow_file_extensions) && !in_array($extension, $allow_file_extensions, true)) {
-                throw new Exception("アップロードされたファイルの拡張子が許可されてません。Invalid Extension.");
+                throw new CakeException("アップロードされたファイルの拡張子が許可されてません。Invalid Extension.");
             }
 
             // ファイルアップロード
@@ -66,7 +66,7 @@ trait FormFileTrait
             $cur_name = $new_file_key . "." . $extension;
             $upload_to = UPLOAD_FILE_BASE_DIR . DS . Inflector::underscore($this->name) . DS . $cur_name;
             if (!rename($tmp_name, $upload_to)) {
-                throw new Exception("ファイルのアップロードに失敗しました。Upload Failed.");
+                throw new CakeException("ファイルのアップロードに失敗しました。Upload Failed.");
             }
 
             // アップロードされたファイルが画像かつ、サムネイル生成のオプションが有効なときサムネ生成
@@ -147,18 +147,18 @@ trait FormFileTrait
             $this->autoRender = false;
 
             if (!$this->getRequest()->is(['post', 'delete'])) {
-                throw new Exception("不正なリクエストです。Invalid Request.");
+                throw new CakeException("不正なリクエストです。Invalid Request.");
             }
 
             $key = $this->getRequest()->getData('key');
             if (is_null($key)) {
                 $this->log('削除対象のファイルキーが存在しません');
-                throw new Exception("プログラムエラーが発生しました。");
+                throw new CakeException("プログラムエラーが発生しました。");
             }
 
             if (!file_exists(UPLOAD_FILE_BASE_DIR . DS . Inflector::underscore($this->name) . DS . $key)) {
                 $this->log('削除対象の実ファイルが存在しません');
-                throw new Exception("プログラムエラーが発生しました。");
+                throw new CakeException("プログラムエラーが発生しました。");
             }
 
             $response_data['status'] = true;
