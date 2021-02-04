@@ -21,13 +21,14 @@ trait FormFileTrait
      */
     public function fileUpload($input_name = null)
     {
-        $error = null;
+        $response = $this->getResponse();
         $response_data = [];
         try {
             $this->viewBuilder()->disableAutoLayout();
             $this->autoRender = false;
-
-            if (is_null($input_name)) {
+            if (!$this->getRequest()->is(['post'])) {
+                throw new Exception("不正なリクエストです。Invalid Request.");
+            } elseif (is_null($input_name)) {
                 throw new Exception("プログラムエラーが発生しました。Invalid Request.");
             }
 
@@ -54,49 +55,54 @@ trait FormFileTrait
             }
             $extension = strtolower($extension);
 
+            // 拡張子チェック
+            $allow_file_extensions = _code("FileUploadOptions.{$this->name}.{$input_name}.allow_file_extensions", null);
+            if (!is_null($allow_file_extensions) && !in_array($extension, $allow_file_extensions, true)) {
+                throw new Exception("アップロードされたファイルの拡張子が許可されてません。Invalid Extension.");
+            }
+
             // ファイルアップロード
-            $new_image_key = sha1(uniqid(rand()));
-            $cur_name = $new_image_key . "." . $extension;
+            $new_file_key = sha1(uniqid(rand()));
+            $cur_name = $new_file_key . "." . $extension;
             $upload_to = UPLOAD_FILE_BASE_DIR . DS . Inflector::underscore($this->name) . DS . $cur_name;
-            if (!move_uploaded_file($tmp_name, $upload_to)) {
+            if (!rename($tmp_name, $upload_to)) {
                 throw new Exception("ファイルのアップロードに失敗しました。Upload Failed.");
             }
 
-            // アップロードされたファイルが画像かつ、サムネイル生成のオプションが存在するときサムネ生成
-            if (in_array($extension, ['png', 'jpg', 'jpeg', 'gif'])) {
-                $thumbnail_options = _code("ThumbnailOptions.{$this->name}.{$input_name}");
-                if (!empty($thumbnail_options)) {
-                    $thumbnail_width = (isset($thumbnail_options['thumbnail_width']) && is_numeric($thumbnail_options['thumbnail_width'])) ? $thumbnail_options['thumbnail_width'] : null;
-                    $thumbnail_height = (isset($thumbnail_options['thumbnail_height']) && is_numeric($thumbnail_options['thumbnail_height'])) ? $thumbnail_options['thumbnail_height'] : null;
-                    $thumbnail_aspect_ratio_keep = (isset($thumbnail_options['thumbnail_aspect_ratio_keep']) && $thumbnail_options['thumbnail_aspect_ratio_keep'] === true) ? true : false;
-                    $thumbnail_quality = (isset($thumbnail_options['thumbnail_quality']) && is_numeric($thumbnail_options['thumbnail_quality'])) ? $thumbnail_options['thumbnail_quality'] : 90;
-                    $thumb_to = UPLOAD_FILE_BASE_DIR . DS . Inflector::underscore($this->name) . DS . $new_image_key . "_thumb." . $extension;
-                    if ($thumbnail_aspect_ratio_keep) {
-                        ImageManagerStatic::make($upload_to)->resize($thumbnail_width, $thumbnail_height, function ($constraint) {
-                            $constraint->aspectRatio();
-                        })->save($thumb_to, $thumbnail_quality);
-                    } else {
-                        ImageManagerStatic::make($upload_to)->resize($thumbnail_width, $thumbnail_height)->save($thumb_to, $thumbnail_quality);
-                    }
+            // アップロードされたファイルが画像かつ、サムネイル生成のオプションが有効なときサムネ生成
+            if (in_array($extension, ['png', 'jpg', 'jpeg', 'gif'], true) && _code("FileUploadOptions.{$this->name}.{$input_name}.create_thumbnail", false)) {
+                $file_upload_options = _code("FileUploadOptions.{$this->name}.{$input_name}");
+                $thumbnail_width = (isset($file_upload_options['thumbnail_width']) && is_numeric($file_upload_options['thumbnail_width'])) ? $file_upload_options['thumbnail_width'] : null;
+                $thumbnail_height = (isset($file_upload_options['thumbnail_height']) && is_numeric($file_upload_options['thumbnail_height'])) ? $file_upload_options['thumbnail_height'] : null;
+                $thumbnail_aspect_ratio_keep = (isset($file_upload_options['thumbnail_aspect_ratio_keep']) && $file_upload_options['thumbnail_aspect_ratio_keep'] === true) ? true : false;
+                $thumbnail_quality = (isset($file_upload_options['thumbnail_quality']) && is_numeric($file_upload_options['thumbnail_quality'])) ? $file_upload_options['thumbnail_quality'] : 90;
+                $thumb_to = UPLOAD_FILE_BASE_DIR . DS . Inflector::underscore($this->name) . DS . $new_file_key . "_thumb." . $extension;
+                if ($thumbnail_aspect_ratio_keep) {
+                    ImageManagerStatic::make($upload_to)->resize($thumbnail_width, $thumbnail_height, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save($thumb_to, $thumbnail_quality);
+                } else {
+                    ImageManagerStatic::make($upload_to)->resize($thumbnail_width, $thumbnail_height)->save($thumb_to, $thumbnail_quality);
                 }
             }
 
             $delete_action = "";
             $prefix = $this->getRequest()->getParam('prefix');
             if (!empty($prefix)) {
-                $delete_action .= "/" . Inflector::underscore($prefix);
+                $delete_action .= '/' . Inflector::underscore($prefix);
             }
-            $delete_action .= "/" . Inflector::underscore($this->name) . "/fileDelete/" . $input_name;
+            $delete_action .= '/' . Inflector::underscore($this->name) . '/file-delete/' . $input_name;
 
-            $url = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? "https://" : "http://";
-            $url .= $_SERVER['SERVER_NAME'];
-            if ($_SERVER['SERVER_PORT'] != 80 && $_SERVER['SERVER_PORT'] != 443) {
-                $url .= ":" . $_SERVER['SERVER_PORT'];
+            $url = $this->getRequest()->is('ssl') ? 'https://' : 'http://';
+            $url .= is_null($this->getRequest()->host()) ? 'localhost' : $this->getRequest()->host();
+            $port = $this->getRequest()->port();
+            if (!is_null($port) && $port != 80 && $port != 443) {
+                $url .= ':' . $port;
             }
 
             $response_data += [
                 'initialPreview' => [
-                    $url . "/" . UPLOAD_FILE_BASE_DIR_NAME . "/" . Inflector::underscore($this->name) . "/" . $cur_name
+                    $url . '/' . UPLOAD_FILE_BASE_DIR_NAME . '/' . Inflector::underscore($this->name) . '/' . $cur_name
                 ],
                 'initialPreviewConfig' => [
                     0 => [
@@ -115,14 +121,11 @@ trait FormFileTrait
             ];
         } catch (\Exception $e) {
             $this->log($e->getMessage());
-            $error = $e->getMessage();
+            $response_data['error'] = $e->getMessage();
+            $response = $response->withStatus(400);
         }
 
-        if (!empty($error)) {
-            $response_data['error'] = $error;
-        }
-
-        return $this->response->withType('json')->withStringBody(json_encode($response_data));
+        return $response->withType('json')->withStringBody(json_encode($response_data));
     }
 
     /**
@@ -137,11 +140,15 @@ trait FormFileTrait
      */
     public function fileDelete($input_name = null)
     {
-        $error = null;
+        $response = $this->getResponse();
         $response_data = [];
         try {
             $this->viewBuilder()->disableAutoLayout();
             $this->autoRender = false;
+
+            if (!$this->getRequest()->is(['post', 'delete'])) {
+                throw new Exception("不正なリクエストです。Invalid Request.");
+            }
 
             $key = $this->getRequest()->getData('key');
             if (is_null($key)) {
@@ -157,13 +164,10 @@ trait FormFileTrait
             $response_data['status'] = true;
         } catch (\Exception $e) {
             $this->log($e->getMessage());
-            $error = $e->getMessage();
+            $response_data['error'] = $e->getMessage();
+            $response = $response->withStatus(400);
         }
 
-        if (!empty($error)) {
-            $response_data['error'] = $error;
-        }
-
-        return $this->response->withType('json')->withStringBody(json_encode($response_data));
+        return $response->withType('json')->withStringBody(json_encode($response_data));
     }
 }

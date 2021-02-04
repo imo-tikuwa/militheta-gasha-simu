@@ -60,7 +60,5 @@ $is_secure_login = ($this->getRequest()->getParam('action') === 'secureLogin');
     <!-- /.login-card-body -->
   </div>
 </div>
-<?= $this->Html->script('jquery-3.4.1.min') ?>
-<?= $this->Html->script('vendor/bundle') ?>
 </body>
 </html>

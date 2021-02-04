@@ -44,6 +44,12 @@ const ACTION_EDIT = 'edit';
 /** deleteアクション */
 const ACTION_DELETE = 'delete';
 
+/** fileUploadアクション */
+const ACTION_FILE_UPLOAD = 'fileUpload';
+
+/** fileDeleteアクション */
+const ACTION_FILE_DELETE = 'fileDelete';
+
 /** csvExportアクション */
 const ACTION_CSV_EXPORT = 'csvExport';
 

@@ -112,7 +112,7 @@ return [
             'icon_class' => 'fas fa-level-up-alt',
         ],
     ],
-    'ThumbnailOptions' => [
+    'FileUploadOptions' => [
     ],
     'ExcelOptions' => [
         'CardReprints' => [

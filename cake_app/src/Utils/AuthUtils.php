@@ -77,6 +77,8 @@ class AuthUtils
                 break;
             case ACTION_ADD:
             case ACTION_EDIT:
+            case ACTION_FILE_UPLOAD:
+            case ACTION_FILE_DELETE:
                 $has_role = in_array(ROLE_WRITE, $privileges, true);
                 break;
             case ACTION_DELETE:
