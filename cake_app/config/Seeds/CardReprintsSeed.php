@@ -1047,6 +1047,33 @@ class CardReprintsSeed extends AbstractSeed
                 'modified' => '2020-12-02 22:28:42',
                 'deleted' => NULL,
             ],
+            [
+                'id' => '115',
+                'gasha_id' => '172',
+                'card_id' => '740',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ ブランニュー・シーナリー　萩原雪歩',
+                'created' => '2021-02-07 11:36:06',
+                'modified' => '2021-02-07 11:36:06',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '116',
+                'gasha_id' => '172',
+                'card_id' => '753',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 新春ハピネスガール　高坂海美',
+                'created' => '2021-02-07 11:36:18',
+                'modified' => '2021-02-07 11:36:18',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '117',
+                'gasha_id' => '172',
+                'card_id' => '761',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 快方のプロミス　永吉昴',
+                'created' => '2021-02-07 11:36:29',
+                'modified' => '2021-02-07 11:36:29',
+                'deleted' => NULL,
+            ],
         ];
 
         $table = $this->table('card_reprints');
