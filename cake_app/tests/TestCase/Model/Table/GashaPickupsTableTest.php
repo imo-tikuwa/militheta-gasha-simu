@@ -130,6 +130,27 @@ class GashaPickupsTableTest extends TestCase
     }
 
     /**
+     * Test getSearchQuery method
+     *
+     * @return void
+     */
+    public function testGetSearchQuery(): void
+    {
+        $query = $this->GashaPickups->getSearchQuery([]);
+        $gasha_pickup = $query->select(['id'])->enableHydration(false)->first();
+
+        $this->assertInstanceOf('\Cake\ORM\Query', $query);
+        $this->assertTrue(array_key_exists('id', $gasha_pickup));
+        $this->assertEquals(1, $gasha_pickup['id']);
+
+        $query = $this->GashaPickups->getSearchQuery(['id' => 99999]);
+        $gasha_pickup = $query->enableHydration(false)->first();
+
+        $this->assertInstanceOf('\Cake\ORM\Query', $query);
+        $this->assertNull($gasha_pickup);
+    }
+
+    /**
      * Test getCsvHeaders method
      *
      * @return void

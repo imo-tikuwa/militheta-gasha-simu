@@ -99,6 +99,26 @@ class CharactersTable extends AppTable
     }
 
     /**
+     * ページネートに渡すクエリオブジェクトを生成する
+     * @param array $request リクエスト情報
+     * @return \Cake\ORM\Query $query
+     */
+    public function getSearchQuery($request)
+    {
+        $query = $this->find();
+        // ID
+        if (isset($request['id']) && !is_null($request['id']) && $request['id'] !== '') {
+            $query->where([$this->aliasField('id') => $request['id']]);
+        }
+        // 名前
+        if (isset($request['name']) && !is_null($request['name']) && $request['name'] !== '') {
+            $query->where([$this->aliasField('name') => $request['name']]);
+        }
+
+        return $query;
+    }
+
+    /**
      * CSVヘッダー情報を取得する
      * @return array
      */

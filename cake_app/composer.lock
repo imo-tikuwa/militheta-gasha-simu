@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fea6a035fb33d01b9ce4a0ad19bce464",
+    "content-hash": "fda2e4fe5205d42453ba0f92d1537e97",
     "packages": [
         {
             "name": "cakephp/authentication",
@@ -664,16 +664,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-utils",
-            "version": "v0.0.13",
+            "version": "v0.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/imo-tikuwa/cakephp-utils.git",
-                "reference": "e4bb1f3a13d665331aa3fae979ad9267eb7da172"
+                "reference": "8dbc385739c1c6bd09bd51187c2f978c8201e6c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-utils/zipball/e4bb1f3a13d665331aa3fae979ad9267eb7da172",
-                "reference": "e4bb1f3a13d665331aa3fae979ad9267eb7da172",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-utils/zipball/8dbc385739c1c6bd09bd51187c2f978c8201e6c8",
+                "reference": "8dbc385739c1c6bd09bd51187c2f978c8201e6c8",
                 "shasum": ""
             },
             "require": {
@@ -693,9 +693,9 @@
             "description": "Utilities plugin for CakePHP",
             "support": {
                 "issues": "https://github.com/imo-tikuwa/cakephp-utils/issues",
-                "source": "https://github.com/imo-tikuwa/cakephp-utils/tree/v0.0.13"
+                "source": "https://github.com/imo-tikuwa/cakephp-utils/tree/v0.0.14"
             },
-            "time": "2021-01-31T02:03:46+00:00"
+            "time": "2021-02-09T08:44:01+00:00"
         },
         {
             "name": "imo-tikuwa/cakephp3-soft-delete",
@@ -3997,16 +3997,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-admin-baker",
-            "version": "v2.7.13",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-admin-baker.git",
-                "reference": "e95bdd564db7bb79369b92a65ce6d4e296678876"
+                "reference": "31f506aadb1184264fed2427f5bfc469f202bc79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/e95bdd564db7bb79369b92a65ce6d4e296678876",
-                "reference": "e95bdd564db7bb79369b92a65ce6d4e296678876",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/31f506aadb1184264fed2427f5bfc469f202bc79",
+                "reference": "31f506aadb1184264fed2427f5bfc469f202bc79",
                 "shasum": ""
             },
             "require": {
@@ -4035,10 +4035,10 @@
             ],
             "description": "Cake3AdminBaker plugin for CakePHP",
             "support": {
-                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v2.7.13",
+                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v2.8.2",
                 "issues": "https://github.com/imo-tikuwa/cakephp-admin-baker/issues"
             },
-            "time": "2021-02-06T10:54:15+00:00"
+            "time": "2021-02-11T03:11:01+00:00"
         },
         {
             "name": "imo-tikuwa/cakephp-api-generator",
@@ -6675,7 +6675,7 @@
         },
         {
             "name": "twig/markdown-extra",
-            "version": "v3.2.1",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/markdown-extra.git",
@@ -6732,7 +6732,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/twigphp/markdown-extra/tree/v3.2.1"
+                "source": "https://github.com/twigphp/markdown-extra/tree/v3.3.0"
             },
             "funding": [
                 {
@@ -6748,16 +6748,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.2.1",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "f795ca686d38530045859b0350b5352f7d63447d"
+                "reference": "1f3b7e2c06cc05d42936a8ad508ff1db7975cdc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/f795ca686d38530045859b0350b5352f7d63447d",
-                "reference": "f795ca686d38530045859b0350b5352f7d63447d",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1f3b7e2c06cc05d42936a8ad508ff1db7975cdc5",
+                "reference": "1f3b7e2c06cc05d42936a8ad508ff1db7975cdc5",
                 "shasum": ""
             },
             "require": {
@@ -6772,7 +6772,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "3.3-dev"
                 }
             },
             "autoload": {
@@ -6808,7 +6808,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.2.1"
+                "source": "https://github.com/twigphp/Twig/tree/v3.3.0"
             },
             "funding": [
                 {
@@ -6820,7 +6820,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-05T15:40:36+00:00"
+            "time": "2021-02-08T09:54:36+00:00"
         },
         {
             "name": "webmozart/assert",

@@ -268,6 +268,65 @@ class CardsTable extends AppTable
     }
 
     /**
+     * ページネートに渡すクエリオブジェクトを生成する
+     * @param array $request リクエスト情報
+     * @return \Cake\ORM\Query $query
+     */
+    public function getSearchQuery($request)
+    {
+        $query = $this->find();
+        // ID
+        if (isset($request['id']) && !is_null($request['id']) && $request['id'] !== '') {
+            $query->where([$this->aliasField('id') => $request['id']]);
+        }
+        // キャラクター
+        if (isset($request['character_id']) && !is_null($request['character_id']) && $request['character_id'] !== '') {
+            $query->where(['Characters.id' => $request['character_id']]);
+        }
+        // カード名
+        if (isset($request['name']) && !is_null($request['name']) && $request['name'] !== '') {
+            $query->where([$this->aliasField('name LIKE') => "%{$request['name']}%"]);
+        }
+        // レアリティ
+        if (isset($request['rarity']) && !is_null($request['rarity']) && $request['rarity'] !== '') {
+            $query->where([$this->aliasField('rarity') => $request['rarity']]);
+        }
+        // タイプ
+        if (isset($request['type']) && !is_null($request['type']) && $request['type'] !== '') {
+            $query->where([$this->aliasField('type') => $request['type']]);
+        }
+        // 実装日
+        if (isset($request['add_date']) && !is_null($request['add_date']) && $request['add_date'] !== '') {
+            $query->where([$this->aliasField('add_date') => $request['add_date']]);
+        }
+        // ガシャ対象？
+        if (isset($request['gasha_include']) && !is_null($request['gasha_include']) && $request['gasha_include'] !== '') {
+            $query->where([$this->aliasField('gasha_include') => $request['gasha_include']]);
+        }
+        // 限定？
+        if (isset($request['limited']) && !is_null($request['limited']) && $request['limited'] !== '') {
+            $query->where([$this->aliasField('limited') => $request['limited']]);
+        }
+        // フリーワード
+        if (isset($request['search_snippet']) && !is_null($request['search_snippet']) && $request['search_snippet'] !== '') {
+            $search_snippet_conditions = [];
+            foreach (explode(' ', str_replace('　', ' ', $request['search_snippet'])) as $search_snippet) {
+                $search_snippet_conditions[] = [$this->aliasField('search_snippet LIKE') => "%{$search_snippet}%"];
+            }
+            if (isset($request['search_snippet_format']) && $request['search_snippet_format'] == 'AND') {
+                $query->where($search_snippet_conditions);
+            } else {
+                $query->where(function ($exp) use ($search_snippet_conditions) {
+                    return $exp->or($search_snippet_conditions);
+                });
+            }
+        }
+        $query->group('Cards.id');
+
+        return $query->contain(['Characters', 'CardReprints', 'GashaPickups']);
+    }
+
+    /**
      * CSVヘッダー情報を取得する
      * @return array
      */

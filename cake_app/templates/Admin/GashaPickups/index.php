@@ -17,14 +17,14 @@ $this->Form->setTemplates([
       <div class="form-inline">
         <div class="btn-group mr-2" role="group">
           <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_ADD])) { ?>
-            <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_ADD]) ?>'">新規登録</button>
+            <a class="btn btn-sm btn-flat btn-outline-secondary" href="<?= $this->Url->build(['action' => ACTION_ADD]) ?>">新規登録</a>
           <?php } ?>
-          <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" data-toggle="modal" data-target="#gasha_pickups-search-form-modal">検索</button>
+          <a class="btn btn-sm btn-flat btn-outline-secondary" href="javascript:void(0);" data-toggle="modal" data-target="#gasha_pickups-search-form-modal">検索</a>
           <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_CSV_EXPORT])) { ?>
-            <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->getRequest()->getQueryParams()]) ?>'">CSVエクスポート</button>
+            <a class="btn btn-sm btn-flat btn-outline-secondary" href="<?= $this->Url->build(['action' => ACTION_CSV_EXPORT, '?' => $this->getRequest()->getQueryParams()]) ?>">CSVエクスポート</a>
           <?php } ?>
           <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_EXCEL_EXPORT])) { ?>
-            <button type="button" class="btn btn-sm btn-flat btn-outline-secondary" onclick="location.href='<?= $this->Url->build(['action' => ACTION_EXCEL_EXPORT, '?' => $this->getRequest()->getQueryParams()]) ?>'">Excelエクスポート</button>
+            <a class="btn btn-sm btn-flat btn-outline-secondary" href="<?= $this->Url->build(['action' => ACTION_EXCEL_EXPORT, '?' => $this->getRequest()->getQueryParams()]) ?>">Excelエクスポート</a>
           <?php } ?>
         </div>
         <?= $this->Form->create($search_form, ['type' => 'get', 'id' => 'gasha_pickups-freeword-search-form']) ?>

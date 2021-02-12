@@ -8,6 +8,7 @@ use App\Utils\CsvUtils;
 use App\Form\SearchForm;
 use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
+use Cake\Core\Exception\CakeException;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
@@ -42,54 +43,12 @@ class GashasController extends AppController
     public function index()
     {
         $request = $this->getRequest()->getQueryParams();
-        $query = $this->_getQuery($request);
+        $query = $this->Gashas->getSearchQuery($request);
         $gashas = $this->paginate($query);
         $search_form = new SearchForm();
         $search_form->setData($request);
 
         $this->set(compact('gashas', 'search_form'));
-    }
-
-    /**
-     * ページネートに渡すクエリオブジェクトを生成する
-     * @param array $request リクエスト情報
-     * @return \Cake\ORM\Query $query
-     */
-    private function _getQuery($request)
-    {
-        $query = $this->Gashas->find();
-        // ID
-        if (isset($request['id']) && !is_null($request['id']) && $request['id'] !== '') {
-            $query->where([$this->Gashas->aliasField('id') => $request['id']]);
-        }
-        // ガシャ開始日
-        if (isset($request['start_date']) && !is_null($request['start_date']) && $request['start_date'] !== '') {
-            $query->where([$this->Gashas->aliasField('start_date >=') => $request['start_date']]);
-        }
-        // ガシャ終了日
-        if (isset($request['end_date']) && !is_null($request['end_date']) && $request['end_date'] !== '') {
-            $query->where([$this->Gashas->aliasField('end_date <=') => $request['end_date']]);
-        }
-        // ガシャタイトル
-        if (isset($request['title']) && !is_null($request['title']) && $request['title'] !== '') {
-            $query->where([$this->Gashas->aliasField('title LIKE') => "%{$request['title']}%"]);
-        }
-        // フリーワード
-        if (isset($request['search_snippet']) && !is_null($request['search_snippet']) && $request['search_snippet'] !== '') {
-            $search_snippet_conditions = [];
-            foreach (explode(' ', str_replace('　', ' ', $request['search_snippet'])) as $search_snippet) {
-                $search_snippet_conditions[] = [$this->Gashas->aliasField('search_snippet LIKE') => "%{$search_snippet}%"];
-            }
-            if (isset($request['search_snippet_format']) && $request['search_snippet_format'] == 'AND') {
-                $query->where($search_snippet_conditions);
-            } else {
-                $query->where(function ($exp) use ($search_snippet_conditions) {
-                    return $exp->or($search_snippet_conditions);
-                });
-            }
-        }
-
-        return $query;
     }
 
     /**
@@ -194,7 +153,7 @@ class GashasController extends AppController
     public function csvExport()
     {
         $request = $this->getRequest()->getQueryParams();
-        $gashas = $this->_getQuery($request)->toArray();
+        $gashas = $this->Gashas->getSearchQuery($request)->toArray();
         $_extract = [
             // ID
             'id',
@@ -279,7 +238,7 @@ class GashasController extends AppController
                 foreach ($csv_data as $index => $csv_row) {
                     if ($index == 0) {
                         if ($this->Gashas->getCsvHeaders() != $csv_row) {
-                            throw new \Exception('HeaderCheckError');
+                            throw new CakeException('HeaderCheckError');
                         }
                         continue;
                     }
@@ -291,14 +250,14 @@ class GashasController extends AppController
                         $update_count++;
                     }
                     if (!$this->Gashas->save($gasha, ['atomic' => false])) {
-                        throw new \Exception('SaveError');
+                        throw new CakeException('SaveError');
                     }
                 }
                 if (!$conn->commit()) {
-                    throw new \Exception('CommitError');
+                    throw new CakeException('CommitError');
                 }
                 $this->Flash->success("ガシャCSVの登録が完了しました。<br />新規：{$insert_count}件<br />更新：{$update_count}件", ['escape' => false]);
-            } catch (\Exception $e) {
+            } catch (CakeException $e) {
                 $error_message = 'ガシャCSVの登録でエラーが発生しました。';
                 if (!empty($e->getMessage())) {
                     $error_message .= "(" . $e->getMessage() . ")";
@@ -319,7 +278,7 @@ class GashasController extends AppController
     {
         $request = $this->getRequest()->getQueryParams();
         /** @var \App\Model\Entity\Gasha[] $gashas */
-        $gashas = $this->_getQuery($request)->toArray();
+        $gashas = $this->Gashas->getSearchQuery($request)->toArray();
 
         $reader = new XlsxReader();
         $spreadsheet = $reader->load(EXCEL_TEMPLATE_DIR . 'gashas_template.xlsx');

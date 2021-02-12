@@ -11,7 +11,7 @@ class AuthUtils
 {
 
     /**
-     * Adminsテーブルのスーパーユーザー判定
+     * Adminsテーブルの管理者判定
      * @param ServerRequest $request リクエスト情報
      * @return bool
      */
@@ -50,7 +50,7 @@ class AuthUtils
             return false;
         }
 
-        // スーパーユーザーは全機能にアクセス可
+        // 管理者は全機能にアクセス可
         if (self::isSuperUser($request)) {
             return true;
         }

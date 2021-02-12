@@ -41,32 +41,12 @@ class CharactersController extends AppController
     public function index()
     {
         $request = $this->getRequest()->getQueryParams();
-        $query = $this->_getQuery($request);
+        $query = $this->Characters->getSearchQuery($request);
         $characters = $this->paginate($query);
         $search_form = new SearchForm();
         $search_form->setData($request);
 
         $this->set(compact('characters', 'search_form'));
-    }
-
-    /**
-     * ページネートに渡すクエリオブジェクトを生成する
-     * @param array $request リクエスト情報
-     * @return \Cake\ORM\Query $query
-     */
-    private function _getQuery($request)
-    {
-        $query = $this->Characters->find();
-        // ID
-        if (isset($request['id']) && !is_null($request['id']) && $request['id'] !== '') {
-            $query->where([$this->Characters->aliasField('id') => $request['id']]);
-        }
-        // 名前
-        if (isset($request['name']) && !is_null($request['name']) && $request['name'] !== '') {
-            $query->where([$this->Characters->aliasField('name') => $request['name']]);
-        }
-
-        return $query;
     }
 
     /**
@@ -151,7 +131,7 @@ class CharactersController extends AppController
     public function csvExport()
     {
         $request = $this->getRequest()->getQueryParams();
-        $characters = $this->_getQuery($request)->toArray();
+        $characters = $this->Characters->getSearchQuery($request)->toArray();
         $_extract = [
             // ID
             'id',
@@ -195,7 +175,7 @@ class CharactersController extends AppController
     {
         $request = $this->getRequest()->getQueryParams();
         /** @var \App\Model\Entity\Character[] $characters */
-        $characters = $this->_getQuery($request)->toArray();
+        $characters = $this->Characters->getSearchQuery($request)->toArray();
 
         $reader = new XlsxReader();
         $spreadsheet = $reader->load(EXCEL_TEMPLATE_DIR . 'characters_template.xlsx');

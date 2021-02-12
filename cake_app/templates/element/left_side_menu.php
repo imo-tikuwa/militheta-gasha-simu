@@ -30,7 +30,7 @@ $html .= "<li class=\"nav-item\"><a href=\"/admin/access-logs\" class=\"nav-link
 $latest_logs_active = ($this->name == "LatestLogs") ? " active" : "";
 $html .= "<li class=\"nav-item\"><a href=\"/admin/latest-logs\" class=\"nav-link{$latest_logs_active}\"><i class=\"far fa-chart-bar fa-fw mr-2\"></i><p>直近のアクセスログ</p></a></li>";
 
-// スーパーユーザーのみ権限管理可能
+// 管理者のみ権限管理可能
 if (AuthUtils::isSuperUser($this->getRequest())) {
 	$active_class = ($this->name == 'Account') ? ' active' : '';
 	$html .= "<li class=\"nav-item mt-3\"><a href=\"/admin/account\" class=\"nav-link{$active_class}\" ><i class=\"fas fa-user-shield mr-2\"></i><p>アカウント/権限管理</p></a></li>";

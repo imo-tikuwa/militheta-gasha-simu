@@ -90,6 +90,27 @@ class CharactersTableTest extends TestCase
     }
 
     /**
+     * Test getSearchQuery method
+     *
+     * @return void
+     */
+    public function testGetSearchQuery(): void
+    {
+        $query = $this->Characters->getSearchQuery([]);
+        $character = $query->select(['id'])->enableHydration(false)->first();
+
+        $this->assertInstanceOf('\Cake\ORM\Query', $query);
+        $this->assertTrue(array_key_exists('id', $character));
+        $this->assertEquals(1, $character['id']);
+
+        $query = $this->Characters->getSearchQuery(['id' => 99999]);
+        $character = $query->enableHydration(false)->first();
+
+        $this->assertInstanceOf('\Cake\ORM\Query', $query);
+        $this->assertNull($character);
+    }
+
+    /**
      * Test getCsvHeaders method
      *
      * @return void

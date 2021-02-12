@@ -53,22 +53,24 @@ class Admin extends AppEntity
      * パスワードを暗号化する
      *
      * @param string $password 暗号化されていないパスワード文字列
-     * @return string 暗号化されたパスワード文字列
+     * @return string|null 暗号化されたパスワード文字列 or null
      */
     protected function _setPassword($password)
     {
-        if (strlen($password) > 0) {
-            return Encrypter::encrypt($password);
+        if (mb_strlen($password) <= 0) {
+            return null;
         }
+
+        return Encrypter::encrypt($password);
     }
 
     /**
      * 復号化されたパスワードを返す
-     * @return string 暗号化されていないパスワード文字列
+     * @return string|null 暗号化されていないパスワード文字列 or null
      */
     protected function _getRawPassword()
     {
-        if (empty($this->password)) {
+        if (mb_strlen($this->password) <= 0) {
             return null;
         }
 
@@ -84,6 +86,7 @@ class Admin extends AppEntity
         if ($this->use_otp == 1) {
             return '有効';
         }
+
         return '無効';
     }
 }

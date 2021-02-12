@@ -170,6 +170,27 @@ class CardsTableTest extends TestCase
     }
 
     /**
+     * Test getSearchQuery method
+     *
+     * @return void
+     */
+    public function testGetSearchQuery(): void
+    {
+        $query = $this->Cards->getSearchQuery([]);
+        $card = $query->select(['id'])->enableHydration(false)->first();
+
+        $this->assertInstanceOf('\Cake\ORM\Query', $query);
+        $this->assertTrue(array_key_exists('id', $card));
+        $this->assertEquals(1, $card['id']);
+
+        $query = $this->Cards->getSearchQuery(['id' => 99999]);
+        $card = $query->enableHydration(false)->first();
+
+        $this->assertInstanceOf('\Cake\ORM\Query', $query);
+        $this->assertNull($card);
+    }
+
+    /**
      * Test getCsvHeaders method
      *
      * @return void
@@ -248,6 +269,26 @@ class CardsTableTest extends TestCase
             'modified',
         ];
         $this->assertEquals($this->Cards->getExcelColumns(), $data);
+    }
+
+    /**
+     * Test findGashaTargetCards method
+     *
+     * @return void
+     */
+    public function testFindGashaTargetCards(): void
+    {
+        $this->markTestIncomplete('このテストはまだ実装されていません。');
+    }
+
+    /**
+     * Test findByIds method
+     *
+     * @return void
+     */
+    public function testFindByIds(): void
+    {
+        $this->markTestIncomplete('このテストはまだ実装されていません。');
     }
 
     /**

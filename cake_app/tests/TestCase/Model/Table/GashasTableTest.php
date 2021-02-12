@@ -136,6 +136,27 @@ class GashasTableTest extends TestCase
     }
 
     /**
+     * Test getSearchQuery method
+     *
+     * @return void
+     */
+    public function testGetSearchQuery(): void
+    {
+        $query = $this->Gashas->getSearchQuery([]);
+        $gasha = $query->select(['id'])->enableHydration(false)->first();
+
+        $this->assertInstanceOf('\Cake\ORM\Query', $query);
+        $this->assertTrue(array_key_exists('id', $gasha));
+        $this->assertEquals(1, $gasha['id']);
+
+        $query = $this->Gashas->getSearchQuery(['id' => 99999]);
+        $gasha = $query->enableHydration(false)->first();
+
+        $this->assertInstanceOf('\Cake\ORM\Query', $query);
+        $this->assertNull($gasha);
+    }
+
+    /**
      * Test getCsvHeaders method
      *
      * @return void
@@ -208,6 +229,26 @@ class GashasTableTest extends TestCase
             'modified',
         ];
         $this->assertEquals($this->Gashas->getExcelColumns(), $data);
+    }
+
+    /**
+     * Test findGashaData method
+     *
+     * @return void
+     */
+    public function testFindGashaData(): void
+    {
+        $this->markTestIncomplete('このテストはまだ実装されていません。');
+    }
+
+    /**
+     * Test getGashaJsonData method
+     *
+     * @return void
+     */
+    public function testGetGashaJsonData(): void
+    {
+        $this->markTestIncomplete('このテストはまだ実装されていません。');
     }
 
     /**

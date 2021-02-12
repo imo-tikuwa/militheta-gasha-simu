@@ -8,6 +8,7 @@ use App\Utils\CsvUtils;
 use App\Form\SearchForm;
 use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
+use Cake\Core\Exception\CakeException;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
@@ -55,71 +56,12 @@ class CardsController extends AppController
     public function index()
     {
         $request = $this->getRequest()->getQueryParams();
-        $query = $this->_getQuery($request);
+        $query = $this->Cards->getSearchQuery($request);
         $cards = $this->paginate($query);
         $search_form = new SearchForm();
         $search_form->setData($request);
 
         $this->set(compact('cards', 'search_form'));
-    }
-
-    /**
-     * ページネートに渡すクエリオブジェクトを生成する
-     * @param array $request リクエスト情報
-     * @return \Cake\ORM\Query $query
-     */
-    private function _getQuery($request)
-    {
-        $query = $this->Cards->find();
-        // ID
-        if (isset($request['id']) && !is_null($request['id']) && $request['id'] !== '') {
-            $query->where([$this->Cards->aliasField('id') => $request['id']]);
-        }
-        // キャラクター
-        if (isset($request['character_id']) && !is_null($request['character_id']) && $request['character_id'] !== '') {
-            $query->where(['Characters.id' => $request['character_id']]);
-        }
-        // カード名
-        if (isset($request['name']) && !is_null($request['name']) && $request['name'] !== '') {
-            $query->where([$this->Cards->aliasField('name LIKE') => "%{$request['name']}%"]);
-        }
-        // レアリティ
-        if (isset($request['rarity']) && !is_null($request['rarity']) && $request['rarity'] !== '') {
-            $query->where([$this->Cards->aliasField('rarity') => $request['rarity']]);
-        }
-        // タイプ
-        if (isset($request['type']) && !is_null($request['type']) && $request['type'] !== '') {
-            $query->where([$this->Cards->aliasField('type') => $request['type']]);
-        }
-        // 実装日
-        if (isset($request['add_date']) && !is_null($request['add_date']) && $request['add_date'] !== '') {
-            $query->where([$this->Cards->aliasField('add_date') => $request['add_date']]);
-        }
-        // ガシャ対象？
-        if (isset($request['gasha_include']) && !is_null($request['gasha_include']) && $request['gasha_include'] !== '') {
-            $query->where([$this->Cards->aliasField('gasha_include') => $request['gasha_include']]);
-        }
-        // 限定？
-        if (isset($request['limited']) && !is_null($request['limited']) && $request['limited'] !== '') {
-            $query->where([$this->Cards->aliasField('limited') => $request['limited']]);
-        }
-        // フリーワード
-        if (isset($request['search_snippet']) && !is_null($request['search_snippet']) && $request['search_snippet'] !== '') {
-            $search_snippet_conditions = [];
-            foreach (explode(' ', str_replace('　', ' ', $request['search_snippet'])) as $search_snippet) {
-                $search_snippet_conditions[] = [$this->Cards->aliasField('search_snippet LIKE') => "%{$search_snippet}%"];
-            }
-            if (isset($request['search_snippet_format']) && $request['search_snippet_format'] == 'AND') {
-                $query->where($search_snippet_conditions);
-            } else {
-                $query->where(function ($exp) use ($search_snippet_conditions) {
-                    return $exp->or($search_snippet_conditions);
-                });
-            }
-        }
-        $query->group('Cards.id');
-
-        return $query->contain(['Characters', 'CardReprints', 'GashaPickups']);
     }
 
     /**
@@ -224,7 +166,7 @@ class CardsController extends AppController
     public function csvExport()
     {
         $request = $this->getRequest()->getQueryParams();
-        $cards = $this->_getQuery($request)->toArray();
+        $cards = $this->Cards->getSearchQuery($request)->toArray();
         $_extract = [
             // ID
             'id',
@@ -315,7 +257,7 @@ class CardsController extends AppController
                 foreach ($csv_data as $index => $csv_row) {
                     if ($index == 0) {
                         if ($this->Cards->getCsvHeaders() != $csv_row) {
-                            throw new \Exception('HeaderCheckError');
+                            throw new CakeException('HeaderCheckError');
                         }
                         continue;
                     }
@@ -327,14 +269,14 @@ class CardsController extends AppController
                         $update_count++;
                     }
                     if (!$this->Cards->save($card, ['atomic' => false])) {
-                        throw new \Exception('SaveError');
+                        throw new CakeException('SaveError');
                     }
                 }
                 if (!$conn->commit()) {
-                    throw new \Exception('CommitError');
+                    throw new CakeException('CommitError');
                 }
                 $this->Flash->success("カードCSVの登録が完了しました。<br />新規：{$insert_count}件<br />更新：{$update_count}件", ['escape' => false]);
-            } catch (\Exception $e) {
+            } catch (CakeException $e) {
                 $error_message = 'カードCSVの登録でエラーが発生しました。';
                 if (!empty($e->getMessage())) {
                     $error_message .= "(" . $e->getMessage() . ")";
@@ -355,7 +297,7 @@ class CardsController extends AppController
     {
         $request = $this->getRequest()->getQueryParams();
         /** @var \App\Model\Entity\Card[] $cards */
-        $cards = $this->_getQuery($request)->toArray();
+        $cards = $this->Cards->getSearchQuery($request)->toArray();
 
         $reader = new XlsxReader();
         $spreadsheet = $reader->load(EXCEL_TEMPLATE_DIR . 'cards_template.xlsx');

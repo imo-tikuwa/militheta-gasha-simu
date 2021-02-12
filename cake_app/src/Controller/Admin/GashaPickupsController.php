@@ -63,51 +63,12 @@ class GashaPickupsController extends AppController
     public function index()
     {
         $request = $this->getRequest()->getQueryParams();
-        $query = $this->_getQuery($request);
+        $query = $this->GashaPickups->getSearchQuery($request);
         $gasha_pickups = $this->paginate($query);
         $search_form = new SearchForm();
         $search_form->setData($request);
 
         $this->set(compact('gasha_pickups', 'search_form'));
-    }
-
-    /**
-     * ページネートに渡すクエリオブジェクトを生成する
-     * @param array $request リクエスト情報
-     * @return \Cake\ORM\Query $query
-     */
-    private function _getQuery($request)
-    {
-        $query = $this->GashaPickups->find();
-        // ID
-        if (isset($request['id']) && !is_null($request['id']) && $request['id'] !== '') {
-            $query->where([$this->GashaPickups->aliasField('id') => $request['id']]);
-        }
-        // ガシャID
-        if (isset($request['gasha_id']) && !is_null($request['gasha_id']) && $request['gasha_id'] !== '') {
-            $query->where(['Gashas.id' => $request['gasha_id']]);
-        }
-        // カードID
-        if (isset($request['card_id']) && !is_null($request['card_id']) && $request['card_id'] !== '') {
-            $query->where(['Cards.id' => $request['card_id']]);
-        }
-        // フリーワード
-        if (isset($request['search_snippet']) && !is_null($request['search_snippet']) && $request['search_snippet'] !== '') {
-            $search_snippet_conditions = [];
-            foreach (explode(' ', str_replace('　', ' ', $request['search_snippet'])) as $search_snippet) {
-                $search_snippet_conditions[] = [$this->GashaPickups->aliasField('search_snippet LIKE') => "%{$search_snippet}%"];
-            }
-            if (isset($request['search_snippet_format']) && $request['search_snippet_format'] == 'AND') {
-                $query->where($search_snippet_conditions);
-            } else {
-                $query->where(function ($exp) use ($search_snippet_conditions) {
-                    return $exp->or($search_snippet_conditions);
-                });
-            }
-        }
-        $query->group('GashaPickups.id');
-
-        return $query->contain(['Gashas', 'Cards']);
     }
 
     /**
@@ -212,7 +173,7 @@ class GashaPickupsController extends AppController
     public function csvExport()
     {
         $request = $this->getRequest()->getQueryParams();
-        $gasha_pickups = $this->_getQuery($request)->toArray();
+        $gasha_pickups = $this->GashaPickups->getSearchQuery($request)->toArray();
         $_extract = [
             // ID
             'id',
@@ -262,7 +223,7 @@ class GashaPickupsController extends AppController
     {
         $request = $this->getRequest()->getQueryParams();
         /** @var \App\Model\Entity\GashaPickup[] $gasha_pickups */
-        $gasha_pickups = $this->_getQuery($request)->toArray();
+        $gasha_pickups = $this->GashaPickups->getSearchQuery($request)->toArray();
 
         $reader = new XlsxReader();
         $spreadsheet = $reader->load(EXCEL_TEMPLATE_DIR . 'gasha_pickups_template.xlsx');

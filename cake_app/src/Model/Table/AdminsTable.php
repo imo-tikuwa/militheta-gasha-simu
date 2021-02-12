@@ -107,6 +107,13 @@ class AdminsTable extends AppTable
                 'message' => 'パスワードを正しく入力してください。',
                 'last' => true
             ])
+            ->add('password', 'custom', [
+                'rule' => function ($value) {
+                    return (bool)preg_match('/^[a-zA-Z0-9!-\/:-@\[-~]+$/u', $value);
+                },
+                'message' => 'パスワードは半角英字、半角数字、半角記号で入力してください。',
+                'last' => true
+            ])
             ->add('password', 'lengthBetween', [
                 'rule' => ['lengthBetween', 8, 20],
                 'message' => 'パスワードは8文字以上20文字以下で入力してください。',

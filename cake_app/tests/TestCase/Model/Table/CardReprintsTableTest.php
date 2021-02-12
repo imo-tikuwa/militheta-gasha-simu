@@ -130,6 +130,27 @@ class CardReprintsTableTest extends TestCase
     }
 
     /**
+     * Test getSearchQuery method
+     *
+     * @return void
+     */
+    public function testGetSearchQuery(): void
+    {
+        $query = $this->CardReprints->getSearchQuery([]);
+        $card_reprint = $query->select(['id'])->enableHydration(false)->first();
+
+        $this->assertInstanceOf('\Cake\ORM\Query', $query);
+        $this->assertTrue(array_key_exists('id', $card_reprint));
+        $this->assertEquals(1, $card_reprint['id']);
+
+        $query = $this->CardReprints->getSearchQuery(['id' => 99999]);
+        $card_reprint = $query->enableHydration(false)->first();
+
+        $this->assertInstanceOf('\Cake\ORM\Query', $query);
+        $this->assertNull($card_reprint);
+    }
+
+    /**
      * Test getCsvHeaders method
      *
      * @return void

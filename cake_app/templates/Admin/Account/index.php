@@ -21,8 +21,10 @@ $google_authenticator = new PHPGangsta_GoogleAuthenticator();
   <div class="card rounded-0">
     <div class="card-header">
       <div class="form-inline">
-        <button type="button" class="<?= h($btn_class) ?> mr-2" onclick="location.href='<?= $this->Url->build(['action' => 'add']) ?>'">新規登録</button>
-        <button type="button" class="<?= h($btn_class) ?>" data-toggle="modal" data-target="#accounts-search-form-modal">検索</button>
+        <div class="btn-group mr-2" role="group">
+          <a class="<?= h($btn_class) ?>" href="<?= $this->Url->build(['action' => 'add']) ?>">新規登録</a>
+          <a class="<?= h($btn_class) ?>" href="javascript:void(0);" data-toggle="modal" data-target="#accounts-search-form-modal">検索</a>
+        </div>
       </div>
     </div>
     <div class="card-body table-responsive p-0">

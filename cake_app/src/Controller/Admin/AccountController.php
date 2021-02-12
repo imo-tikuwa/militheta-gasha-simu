@@ -38,7 +38,7 @@ class AccountController extends AppController
 
         $this->loadModel('Admins');
 
-        // スーパーユーザー以外はアクセス不可
+        // 管理者以外はアクセス不可
         if (!AuthUtils::isSuperUser($this->getRequest())) {
             $this->Flash->error(MESSAGE_AUTH_ERROR);
 

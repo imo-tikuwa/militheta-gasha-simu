@@ -13,6 +13,7 @@ $label_class = 'item-label col-form-label col-form-label-sm';
 $this->Form->setTemplates([
   'nestingLabel' => '{{hidden}}{{input}}<label class="form-check-label col-form-label col-form-label-sm" {{attrs}}>{{text}}</label>'
 ]);
+$password_value = $this->getRequest()->is(['patch', 'post', 'put']) ? $this->getRequest()->getParam('password') : $admin->raw_password;
 ?>
 <div class="col-md-12 mb-12">
   <div class="card rounded-0">
@@ -34,7 +35,7 @@ $this->Form->setTemplates([
         <div class="col-lg-3 col-md-6 col-sm-12">
           <div class="form-group">
             <?= $this->element('Parts/label', ['field' => 'password', 'label' => 'パスワード', 'require' => true, 'class' => $label_class]); ?>
-            <?= $this->Form->control('password', ['class' => $input_class, 'label' => false, 'maxlength' => '20', 'value' => @$admin->raw_password, 'required' => false, 'error' => false]); ?>
+            <?= $this->Form->control('password', ['class' => $input_class, 'label' => false, 'maxlength' => '20', 'value' => $password_value, 'required' => false, 'error' => false]); ?>
             <label class="text-info" id="password-toggle-label"><input type="checkbox" id="password-toggle"/> パスワードを表示</label>
           </div>
         </div>
