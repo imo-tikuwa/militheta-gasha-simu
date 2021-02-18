@@ -23,6 +23,7 @@ use DateTimeZone;
  * Cards Controller
  *
  * @property \App\Model\Table\CardsTable $Cards
+ * @property \App\Model\Table\CharactersTable $Characters
  *
  * @method \App\Model\Entity\Card[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -35,9 +36,14 @@ class CardsController extends AppController
     public function initialize(): void
     {
         parent::initialize();
+
+        $this->loadModel('Characters');
+
         if (!in_array($this->getRequest()->getParam('action'), [ACTION_DELETE, ACTION_CSV_EXPORT, ACTION_CSV_IMPORT, ACTION_EXCEL_EXPORT], true)) {
             // キャラクターの選択肢
-            $this->set('characters', $this->Cards->findForeignSelectionData('Characters', 'name', true));
+            $characters = $this->Characters->find('list', ['keyField' => 'id', 'valueField' => 'name'])->toArray();
+
+            $this->set(compact('characters'));
         }
     }
 
@@ -351,7 +357,7 @@ class CardsController extends AppController
         }
 
         // キャラクターの一覧を取得、選択肢情報を設定
-        $characters = $this->Cards->findForeignSelectionData('Characters', 'name');
+        $characters = $this->Characters->find('list', ['keyField' => 'id', 'valueField' => 'name'])->toArray();
         if (!is_null($characters) && count($characters) > 0) {
             $row_num = 2;
             foreach ($characters as $selection_key => $selection_value) {

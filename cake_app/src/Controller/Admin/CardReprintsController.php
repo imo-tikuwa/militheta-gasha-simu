@@ -5,11 +5,11 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Form\SearchForm;
+use App\Model\Entity\Gasha;
 use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
-use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
@@ -22,6 +22,8 @@ use DateTimeZone;
  * CardReprints Controller
  *
  * @property \App\Model\Table\CardReprintsTable $CardReprints
+ * @property \App\Model\Table\GashasTable $Gashas
+ * @property \App\Model\Table\CardsTable $Cards
  *
  * @method \App\Model\Entity\CardReprint[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -34,17 +36,22 @@ class CardReprintsController extends AppController
     public function initialize(): void
     {
         parent::initialize();
+
+        $this->loadModel('Gashas');
+        $this->loadModel('Cards');
+
         if (!in_array($this->getRequest()->getParam('action'), [ACTION_DELETE, ACTION_CSV_EXPORT, ACTION_EXCEL_EXPORT], true)) {
             // ガシャIDの選択肢
-            $this->Gashas = TableRegistry::getTableLocator()->get('Gashas');
-            $gashas = $this->Gashas->find()->select(['id', 'title', 'start_date'])->where(['title LIKE' => '【限定復刻】%'])->enableHydration(false)->order(['id' => 'DESC'])->toArray();
-            if (!empty($gashas)) {
-                $gashas = Hash::combine($gashas, '{n}.id', ['%s　%s', '{n}.start_date', '{n}.title']);
-                $gashas = ["" => "　"] + $gashas;
-            }
-            $this->set('gashas', $gashas);
+            $gashas = $this->Gashas->find('list', [
+                'keyField' => 'id',
+                'valueField' => function (Gasha $gasha) {
+                    return $gasha->start_date->i18nFormat('yyyy/MM/dd') . '　' . $gasha->title;
+                }
+            ])->order(['id' => 'DESC'])->toArray();
             // カードIDの選択肢
-            $this->set('cards', $this->CardReprints->findForeignSelectionData('Cards', 'name', true));
+            $cards = $this->Cards->find('list', ['keyField' => 'id', 'valueField' => 'name'])->toArray();
+
+            $this->set(compact('gashas', 'cards'));
         }
     }
 
@@ -257,7 +264,7 @@ class CardReprintsController extends AppController
         }
 
         // ガシャIDの一覧を取得、選択肢情報を設定
-        $gashas = $this->CardReprints->findForeignSelectionData('Gashas', 'title');
+        $gashas = $this->Gashas->find('list', ['keyField' => 'id', 'valueField' => 'title'])->toArray();
         if (!is_null($gashas) && count($gashas) > 0) {
             $row_num = 2;
             foreach ($gashas as $selection_key => $selection_value) {
@@ -267,7 +274,7 @@ class CardReprintsController extends AppController
         }
 
         // カードIDの一覧を取得、選択肢情報を設定
-        $cards = $this->CardReprints->findForeignSelectionData('Cards', 'name');
+        $cards = $this->Cards->find('list', ['keyField' => 'id', 'valueField' => 'name'])->toArray();
         if (!is_null($cards) && count($cards) > 0) {
             $row_num = 2;
             foreach ($cards as $selection_key => $selection_value) {

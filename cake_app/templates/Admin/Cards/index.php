@@ -130,6 +130,7 @@ $this->Form->setTemplates([
                   'options' => $characters,
                   'class' => 'form-control form-control-sm',
                   'label' => 'キャラクター',
+                  'empty' => '　',
                 ]); ?>
               </div>
             </div>

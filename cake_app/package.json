@@ -28,8 +28,8 @@
     "tempusdominus-bootstrap-4": "git+https://github.com/imo-tikuwa/bootstrap-4.git"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
     "babel-loader": "^8.2.2",
     "cross-env": "^7.0.3",
     "css-loader": "^3.6.0",

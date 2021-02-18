@@ -114,6 +114,7 @@ $this->Form->setTemplates([
                   'options' => $gashas,
                   'class' => 'form-control form-control-sm',
                   'label' => 'ガシャID',
+                  'empty' => '　',
                 ]); ?>
               </div>
             </div>
@@ -127,6 +128,7 @@ $this->Form->setTemplates([
                   'options' => $cards,
                   'class' => 'form-control form-control-sm',
                   'label' => 'カードID',
+                  'empty' => '　',
                 ]); ?>
               </div>
             </div>
