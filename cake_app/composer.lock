@@ -3997,16 +3997,16 @@
         },
         {
             "name": "imo-tikuwa/cakephp-admin-baker",
-            "version": "v2.8.8",
+            "version": "v2.8.10",
             "source": {
                 "type": "git",
                 "url": "git@github.com:imo-tikuwa/cakephp-admin-baker.git",
-                "reference": "298958426120d340490b9f3bb37518bad44646b6"
+                "reference": "5bf205c7b9aca4c4afd2c116b6b0df01625a599b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/298958426120d340490b9f3bb37518bad44646b6",
-                "reference": "298958426120d340490b9f3bb37518bad44646b6",
+                "url": "https://api.github.com/repos/imo-tikuwa/cakephp-admin-baker/zipball/5bf205c7b9aca4c4afd2c116b6b0df01625a599b",
+                "reference": "5bf205c7b9aca4c4afd2c116b6b0df01625a599b",
                 "shasum": ""
             },
             "require": {
@@ -4035,10 +4035,10 @@
             ],
             "description": "Cake3AdminBaker plugin for CakePHP",
             "support": {
-                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v2.8.8",
+                "source": "https://github.com/imo-tikuwa/cakephp-admin-baker/tree/v2.8.10",
                 "issues": "https://github.com/imo-tikuwa/cakephp-admin-baker/issues"
             },
-            "time": "2021-02-17T09:43:43+00:00"
+            "time": "2021-02-19T08:12:43+00:00"
         },
         {
             "name": "imo-tikuwa/cakephp-api-generator",

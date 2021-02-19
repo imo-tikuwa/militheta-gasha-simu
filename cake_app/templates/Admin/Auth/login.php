@@ -36,7 +36,7 @@ $is_secure_login = ($this->getRequest()->getParam('action') === 'secureLogin');
         </div>
         <?php if ($is_secure_login) { ?>
           <div class="form-group has-feedback">
-            <?= $this->Form->control(GOOGLE_AUTHENTICATOR_SECRET_INPUT_NAME, ['id' => 'login-secret', 'type' => 'password', 'class' => 'form-control rounded-0', 'label' => '認証コード']) ?>
+            <?= $this->Form->control(GOOGLE_AUTHENTICATOR_SECRET_INPUT_NAME, ['id' => 'login-secret', 'type' => 'text', 'class' => 'form-control rounded-0', 'label' => '認証コード', 'maxlength' => 6]) ?>
           </div>
         <?php } ?>
         <div class="row">

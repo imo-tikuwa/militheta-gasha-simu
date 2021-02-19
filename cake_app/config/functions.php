@@ -2,7 +2,8 @@
 use Cake\Core\Configure;
 
 /**
- * コード定義を取得する
+ * 設定データを取得する
+ *
  * @param $code_key
  * @param $default
  * @return bool|mixed
@@ -13,25 +14,11 @@ function _code($code_key, $default = null)
 }
 
 /**
- * ランダムな文字列の生成
- * @param number $length
- */
-function create_random_str($length = 8)
-{
-    $str = array_merge(range('a', 'z'), range('0', '9'), range('A', 'Z'));
-    $r_str = null;
-    for ($i = 0; $i < $length; $i++) {
-        $r_str .= $str[rand(0, count($str) - 1)];
-    }
-    return $r_str;
-}
-
-/**
  * 桁数を指定した切り捨て
  * 参考：https://gotohayato.com/content/491/
- * @param unknown $value
- * @param number $precision
- * @return number
+ * @param int|float $value
+ * @param int $precision
+ * @return float
  */
 function floor_plus($value, $precision = 1)
 {
