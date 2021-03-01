@@ -181,7 +181,7 @@ class GashaPickupsController extends AppController
     {
         $request = $this->getRequest()->getQueryParams();
         $gasha_pickups = $this->GashaPickups->getSearchQuery($request)->toArray();
-        $_extract = [
+        $extract = [
             // ID
             'id',
             // ガシャID
@@ -216,7 +216,7 @@ class GashaPickupsController extends AppController
         $this->viewBuilder()->setOptions([
             'serialize' => 'gasha_pickups',
             'header' => $this->GashaPickups->getCsvHeaders(),
-            'extract' => $_extract,
+            'extract' => $extract,
             'csvEncoding' => 'UTF-8'
         ]);
         $this->set(compact('gasha_pickups'));
@@ -255,10 +255,10 @@ class GashaPickupsController extends AppController
             }
             $data_sheet->setCellValue("C{$row_num}", $cell_value);
             // 作成日時
-            $cell_value = @$gasha_pickup->created->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = ($gasha_pickup->created instanceof FrozenTime) ? $gasha_pickup->created->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
             $data_sheet->setCellValue("D{$row_num}", $cell_value);
             // 更新日時
-            $cell_value = @$gasha_pickup->modified->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = ($gasha_pickup->modified instanceof FrozenTime) ? $gasha_pickup->modified->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
             $data_sheet->setCellValue("E{$row_num}", $cell_value);
             $row_num++;
         }

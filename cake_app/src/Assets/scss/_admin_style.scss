@@ -193,9 +193,12 @@ table.table td.actions div.btn-group {
 }
 
 /* ログインボックスの幅調整 */
+.login-page {
+  flex-direction: inherit !important;
 
-.login-box, .register-box {
-  width: 400px;
+  .login-box, .register-box {
+    width: 400px;
+  }
 }
 
 /* アカウント管理のパスワードを表示のラベル */
@@ -213,6 +216,10 @@ table.table td.actions div.btn-group {
 label.item-label {
   display:block;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
 
   span.require-icon {
     position: relative;
@@ -289,6 +296,10 @@ label.item-label {
 /* フリーワード検索のAND、OR検索のラジオボタンについてANDの後ろの間隔を空ける */
 .freeword-search .input-group-prepend .input-group-text small:first-of-type {
   margin-right: .25rem !important;
+}
+/* フリーワード検索のAND、ORラベルについて画面が狭くなったときにレイアウトが崩れるのを防ぐ */
+.freeword-search .input-group-prepend .input-group-text small label {
+  margin-bottom: 0 !important;
 }
 
 /* ラベル太くするのやめる */

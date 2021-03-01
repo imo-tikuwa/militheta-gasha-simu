@@ -132,7 +132,7 @@ class CharactersController extends AppController
     {
         $request = $this->getRequest()->getQueryParams();
         $characters = $this->Characters->getSearchQuery($request)->toArray();
-        $_extract = [
+        $extract = [
             // ID
             'id',
             // 名前
@@ -161,7 +161,7 @@ class CharactersController extends AppController
         $this->viewBuilder()->setOptions([
             'serialize' => 'characters',
             'header' => $this->Characters->getCsvHeaders(),
-            'extract' => $_extract,
+            'extract' => $extract,
             'csvEncoding' => 'UTF-8'
         ]);
         $this->set(compact('characters'));
@@ -189,10 +189,10 @@ class CharactersController extends AppController
             // 名前
             $data_sheet->setCellValue("B{$row_num}", $character->name);
             // 作成日時
-            $cell_value = @$character->created->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = ($character->created instanceof FrozenTime) ? $character->created->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
             $data_sheet->setCellValue("C{$row_num}", $cell_value);
             // 更新日時
-            $cell_value = @$character->modified->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = ($character->modified instanceof FrozenTime) ? $character->modified->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
             $data_sheet->setCellValue("D{$row_num}", $cell_value);
             $row_num++;
         }

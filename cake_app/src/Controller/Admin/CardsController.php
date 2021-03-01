@@ -173,7 +173,7 @@ class CardsController extends AppController
     {
         $request = $this->getRequest()->getQueryParams();
         $cards = $this->Cards->getSearchQuery($request)->toArray();
-        $_extract = [
+        $extract = [
             // ID
             'id',
             // キャラクター
@@ -240,7 +240,7 @@ class CardsController extends AppController
         $this->viewBuilder()->setOptions([
             'serialize' => 'cards',
             'header' => $this->Cards->getCsvHeaders(),
-            'extract' => $_extract,
+            'extract' => $extract,
             'csvEncoding' => 'UTF-8'
         ]);
         $this->set(compact('cards'));
@@ -336,7 +336,7 @@ class CardsController extends AppController
             }
             $data_sheet->setCellValue("E{$row_num}", $cell_value);
             // 実装日
-            $cell_value = @$card->add_date->i18nFormat('yyyy-MM-dd');
+            $cell_value = ($card->add_date instanceof FrozenDate) ? $card->add_date->i18nFormat('yyyy-MM-dd') : null;
             $data_sheet->setCellValue("F{$row_num}", $cell_value);
             // ガシャ対象？
             $cell_value = _code('Codes.Cards.gasha_include.' . $card->gasha_include, 'false');
@@ -348,10 +348,10 @@ class CardsController extends AppController
             }
             $data_sheet->setCellValue("H{$row_num}", $cell_value);
             // 作成日時
-            $cell_value = @$card->created->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = ($card->created instanceof FrozenTime) ? $card->created->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
             $data_sheet->setCellValue("I{$row_num}", $cell_value);
             // 更新日時
-            $cell_value = @$card->modified->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = ($card->modified instanceof FrozenTime) ? $card->modified->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
             $data_sheet->setCellValue("J{$row_num}", $cell_value);
             $row_num++;
         }

@@ -181,7 +181,7 @@ class CardReprintsController extends AppController
     {
         $request = $this->getRequest()->getQueryParams();
         $card_reprints = $this->CardReprints->getSearchQuery($request)->toArray();
-        $_extract = [
+        $extract = [
             // ID
             'id',
             // ガシャID
@@ -216,7 +216,7 @@ class CardReprintsController extends AppController
         $this->viewBuilder()->setOptions([
             'serialize' => 'card_reprints',
             'header' => $this->CardReprints->getCsvHeaders(),
-            'extract' => $_extract,
+            'extract' => $extract,
             'csvEncoding' => 'UTF-8'
         ]);
         $this->set(compact('card_reprints'));
@@ -255,10 +255,10 @@ class CardReprintsController extends AppController
             }
             $data_sheet->setCellValue("C{$row_num}", $cell_value);
             // 作成日時
-            $cell_value = @$card_reprint->created->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = ($card_reprint->created instanceof FrozenTime) ? $card_reprint->created->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
             $data_sheet->setCellValue("D{$row_num}", $cell_value);
             // 更新日時
-            $cell_value = @$card_reprint->modified->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = ($card_reprint->modified instanceof FrozenTime) ? $card_reprint->modified->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
             $data_sheet->setCellValue("E{$row_num}", $cell_value);
             $row_num++;
         }

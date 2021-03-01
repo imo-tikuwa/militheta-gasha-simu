@@ -154,7 +154,7 @@ class GashasController extends AppController
     {
         $request = $this->getRequest()->getQueryParams();
         $gashas = $this->Gashas->getSearchQuery($request)->toArray();
-        $_extract = [
+        $extract = [
             // ID
             'id',
             // ガシャ開始日
@@ -215,7 +215,7 @@ class GashasController extends AppController
         $this->viewBuilder()->setOptions([
             'serialize' => 'gashas',
             'header' => $this->Gashas->getCsvHeaders(),
-            'extract' => $_extract,
+            'extract' => $extract,
             'csvEncoding' => 'UTF-8'
         ]);
         $this->set(compact('gashas'));
@@ -290,10 +290,10 @@ class GashasController extends AppController
             // ID
             $data_sheet->setCellValue("A{$row_num}", $gasha->id);
             // ガシャ開始日
-            $cell_value = @$gasha->start_date->i18nFormat('yyyy-MM-dd');
+            $cell_value = ($gasha->start_date instanceof FrozenDate) ? $gasha->start_date->i18nFormat('yyyy-MM-dd') : null;
             $data_sheet->setCellValue("B{$row_num}", $cell_value);
             // ガシャ終了日
-            $cell_value = @$gasha->end_date->i18nFormat('yyyy-MM-dd');
+            $cell_value = ($gasha->end_date instanceof FrozenDate) ? $gasha->end_date->i18nFormat('yyyy-MM-dd') : null;
             $data_sheet->setCellValue("C{$row_num}", $cell_value);
             // ガシャタイトル
             $data_sheet->setCellValue("D{$row_num}", $gasha->title);
@@ -302,10 +302,10 @@ class GashasController extends AppController
             // SRレート
             $data_sheet->setCellValue("F{$row_num}", $gasha->sr_rate);
             // 作成日時
-            $cell_value = @$gasha->created->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = ($gasha->created instanceof FrozenTime) ? $gasha->created->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
             $data_sheet->setCellValue("G{$row_num}", $cell_value);
             // 更新日時
-            $cell_value = @$gasha->modified->i18nFormat('yyyy-MM-dd HH:mm:ss');
+            $cell_value = ($gasha->modified instanceof FrozenTime) ? $gasha->modified->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
             $data_sheet->setCellValue("H{$row_num}", $cell_value);
             $row_num++;
         }

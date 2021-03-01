@@ -82,7 +82,7 @@ class AdminsTable extends AppTable
                 'message' => '名前は255文字以内で入力してください。',
                 'last' => true
             ])
-            ->allowEmptyString('name');
+            ->notEmptyString('name', '名前を入力してください。');
 
         // メールアドレス
         $validator
@@ -95,6 +95,18 @@ class AdminsTable extends AppTable
             ->add('mail', 'maxLength', [
                 'rule' => ['maxLength', 255],
                 'message' => 'メールアドレスは255文字以内で入力してください。',
+                'last' => true
+            ])
+            ->add('mail', 'checkUnique', [
+                'rule' => function ($value, $context) {
+                    $conditions = ['mail' => $value];
+                    if (isset($context['data']['id'])) {
+                        $conditions['id <>'] = $context['data']['id'];
+                    }
+
+                    return !$this->exists($conditions);
+                },
+                'message' => '入力されたメールアドレスのアカウントは既に存在します。',
                 'last' => true
             ])
             ->notEmptyString('mail', 'メールアドレスを入力してください。');

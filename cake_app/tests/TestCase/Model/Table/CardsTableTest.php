@@ -272,26 +272,6 @@ class CardsTableTest extends TestCase
     }
 
     /**
-     * Test findGashaTargetCards method
-     *
-     * @return void
-     */
-    public function testFindGashaTargetCards(): void
-    {
-        $this->markTestIncomplete('このテストはまだ実装されていません。');
-    }
-
-    /**
-     * Test findByIds method
-     *
-     * @return void
-     */
-    public function testFindByIds(): void
-    {
-        $this->markTestIncomplete('このテストはまだ実装されていません。');
-    }
-
-    /**
      * Test query method
      *
      * @return void

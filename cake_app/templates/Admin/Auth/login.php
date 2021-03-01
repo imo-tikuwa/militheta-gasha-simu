@@ -16,7 +16,6 @@ $is_secure_login = ($this->getRequest()->getParam('action') === 'secureLogin');
   <?= $this->Html->css('vendor/bundle') ?>
   <?= $this->fetch('meta') ?>
   <?= $this->fetch('css') ?>
-  <?= $this->fetch('script') ?>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -60,5 +59,7 @@ $is_secure_login = ($this->getRequest()->getParam('action') === 'secureLogin');
     <!-- /.login-card-body -->
   </div>
 </div>
+<?= $this->Html->script('vendor/bundle') ?>
+<?= $this->fetch('script') ?>
 </body>
 </html>

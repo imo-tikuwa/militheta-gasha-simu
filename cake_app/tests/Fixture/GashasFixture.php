@@ -130,14 +130,14 @@ class GashasFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'start_date' => '2021-02-18',
-                'end_date' => '2021-02-18',
+                'start_date' => '2021-03-01',
+                'end_date' => '2021-03-01',
                 'title' => 'Lorem ipsum dolor sit amet',
                 'ssr_rate' => 0,
                 'sr_rate' => 0,
                 'search_snippet' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'created' => '2021-02-18 22:13:10',
-                'modified' => '2021-02-18 22:13:10',
+                'created' => '2021-03-01 17:58:37',
+                'modified' => '2021-03-01 17:58:37',
                 'deleted' => null,
             ],
         ];

@@ -22,7 +22,7 @@ $password_value = $this->getRequest()->is(['patch', 'post', 'put']) ? $this->get
       <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-12">
           <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'name', 'label' => '名前', 'require' => false, 'class' => $label_class]); ?>
+            <?= $this->element('Parts/label', ['field' => 'name', 'label' => '名前', 'require' => true, 'class' => $label_class]); ?>
             <?= $this->Form->control('name', ['class' => $input_class, 'label' => false, 'maxlength' => '255', 'required' => false, 'error' => false]); ?>
           </div>
         </div>

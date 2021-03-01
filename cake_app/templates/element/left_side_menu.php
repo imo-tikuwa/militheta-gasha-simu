@@ -13,7 +13,7 @@ if (!empty($functions) && count($functions) > 0) {
 			if (!method_exists("App\\Controller\\Admin\\{$function['controller']}Controller", 'index')) {
 				$url = $this->Url->build(['controller' => $function['controller'], 'action' => ACTION_EDIT]);
 			} else {
-				$url = $this->Url->build(['controller' => $function['controller'], 'action' => ACTION_INDEX, '?' => _code("InitialOrders.{$alias}")]);
+				$url = $this->Url->build(['controller' => $function['controller'], 'action' => ACTION_INDEX, '?' => _code("InitialOrders.{$alias}")], ['escape' => false]);
 			}
 			$html .= $this->Html->link(
 				"<i class=\"{$function['icon_class']} fa-fw mr-2\"></i><p>{$function['label']}</p>",

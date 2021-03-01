@@ -1,7 +1,7 @@
 $(function(){
 
     // CSVインポート
-    $('#csv-import-btn').on('click', function(){
+    $('.csv-import-btn').on('click', function(){
         $('#csv-import-file').trigger('click');
     });
     $('#csv-import-file').on('change', function(){

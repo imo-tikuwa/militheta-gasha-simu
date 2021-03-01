@@ -232,26 +232,6 @@ class GashasTableTest extends TestCase
     }
 
     /**
-     * Test findGashaData method
-     *
-     * @return void
-     */
-    public function testFindGashaData(): void
-    {
-        $this->markTestIncomplete('このテストはまだ実装されていません。');
-    }
-
-    /**
-     * Test getGashaJsonData method
-     *
-     * @return void
-     */
-    public function testGetGashaJsonData(): void
-    {
-        $this->markTestIncomplete('このテストはまだ実装されていません。');
-    }
-
-    /**
      * Test query method
      *
      * @return void
