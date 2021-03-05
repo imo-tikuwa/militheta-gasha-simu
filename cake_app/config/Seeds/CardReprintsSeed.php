@@ -1074,6 +1074,42 @@ class CardReprintsSeed extends AbstractSeed
                 'modified' => '2021-02-07 11:36:29',
                 'deleted' => NULL,
             ],
+            [
+                'id' => '118',
+                'gasha_id' => '176',
+                'card_id' => '726',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ クリスマス★スイーツ　徳川まつり',
+                'created' => '2021-03-05 18:11:27',
+                'modified' => '2021-03-05 18:11:27',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '119',
+                'gasha_id' => '176',
+                'card_id' => '747',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 寿の華、ごらんあれ！　箱崎星梨花',
+                'created' => '2021-03-05 18:11:42',
+                'modified' => '2021-03-05 18:11:42',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '120',
+                'gasha_id' => '176',
+                'card_id' => '728',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 想いはいっしょ　矢吹可奈',
+                'created' => '2021-03-05 18:11:54',
+                'modified' => '2021-03-05 18:11:54',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '121',
+                'gasha_id' => '176',
+                'card_id' => '749',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ しっとり振袖ライブ　高山紗代子',
+                'created' => '2021-03-05 18:12:05',
+                'modified' => '2021-03-05 18:12:05',
+                'deleted' => NULL,
+            ],
         ];
 
         $table = $this->table('card_reprints');

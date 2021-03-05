@@ -47,7 +47,9 @@ class CardReprintsController extends AppController
                 'valueField' => function (Gasha $gasha) {
                     return $gasha->start_date->i18nFormat('yyyy/MM/dd') . '　' . $gasha->title;
                 }
-            ])->order(['id' => 'DESC'])->toArray();
+            ])
+            ->where(['title LIKE' => '【限定復刻】%'])
+            ->order(['id' => 'DESC'])->toArray();
             // カードIDの選択肢
             $cards = $this->Cards->find('list', ['keyField' => 'id', 'valueField' => 'name'])->toArray();
 
