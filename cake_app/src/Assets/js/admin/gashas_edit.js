@@ -1,4 +1,4 @@
-$(function(){
+$(() => {
 
     // ガシャ開始日
     $('#start_date-datepicker').datetimepicker({
@@ -20,6 +20,11 @@ $(function(){
         },
         format: 'YYYY-MM-DD',
     });
+    $('#start_date-datepicker').on('change.datetimepicker', e => {
+        if (e.date === false) {
+            $('#start_date-datepicker').datetimepicker('hide');
+        }
+    });
 
     // ガシャ終了日
     $('#end_date-datepicker').datetimepicker({
@@ -40,6 +45,11 @@ $(function(){
             close: 'fas fa-times'
         },
         format: 'YYYY-MM-DD',
+    });
+    $('#end_date-datepicker').on('change.datetimepicker', e => {
+        if (e.date === false) {
+            $('#end_date-datepicker').datetimepicker('hide');
+        }
     });
 
 });

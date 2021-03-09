@@ -1,7 +1,7 @@
-$(function(){
+$(() => {
 
     // フリーワード検索
-    $('#gasha_pickups-freeword-search-snippet').on('keypress', function(e) {
+    $('#gasha_pickups-freeword-search-snippet').on('keypress', e => {
         if (e.keyCode == 13) {
             $('#gasha_pickups-freeword-search-btn').trigger('click');
         }

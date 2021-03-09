@@ -1,4 +1,4 @@
-$(function(){
+$(() => {
 
     // ガシャID
     $('#gasha_id').select2({

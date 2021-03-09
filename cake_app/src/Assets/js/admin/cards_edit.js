@@ -1,4 +1,4 @@
-$(function(){
+$(() => {
 
     // キャラクター
     $('#character_id').select2({
@@ -40,6 +40,11 @@ $(function(){
             close: 'fas fa-times'
         },
         format: 'YYYY-MM-DD',
+    });
+    $('#add_date-datepicker').on('change.datetimepicker', e => {
+        if (e.date === false) {
+            $('#add_date-datepicker').datetimepicker('hide');
+        }
     });
 
     // ガシャ対象？

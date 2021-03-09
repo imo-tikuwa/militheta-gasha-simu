@@ -1,15 +1,15 @@
-$(function(){
+$(() => {
 
     // CSVインポート
-    $('.csv-import-btn').on('click', function(){
+    $('.csv-import-btn').on('click', () => {
         $('#csv-import-file').trigger('click');
     });
-    $('#csv-import-file').on('change', function(){
+    $('#csv-import-file').on('change', () => {
         $('#csv-import-form').submit();
     });
 
     // フリーワード検索
-    $('#cards-freeword-search-snippet').on('keypress', function(e) {
+    $('#cards-freeword-search-snippet').on('keypress', e => {
         if (e.keyCode == 13) {
             $('#cards-freeword-search-btn').trigger('click');
         }
@@ -55,6 +55,11 @@ $(function(){
             close: 'fas fa-times'
         },
         format: 'YYYY-MM-DD',
+    });
+    $('#add_date-datepicker').on('change.datetimepicker', e => {
+        if (e.date === false) {
+            $('#add_date-datepicker').datetimepicker('hide');
+        }
     });
 
     // ガシャ対象？

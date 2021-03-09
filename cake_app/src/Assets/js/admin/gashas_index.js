@@ -1,15 +1,15 @@
-$(function(){
+$(() => {
 
     // CSVインポート
-    $('.csv-import-btn').on('click', function(){
+    $('.csv-import-btn').on('click', () => {
         $('#csv-import-file').trigger('click');
     });
-    $('#csv-import-file').on('change', function(){
+    $('#csv-import-file').on('change', () => {
         $('#csv-import-form').submit();
     });
 
     // フリーワード検索
-    $('#gashas-freeword-search-snippet').on('keypress', function(e) {
+    $('#gashas-freeword-search-snippet').on('keypress', e => {
         if (e.keyCode == 13) {
             $('#gashas-freeword-search-btn').trigger('click');
         }
@@ -35,6 +35,11 @@ $(function(){
         },
         format: 'YYYY-MM-DD',
     });
+    $('#start_date-datepicker').on('change.datetimepicker', e => {
+        if (e.date === false) {
+            $('#start_date-datepicker').datetimepicker('hide');
+        }
+    });
 
     // ガシャ終了日
     $('#end_date-datepicker').datetimepicker({
@@ -55,6 +60,11 @@ $(function(){
             close: 'fas fa-times'
         },
         format: 'YYYY-MM-DD',
+    });
+    $('#end_date-datepicker').on('change.datetimepicker', e => {
+        if (e.date === false) {
+            $('#end_date-datepicker').datetimepicker('hide');
+        }
     });
 
 });
