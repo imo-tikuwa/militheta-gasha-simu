@@ -9,8 +9,6 @@ use App\Form\SearchForm;
 use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
 use Cake\Core\Exception\CakeException;
-use Cake\I18n\FrozenDate;
-use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
@@ -103,7 +101,12 @@ class GashasController extends AppController
             $gasha = $this->Gashas->newEmptyEntity();
         }
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
-            $gasha = $this->Gashas->patchEntity($gasha, $this->getRequest()->getData(), ['associated' => ['CardReprints', 'GashaPickups']]);
+            $gasha = $this->Gashas->patchEntity($gasha, $this->getRequest()->getData(), [
+                'associated' => [
+                    'CardReprints',
+                    'GashaPickups',
+                ]
+            ]);
             if ($gasha->hasErrors()) {
                 $this->Flash->set(implode('<br />', $gasha->getErrorMessages()), [
                     'escape' => false,
@@ -159,53 +162,29 @@ class GashasController extends AppController
             'id',
             // ガシャ開始日
             function ($row) {
-                if ($row['start_date'] instanceof FrozenDate) {
-                    return @$row['start_date']->i18nFormat('yyyy-MM-dd');
-                }
-
-                return "";
+                return $row['start_date']?->i18nFormat('yyyy-MM-dd');
             },
             // ガシャ終了日
             function ($row) {
-                if ($row['end_date'] instanceof FrozenDate) {
-                    return @$row['end_date']->i18nFormat('yyyy-MM-dd');
-                }
-
-                return "";
+                return $row['end_date']?->i18nFormat('yyyy-MM-dd');
             },
             // ガシャタイトル
             'title',
             // SSRレート
             function ($row) {
-                if (!empty($row['ssr_rate'])) {
-                    return $row['ssr_rate'] . "%";
-                }
-
-                return "";
+                return !is_null($row['ssr_rate']) ? "{$row['ssr_rate']}%" : null;
             },
             // SRレート
             function ($row) {
-                if (!empty($row['sr_rate'])) {
-                    return $row['sr_rate'] . "%";
-                }
-
-                return "";
+                return !is_null($row['sr_rate']) ? "{$row['sr_rate']}%" : null;
             },
             // 作成日時
             function ($row) {
-                if ($row['created'] instanceof FrozenTime) {
-                    return @$row['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
-                }
-
-                return "";
+                return $row['created']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
             // 更新日時
             function ($row) {
-                if ($row['modified'] instanceof FrozenTime) {
-                    return @$row['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
-                }
-
-                return "";
+                return $row['modified']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
         ];
 
@@ -290,11 +269,9 @@ class GashasController extends AppController
             // ID
             $data_sheet->setCellValue("A{$row_num}", $gasha->id);
             // ガシャ開始日
-            $cell_value = ($gasha->start_date instanceof FrozenDate) ? $gasha->start_date->i18nFormat('yyyy-MM-dd') : null;
-            $data_sheet->setCellValue("B{$row_num}", $cell_value);
+            $data_sheet->setCellValue("B{$row_num}", $gasha->start_date?->i18nFormat('yyyy-MM-dd'));
             // ガシャ終了日
-            $cell_value = ($gasha->end_date instanceof FrozenDate) ? $gasha->end_date->i18nFormat('yyyy-MM-dd') : null;
-            $data_sheet->setCellValue("C{$row_num}", $cell_value);
+            $data_sheet->setCellValue("C{$row_num}", $gasha->end_date?->i18nFormat('yyyy-MM-dd'));
             // ガシャタイトル
             $data_sheet->setCellValue("D{$row_num}", $gasha->title);
             // SSRレート
@@ -302,11 +279,9 @@ class GashasController extends AppController
             // SRレート
             $data_sheet->setCellValue("F{$row_num}", $gasha->sr_rate);
             // 作成日時
-            $cell_value = ($gasha->created instanceof FrozenTime) ? $gasha->created->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
-            $data_sheet->setCellValue("G{$row_num}", $cell_value);
+            $data_sheet->setCellValue("G{$row_num}", $gasha->created?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             // 更新日時
-            $cell_value = ($gasha->modified instanceof FrozenTime) ? $gasha->modified->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
-            $data_sheet->setCellValue("H{$row_num}", $cell_value);
+            $data_sheet->setCellValue("H{$row_num}", $gasha->modified?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             $row_num++;
         }
 

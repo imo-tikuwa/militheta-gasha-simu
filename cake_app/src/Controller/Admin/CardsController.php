@@ -9,8 +9,6 @@ use App\Form\SearchForm;
 use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
 use Cake\Core\Exception\CakeException;
-use Cake\I18n\FrozenDate;
-use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
@@ -79,7 +77,13 @@ class CardsController extends AppController
      */
     public function view($id = null)
     {
-        $card = $this->Cards->get($id, ['contain' => ['Characters', 'CardReprints', 'GashaPickups']]);
+        $card = $this->Cards->get($id, [
+            'contain' => [
+                'Characters',
+                'CardReprints',
+                'GashaPickups',
+            ]
+        ]);
 
         $this->set('card', $card);
     }
@@ -122,7 +126,13 @@ class CardsController extends AppController
             $card = $this->Cards->newEmptyEntity();
         }
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
-            $card = $this->Cards->patchEntity($card, $this->getRequest()->getData(), ['associated' => ['Characters', 'CardReprints', 'GashaPickups']]);
+            $card = $this->Cards->patchEntity($card, $this->getRequest()->getData(), [
+                'associated' => [
+                    'Characters',
+                    'CardReprints',
+                    'GashaPickups',
+                ]
+            ]);
             if ($card->hasErrors()) {
                 $this->Flash->set(implode('<br />', $card->getErrorMessages()), [
                     'escape' => false,
@@ -188,7 +198,7 @@ class CardsController extends AppController
                     return _code('Codes.Cards.rarity.' . $row['rarity']);
                 }
 
-                return "";
+                return null;
             },
             // タイプ
             function ($row) {
@@ -196,15 +206,11 @@ class CardsController extends AppController
                     return _code('Codes.Cards.type.' . $row['type']);
                 }
 
-                return "";
+                return null;
             },
             // 実装日
             function ($row) {
-                if ($row['add_date'] instanceof FrozenDate) {
-                    return @$row['add_date']->i18nFormat('yyyy-MM-dd');
-                }
-
-                return "";
+                return $row['add_date']?->i18nFormat('yyyy-MM-dd');
             },
             // ガシャ対象？
             'gasha_include',
@@ -214,23 +220,15 @@ class CardsController extends AppController
                     return _code('Codes.Cards.limited.' . $row['limited']);
                 }
 
-                return "";
+                return null;
             },
             // 作成日時
             function ($row) {
-                if ($row['created'] instanceof FrozenTime) {
-                    return @$row['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
-                }
-
-                return "";
+                return $row['created']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
             // 更新日時
             function ($row) {
-                if ($row['modified'] instanceof FrozenTime) {
-                    return @$row['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
-                }
-
-                return "";
+                return $row['modified']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
         ];
 
@@ -336,8 +334,7 @@ class CardsController extends AppController
             }
             $data_sheet->setCellValue("E{$row_num}", $cell_value);
             // 実装日
-            $cell_value = ($card->add_date instanceof FrozenDate) ? $card->add_date->i18nFormat('yyyy-MM-dd') : null;
-            $data_sheet->setCellValue("F{$row_num}", $cell_value);
+            $data_sheet->setCellValue("F{$row_num}", $card->add_date?->i18nFormat('yyyy-MM-dd'));
             // ガシャ対象？
             $cell_value = _code('Codes.Cards.gasha_include.' . $card->gasha_include, 'false');
             $data_sheet->setCellValue("G{$row_num}", $cell_value);
@@ -348,11 +345,9 @@ class CardsController extends AppController
             }
             $data_sheet->setCellValue("H{$row_num}", $cell_value);
             // 作成日時
-            $cell_value = ($card->created instanceof FrozenTime) ? $card->created->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
-            $data_sheet->setCellValue("I{$row_num}", $cell_value);
+            $data_sheet->setCellValue("I{$row_num}", $card->created?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             // 更新日時
-            $cell_value = ($card->modified instanceof FrozenTime) ? $card->modified->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
-            $data_sheet->setCellValue("J{$row_num}", $cell_value);
+            $data_sheet->setCellValue("J{$row_num}", $card->modified?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             $row_num++;
         }
 

@@ -53,7 +53,7 @@ $this->assign('title', "カード{$button_name}");
             <?= $this->Form->control('limited', ['id' => 'limited', 'type' => 'select', 'options' => _code('Codes.Cards.limited'), 'class' => 'form-control form-control-sm ', 'label' => false, 'required' => false, 'error' => false, 'default' => '01', 'empty' => '　']); ?>
           </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-lg-12 col-md-12 col-sm-12">
           <?= $this->Form->button($button_name, ['class' => "btn btn-sm btn-flat btn-outline-secondary"]) ?>
         </div>
       </div>

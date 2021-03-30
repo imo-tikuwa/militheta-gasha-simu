@@ -126,8 +126,8 @@ class CardReprintsFixture extends TestFixture
                 'gasha_id' => 1,
                 'card_id' => 1,
                 'search_snippet' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'created' => '2021-03-01 17:58:19',
-                'modified' => '2021-03-01 17:58:19',
+                'created' => '2021-03-30 18:25:35',
+                'modified' => '2021-03-30 18:25:35',
                 'deleted' => null,
             ],
         ];

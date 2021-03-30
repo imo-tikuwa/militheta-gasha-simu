@@ -14,9 +14,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.2",
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "@ttskch/select2-bootstrap4-theme": "^1.5.2",
-    "admin-lte": "^3.0.5",
+    "admin-lte": "^3.1.0",
     "bootstrap": "4.4.1",
     "bootstrap-fileinput": "^5.1.5",
     "bootstrap4-tagsinput": "git+https://github.com/imo-tikuwa/bootstrap4-tagsinput.git",
@@ -28,8 +28,8 @@
     "tempusdominus-bootstrap-4": "^5.39.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
     "babel-loader": "^8.2.2",
     "cross-env": "^7.0.3",
     "css-loader": "^3.6.0",

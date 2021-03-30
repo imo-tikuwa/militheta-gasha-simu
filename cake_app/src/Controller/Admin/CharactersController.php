@@ -7,8 +7,6 @@ use App\Controller\Admin\AppController;
 use App\Form\SearchForm;
 use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
-use Cake\I18n\FrozenDate;
-use Cake\I18n\FrozenTime;
 use Cake\Utility\Hash;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
@@ -101,7 +99,11 @@ class CharactersController extends AppController
             $character = $this->Characters->newEmptyEntity();
         }
         if ($this->getRequest()->is(['patch', 'post', 'put'])) {
-            $character = $this->Characters->patchEntity($character, $this->getRequest()->getData(), ['associated' => ['Cards']]);
+            $character = $this->Characters->patchEntity($character, $this->getRequest()->getData(), [
+                'associated' => [
+                    'Cards',
+                ]
+            ]);
             if ($character->hasErrors()) {
                 $this->Flash->set(implode('<br />', $character->getErrorMessages()), [
                     'escape' => false,
@@ -139,19 +141,11 @@ class CharactersController extends AppController
             'name',
             // 作成日時
             function ($row) {
-                if ($row['created'] instanceof FrozenTime) {
-                    return @$row['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
-                }
-
-                return "";
+                return $row['created']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
             // 更新日時
             function ($row) {
-                if ($row['modified'] instanceof FrozenTime) {
-                    return @$row['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
-                }
-
-                return "";
+                return $row['modified']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
         ];
 
@@ -189,11 +183,9 @@ class CharactersController extends AppController
             // 名前
             $data_sheet->setCellValue("B{$row_num}", $character->name);
             // 作成日時
-            $cell_value = ($character->created instanceof FrozenTime) ? $character->created->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
-            $data_sheet->setCellValue("C{$row_num}", $cell_value);
+            $data_sheet->setCellValue("C{$row_num}", $character->created?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             // 更新日時
-            $cell_value = ($character->modified instanceof FrozenTime) ? $character->modified->i18nFormat('yyyy-MM-dd HH:mm:ss') : null;
-            $data_sheet->setCellValue("D{$row_num}", $cell_value);
+            $data_sheet->setCellValue("D{$row_num}", $character->modified?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             $row_num++;
         }
 

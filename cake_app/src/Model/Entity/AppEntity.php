@@ -10,6 +10,9 @@ class AppEntity extends Entity
 {
     /**
      * エラーメッセージの配列を取得する
+     *
+     * 関連テーブルのエラーはメッセージの先頭にテーブルの項目名と番号を付加する
+     *
      * @return array エラーメッセージの配列
      */
     public function getErrorMessages()
@@ -17,9 +20,34 @@ class AppEntity extends Entity
         if (!$this->hasErrors()) {
             return null;
         }
+
         $error_messages = [];
-        foreach ($this->getErrors() as $error) {
-            $error_messages[] = $this->getEachErrorMessage($error);
+        $related_entity_names = $this->related_entity_names;
+        foreach ($this->getErrors() as $field_name => $error) {
+            if (is_array($related_entity_names) && array_key_exists($field_name, $related_entity_names)) {
+                $error_messages = array_merge($error_messages, $this->getRelationErrorMessages($error, $related_entity_names[$field_name]));
+            } else {
+                $error_messages[] = $this->getEachErrorMessage($error);
+            }
+        }
+
+        return $error_messages;
+    }
+
+    /**
+     * 関連テーブルのエラーメッセージを返す
+     * @param array $related_errors 関連テーブルのエラー情報
+     * @param string $entity_name 関連テーブルのエンティティオブジェクト
+     * @return array 関連テーブルのエラーメッセージの配列
+     */
+    private function getRelationErrorMessages($related_errors, $entity_name)
+    {
+        $error_messages = [];
+        foreach ($related_errors as $child_index => $related_error) {
+            foreach ($related_error as $each_error) {
+                $child_num = $child_index + 1;
+                $error_messages[] = "{$entity_name}{$child_num} - " . $this->getEachErrorMessage($each_error);
+            }
         }
 
         return $error_messages;

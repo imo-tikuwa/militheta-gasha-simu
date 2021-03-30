@@ -70,6 +70,11 @@ class AuthUtils
             return false;
         }
 
+        // 子テーブルの動的なフォーム追加を行うアクションはWRITE権限があるときアクセス可
+        if (str_starts_with($action, 'append') && str_ends_with($action, 'Row')) {
+            return in_array(ROLE_WRITE, $privileges, true);
+        }
+
         switch ($action) {
             case ACTION_INDEX:
             case ACTION_VIEW:
