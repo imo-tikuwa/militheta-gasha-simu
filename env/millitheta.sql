@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2021-03-05 18:26:16
+Date: 2021-04-02 18:14:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,7 +58,7 @@ CREATE TABLE `cards` (
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`),
   KEY `character_id` (`character_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1090 DEFAULT CHARSET=utf8 COMMENT='カード';
+) ENGINE=InnoDB AUTO_INCREMENT=1110 DEFAULT CHARSET=utf8 COMMENT='カード';
 
 -- ----------------------------
 -- Records of cards
@@ -1152,6 +1152,26 @@ INSERT INTO `cards` VALUES ('1086', '10', '静寂のワンショット　三浦�
 INSERT INTO `cards` VALUES ('1087', '2', 'MILLION LIVE CLOSET！　如月千早', '03', '02', '2021-02-28', '1', '01', '如月千早 MILLION LIVE CLOSET！　如月千早 SR Fairy 恒常', '2021-03-04 21:47:58', '2021-03-04 21:47:58', null);
 INSERT INTO `cards` VALUES ('1088', '31', 'ピスケス　天空橋朋花', '03', '02', '2021-03-03', '0', '01', '天空橋朋花 ピスケス　天空橋朋花 SR Fairy 恒常', '2021-03-04 21:47:58', '2021-03-04 21:47:58', null);
 INSERT INTO `cards` VALUES ('1089', '38', 'ピスケス　二階堂千鶴', '03', '02', '2021-03-03', '0', '01', '二階堂千鶴 ピスケス　二階堂千鶴 SR Fairy 恒常', '2021-03-04 21:47:58', '2021-03-04 21:47:58', null);
+INSERT INTO `cards` VALUES ('1090', '49', 'デコレーション・ドリ～ミンッ♪　周防桃子', '04', '02', '2021-03-12', '1', '01', '周防桃子 デコレーション・ドリ～ミンッ♪　周防桃子 SSR Fairy 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1091', '5', 'キラメキラリ　高槻やよい', '04', '03', '2021-03-12', '1', '01', '高槻やよい キラメキラリ　高槻やよい SSR Angel 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1092', '19', 'MILLION LIVE CLOSET！　佐竹美奈子', '03', '01', '2021-03-12', '1', '01', '佐竹美奈子 MILLION LIVE CLOSET！　佐竹美奈子 SR Princess 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1093', '41', 'MILLION LIVE CLOSET！　豊川風花', '03', '03', '2021-03-12', '1', '01', '豊川風花 MILLION LIVE CLOSET！　豊川風花 SR Angel 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1094', '22', 'ごきげん校庭ライブ！　箱崎星梨花', '03', '03', '2021-03-12', '0', '01', '箱崎星梨花 ごきげん校庭ライブ！　箱崎星梨花 SR Angel 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1095', '14', '親愛の手紙　春日未来', '03', '01', '2021-03-12', '0', '01', '春日未来 親愛の手紙　春日未来 SR Princess 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1096', '47', 'フレッシュアピール　永吉昴', '02', '02', '2021-03-12', '1', '01', '永吉昴 フレッシュアピール　永吉昴 R Fairy 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1097', '6', 'アフター・ティーブレイク　菊地真', '04', '01', '2021-03-19', '1', '02', '菊地真 アフター・ティーブレイク　菊地真 SSR Princess 限定', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1098', '34', 'いざ、ご覚悟を　舞浜歩', '04', '02', '2021-03-19', '1', '01', '舞浜歩 いざ、ご覚悟を　舞浜歩 SSR Fairy 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1099', '42', 'MILLION LIVE CLOSET！　宮尾美也', '03', '03', '2021-03-19', '1', '01', '宮尾美也 MILLION LIVE CLOSET！　宮尾美也 SR Angel 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1100', '25', '大好き｡ 　ロコ', '03', '02', '2021-03-19', '1', '01', 'ロコ 大好き｡ 　ロコ SR Fairy 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1101', '50', 'エレガンスバトラー　ジュリア', '02', '02', '2021-03-19', '1', '01', 'ジュリア エレガンスバトラー　ジュリア R Fairy 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1102', '12', 'ARMooo　双海真美', '03', '03', '2021-03-19', '0', '01', '双海真美 ARMooo　双海真美 SR Angel 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1103', '9', 'ARMooo　秋月律子', '03', '02', '2021-03-19', '0', '01', '秋月律子 ARMooo　秋月律子 SR Fairy 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1104', '29', 'ビッグ！ウェ―――ブ！！　高坂海美', '04', '01', '2021-03-29', '1', '03', '高坂海美 ビッグ！ウェ―――ブ！！　高坂海美 SSR Princess フェス限定', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1105', '40', '海の裏側　大神環', '04', '03', '2021-03-29', '1', '03', '大神環 海の裏側　大神環 SSR Angel フェス限定', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1106', '31', 'リリィナイトと天空の騎士団［魔王］　天空橋朋花', '04', '02', '2021-04-02', '1', '02', '天空橋朋花 リリィナイトと天空の騎士団［魔王］　天空橋朋花 SSR Fairy 限定', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1107', '22', 'リリィナイトと天空の騎士団［妖精］　箱崎星梨花', '04', '03', '2021-04-02', '1', '01', '箱崎星梨花 リリィナイトと天空の騎士団［妖精］　箱崎星梨花 SSR Angel 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1108', '28', 'リリィナイトと天空の騎士団［四天王］　松田亜利沙', '03', '01', '2021-04-02', '1', '01', '松田亜利沙 リリィナイトと天空の騎士団［四天王］　松田亜利沙 SR Princess 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
+INSERT INTO `cards` VALUES ('1109', '16', 'MILLION LIVE CLOSET！　伊吹翼', '03', '03', '2021-04-02', '1', '01', '伊吹翼 MILLION LIVE CLOSET！　伊吹翼 SR Angel 恒常', '2021-04-02 17:57:38', '2021-04-02 17:57:38', null);
 
 -- ----------------------------
 -- Table structure for `card_reprints`
@@ -1383,7 +1403,7 @@ CREATE TABLE `gashas` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=178 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
+) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
 
 -- ----------------------------
 -- Records of gashas
@@ -1561,6 +1581,10 @@ INSERT INTO `gashas` VALUES ('174', '2021-02-11', '2021-02-18', 'SONG FOR YOU！
 INSERT INTO `gashas` VALUES ('175', '2021-02-18', '2021-02-23', '【期間限定】S･O･S！サイキックヒーローズガシャ', '3', '12', '【期間限定】S･O･S！サイキックヒーローズガシャ', '2021-03-05 18:08:13', '2021-03-05 18:08:13', null);
 INSERT INTO `gashas` VALUES ('176', '2021-02-26', '2021-02-28', '【限定復刻】日替わりピックアップ！限定復刻ガシャ', '3', '12', '【限定復刻】日替わりピックアップ！限定復刻ガシャ', '2021-03-05 18:08:13', '2021-03-05 18:08:13', null);
 INSERT INTO `gashas` VALUES ('177', '2021-02-28', '2021-03-12', '【期間限定】ラブいっぱい♡ホワイトデーガシャ', '3', '12', '【期間限定】ラブいっぱい♡ホワイトデーガシャ', '2021-03-05 18:08:13', '2021-03-05 18:08:13', null);
+INSERT INTO `gashas` VALUES ('178', '2021-03-12', '2021-03-19', 'SONG FOR YOU！ガシャ VOL.14', '3', '12', 'SONG FOR YOU！ガシャ VOL.14', '2021-04-02 18:02:41', '2021-04-02 18:02:41', null);
+INSERT INTO `gashas` VALUES ('179', '2021-03-19', '2021-03-29', '【期間限定】我ら、主様のおそばに…！ガシャ', '3', '12', '【期間限定】我ら、主様のおそばに…！ガシャ', '2021-04-02 18:02:41', '2021-04-02 18:02:41', null);
+INSERT INTO `gashas` VALUES ('180', '2021-03-29', '2021-04-02', '【フェス限定】ミリオンフェス', '6', '12', '【フェス限定】ミリオンフェス', '2021-04-02 18:02:41', '2021-04-02 18:02:41', null);
+INSERT INTO `gashas` VALUES ('181', '2021-04-02', '2021-04-11', '【期間限定】剣と魔法のファンタジーガシャ', '3', '12', '【期間限定】剣と魔法のファンタジーガシャ', '2021-04-02 18:02:41', '2021-04-02 18:02:41', null);
 
 -- ----------------------------
 -- Table structure for `gasha_pickups`
@@ -1577,7 +1601,7 @@ CREATE TABLE `gasha_pickups` (
   PRIMARY KEY (`id`),
   KEY `card_id` (`card_id`),
   KEY `gasha_id` (`gasha_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=645 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
+) ENGINE=InnoDB AUTO_INCREMENT=660 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
 
 -- ----------------------------
 -- Records of gasha_pickups
@@ -2226,3 +2250,18 @@ INSERT INTO `gasha_pickups` VALUES ('641', '177', '1084', '【期間限定】ラ
 INSERT INTO `gasha_pickups` VALUES ('642', '177', '1085', '【期間限定】ラブいっぱい♡ホワイトデーガシャ シャイニー・デイズ　松田亜利沙', '2021-03-05 18:17:42', '2021-03-05 18:17:42', null);
 INSERT INTO `gasha_pickups` VALUES ('643', '177', '1086', '【期間限定】ラブいっぱい♡ホワイトデーガシャ 静寂のワンショット　三浦あずさ', '2021-03-05 18:17:51', '2021-03-05 18:17:51', null);
 INSERT INTO `gasha_pickups` VALUES ('644', '177', '1087', '【期間限定】ラブいっぱい♡ホワイトデーガシャ MILLION LIVE CLOSET！　如月千早', '2021-03-05 18:18:01', '2021-03-05 18:18:01', null);
+INSERT INTO `gasha_pickups` VALUES ('645', '178', '1090', 'SONG FOR YOU！ガシャ VOL.14 デコレーション・ドリ～ミンッ♪　周防桃子', '2021-04-02 18:04:52', '2021-04-02 18:04:52', null);
+INSERT INTO `gasha_pickups` VALUES ('646', '178', '1091', 'SONG FOR YOU！ガシャ VOL.14 キラメキラリ　高槻やよい', '2021-04-02 18:05:04', '2021-04-02 18:05:04', null);
+INSERT INTO `gasha_pickups` VALUES ('647', '178', '1092', 'SONG FOR YOU！ガシャ VOL.14 MILLION LIVE CLOSET！　佐竹美奈子', '2021-04-02 18:05:16', '2021-04-02 18:05:16', null);
+INSERT INTO `gasha_pickups` VALUES ('648', '178', '1093', 'SONG FOR YOU！ガシャ VOL.14 MILLION LIVE CLOSET！　豊川風花', '2021-04-02 18:05:28', '2021-04-02 18:05:28', null);
+INSERT INTO `gasha_pickups` VALUES ('649', '179', '1097', '【期間限定】我ら、主様のおそばに…！ガシャ アフター・ティーブレイク　菊地真', '2021-04-02 18:06:10', '2021-04-02 18:06:10', null);
+INSERT INTO `gasha_pickups` VALUES ('650', '179', '1098', '【期間限定】我ら、主様のおそばに…！ガシャ いざ、ご覚悟を　舞浜歩', '2021-04-02 18:06:19', '2021-04-02 18:06:19', null);
+INSERT INTO `gasha_pickups` VALUES ('651', '179', '1099', '【期間限定】我ら、主様のおそばに…！ガシャ MILLION LIVE CLOSET！　宮尾美也', '2021-04-02 18:06:33', '2021-04-02 18:06:33', null);
+INSERT INTO `gasha_pickups` VALUES ('652', '179', '1100', '【期間限定】我ら、主様のおそばに…！ガシャ 大好き｡ 　ロコ', '2021-04-02 18:06:41', '2021-04-02 18:06:41', null);
+INSERT INTO `gasha_pickups` VALUES ('653', '179', '1101', '【期間限定】我ら、主様のおそばに…！ガシャ エレガンスバトラー　ジュリア', '2021-04-02 18:06:52', '2021-04-02 18:06:52', null);
+INSERT INTO `gasha_pickups` VALUES ('654', '180', '1104', '【フェス限定】ミリオンフェス ビッグ！ウェ―――ブ！！　高坂海美', '2021-04-02 18:07:18', '2021-04-02 18:07:18', null);
+INSERT INTO `gasha_pickups` VALUES ('655', '180', '1105', '【フェス限定】ミリオンフェス 海の裏側　大神環', '2021-04-02 18:07:32', '2021-04-02 18:07:32', null);
+INSERT INTO `gasha_pickups` VALUES ('656', '181', '1106', '【期間限定】剣と魔法のファンタジーガシャ リリィナイトと天空の騎士団［魔王］　天空橋朋花', '2021-04-02 18:07:48', '2021-04-02 18:07:48', null);
+INSERT INTO `gasha_pickups` VALUES ('657', '181', '1107', '【期間限定】剣と魔法のファンタジーガシャ リリィナイトと天空の騎士団［妖精］　箱崎星梨花', '2021-04-02 18:07:58', '2021-04-02 18:07:58', null);
+INSERT INTO `gasha_pickups` VALUES ('658', '181', '1108', '【期間限定】剣と魔法のファンタジーガシャ リリィナイトと天空の騎士団［四天王］　松田亜利沙', '2021-04-02 18:08:09', '2021-04-02 18:08:09', null);
+INSERT INTO `gasha_pickups` VALUES ('659', '181', '1109', '【期間限定】剣と魔法のファンタジーガシャ MILLION LIVE CLOSET！　伊吹翼', '2021-04-02 18:08:18', '2021-04-02 18:08:18', null);
