@@ -95,7 +95,12 @@ class GashasController extends AppController
     private function _form($id = null)
     {
         if ($this->getRequest()->getParam('action') == 'edit') {
-            $gasha = $this->Gashas->get($id);
+            $gasha = $this->Gashas->get($id, [
+                'contain' => [
+                    'CardReprints',
+                    'GashaPickups',
+                ]
+            ]);
             $this->Gashas->touch($gasha);
         } else {
             $gasha = $this->Gashas->newEmptyEntity();

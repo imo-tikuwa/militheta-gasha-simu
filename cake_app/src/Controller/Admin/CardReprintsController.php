@@ -129,7 +129,12 @@ class CardReprintsController extends AppController
     private function _form($id = null)
     {
         if ($this->getRequest()->getParam('action') == 'edit') {
-            $card_reprint = $this->CardReprints->get($id);
+            $card_reprint = $this->CardReprints->get($id, [
+                'contain' => [
+                    'Gashas',
+                    'Cards',
+                ]
+            ]);
             $this->CardReprints->touch($card_reprint);
         } else {
             $card_reprint = $this->CardReprints->newEmptyEntity();

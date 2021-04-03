@@ -120,7 +120,13 @@ class CardsController extends AppController
     private function _form($id = null)
     {
         if ($this->getRequest()->getParam('action') == 'edit') {
-            $card = $this->Cards->get($id);
+            $card = $this->Cards->get($id, [
+                'contain' => [
+                    'Characters',
+                    'CardReprints',
+                    'GashaPickups',
+                ]
+            ]);
             $this->Cards->touch($card);
         } else {
             $card = $this->Cards->newEmptyEntity();

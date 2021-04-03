@@ -93,7 +93,11 @@ class CharactersController extends AppController
     private function _form($id = null)
     {
         if ($this->getRequest()->getParam('action') == 'edit') {
-            $character = $this->Characters->get($id);
+            $character = $this->Characters->get($id, [
+                'contain' => [
+                    'Cards',
+                ]
+            ]);
             $this->Characters->touch($character);
         } else {
             $character = $this->Characters->newEmptyEntity();

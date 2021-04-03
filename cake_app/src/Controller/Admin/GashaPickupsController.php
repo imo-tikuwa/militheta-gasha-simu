@@ -127,7 +127,12 @@ class GashaPickupsController extends AppController
     private function _form($id = null)
     {
         if ($this->getRequest()->getParam('action') == 'edit') {
-            $gasha_pickup = $this->GashaPickups->get($id);
+            $gasha_pickup = $this->GashaPickups->get($id, [
+                'contain' => [
+                    'Gashas',
+                    'Cards',
+                ]
+            ]);
             $this->GashaPickups->touch($gasha_pickup);
         } else {
             $gasha_pickup = $this->GashaPickups->newEmptyEntity();
