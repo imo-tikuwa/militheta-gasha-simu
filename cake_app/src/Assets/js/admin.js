@@ -13,15 +13,6 @@ window.moment = require('moment');
 window.moment.locale('ja');
 import 'tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.js';
 
-import 'bootstrap-fileinput/js/plugins/piexif.min.js';
-window.Sortable = require('bootstrap-fileinput/js/plugins/sortable.min.js');
-import 'bootstrap-fileinput/js/fileinput.min.js';
-import 'bootstrap-fileinput/themes/explorer-fas/theme.min.js';
-import 'bootstrap-fileinput/js/locales/ja.js';
-
-import 'summernote/dist/summernote-bs4.min.js';
-import 'summernote/dist/lang/summernote-ja-JP.min.js';
-
 $(() => {
     // tempusdominus-bootstrap-4のフォーカスが外れたとき、自動で非表示となるようにする
     $(document).on('mouseup touchend', e => {

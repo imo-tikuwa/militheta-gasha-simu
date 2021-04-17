@@ -14,7 +14,13 @@ $this->assign('title', "キャラクター{$button_name}");
         <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="form-group">
             <?= $this->element('Parts/label', ['field' => 'name', 'label' => '名前', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
-            <?= $this->Form->control('name', ['type' => 'text', 'class' => 'form-control form-control-sm rounded-0 ', 'label' => false, 'required' => false, 'error' => false]); ?>
+            <?= $this->Form->control('name', [
+              'type' => 'text',
+              'class' => 'form-control form-control-sm rounded-0 ',
+              'label' => false,
+              'required' => false,
+              'error' => false
+            ]); ?>
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">

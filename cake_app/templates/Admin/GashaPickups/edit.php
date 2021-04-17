@@ -14,13 +14,29 @@ $this->assign('title', "ピックアップ情報{$button_name}");
         <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="form-group">
             <?= $this->element('Parts/label', ['field' => 'gasha_id', 'label' => 'ガシャID', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
-            <?= $this->Form->control('gasha_id', ['id' => 'gasha_id', 'type' => 'select', 'class' => 'form-control form-control-sm rounded-0 ', 'label' => false, 'required' => false, 'error' => false, 'empty' => '　']); ?>
+            <?= $this->Form->control('gasha_id', [
+              'id' => 'gasha_id',
+              'type' => 'select',
+              'class' => 'form-control form-control-sm rounded-0 ',
+              'label' => false,
+              'required' => false,
+              'error' => false,
+              'empty' => '　'
+            ]); ?>
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="form-group">
             <?= $this->element('Parts/label', ['field' => 'card_id', 'label' => 'カードID', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
-            <?= $this->Form->control('card_id', ['id' => 'card_id', 'type' => 'select', 'class' => 'form-control form-control-sm rounded-0 ', 'label' => false, 'required' => false, 'error' => false, 'empty' => '　']); ?>
+            <?= $this->Form->control('card_id', [
+              'id' => 'card_id',
+              'type' => 'select',
+              'class' => 'form-control form-control-sm rounded-0 ',
+              'label' => false,
+              'required' => false,
+              'error' => false,
+              'empty' => '　'
+            ]); ?>
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
