@@ -21,6 +21,7 @@ $this->assign('title', "ピックアップ情報{$button_name}");
               'label' => false,
               'required' => false,
               'error' => false,
+              'options' => $gasha_id_list,
               'empty' => '　'
             ]); ?>
           </div>
@@ -35,6 +36,7 @@ $this->assign('title', "ピックアップ情報{$button_name}");
               'label' => false,
               'required' => false,
               'error' => false,
+              'options' => $card_id_list,
               'empty' => '　'
             ]); ?>
           </div>

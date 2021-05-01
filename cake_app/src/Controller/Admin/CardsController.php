@@ -37,11 +37,10 @@ class CardsController extends AppController
 
         $this->loadModel('Characters');
 
-        if (!in_array($this->getRequest()->getParam('action'), [ACTION_DELETE, ACTION_CSV_EXPORT, ACTION_CSV_IMPORT, ACTION_EXCEL_EXPORT], true)) {
-            // キャラクターの選択肢
-            $characters = $this->Characters->find('list', ['keyField' => 'id', 'valueField' => 'name'])->toArray();
+        if (in_array($this->getRequest()->getParam('action'), [ACTION_INDEX, ACTION_ADD, ACTION_EDIT], true)) {
+            $character_id_list = $this->Characters->find('list', ['keyField' => 'id', 'valueField' => 'name'])->toArray();
 
-            $this->set(compact('characters'));
+            $this->set(compact('character_id_list'));
         }
     }
 

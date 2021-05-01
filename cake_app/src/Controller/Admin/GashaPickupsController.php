@@ -38,18 +38,16 @@ class GashaPickupsController extends AppController
         $this->loadModel('Gashas');
         $this->loadModel('Cards');
 
-        if (!in_array($this->getRequest()->getParam('action'), [ACTION_DELETE, ACTION_CSV_EXPORT, ACTION_EXCEL_EXPORT], true)) {
-            // ガシャIDの選択肢
-            $gashas = $this->Gashas->find('list', [
+        if (in_array($this->getRequest()->getParam('action'), [ACTION_INDEX, ACTION_ADD, ACTION_EDIT], true)) {
+            $gasha_id_list = $this->Gashas->find('list', [
                 'keyField' => 'id',
                 'valueField' => function (Gasha $gasha) {
                     return $gasha->start_date->i18nFormat('yyyy/MM/dd') . '　' . $gasha->title;
                 }
             ])->order(['id' => 'DESC'])->toArray();
-            // カードIDの選択肢
-            $cards = $this->Cards->find('list', ['keyField' => 'id', 'valueField' => 'name'])->toArray();
+            $card_id_list = $this->Cards->find('list', ['keyField' => 'id', 'valueField' => 'name'])->toArray();
 
-            $this->set(compact('gashas', 'cards'));
+            $this->set(compact('gasha_id_list', 'card_id_list'));
         }
     }
 

@@ -94,6 +94,7 @@ $this->Form->setTemplates([
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('id', [
+                  'type' => 'text',
                   'class' => 'form-control form-control-sm rounded-0',
                   'label' => 'ID',
                 ]); ?>
@@ -104,6 +105,7 @@ $this->Form->setTemplates([
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('name', [
+                  'type' => 'text',
                   'class' => 'form-control form-control-sm rounded-0',
                   'label' => '名前',
                 ]); ?>

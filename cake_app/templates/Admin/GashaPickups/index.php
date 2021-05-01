@@ -114,6 +114,7 @@ $this->Form->setTemplates([
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('id', [
+                  'type' => 'text',
                   'class' => 'form-control form-control-sm rounded-0',
                   'label' => 'ID',
                 ]); ?>
@@ -126,7 +127,7 @@ $this->Form->setTemplates([
                 <?= $this->Form->control('gasha_id', [
                   'id' => 'gasha_id',
                   'type' => 'select',
-                  'options' => $gashas,
+                  'options' => $gasha_id_list,
                   'class' => 'form-control form-control-sm',
                   'label' => 'ガシャID',
                   'empty' => '　',
@@ -140,7 +141,7 @@ $this->Form->setTemplates([
                 <?= $this->Form->control('card_id', [
                   'id' => 'card_id',
                   'type' => 'select',
-                  'options' => $cards,
+                  'options' => $card_id_list,
                   'class' => 'form-control form-control-sm',
                   'label' => 'カードID',
                   'empty' => '　',

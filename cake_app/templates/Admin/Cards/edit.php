@@ -21,6 +21,7 @@ $this->assign('title', "カード{$button_name}");
               'label' => false,
               'required' => false,
               'error' => false,
+              'options' => $character_id_list,
               'empty' => '　'
             ]); ?>
           </div>
