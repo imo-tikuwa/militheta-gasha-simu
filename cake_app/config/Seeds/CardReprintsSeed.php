@@ -1110,6 +1110,42 @@ class CardReprintsSeed extends AbstractSeed
                 'modified' => '2021-03-05 18:12:05',
                 'deleted' => NULL,
             ],
+            [
+                'id' => '122',
+                'gasha_id' => '184',
+                'card_id' => '766',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ Love me do♡　星井美希',
+                'created' => '2021-05-02 09:20:16',
+                'modified' => '2021-05-02 09:20:16',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '123',
+                'gasha_id' => '184',
+                'card_id' => '767',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ プレシャス・ギフト　北沢志保',
+                'created' => '2021-05-02 09:20:55',
+                'modified' => '2021-05-02 09:20:55',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '124',
+                'gasha_id' => '184',
+                'card_id' => '779',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 弾けろ青春っ！　双海亜美',
+                'created' => '2021-05-02 09:21:14',
+                'modified' => '2021-05-02 09:21:14',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '125',
+                'gasha_id' => '184',
+                'card_id' => '768',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ スイートドーナツステージ　所恵美',
+                'created' => '2021-05-02 09:21:34',
+                'modified' => '2021-05-02 09:21:34',
+                'deleted' => NULL,
+            ],
         ];
 
         $table = $this->table('card_reprints');
