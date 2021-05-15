@@ -52,3 +52,14 @@ env/start.bat
 http://192.168.1.xxx/admin/auth/login  
 user: admin@imo-tikuwa.com    
 pass: password  
+
+## ER図作成
+erd直下にschemaspy-6.1.0.jarをダウンロード＆配置した状態で以下実行
+```
+>java -version
+java version "1.8.0_281"
+Java(TM) SE Runtime Environment (build 1.8.0_281-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.281-b09, mixed mode)
+
+>java -jar schemaspy-6.1.0.jar -vizjs
+```
