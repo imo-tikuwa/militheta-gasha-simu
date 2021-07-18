@@ -1146,6 +1146,42 @@ class CardReprintsSeed extends AbstractSeed
                 'modified' => '2021-05-02 09:21:34',
                 'deleted' => NULL,
             ],
+            [
+                'id' => '126',
+                'gasha_id' => '188',
+                'card_id' => '786',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ スマイルキャットランド　周防桃子',
+                'created' => '2021-07-18 09:52:31',
+                'modified' => '2021-07-18 09:52:31',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '127',
+                'gasha_id' => '188',
+                'card_id' => '787',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 乙女、風に吹かれて　福田のり子',
+                'created' => '2021-07-18 09:52:45',
+                'modified' => '2021-07-18 09:52:45',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '128',
+                'gasha_id' => '188',
+                'card_id' => '799',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ セクシー雀士…何を斬る？　馬場このみ',
+                'created' => '2021-07-18 09:52:57',
+                'modified' => '2021-07-18 09:52:57',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '129',
+                'gasha_id' => '188',
+                'card_id' => '788',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 柔らかな眼差し　島原エレナ',
+                'created' => '2021-07-18 09:53:09',
+                'modified' => '2021-07-18 09:53:09',
+                'deleted' => NULL,
+            ],
         ];
 
         $table = $this->table('card_reprints');
