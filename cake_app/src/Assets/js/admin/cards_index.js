@@ -16,7 +16,7 @@ $(() => {
     });
 
     // キャラクター
-    $('#character_id').select2({
+    $('#character-id').select2({
         theme: "bootstrap4",
         width: 'auto',
         dropdownAutoWidth: true,
@@ -37,7 +37,7 @@ $(() => {
     });
 
     // 実装日
-    $('#add_date-datepicker').datetimepicker({
+    $('#add-date-datepicker').datetimepicker({
         dayViewHeaderFormat: 'YYYY年 M月',
         locale: 'ja',
         buttons: {
@@ -56,14 +56,14 @@ $(() => {
         },
         format: 'YYYY-MM-DD',
     });
-    $('#add_date-datepicker').on('change.datetimepicker', e => {
+    $('#add-date-datepicker').on('change.datetimepicker', e => {
         if (e.date === false) {
-            $('#add_date-datepicker').datetimepicker('hide');
+            $('#add-date-datepicker').datetimepicker('hide');
         }
     });
 
     // ガシャ対象？
-    $('#gasha_include').select2({
+    $('#gasha-include').select2({
         theme: "bootstrap4",
         width: 'auto',
         dropdownAutoWidth: true,

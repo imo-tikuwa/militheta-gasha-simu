@@ -125,7 +125,7 @@ $this->Form->setTemplates([
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('gasha_id', [
-                  'id' => 'gasha_id',
+                  'id' => 'gasha-id',
                   'type' => 'select',
                   'options' => $gasha_id_list,
                   'class' => 'form-control form-control-sm',
@@ -139,7 +139,7 @@ $this->Form->setTemplates([
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('card_id', [
-                  'id' => 'card_id',
+                  'id' => 'card-id',
                   'type' => 'select',
                   'options' => $card_id_list,
                   'class' => 'form-control form-control-sm',

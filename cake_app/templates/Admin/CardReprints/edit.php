@@ -15,7 +15,7 @@ $this->assign('title', "復刻情報{$button_name}");
           <div class="form-group">
             <?= $this->element('Parts/label', ['field' => 'gasha_id', 'label' => 'ガシャID', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('gasha_id', [
-              'id' => 'gasha_id',
+              'id' => 'gasha-id',
               'type' => 'select',
               'class' => 'form-control form-control-sm rounded-0 ',
               'label' => false,
@@ -30,7 +30,7 @@ $this->assign('title', "復刻情報{$button_name}");
           <div class="form-group">
             <?= $this->element('Parts/label', ['field' => 'card_id', 'label' => 'カードID', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('card_id', [
-              'id' => 'card_id',
+              'id' => 'card-id',
               'type' => 'select',
               'class' => 'form-control form-control-sm rounded-0 ',
               'label' => false,

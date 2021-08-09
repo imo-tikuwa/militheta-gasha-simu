@@ -64,6 +64,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * 管理者権限
      */
     $builder->prefix('admin', function (RouteBuilder $routes) {
+        $routes->connect('/', ['controller' => 'Top', 'action' => 'index']);
         $routes->connect('/access-logs/*', ['controller' => 'AccessLogs', 'action' => 'index']);
         $routes->fallbacks('DashedRoute');
     });

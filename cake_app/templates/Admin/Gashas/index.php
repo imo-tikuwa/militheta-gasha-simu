@@ -140,12 +140,12 @@ $this->Form->setTemplates([
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('start_date', [
-                  'id' => 'start_date-datepicker',
+                  'id' => 'start-date-datepicker',
                   'type' => 'text',
                   'class' => 'form-control form-control-sm rounded-0',
                   'label' => 'ガシャ開始日',
                   'data-toggle' => 'datetimepicker',
-                  'data-target' => '#start_date-datepicker',
+                  'data-target' => '#start-date-datepicker',
                 ]); ?>
               </div>
             </div>
@@ -154,12 +154,12 @@ $this->Form->setTemplates([
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('end_date', [
-                  'id' => 'end_date-datepicker',
+                  'id' => 'end-date-datepicker',
                   'type' => 'text',
                   'class' => 'form-control form-control-sm rounded-0',
                   'label' => 'ガシャ終了日',
                   'data-toggle' => 'datetimepicker',
-                  'data-target' => '#end_date-datepicker',
+                  'data-target' => '#end-date-datepicker',
                 ]); ?>
               </div>
             </div>

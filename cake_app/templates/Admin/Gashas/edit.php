@@ -13,32 +13,32 @@ $this->assign('title', "ガシャ{$button_name}");
       <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-12">
           <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'start_date-datepicker', 'label' => 'ガシャ開始日', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+            <?= $this->element('Parts/label', ['field' => 'start-date-datepicker', 'label' => 'ガシャ開始日', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('start_date', [
               'type' => 'text',
-              'id' => 'start_date-datepicker',
+              'id' => 'start-date-datepicker',
               'required' => false,
               'error' => false,
               'class' => 'form-control form-control-sm rounded-0 ',
               'label' => false,
               'data-toggle' => 'datetimepicker',
-              'data-target' => '#start_date-datepicker',
+              'data-target' => '#start-date-datepicker',
               'value' => $this->formatDate($gasha->start_date, 'yyyy-MM-dd')
             ]); ?>
           </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-12">
           <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'end_date-datepicker', 'label' => 'ガシャ終了日', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+            <?= $this->element('Parts/label', ['field' => 'end-date-datepicker', 'label' => 'ガシャ終了日', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('end_date', [
               'type' => 'text',
-              'id' => 'end_date-datepicker',
+              'id' => 'end-date-datepicker',
               'required' => false,
               'error' => false,
               'class' => 'form-control form-control-sm rounded-0 ',
               'label' => false,
               'data-toggle' => 'datetimepicker',
-              'data-target' => '#end_date-datepicker',
+              'data-target' => '#end-date-datepicker',
               'value' => $this->formatDate($gasha->end_date, 'yyyy-MM-dd')
             ]); ?>
           </div>

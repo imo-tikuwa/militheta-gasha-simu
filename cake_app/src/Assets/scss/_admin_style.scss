@@ -302,6 +302,11 @@ label.item-label {
   margin-bottom: 0 !important;
 }
 
+/* 入力項目にくっつくボタンの線色を入力項目に揃える */
+.input-group .input-group-append .btn {
+  border-color: $input-border-color;
+}
+
 /* ラベル太くするのやめる */
 label:not(.form-check-label):not(.custom-file-label) {
   font-weight: inherit;

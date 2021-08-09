@@ -144,7 +144,7 @@ $this->Form->setTemplates([
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('character_id', [
-                  'id' => 'character_id',
+                  'id' => 'character-id',
                   'type' => 'select',
                   'options' => $character_id_list,
                   'class' => 'form-control form-control-sm',
@@ -197,12 +197,12 @@ $this->Form->setTemplates([
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('add_date', [
-                  'id' => 'add_date-datepicker',
+                  'id' => 'add-date-datepicker',
                   'type' => 'text',
                   'class' => 'form-control form-control-sm rounded-0',
                   'label' => '実装日',
                   'data-toggle' => 'datetimepicker',
-                  'data-target' => '#add_date-datepicker',
+                  'data-target' => '#add-date-datepicker',
                 ]); ?>
               </div>
             </div>
@@ -211,7 +211,7 @@ $this->Form->setTemplates([
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <?= $this->Form->control('gasha_include', [
-                  'id' => 'gasha_include',
+                  'id' => 'gasha-include',
                   'type' => 'select',
                   'options' => _code('Codes.Cards.gasha_include'),
                   'class' => 'form-control form-control-sm',

@@ -8,14 +8,14 @@ $(() => {
     });
 
     // ガシャID
-    $('#gasha_id').select2({
+    $('#gasha-id').select2({
         theme: "bootstrap4",
         width: 'auto',
         dropdownAutoWidth: true,
     });
 
     // カードID
-    $('#card_id').select2({
+    $('#card-id').select2({
         theme: "bootstrap4",
         width: 'auto',
         dropdownAutoWidth: true,

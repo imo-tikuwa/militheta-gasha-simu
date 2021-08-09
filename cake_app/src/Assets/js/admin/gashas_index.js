@@ -16,7 +16,7 @@ $(() => {
     });
 
     // ガシャ開始日
-    $('#start_date-datepicker').datetimepicker({
+    $('#start-date-datepicker').datetimepicker({
         dayViewHeaderFormat: 'YYYY年 M月',
         locale: 'ja',
         buttons: {
@@ -35,14 +35,14 @@ $(() => {
         },
         format: 'YYYY-MM-DD',
     });
-    $('#start_date-datepicker').on('change.datetimepicker', e => {
+    $('#start-date-datepicker').on('change.datetimepicker', e => {
         if (e.date === false) {
-            $('#start_date-datepicker').datetimepicker('hide');
+            $('#start-date-datepicker').datetimepicker('hide');
         }
     });
 
     // ガシャ終了日
-    $('#end_date-datepicker').datetimepicker({
+    $('#end-date-datepicker').datetimepicker({
         dayViewHeaderFormat: 'YYYY年 M月',
         locale: 'ja',
         buttons: {
@@ -61,9 +61,9 @@ $(() => {
         },
         format: 'YYYY-MM-DD',
     });
-    $('#end_date-datepicker').on('change.datetimepicker', e => {
+    $('#end-date-datepicker').on('change.datetimepicker', e => {
         if (e.date === false) {
-            $('#end_date-datepicker').datetimepicker('hide');
+            $('#end-date-datepicker').datetimepicker('hide');
         }
     });
 
