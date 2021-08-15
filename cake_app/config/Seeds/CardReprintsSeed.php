@@ -1182,6 +1182,33 @@ class CardReprintsSeed extends AbstractSeed
                 'modified' => '2021-07-18 09:53:09',
                 'deleted' => NULL,
             ],
+            [
+                'id' => '130',
+                'gasha_id' => '196',
+                'card_id' => '810',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 花桜に惹かれて　如月千早',
+                'created' => '2021-08-15 11:26:09',
+                'modified' => '2021-08-15 11:26:09',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '131',
+                'gasha_id' => '196',
+                'card_id' => '811',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 光照らす鼓草　木下ひなた',
+                'created' => '2021-08-15 11:26:33',
+                'modified' => '2021-08-15 11:26:33',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '132',
+                'gasha_id' => '196',
+                'card_id' => '812',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 笑顔満開Ｖサイン！　真壁瑞希',
+                'created' => '2021-08-15 11:26:52',
+                'modified' => '2021-08-15 11:26:52',
+                'deleted' => NULL,
+            ],
         ];
 
         $table = $this->table('card_reprints');

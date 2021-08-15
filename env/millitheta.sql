@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2021-07-18 10:39:31
+Date: 2021-08-15 11:45:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,7 +58,7 @@ CREATE TABLE `cards` (
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`),
   KEY `character_id` (`character_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1243 DEFAULT CHARSET=utf8 COMMENT='カード';
+) ENGINE=InnoDB AUTO_INCREMENT=1264 DEFAULT CHARSET=utf8 COMMENT='カード';
 
 -- ----------------------------
 -- Records of cards
@@ -1304,7 +1304,28 @@ INSERT INTO `cards` VALUES ('1238', '54', '制服シリーズ［961］　玲音'
 INSERT INTO `cards` VALUES ('1239', '53', '制服シリーズ［961］　詩花', '03', '04', '2021-07-13', '0', '01', '詩花 制服シリーズ［961］　詩花 SR Ex 恒常', '2021-07-18 09:46:57', '2021-07-18 09:46:57', null);
 INSERT INTO `cards` VALUES ('1240', '43', '花火に照らされて　福田のり子', '03', '01', '2021-07-13', '0', '01', '福田のり子 花火に照らされて　福田のり子 SR Princess 恒常', '2021-07-18 09:46:57', '2021-07-18 09:46:57', null);
 INSERT INTO `cards` VALUES ('1241', '24', 'たこ焼きの達人！　望月杏奈', '03', '03', '2021-07-13', '0', '01', '望月杏奈 たこ焼きの達人！　望月杏奈 SR Angel 恒常', '2021-07-18 09:46:57', '2021-07-18 09:46:57', null);
-INSERT INTO `cards` VALUES ('1242', '33', 'はっぴスマイル　北沢志保', '02', '02', '2021-07-13', '0', '01', '北沢志保 はっぴスマイル　北沢志保 R Fairy 恒常', '2021-07-18 09:46:57', '2021-07-18 09:46:57', null);
+INSERT INTO `cards` VALUES ('1242', '33', 'はっぴスマイル　北沢志保', '02', '02', '2021-07-13', '1', '01', '北沢志保 はっぴスマイル　北沢志保 R Fairy 恒常', '2021-07-18 09:46:57', '2021-08-15 11:39:46', null);
+INSERT INTO `cards` VALUES ('1243', '4', '無邪気なメカニック　萩原雪歩', '04', '01', '2021-07-20', '1', '02', '萩原雪歩 無邪気なメカニック　萩原雪歩 SSR Princess 限定', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1244', '20', '天翔ける正義　所恵美', '04', '02', '2021-07-20', '1', '02', '所恵美 天翔ける正義　所恵美 SSR Fairy 限定', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1245', '54', 'MILLION LIVE CLOSET！［961］　玲音', '03', '04', '2021-07-20', '0', '01', '玲音 MILLION LIVE CLOSET！［961］　玲音 SR Ex 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1246', '37', '音楽革命を起こせ！　横山奈緒', '03', '01', '2021-07-20', '1', '01', '横山奈緒 音楽革命を起こせ！　横山奈緒 SR Princess 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1247', '21', '逃してあげない♪　徳川まつり', '02', '01', '2021-07-20', '1', '01', '徳川まつり 逃してあげない♪　徳川まつり R Princess 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1248', '16', '＊DIAMOND JOKER＊　伊吹翼', '03', '03', '2021-07-20', '0', '01', '伊吹翼 ＊DIAMOND JOKER＊　伊吹翼 SR Angel 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1249', '21', '＊DIAMOND JOKER＊　徳川まつり', '03', '01', '2021-07-21', '0', '01', '徳川まつり ＊DIAMOND JOKER＊　徳川まつり SR Princess 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1250', '33', 'グラティテュード・ナイト　北沢志保', '04', '02', '2021-07-31', '1', '02', '北沢志保 グラティテュード・ナイト　北沢志保 SSR Fairy 限定', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1251', '18', 'しなやかに、はんなりと　島原エレナ', '04', '03', '2021-07-31', '1', '02', '島原エレナ しなやかに、はんなりと　島原エレナ SSR Angel 限定', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1252', '35', 'ドドン！と和太鼓！！　木下ひなた', '03', '03', '2021-07-31', '1', '02', '木下ひなた ドドン！と和太鼓！！　木下ひなた SR Angel 限定', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1253', '53', 'MILLION LIVE CLOSET！［961］　詩花', '03', '04', '2021-07-31', '0', '01', '詩花 MILLION LIVE CLOSET！［961］　詩花 SR Ex 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1254', '28', '明日へのProgram　松田亜利沙', '03', '01', '2021-08-03', '0', '01', '松田亜利沙 明日へのProgram　松田亜利沙 SR Princess 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1255', '26', '明日へのProgram　七尾百合子', '03', '01', '2021-08-03', '0', '01', '七尾百合子 明日へのProgram　七尾百合子 SR Princess 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1256', '34', '夏服シリーズ　舞浜歩', '03', '02', '2021-08-05', '0', '01', '舞浜歩 夏服シリーズ　舞浜歩 SR Fairy 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1257', '23', '夏服シリーズ　野々原茜', '03', '03', '2021-08-05', '0', '01', '野々原茜 夏服シリーズ　野々原茜 SR Angel 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1258', '45', '夏服シリーズ　篠宮可憐', '03', '03', '2021-08-05', '0', '01', '篠宮可憐 夏服シリーズ　篠宮可憐 SR Angel 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1259', '6', '夏服シリーズ　菊地真', '03', '01', '2021-08-05', '0', '01', '菊地真 夏服シリーズ　菊地真 SR Princess 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1260', '13', 'Pon De Beach　我那覇響', '04', '01', '2021-08-12', '1', '01', '我那覇響 Pon De Beach　我那覇響 SSR Princess 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1261', '47', 'Day After ”Yesterday”　永吉昴', '04', '02', '2021-08-12', '1', '01', '永吉昴 Day After ”Yesterday”　永吉昴 SSR Fairy 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1262', '42', 'MILLION LIVE CONFERENCE！　宮尾美也', '03', '03', '2021-08-12', '1', '01', '宮尾美也 MILLION LIVE CONFERENCE！　宮尾美也 SR Angel 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
+INSERT INTO `cards` VALUES ('1263', '9', 'MILLION LIVE CONFERENCE！　秋月律子', '03', '02', '2021-08-12', '1', '01', '秋月律子 MILLION LIVE CONFERENCE！　秋月律子 SR Fairy 恒常', '2021-08-15 11:06:08', '2021-08-15 11:06:08', null);
 
 -- ----------------------------
 -- Table structure for `card_reprints`
@@ -1321,7 +1342,7 @@ CREATE TABLE `card_reprints` (
   PRIMARY KEY (`id`),
   KEY `card_id` (`card_id`),
   KEY `gasha_id` (`gasha_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8 COMMENT='復刻情報';
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8 COMMENT='復刻情報';
 
 -- ----------------------------
 -- Records of card_reprints
@@ -1455,6 +1476,9 @@ INSERT INTO `card_reprints` VALUES ('126', '188', '786', '【限定復刻】日�
 INSERT INTO `card_reprints` VALUES ('127', '188', '787', '【限定復刻】日替わりピックアップ！限定復刻ガシャ 乙女、風に吹かれて　福田のり子', '2021-07-18 09:52:45', '2021-07-18 09:52:45', null);
 INSERT INTO `card_reprints` VALUES ('128', '188', '799', '【限定復刻】日替わりピックアップ！限定復刻ガシャ セクシー雀士…何を斬る？　馬場このみ', '2021-07-18 09:52:57', '2021-07-18 09:52:57', null);
 INSERT INTO `card_reprints` VALUES ('129', '188', '788', '【限定復刻】日替わりピックアップ！限定復刻ガシャ 柔らかな眼差し　島原エレナ', '2021-07-18 09:53:09', '2021-07-18 09:53:09', null);
+INSERT INTO `card_reprints` VALUES ('130', '196', '810', '【限定復刻】日替わりピックアップ！限定復刻ガシャ 花桜に惹かれて　如月千早', '2021-08-15 11:26:09', '2021-08-15 11:26:09', null);
+INSERT INTO `card_reprints` VALUES ('131', '196', '811', '【限定復刻】日替わりピックアップ！限定復刻ガシャ 光照らす鼓草　木下ひなた', '2021-08-15 11:26:33', '2021-08-15 11:26:33', null);
+INSERT INTO `card_reprints` VALUES ('132', '196', '812', '【限定復刻】日替わりピックアップ！限定復刻ガシャ 笑顔満開Ｖサイン！　真壁瑞希', '2021-08-15 11:26:52', '2021-08-15 11:26:52', null);
 
 -- ----------------------------
 -- Table structure for `characters`
@@ -1544,7 +1568,7 @@ CREATE TABLE `gashas` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
+) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
 
 -- ----------------------------
 -- Records of gashas
@@ -1737,8 +1761,12 @@ INSERT INTO `gashas` VALUES ('189', '2021-05-31', '2021-06-10', '【期間限定
 INSERT INTO `gashas` VALUES ('190', '2021-06-10', '2021-06-17', 'SONG FOR YOU！ガシャ VOL.17', '3', '12', 'SONG FOR YOU！ガシャ VOL.17', '2021-07-18 09:51:11', '2021-07-18 09:51:11', null);
 INSERT INTO `gashas` VALUES ('191', '2021-06-17', '2021-06-24', '【期間限定】愛・大切な貴方と…聖ミリオン女学園ガシャ', '3', '12', '【期間限定】愛・大切な貴方と…聖ミリオン女学園ガシャ', '2021-07-18 09:51:11', '2021-07-18 09:51:11', null);
 INSERT INTO `gashas` VALUES ('192', '2021-06-28', '2021-07-02', '【フェス限定】ミリオンフェス', '6', '12', '【フェス限定】ミリオンフェス', '2021-07-18 09:51:11', '2021-07-18 09:51:11', null);
-INSERT INTO `gashas` VALUES ('193', '2021-07-02', '2021-07-13', '【期間限定】セカンドヘアスタイルガシャ', '3', '12', '【期間限定】セカンドヘアスタイルガシャ', '2021-07-18 09:51:11', '2021-07-18 09:51:11', null);
+INSERT INTO `gashas` VALUES ('193', '2021-07-02', '2021-07-13', '【ヘアスタイル限定】セカンドヘアスタイルガシャ', '3', '12', '【ヘアスタイル限定】セカンドヘアスタイルガシャ', '2021-07-18 09:51:11', '2021-08-15 11:19:37', null);
 INSERT INTO `gashas` VALUES ('194', '2021-07-13', '2021-07-20', 'SONG FOR YOU！ガシャ VOL.18', '3', '12', 'SONG FOR YOU！ガシャ VOL.18', '2021-07-18 09:51:11', '2021-07-18 09:51:11', null);
+INSERT INTO `gashas` VALUES ('195', '2021-07-20', '2021-07-29', '【ヘアスタイル限定】セカンドヘアスタイルガシャ', '3', '12', '【ヘアスタイル限定】セカンドヘアスタイルガシャ', '2021-08-15 11:18:59', '2021-08-15 11:18:59', null);
+INSERT INTO `gashas` VALUES ('196', '2021-07-29', '2021-07-31', '【限定復刻】日替わりピックアップ！限定復刻ガシャ', '3', '12', '【限定復刻】日替わりピックアップ！限定復刻ガシャ', '2021-08-15 11:18:59', '2021-08-15 11:18:59', null);
+INSERT INTO `gashas` VALUES ('197', '2021-07-31', '2021-08-12', '【ヘアスタイル限定】セカンドヘアスタイルガシャ', '3', '12', '【ヘアスタイル限定】セカンドヘアスタイルガシャ', '2021-08-15 11:18:59', '2021-08-15 11:18:59', null);
+INSERT INTO `gashas` VALUES ('198', '2021-08-12', '2021-08-19', 'SONG FOR YOU！ガシャ VOL.19', '3', '12', 'SONG FOR YOU！ガシャ VOL.19', '2021-08-15 11:18:59', '2021-08-15 11:18:59', null);
 
 -- ----------------------------
 -- Table structure for `gasha_pickups`
@@ -1755,7 +1783,7 @@ CREATE TABLE `gasha_pickups` (
   PRIMARY KEY (`id`),
   KEY `card_id` (`card_id`),
   KEY `gasha_id` (`gasha_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=711 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
+) ENGINE=InnoDB AUTO_INCREMENT=725 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
 
 -- ----------------------------
 -- Records of gasha_pickups
@@ -2464,9 +2492,23 @@ INSERT INTO `gasha_pickups` VALUES ('701', '191', '1170', '【期間限定】愛
 INSERT INTO `gasha_pickups` VALUES ('702', '191', '1171', '【期間限定】愛・大切な貴方と…聖ミリオン女学園ガシャ 高飛車お嬢さま　高坂海美', '2021-07-18 10:00:15', '2021-07-18 10:00:15', null);
 INSERT INTO `gasha_pickups` VALUES ('703', '192', '1174', '【フェス限定】ミリオンフェス 止まらないディスティニー　ジュリア', '2021-07-18 10:00:44', '2021-07-18 10:00:44', null);
 INSERT INTO `gasha_pickups` VALUES ('704', '192', '1175', '【フェス限定】ミリオンフェス 在るが儘に　北上麗花', '2021-07-18 10:00:54', '2021-07-18 10:00:54', null);
-INSERT INTO `gasha_pickups` VALUES ('705', '193', '1228', '【期間限定】セカンドヘアスタイルガシャ 今は、まだ…　七尾百合子', '2021-07-18 10:01:22', '2021-07-18 10:01:22', null);
-INSERT INTO `gasha_pickups` VALUES ('706', '193', '1229', '【期間限定】セカンドヘアスタイルガシャ 都会の空に思うのは　最上静香', '2021-07-18 10:01:31', '2021-07-18 10:01:31', null);
-INSERT INTO `gasha_pickups` VALUES ('707', '193', '1230', '【期間限定】セカンドヘアスタイルガシャ 星の海　高槻やよい', '2021-07-18 10:01:40', '2021-07-18 10:01:40', null);
-INSERT INTO `gasha_pickups` VALUES ('708', '193', '1231', '【期間限定】セカンドヘアスタイルガシャ MILLION LIVE CLOSET！　田中琴葉', '2021-07-18 10:01:56', '2021-07-18 10:01:56', null);
+INSERT INTO `gasha_pickups` VALUES ('705', '193', '1228', '【ヘアスタイル限定】セカンドヘアスタイルガシャ 今は、まだ…　七尾百合子', '2021-07-18 10:01:22', '2021-07-18 10:01:22', null);
+INSERT INTO `gasha_pickups` VALUES ('706', '193', '1229', '【ヘアスタイル限定】セカンドヘアスタイルガシャ 都会の空に思うのは　最上静香', '2021-07-18 10:01:31', '2021-07-18 10:01:31', null);
+INSERT INTO `gasha_pickups` VALUES ('707', '193', '1230', '【ヘアスタイル限定】セカンドヘアスタイルガシャ 星の海　高槻やよい', '2021-07-18 10:01:40', '2021-07-18 10:01:40', null);
+INSERT INTO `gasha_pickups` VALUES ('708', '193', '1231', '【ヘアスタイル限定】セカンドヘアスタイルガシャ MILLION LIVE CLOSET！　田中琴葉', '2021-07-18 10:01:56', '2021-07-18 10:01:56', null);
 INSERT INTO `gasha_pickups` VALUES ('709', '194', '1236', 'SONG FOR YOU！ガシャ VOL.18 スポーツ！スポーツ！スポーツ！　高坂海美', '2021-07-18 10:02:23', '2021-07-18 10:02:23', null);
 INSERT INTO `gasha_pickups` VALUES ('710', '194', '1237', 'SONG FOR YOU！ガシャ VOL.18 水中キャンディ　馬場このみ', '2021-07-18 10:02:37', '2021-07-18 10:02:37', null);
+INSERT INTO `gasha_pickups` VALUES ('711', '195', '1243', '【ヘアスタイル限定】セカンドヘアスタイルガシャ 無邪気なメカニック　萩原雪歩', '2021-08-15 11:27:37', '2021-08-15 11:27:37', null);
+INSERT INTO `gasha_pickups` VALUES ('712', '195', '1244', '【ヘアスタイル限定】セカンドヘアスタイルガシャ 天翔ける正義　所恵美', '2021-08-15 11:27:57', '2021-08-15 11:27:57', null);
+INSERT INTO `gasha_pickups` VALUES ('713', '195', '1246', '【ヘアスタイル限定】セカンドヘアスタイルガシャ 音楽革命を起こせ！　横山奈緒', '2021-08-15 11:28:23', '2021-08-15 11:28:23', null);
+INSERT INTO `gasha_pickups` VALUES ('714', '195', '1247', '【ヘアスタイル限定】セカンドヘアスタイルガシャ 逃してあげない♪　徳川まつり', '2021-08-15 11:28:47', '2021-08-15 11:28:47', null);
+INSERT INTO `gasha_pickups` VALUES ('715', '196', '810', '【限定復刻】日替わりピックアップ！限定復刻ガシャ 花桜に惹かれて　如月千早', '2021-08-15 11:26:09', '2021-08-15 11:26:09', null);
+INSERT INTO `gasha_pickups` VALUES ('716', '196', '811', '【限定復刻】日替わりピックアップ！限定復刻ガシャ 光照らす鼓草　木下ひなた', '2021-08-15 11:26:33', '2021-08-15 11:26:33', null);
+INSERT INTO `gasha_pickups` VALUES ('717', '196', '812', '【限定復刻】日替わりピックアップ！限定復刻ガシャ 笑顔満開Ｖサイン！　真壁瑞希', '2021-08-15 11:26:52', '2021-08-15 11:26:52', null);
+INSERT INTO `gasha_pickups` VALUES ('718', '197', '1250', '【ヘアスタイル限定】セカンドヘアスタイルガシャ グラティテュード・ナイト　北沢志保', '2021-08-15 11:30:54', '2021-08-15 11:30:54', null);
+INSERT INTO `gasha_pickups` VALUES ('719', '197', '1251', '【ヘアスタイル限定】セカンドヘアスタイルガシャ しなやかに、はんなりと　島原エレナ', '2021-08-15 11:31:14', '2021-08-15 11:31:14', null);
+INSERT INTO `gasha_pickups` VALUES ('720', '197', '1252', '【ヘアスタイル限定】セカンドヘアスタイルガシャ ドドン！と和太鼓！！　木下ひなた', '2021-08-15 11:31:33', '2021-08-15 11:31:33', null);
+INSERT INTO `gasha_pickups` VALUES ('721', '198', '1260', 'SONG FOR YOU！ガシャ VOL.19 Pon De Beach　我那覇響', '2021-08-15 11:32:06', '2021-08-15 11:32:06', null);
+INSERT INTO `gasha_pickups` VALUES ('722', '198', '1261', 'SONG FOR YOU！ガシャ VOL.19 Day After ”Yesterday”　永吉昴', '2021-08-15 11:32:31', '2021-08-15 11:32:31', null);
+INSERT INTO `gasha_pickups` VALUES ('723', '198', '1262', 'SONG FOR YOU！ガシャ VOL.19 MILLION LIVE CONFERENCE！　宮尾美也', '2021-08-15 11:32:52', '2021-08-15 11:32:52', null);
+INSERT INTO `gasha_pickups` VALUES ('724', '198', '1263', 'SONG FOR YOU！ガシャ VOL.19 MILLION LIVE CONFERENCE！　秋月律子', '2021-08-15 11:33:10', '2021-08-15 11:33:10', null);
