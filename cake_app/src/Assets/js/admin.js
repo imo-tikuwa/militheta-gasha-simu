@@ -9,6 +9,7 @@ import 'admin-lte/plugins/chart.js/Chart.min.js';
 
 import 'select2/dist/js/select2.min.js';
 
+import 'moment/locale/ja.js';
 window.moment = require('moment');
 window.moment.locale('ja');
 import 'tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.js';
