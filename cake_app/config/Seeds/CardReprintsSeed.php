@@ -1209,6 +1209,42 @@ class CardReprintsSeed extends AbstractSeed
                 'modified' => '2021-08-15 11:26:52',
                 'deleted' => NULL,
             ],
+            [
+                'id' => '133',
+                'gasha_id' => '200',
+                'card_id' => '828',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 優雅な休日　田中琴葉',
+                'created' => '2021-09-25 11:06:31',
+                'modified' => '2021-09-25 11:06:31',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '134',
+                'gasha_id' => '200',
+                'card_id' => '829',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ ゆめかわ♡デコレーション　双海真美',
+                'created' => '2021-09-25 11:06:51',
+                'modified' => '2021-09-25 11:06:51',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '135',
+                'gasha_id' => '200',
+                'card_id' => '841',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 新たなる怪盗、参上！　高山紗代子',
+                'created' => '2021-09-25 11:07:09',
+                'modified' => '2021-09-25 11:07:09',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '136',
+                'gasha_id' => '200',
+                'card_id' => '830',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 素直な笑顔　望月杏奈',
+                'created' => '2021-09-25 11:07:25',
+                'modified' => '2021-09-25 11:07:25',
+                'deleted' => NULL,
+            ],
         ];
 
         $table = $this->table('card_reprints');
