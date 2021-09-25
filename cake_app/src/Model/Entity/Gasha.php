@@ -52,7 +52,7 @@ class Gasha extends AppEntity
      */
     public function isLimited()
     {
-        return str_starts_with($this->title, '【期間限定】') || str_starts_with($this->title, '【ヘアスタイル限定】');
+        return str_starts_with($this->title, '【期間限定】');
     }
 
     /**
@@ -62,6 +62,15 @@ class Gasha extends AppEntity
     public function isFesLimited()
     {
         return str_starts_with($this->title, '【フェス限定】');
+    }
+
+    /**
+     * SHS限定ガチャ？
+     * @return bool
+     */
+    public function isShsLimited()
+    {
+        return str_starts_with($this->title, '【ヘアスタイル限定】');
     }
 
     /**

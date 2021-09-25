@@ -77,6 +77,9 @@ const GOOGLE_AUTHENTICATOR_SECRET_INPUT_NAME = 'secret';
 /** SSRピックアップレートの初期値 */
 const BASE_SSR_PICKUP_RATE = 0.99;
 
+/** SHS限定の1枚当たりのSSRピックアップレート(2021-09-17現在) */
+const SHS_LIMITED_SSR_PER_PICKUP_RATE = 0.899;
+
 /** SRピックアップレートの初期値 */
 const BASE_SR_PICKUP_RATE = 2.4;
 

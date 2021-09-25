@@ -499,6 +499,14 @@ class CardsTable extends AppTable
                 'add_date <=' => $start_date, // 過去のフェス限を含める
             ], [], true)->toArray();
             $cards = array_merge($fes_limited_cards, $cards);
+        } elseif ($gasha->isShsLimited()) {
+            // SHS限定カードを取得
+            $shs_limited_cards = $query->where([
+                'gasha_include' => true,
+                'limited' => '04',
+                'add_date <=' => $start_date, // 過去のSHS限を含める
+            ], [], true)->toArray();
+            $cards = array_merge($shs_limited_cards, $cards);
         } elseif ($gasha->isReprintLimited()) {
             // 復刻？の条件追加
             $card_reprints = TableRegistry::getTableLocator()->get('CardReprints');
