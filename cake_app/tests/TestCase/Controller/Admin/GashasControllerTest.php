@@ -26,6 +26,10 @@ class GashasControllerTest extends TestCase
         'app.Gashas',
         'app.CardReprints',
         'app.GashaPickups',
+        'plugin.OperationLogs.OperationLogs',
+        'plugin.OperationLogs.OperationLogsDaily',
+        'plugin.OperationLogs.OperationLogsHourly',
+        'plugin.OperationLogs.OperationLogsMonthly',
     ];
 
     /**

@@ -27,6 +27,10 @@ class CardsControllerTest extends TestCase
         'app.Characters',
         'app.CardReprints',
         'app.GashaPickups',
+        'plugin.OperationLogs.OperationLogs',
+        'plugin.OperationLogs.OperationLogsDaily',
+        'plugin.OperationLogs.OperationLogsHourly',
+        'plugin.OperationLogs.OperationLogsMonthly',
     ];
 
     /**

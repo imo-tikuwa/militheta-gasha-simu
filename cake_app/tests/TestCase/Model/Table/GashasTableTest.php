@@ -63,23 +63,24 @@ class GashasTableTest extends TestCase
             'sr_rate' => 0,
         ];
 
-        $this->valid_csv_data = [];
-        // ID
-        $this->valid_csv_data[] = '';
-        // ガシャ開始日
-        $this->valid_csv_data[] = date('Y-m-d');
-        // ガシャ終了日
-        $this->valid_csv_data[] = date('Y-m-d');
-        // ガシャタイトル
-        $this->valid_csv_data[] = 'valid data.';
-        // SSRレート
-        $this->valid_csv_data[] = '0';
-        // SRレート
-        $this->valid_csv_data[] = '0';
-        // 作成日時
-        $this->valid_csv_data[] = date('Y-m-d H:i:00');
-        // 更新日時
-        $this->valid_csv_data[] = date('Y-m-d H:i:00');
+        $this->valid_csv_data = [
+            // ID
+            '',
+            // ガシャ開始日
+            date('Y-m-d'),
+            // ガシャ終了日
+            date('Y-m-d'),
+            // ガシャタイトル
+            'valid data.',
+            // SSRレート
+            '0',
+            // SRレート
+            '0',
+            // 作成日時
+            date('Y-m-d H:i:00'),
+            // 更新日時
+            date('Y-m-d H:i:00'),
+        ];
     }
 
     /**

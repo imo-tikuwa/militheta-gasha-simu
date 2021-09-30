@@ -71,27 +71,28 @@ class CardsTableTest extends TestCase
             'limited' => '01',
         ];
 
-        $this->valid_csv_data = [];
-        // ID
-        $this->valid_csv_data[] = '';
-        // キャラクター
-        $this->valid_csv_data[] = $character->name;
-        // カード名
-        $this->valid_csv_data[] = 'valid data.';
-        // レアリティ
-        $this->valid_csv_data[] = 'N';
-        // タイプ
-        $this->valid_csv_data[] = 'Princess';
-        // 実装日
-        $this->valid_csv_data[] = date('Y-m-d');
-        // ガシャ対象？
-        $this->valid_csv_data[] = '1';
-        // 限定？
-        $this->valid_csv_data[] = '恒常';
-        // 作成日時
-        $this->valid_csv_data[] = date('Y-m-d H:i:00');
-        // 更新日時
-        $this->valid_csv_data[] = date('Y-m-d H:i:00');
+        $this->valid_csv_data = [
+            // ID
+            '',
+            // キャラクター
+            $character->name,
+            // カード名
+            'valid data.',
+            // レアリティ
+            'N',
+            // タイプ
+            'Princess',
+            // 実装日
+            date('Y-m-d'),
+            // ガシャ対象？
+            '1',
+            // 限定？
+            '恒常',
+            // 作成日時
+            date('Y-m-d H:i:00'),
+            // 更新日時
+            date('Y-m-d H:i:00'),
+        ];
     }
 
     /**

@@ -24,11 +24,11 @@ $this->assign('title', "復刻情報詳細");
           </tr>
           <tr>
             <th scope="row">作成日時</th>
-            <td><?= h($this->formatDate($card_reprint->created, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+            <td><?= h($card_reprint?->created?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
           </tr>
           <tr>
             <th scope="row">更新日時</th>
-            <td><?= h($this->formatDate($card_reprint->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+            <td><?= h($card_reprint?->modified?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
           </tr>
         </table>
       </div>

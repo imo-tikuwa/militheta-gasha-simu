@@ -58,7 +58,7 @@ $this->Form->setTemplates([
               <tr>
                 <td><?= $this->Html->link($character->id, ['action' => ACTION_VIEW, $character->id]) ?></td>
                 <td><?= h($character->name) ?></td>
-                <td><?= h($this->formatDate($character->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+                <td><?= h($character?->modified?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
                 <td class="actions">
                   <div class="btn-group" role="group">
                     <button id="btnGroupDrop<?= $character->id ?>" type="button" class="btn btn-sm btn-flat btn-outline-secondary dropdown-toggle index-dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"></button>

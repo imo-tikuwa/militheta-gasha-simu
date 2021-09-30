@@ -26,6 +26,10 @@ class CardReprintsControllerTest extends TestCase
         'app.CardReprints',
         'app.Gashas',
         'app.Cards',
+        'plugin.OperationLogs.OperationLogs',
+        'plugin.OperationLogs.OperationLogsDaily',
+        'plugin.OperationLogs.OperationLogsHourly',
+        'plugin.OperationLogs.OperationLogsMonthly',
     ];
 
     /**

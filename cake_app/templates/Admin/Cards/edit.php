@@ -82,7 +82,7 @@ $this->assign('title', "カード{$button_name}");
               'label' => false,
               'data-toggle' => 'datetimepicker',
               'data-target' => '#add-date-datepicker',
-              'value' => $this->formatDate($card->add_date, 'yyyy-MM-dd')
+              'value' => $card?->add_date?->i18nFormat('yyyy-MM-dd')
             ]); ?>
           </div>
         </div>

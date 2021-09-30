@@ -16,11 +16,11 @@ $this->assign('title', "ガシャ詳細");
           </tr>
           <tr>
             <th scope="row">ガシャ開始日</th>
-            <td><?= h($this->formatDate($gasha->start_date, 'yyyy/MM/dd')) ?></td>
+            <td><?= h($gasha?->start_date?->i18nFormat('yyyy/MM/dd')) ?></td>
           </tr>
           <tr>
             <th scope="row">ガシャ終了日</th>
-            <td><?= h($this->formatDate($gasha->end_date, 'yyyy/MM/dd')) ?></td>
+            <td><?= h($gasha?->end_date?->i18nFormat('yyyy/MM/dd')) ?></td>
           </tr>
           <tr>
             <th scope="row">ガシャタイトル</th>
@@ -36,11 +36,11 @@ $this->assign('title', "ガシャ詳細");
           </tr>
           <tr>
             <th scope="row">作成日時</th>
-            <td><?= h($this->formatDate($gasha->created, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+            <td><?= h($gasha?->created?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
           </tr>
           <tr>
             <th scope="row">更新日時</th>
-            <td><?= h($this->formatDate($gasha->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+            <td><?= h($gasha?->modified?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
           </tr>
         </table>
       </div>

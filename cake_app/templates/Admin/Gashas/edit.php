@@ -23,7 +23,7 @@ $this->assign('title', "ガシャ{$button_name}");
               'label' => false,
               'data-toggle' => 'datetimepicker',
               'data-target' => '#start-date-datepicker',
-              'value' => $this->formatDate($gasha->start_date, 'yyyy-MM-dd')
+              'value' => $gasha?->start_date?->i18nFormat('yyyy-MM-dd')
             ]); ?>
           </div>
         </div>
@@ -39,7 +39,7 @@ $this->assign('title', "ガシャ{$button_name}");
               'label' => false,
               'data-toggle' => 'datetimepicker',
               'data-target' => '#end-date-datepicker',
-              'value' => $this->formatDate($gasha->end_date, 'yyyy-MM-dd')
+              'value' => $gasha?->end_date?->i18nFormat('yyyy-MM-dd')
             ]); ?>
           </div>
         </div>

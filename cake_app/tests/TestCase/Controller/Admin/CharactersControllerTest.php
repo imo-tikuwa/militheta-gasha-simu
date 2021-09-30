@@ -25,6 +25,10 @@ class CharactersControllerTest extends TestCase
         'app.Admins',
         'app.Characters',
         'app.Cards',
+        'plugin.OperationLogs.OperationLogs',
+        'plugin.OperationLogs.OperationLogsDaily',
+        'plugin.OperationLogs.OperationLogsHourly',
+        'plugin.OperationLogs.OperationLogsMonthly',
     ];
 
     /**

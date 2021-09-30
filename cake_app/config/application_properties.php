@@ -120,7 +120,7 @@ return [
             'version' => 'd0ccdd75726cc23169aac6d2d14d87e1a5dfc2a624aba346ef9c77079c9e4607b87f088e4ac3f6bbd039a21198776518e81b66ef0adf8f8359e3124389200e59',
         ],
         'Cards' => [
-            'version' => 'e8ed847a2b4dee52f1049c2b5e6df0d4ae2b8849f2fb927a2dc6e59cc93fc8c8c73c90bbd7781859e9555ad1a57e31e4b6140527a39033ee6343bf8c98f0e02d',
+            'version' => '8d08ffc9661ce599ef98ea2ed3418bdec76b4b58a6c5e409e3493aaf175fc6b007f3d7edf25840d12ff516c3ccad367709966222707df70eb0caece56cbe999c',
         ],
         'Characters' => [
             'version' => '73842c4534be22815ce74e9bf7c0dfd147f4c39b83ef1137c2c9a80066383bbc8093679ad2923d6e653c38581e34540ca7a9b0e6dabdd79f674a7225a5bc2fd3',

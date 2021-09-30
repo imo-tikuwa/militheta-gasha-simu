@@ -24,11 +24,11 @@ $this->assign('title', "ピックアップ情報詳細");
           </tr>
           <tr>
             <th scope="row">作成日時</th>
-            <td><?= h($this->formatDate($gasha_pickup->created, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+            <td><?= h($gasha_pickup?->created?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
           </tr>
           <tr>
             <th scope="row">更新日時</th>
-            <td><?= h($this->formatDate($gasha_pickup->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+            <td><?= h($gasha_pickup?->modified?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
           </tr>
         </table>
       </div>

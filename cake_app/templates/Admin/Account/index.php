@@ -49,8 +49,8 @@ $google_authenticator = new PHPGangsta_GoogleAuthenticator();
               <td><?= h($account->mail) ?></td>
               <td><?= h($account->otp_status) ?></td>
               <td><?= $this->makePrivilegeListHtml($account->privilege)?></td>
-              <td><?= h($this->formatDate($account->created, 'yyyy/MM/dd HH:mm:ss')) ?></td>
-              <td><?= h($this->formatDate($account->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+              <td><?= h($account?->created?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
+              <td><?= h($account?->modified?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
               <td class="actions">
                 <div class="btn-group" role="group">
                   <button id="btnGroupDrop<?= $account->id ?>" type="button" class="<?= h($btn_class) ?> dropdown-toggle index-dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"></button>

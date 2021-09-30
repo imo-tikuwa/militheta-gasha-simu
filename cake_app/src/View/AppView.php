@@ -13,8 +13,6 @@
  */
 namespace App\View;
 
-use Cake\I18n\FrozenDate;
-use Cake\I18n\FrozenTime;
 use Cake\View\View;
 
 /**
@@ -38,21 +36,6 @@ class AppView extends View
      */
     public function initialize(): void
     {
-    }
-
-    /**
-     * FrozenDateもしくはFrozenTimeを指定のフォーマットに変換して返す
-     * @param FrozenDate|FrozenTime $obj FrozenDate、もしくはFrozenTimeオブジェクト
-     * @param string $format 日付フォーマット
-     * @return string|number
-     */
-    public function formatDate($obj = null, $format = 'yyyy-MM-dd')
-    {
-        if (!is_null($obj) && ($obj instanceof FrozenDate || $obj instanceof FrozenTime)) {
-            return $obj->i18nFormat($format);
-        }
-
-        return "";
     }
 
     /**

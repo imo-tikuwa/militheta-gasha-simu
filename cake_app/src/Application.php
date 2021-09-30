@@ -78,8 +78,8 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         // 開発用プラグインのロード
         try {
             $this->addPlugin('ErdGenerator');
-            $this->addPlugin('Cake3AdminBaker');
-            $this->addPlugin('Cake3ApiGenerator');
+            $this->addPlugin('AdminBaker');
+            $this->addPlugin('ApiGenerator');
         } catch (MissingPluginException $e) {
         }
     }

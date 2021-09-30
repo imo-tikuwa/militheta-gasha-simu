@@ -75,7 +75,7 @@ $this->Form->setTemplates([
                 <td><?= $this->Html->link($gasha_pickup->id, ['action' => ACTION_VIEW, $gasha_pickup->id]) ?></td>
                 <td><?= $gasha_pickup->has('gasha') ? $this->Html->link($gasha_pickup->gasha->title, ['controller' => 'Gashas', 'action' => ACTION_VIEW, $gasha_pickup->gasha->id]) : '' ?></td>
                 <td><?= $gasha_pickup->has('card') ? $this->Html->link($gasha_pickup->card->name, ['controller' => 'Cards', 'action' => ACTION_VIEW, $gasha_pickup->card->id]) : '' ?></td>
-                <td><?= h($this->formatDate($gasha_pickup->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+                <td><?= h($gasha_pickup?->modified?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
                 <td class="actions">
                   <div class="btn-group" role="group">
                     <button id="btnGroupDrop<?= $gasha_pickup->id ?>" type="button" class="btn btn-sm btn-flat btn-outline-secondary dropdown-toggle index-dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"></button>

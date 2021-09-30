@@ -85,12 +85,12 @@ $this->Form->setTemplates([
             <?php foreach ($gashas as $gasha) { ?>
               <tr>
                 <td><?= $this->Html->link($gasha->id, ['action' => ACTION_VIEW, $gasha->id]) ?></td>
-                <td><?= h($this->formatDate($gasha->start_date, 'yyyy/MM/dd')) ?></td>
-                <td><?= h($this->formatDate($gasha->end_date, 'yyyy/MM/dd')) ?></td>
+                <td><?= h($gasha?->start_date?->i18nFormat('yyyy/MM/dd')) ?></td>
+                <td><?= h($gasha?->end_date?->i18nFormat('yyyy/MM/dd')) ?></td>
                 <td><?= h($gasha->title) ?></td>
                 <td><?= $this->Number->format($gasha->ssr_rate) ?>%</td>
                 <td><?= $this->Number->format($gasha->sr_rate) ?>%</td>
-                <td><?= h($this->formatDate($gasha->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+                <td><?= h($gasha?->modified?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
                 <td class="actions">
                   <div class="btn-group" role="group">
                     <button id="btnGroupDrop<?= $gasha->id ?>" type="button" class="btn btn-sm btn-flat btn-outline-secondary dropdown-toggle index-dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"></button>

@@ -32,7 +32,7 @@ $this->assign('title', "カード詳細");
           </tr>
           <tr>
             <th scope="row">実装日</th>
-            <td><?= h($this->formatDate($card->add_date, 'yyyy/MM/dd')) ?></td>
+            <td><?= h($card?->add_date?->i18nFormat('yyyy/MM/dd')) ?></td>
           </tr>
           <tr>
             <th scope="row">ガシャ対象？</th>
@@ -44,11 +44,11 @@ $this->assign('title', "カード詳細");
           </tr>
           <tr>
             <th scope="row">作成日時</th>
-            <td><?= h($this->formatDate($card->created, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+            <td><?= h($card?->created?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
           </tr>
           <tr>
             <th scope="row">更新日時</th>
-            <td><?= h($this->formatDate($card->modified, 'yyyy/MM/dd HH:mm:ss')) ?></td>
+            <td><?= h($card?->modified?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
           </tr>
         </table>
       </div>
