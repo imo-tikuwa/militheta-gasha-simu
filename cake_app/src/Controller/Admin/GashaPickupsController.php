@@ -170,10 +170,11 @@ class GashaPickupsController extends AppController
      * @param string|null $id ピックアップ情報ID
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @throws \Cake\Http\Exception\MethodNotAllowedException When request method invalid.
      */
     public function delete($id = null)
     {
-        $this->getRequest()->allowMethod(['post', 'delete']);
+        $this->getRequest()->allowMethod('delete');
         $entity = $this->GashaPickups->get($id);
         if ($this->GashaPickups->delete($entity)) {
             $this->Flash->success('ピックアップ情報の削除が完了しました。');

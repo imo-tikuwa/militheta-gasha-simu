@@ -96,20 +96,15 @@ $this->Form->setTemplates([
                 <td><?= @h(_code("Codes.Cards.limited.{$card->limited}")) ?></td>
                 <td><?= h($card?->modified?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
                 <td class="actions">
-                  <div class="btn-group" role="group">
-                    <button id="btnGroupDrop<?= $card->id ?>" type="button" class="btn btn-sm btn-flat btn-outline-secondary dropdown-toggle index-dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop<?= $card->id ?>">
-                      <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_VIEW])) { ?>
-                        <?= $this->Html->link('詳細', ['action' => ACTION_VIEW, $card->id], ['class' => 'dropdown-item']) ?>
-                      <?php } ?>
-                      <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_EDIT])) { ?>
-                        <?= $this->Html->link('編集', ['action' => ACTION_EDIT, $card->id], ['class' => 'dropdown-item']) ?>
-                      <?php } ?>
-                      <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_DELETE])) { ?>
-                        <?= $this->Form->postLink('削除', ['action' => ACTION_DELETE, $card->id], ['class' => 'dropdown-item', 'confirm' => __('ID {0} を削除します。よろしいですか？', $card->id)]) ?>
-                      <?php } ?>
-                    </div>
-                  </div>
+                  <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_VIEW])) { ?>
+                    <?= $this->Html->link('<i title="詳細" class="far fa-list-alt mr-1"></i>', ['action' => ACTION_VIEW, $card->id], ['escape' => false]) ?>
+                  <?php } ?>
+                  <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_EDIT])) { ?>
+                    <?= $this->Html->link('<i title="編集" class="fas fa-pen mr-1"></i>', ['action' => ACTION_EDIT, $card->id], ['escape' => false]) ?>
+                  <?php } ?>
+                  <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_DELETE])) { ?>
+                    <?= $this->Form->postLink('<i title="削除" class="fas fa-trash"></i>', ['action' => ACTION_DELETE, $card->id], ['escape' => false, 'method' => 'delete', 'confirm' => __('ID {0} を削除します。よろしいですか？', $card->id)]) ?>
+                  <?php } ?>
                 </td>
               </tr>
             <?php } ?>

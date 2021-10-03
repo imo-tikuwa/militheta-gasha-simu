@@ -6,10 +6,8 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AppController;
 use App\Utils\CsvUtils;
 use App\Form\SearchForm;
-use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
 use Cake\Core\Exception\CakeException;
-use Cake\Utility\Hash;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
@@ -140,10 +138,11 @@ class GashasController extends AppController
      * @param string|null $id ガシャID
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @throws \Cake\Http\Exception\MethodNotAllowedException When request method invalid.
      */
     public function delete($id = null)
     {
-        $this->getRequest()->allowMethod(['post', 'delete']);
+        $this->getRequest()->allowMethod('delete');
         $entity = $this->Gashas->get($id);
         if ($this->Gashas->delete($entity)) {
             $this->Flash->success('ガシャの削除が完了しました。');

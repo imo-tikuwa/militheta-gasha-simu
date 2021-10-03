@@ -5,9 +5,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Form\SearchForm;
-use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
-use Cake\Utility\Hash;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;

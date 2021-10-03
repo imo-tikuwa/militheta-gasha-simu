@@ -172,10 +172,11 @@ class CardReprintsController extends AppController
      * @param string|null $id 復刻情報ID
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @throws \Cake\Http\Exception\MethodNotAllowedException When request method invalid.
      */
     public function delete($id = null)
     {
-        $this->getRequest()->allowMethod(['post', 'delete']);
+        $this->getRequest()->allowMethod('delete');
         $entity = $this->CardReprints->get($id);
         if ($this->CardReprints->delete($entity)) {
             $this->Flash->success('復刻情報の削除が完了しました。');

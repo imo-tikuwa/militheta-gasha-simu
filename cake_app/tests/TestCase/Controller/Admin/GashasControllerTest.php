@@ -519,7 +519,7 @@ class GashasControllerTest extends TestCase
         ]);
         $gasha = $this->Gashas->get(1);
         $this->assertInstanceOf('\App\Model\Entity\Gasha', $gasha);
-        $this->post('/admin/gashas/delete/1');
+        $this->delete('/admin/gashas/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession('ガシャの削除が完了しました。', 'Flash.flash.0.message');
         $gasha = $this->Gashas->findById(1)->first();
@@ -528,14 +528,14 @@ class GashasControllerTest extends TestCase
         $this->session([
             'Auth.Admin' => $this->read_admin
         ]);
-        $this->post('/admin/gashas/delete/1');
+        $this->delete('/admin/gashas/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
             'Auth.Admin' => $this->write_admin
         ]);
-        $this->post('/admin/gashas/delete/1');
+        $this->delete('/admin/gashas/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
@@ -543,35 +543,35 @@ class GashasControllerTest extends TestCase
         $this->session([
             'Auth.Admin' => $this->delete_admin
         ]);
-        $this->post('/admin/gashas/delete/1');
+        $this->delete('/admin/gashas/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession('ガシャの削除が完了しました。', 'Flash.flash.0.message');
 
         $this->session([
             'Auth.Admin' => $this->csv_export_admin
         ]);
-        $this->post('/admin/gashas/delete/1');
+        $this->delete('/admin/gashas/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
             'Auth.Admin' => $this->csv_import_admin
         ]);
-        $this->post('/admin/gashas/delete/1');
+        $this->delete('/admin/gashas/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
             'Auth.Admin' => $this->excel_export_admin
         ]);
-        $this->post('/admin/gashas/delete/1');
+        $this->delete('/admin/gashas/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
             'Auth.Admin' => $this->no_authority_admin
         ]);
-        $this->post('/admin/gashas/delete/1');
+        $this->delete('/admin/gashas/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 

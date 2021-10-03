@@ -9,7 +9,6 @@ use App\Form\SearchForm;
 use App\Utils\ExcelUtils;
 use Cake\Http\CallbackStream;
 use Cake\Core\Exception\CakeException;
-use Cake\Utility\Hash;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
@@ -166,10 +165,11 @@ class CardsController extends AppController
      * @param string|null $id カードID
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @throws \Cake\Http\Exception\MethodNotAllowedException When request method invalid.
      */
     public function delete($id = null)
     {
-        $this->getRequest()->allowMethod(['post', 'delete']);
+        $this->getRequest()->allowMethod('delete');
         $entity = $this->Cards->get($id);
         if ($this->Cards->delete($entity)) {
             $this->Flash->success('カードの削除が完了しました。');

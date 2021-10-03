@@ -471,7 +471,7 @@ class CardReprintsControllerTest extends TestCase
         ]);
         $card_reprint = $this->CardReprints->get(1);
         $this->assertInstanceOf('\App\Model\Entity\CardReprint', $card_reprint);
-        $this->post('/admin/card-reprints/delete/1');
+        $this->delete('/admin/card-reprints/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession('復刻情報の削除が完了しました。', 'Flash.flash.0.message');
         $card_reprint = $this->CardReprints->findById(1)->first();
@@ -480,14 +480,14 @@ class CardReprintsControllerTest extends TestCase
         $this->session([
             'Auth.Admin' => $this->read_admin
         ]);
-        $this->post('/admin/card-reprints/delete/1');
+        $this->delete('/admin/card-reprints/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
             'Auth.Admin' => $this->write_admin
         ]);
-        $this->post('/admin/card-reprints/delete/1');
+        $this->delete('/admin/card-reprints/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
@@ -495,28 +495,28 @@ class CardReprintsControllerTest extends TestCase
         $this->session([
             'Auth.Admin' => $this->delete_admin
         ]);
-        $this->post('/admin/card-reprints/delete/1');
+        $this->delete('/admin/card-reprints/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession('復刻情報の削除が完了しました。', 'Flash.flash.0.message');
 
         $this->session([
             'Auth.Admin' => $this->csv_export_admin
         ]);
-        $this->post('/admin/card-reprints/delete/1');
+        $this->delete('/admin/card-reprints/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
             'Auth.Admin' => $this->excel_export_admin
         ]);
-        $this->post('/admin/card-reprints/delete/1');
+        $this->delete('/admin/card-reprints/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
             'Auth.Admin' => $this->no_authority_admin
         ]);
-        $this->post('/admin/card-reprints/delete/1');
+        $this->delete('/admin/card-reprints/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 

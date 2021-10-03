@@ -60,17 +60,12 @@ $this->Form->setTemplates([
                 <td><?= h($character->name) ?></td>
                 <td><?= h($character?->modified?->i18nFormat('yyyy/MM/dd HH:mm:ss')) ?></td>
                 <td class="actions">
-                  <div class="btn-group" role="group">
-                    <button id="btnGroupDrop<?= $character->id ?>" type="button" class="btn btn-sm btn-flat btn-outline-secondary dropdown-toggle index-dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop<?= $character->id ?>">
-                      <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_VIEW])) { ?>
-                        <?= $this->Html->link('詳細', ['action' => ACTION_VIEW, $character->id], ['class' => 'dropdown-item']) ?>
-                      <?php } ?>
-                      <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_EDIT])) { ?>
-                        <?= $this->Html->link('編集', ['action' => ACTION_EDIT, $character->id], ['class' => 'dropdown-item']) ?>
-                      <?php } ?>
-                    </div>
-                  </div>
+                  <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_VIEW])) { ?>
+                    <?= $this->Html->link('<i title="詳細" class="far fa-list-alt mr-1"></i>', ['action' => ACTION_VIEW, $character->id], ['escape' => false]) ?>
+                  <?php } ?>
+                  <?php if (AuthUtils::hasRole($this->getRequest(), ['action' => ACTION_EDIT])) { ?>
+                    <?= $this->Html->link('<i title="編集" class="fas fa-pen mr-1"></i>', ['action' => ACTION_EDIT, $character->id], ['escape' => false]) ?>
+                  <?php } ?>
                 </td>
               </tr>
             <?php } ?>
