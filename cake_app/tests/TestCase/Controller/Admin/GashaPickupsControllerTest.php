@@ -202,6 +202,56 @@ class GashaPickupsControllerTest extends TestCase
     }
 
     /**
+     * Test beforeFilter method
+     *
+     * @return void
+     */
+    public function testBeforeFilter(): void
+    {
+        $this->session([
+            'Auth.Admin' => $this->super_admin
+        ]);
+        $this->get('/admin/gasha-pickups');
+        $this->assertIsArray($this->viewVariable('gasha_id_list'));
+        $this->assertIsArray($this->viewVariable('card_id_list'));
+        $this->assertResponseCode(200);
+
+        $this->get('/admin/gasha-pickups/add');
+        $this->assertIsArray($this->viewVariable('gasha_id_list'));
+        $this->assertIsArray($this->viewVariable('card_id_list'));
+        $this->assertResponseCode(200);
+
+        $this->get('/admin/gasha-pickups/edit/1');
+        $this->assertIsArray($this->viewVariable('gasha_id_list'));
+        $this->assertIsArray($this->viewVariable('card_id_list'));
+        $this->assertResponseCode(200);
+
+        $this->get('/admin/gasha-pickups/view/1');
+        $this->assertNull($this->viewVariable('gasha_id_list'));
+        $this->assertNull($this->viewVariable('card_id_list'));
+        $this->assertResponseCode(200);
+
+        $this->session([
+            'Auth.Admin' => $this->no_authority_admin
+        ]);
+        $this->get('/admin/gasha-pickups');
+        $this->assertResponseCode(302);
+        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+
+        $this->get('/admin/gasha-pickups/add');
+        $this->assertResponseCode(302);
+        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+
+        $this->get('/admin/gasha-pickups/edit/1');
+        $this->assertResponseCode(302);
+        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+
+        $this->get('/admin/gasha-pickups/view/1');
+        $this->assertResponseCode(302);
+        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+    }
+
+    /**
      * Test index method
      *
      * @return void

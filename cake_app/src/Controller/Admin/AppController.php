@@ -45,7 +45,7 @@ class AppController extends \App\Controller\AppController
         if (!$this->authorize($this->getRequest())) {
             $this->Flash->error(MESSAGE_AUTH_ERROR);
 
-            return $this->redirect(['controller' => 'top', 'action' => 'index']);
+            return $this->redirect(['controller' => 'Top', 'action' => 'index']);
         }
     }
 

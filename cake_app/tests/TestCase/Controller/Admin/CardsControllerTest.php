@@ -223,6 +223,52 @@ class CardsControllerTest extends TestCase
     }
 
     /**
+     * Test beforeFilter method
+     *
+     * @return void
+     */
+    public function testBeforeFilter(): void
+    {
+        $this->session([
+            'Auth.Admin' => $this->super_admin
+        ]);
+        $this->get('/admin/cards');
+        $this->assertIsArray($this->viewVariable('character_id_list'));
+        $this->assertResponseCode(200);
+
+        $this->get('/admin/cards/add');
+        $this->assertIsArray($this->viewVariable('character_id_list'));
+        $this->assertResponseCode(200);
+
+        $this->get('/admin/cards/edit/1');
+        $this->assertIsArray($this->viewVariable('character_id_list'));
+        $this->assertResponseCode(200);
+
+        $this->get('/admin/cards/view/1');
+        $this->assertNull($this->viewVariable('character_id_list'));
+        $this->assertResponseCode(200);
+
+        $this->session([
+            'Auth.Admin' => $this->no_authority_admin
+        ]);
+        $this->get('/admin/cards');
+        $this->assertResponseCode(302);
+        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+
+        $this->get('/admin/cards/add');
+        $this->assertResponseCode(302);
+        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+
+        $this->get('/admin/cards/edit/1');
+        $this->assertResponseCode(302);
+        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+
+        $this->get('/admin/cards/view/1');
+        $this->assertResponseCode(302);
+        $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
+    }
+
+    /**
      * Test index method
      *
      * @return void

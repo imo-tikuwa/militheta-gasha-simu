@@ -7,6 +7,7 @@ use App\Controller\Admin\AppController;
 use App\Utils\CsvUtils;
 use App\Form\SearchForm;
 use App\Utils\ExcelUtils;
+use Cake\Event\EventInterface;
 use Cake\Http\CallbackStream;
 use Cake\Core\Exception\CakeException;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
@@ -27,12 +28,16 @@ use DateTimeZone;
 class CardsController extends AppController
 {
     /**
-     * Initialize Method.
-     * @return void
+     *
+     * {@inheritDoc}
+     * @see \App\Controller\Admin\AppController::beforeFilter()
      */
-    public function initialize(): void
+    public function beforeFilter(EventInterface $event)
     {
-        parent::initialize();
+        $result = parent::beforeFilter($event);
+        if (!is_null($result) && $result instanceof \Cake\Http\Response) {
+            return $result;
+        }
 
         $this->loadModel('Characters');
 

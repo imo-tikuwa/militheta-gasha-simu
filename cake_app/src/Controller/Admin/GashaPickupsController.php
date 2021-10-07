@@ -7,8 +7,8 @@ use App\Controller\Admin\AppController;
 use App\Form\SearchForm;
 use App\Model\Entity\Gasha;
 use App\Utils\ExcelUtils;
+use Cake\Event\EventInterface;
 use Cake\Http\CallbackStream;
-use Cake\Utility\Hash;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
@@ -28,12 +28,16 @@ use DateTimeZone;
 class GashaPickupsController extends AppController
 {
     /**
-     * Initialize Method.
-     * @return void
+     *
+     * {@inheritDoc}
+     * @see \App\Controller\Admin\AppController::beforeFilter()
      */
-    public function initialize(): void
+    public function beforeFilter(EventInterface $event)
     {
-        parent::initialize();
+        $result = parent::beforeFilter($event);
+        if (!is_null($result) && $result instanceof \Cake\Http\Response) {
+            return $result;
+        }
 
         $this->loadModel('Gashas');
         $this->loadModel('Cards');
