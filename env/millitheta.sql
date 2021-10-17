@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2021-09-25 12:16:05
+Date: 2021-10-17 11:05:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,7 +58,7 @@ CREATE TABLE `cards` (
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`),
   KEY `character_id` (`character_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1298 DEFAULT CHARSET=utf8 COMMENT='カード';
+) ENGINE=InnoDB AUTO_INCREMENT=1317 DEFAULT CHARSET=utf8 COMMENT='カード';
 
 -- ----------------------------
 -- Records of cards
@@ -1352,7 +1352,7 @@ INSERT INTO `cards` VALUES ('1286', '27', 'MILLION LIVE CONFERENCE！　高山�
 INSERT INTO `cards` VALUES ('1287', '47', 'MILLION LIVE CONFERENCE！　永吉昴', '03', '02', '2021-09-10', '1', '01', '永吉昴 MILLION LIVE CONFERENCE！　永吉昴 SR Fairy 恒常', '2021-09-25 10:52:19', '2021-09-25 10:52:19', null);
 INSERT INTO `cards` VALUES ('1288', '39', 'まばゆい勝利の財宝　馬場このみ', '03', '03', '2021-09-10', '0', '01', '馬場このみ まばゆい勝利の財宝　馬場このみ SR Angel 恒常', '2021-09-25 10:52:19', '2021-09-25 10:52:19', null);
 INSERT INTO `cards` VALUES ('1289', '50', 'ダイナミックに突き進め！　ジュリア', '03', '02', '2021-09-10', '0', '01', 'ジュリア ダイナミックに突き進め！　ジュリア SR Fairy 恒常', '2021-09-25 10:52:19', '2021-09-25 10:52:19', null);
-INSERT INTO `cards` VALUES ('1290', '4', '妖しい視線　萩原雪歩', '02', '01', '2021-09-10', '0', '01', '萩原雪歩 妖しい視線　萩原雪歩 R Princess 恒常', '2021-09-25 10:52:19', '2021-09-25 10:52:19', null);
+INSERT INTO `cards` VALUES ('1290', '4', '妖しい視線　萩原雪歩', '02', '01', '2021-09-10', '1', '01', '萩原雪歩 妖しい視線　萩原雪歩 R Princess 恒常', '2021-09-25 10:52:19', '2021-10-17 11:05:07', null);
 INSERT INTO `cards` VALUES ('1291', '3', 'スマイル・プロフェッショナル♪　星井美希', '04', '03', '2021-09-17', '1', '04', '星井美希 スマイル・プロフェッショナル♪　星井美希 SSR Angel SHS限定', '2021-09-25 10:52:19', '2021-09-25 12:10:16', null);
 INSERT INTO `cards` VALUES ('1292', '43', '魅力的トイランド　福田のり子', '04', '01', '2021-09-17', '1', '04', '福田のり子 魅力的トイランド　福田のり子 SSR Princess SHS限定', '2021-09-25 10:52:19', '2021-09-25 12:10:16', null);
 INSERT INTO `cards` VALUES ('1293', '32', 'MILLION LIVE CONFERENCE！　エミリー', '03', '01', '2021-09-17', '1', '01', 'エミリー MILLION LIVE CONFERENCE！　エミリー SR Princess 恒常', '2021-09-25 10:52:19', '2021-09-25 10:52:19', null);
@@ -1360,6 +1360,25 @@ INSERT INTO `cards` VALUES ('1294', '29', 'まごころラテアート　高坂�
 INSERT INTO `cards` VALUES ('1295', '18', '秋のエレナフェア！　島原エレナ', '02', '03', '2021-09-17', '1', '01', '島原エレナ 秋のエレナフェア！　島原エレナ R Angel 恒常', '2021-09-25 10:52:19', '2021-09-25 10:52:19', null);
 INSERT INTO `cards` VALUES ('1296', '52', 'BRIGHT DIAMOND　桜守歌織', '03', '03', '2021-09-17', '0', '01', '桜守歌織 BRIGHT DIAMOND　桜守歌織 SR Angel 恒常', '2021-09-25 10:52:19', '2021-09-25 10:52:19', null);
 INSERT INTO `cards` VALUES ('1297', '8', 'BRIGHT DIAMOND　四条貴音', '03', '02', '2021-09-17', '0', '01', '四条貴音 BRIGHT DIAMOND　四条貴音 SR Fairy 恒常', '2021-09-25 10:52:19', '2021-09-25 10:52:19', null);
+INSERT INTO `cards` VALUES ('1298', '6', 'エンド・ゲーム　菊地真', '04', '01', '2021-09-26', '1', '03', '菊地真 エンド・ゲーム　菊地真 SSR Princess フェス限定', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1299', '35', '女神は微笑まない　木下ひなた', '04', '03', '2021-09-26', '1', '03', '木下ひなた 女神は微笑まない　木下ひなた SSR Angel フェス限定', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1300', '21', '満韻・御札！　徳川まつり', '04', '01', '2021-09-30', '1', '04', '徳川まつり 満韻・御札！　徳川まつり SSR Princess SHS限定', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1301', '46', 'トリック・オア…♡　百瀬莉緒', '04', '02', '2021-09-30', '1', '04', '百瀬莉緒 トリック・オア…♡　百瀬莉緒 SSR Fairy SHS限定', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1302', '45', 'プリンセス＆ビースト　篠宮可憐', '03', '03', '2021-09-30', '1', '02', '篠宮可憐 プリンセス＆ビースト　篠宮可憐 SR Angel 限定', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1303', '37', 'MILLION LIVE CONFERENCE！　横山奈緒', '03', '01', '2021-09-30', '1', '01', '横山奈緒 MILLION LIVE CONFERENCE！　横山奈緒 SR Princess 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1304', '27', 'chicAAmor　高山紗代子', '03', '01', '2021-10-02', '0', '01', '高山紗代子 chicAAmor　高山紗代子 SR Princess 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1305', '41', 'chicAAmor　豊川風花', '03', '03', '2021-10-02', '0', '01', '豊川風花 chicAAmor　豊川風花 SR Angel 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1306', '51', '夏服シリーズ　白石紬', '03', '02', '2021-10-05', '0', '01', '白石紬 夏服シリーズ　白石紬 SR Fairy 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1307', '5', '夏服シリーズ　高槻やよい', '03', '03', '2021-10-05', '0', '01', '高槻やよい 夏服シリーズ　高槻やよい SR Angel 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1308', '9', '夏服シリーズ　秋月律子', '03', '02', '2021-10-05', '0', '01', '秋月律子 夏服シリーズ　秋月律子 SR Fairy 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1309', '14', '夏服シリーズ　春日未来', '03', '01', '2021-10-05', '0', '01', '春日未来 夏服シリーズ　春日未来 SR Princess 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1310', '17', 'ホントウノワタシ　田中琴葉', '04', '01', '2021-10-11', '1', '01', '田中琴葉 ホントウノワタシ　田中琴葉 SSR Princess 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1311', '11', '黎明スターライン　双海亜美', '04', '03', '2021-10-11', '1', '01', '双海亜美 黎明スターライン　双海亜美 SSR Angel 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1312', '25', 'MILLION LIVE CONFERENCE！　ロコ', '03', '02', '2021-10-11', '1', '01', 'ロコ MILLION LIVE CONFERENCE！　ロコ SR Fairy 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1313', '16', 'MILLION LIVE CONFERENCE！　伊吹翼', '03', '03', '2021-10-11', '1', '01', '伊吹翼 MILLION LIVE CONFERENCE！　伊吹翼 SR Angel 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1314', '32', '菜の花姫　エミリー', '03', '01', '2021-10-11', '0', '01', 'エミリー 菜の花姫　エミリー SR Princess 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1315', '31', '幸せの歌を共に　天空橋朋花', '03', '02', '2021-10-11', '0', '01', '天空橋朋花 幸せの歌を共に　天空橋朋花 SR Fairy 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
+INSERT INTO `cards` VALUES ('1316', '48', '準備万端！　北上麗花', '02', '03', '2021-10-11', '0', '01', '北上麗花 準備万端！　北上麗花 R Angel 恒常', '2021-10-17 10:55:31', '2021-10-17 10:55:31', null);
 
 -- ----------------------------
 -- Table structure for `card_reprints`
@@ -1606,7 +1625,7 @@ CREATE TABLE `gashas` (
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
+) ENGINE=InnoDB AUTO_INCREMENT=207 DEFAULT CHARSET=utf8 COMMENT='ガシャ';
 
 -- ----------------------------
 -- Records of gashas
@@ -1810,6 +1829,9 @@ INSERT INTO `gashas` VALUES ('200', '2021-08-28', '2021-08-31', '【限定復刻
 INSERT INTO `gashas` VALUES ('201', '2021-08-31', '2021-09-10', '【ヘアスタイル限定】セカンドヘアスタイルガシャ', '3', '12', '【ヘアスタイル限定】セカンドヘアスタイルガシャ', '2021-09-25 11:02:44', '2021-09-25 11:02:44', null);
 INSERT INTO `gashas` VALUES ('202', '2021-09-10', '2021-09-17', 'SONG FOR YOU！ガシャ VOL.20', '3', '12', 'SONG FOR YOU！ガシャ VOL.20', '2021-09-25 11:02:44', '2021-09-25 11:02:44', null);
 INSERT INTO `gashas` VALUES ('203', '2021-09-17', '2021-09-26', '【ヘアスタイル限定】セカンドヘアスタイルガシャ', '3', '12', '【ヘアスタイル限定】セカンドヘアスタイルガシャ', '2021-09-25 11:02:44', '2021-09-25 11:02:44', null);
+INSERT INTO `gashas` VALUES ('204', '2021-09-26', '2021-09-30', '【フェス限定】ミリオンフェス', '6', '12', '【フェス限定】ミリオンフェス', '2021-10-17 10:58:18', '2021-10-17 10:58:18', null);
+INSERT INTO `gashas` VALUES ('205', '2021-09-30', '2021-10-11', '【ヘアスタイル限定】セカンドヘアスタイルガシャ', '3', '12', '【ヘアスタイル限定】セカンドヘアスタイルガシャ', '2021-10-17 10:58:18', '2021-10-17 10:58:18', null);
+INSERT INTO `gashas` VALUES ('206', '2021-10-11', '2021-10-18', 'SONG FOR YOU！ガシャ VOL.21', '3', '12', 'SONG FOR YOU！ガシャ VOL.21', '2021-10-17 10:58:18', '2021-10-17 10:58:18', null);
 
 -- ----------------------------
 -- Table structure for `gasha_pickups`
@@ -1826,7 +1848,7 @@ CREATE TABLE `gasha_pickups` (
   PRIMARY KEY (`id`),
   KEY `card_id` (`card_id`),
   KEY `gasha_id` (`gasha_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=747 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
+) ENGINE=InnoDB AUTO_INCREMENT=757 DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
 
 -- ----------------------------
 -- Records of gasha_pickups
@@ -2577,3 +2599,13 @@ INSERT INTO `gasha_pickups` VALUES ('743', '203', '1292', '【ヘアスタイル
 INSERT INTO `gasha_pickups` VALUES ('744', '203', '1293', '【ヘアスタイル限定】セカンドヘアスタイルガシャ MILLION LIVE CONFERENCE！　エミリー', '2021-09-25 11:16:19', '2021-09-25 11:16:19', null);
 INSERT INTO `gasha_pickups` VALUES ('745', '203', '1294', '【ヘアスタイル限定】セカンドヘアスタイルガシャ まごころラテアート　高坂海美', '2021-09-25 11:16:38', '2021-09-25 11:16:38', null);
 INSERT INTO `gasha_pickups` VALUES ('746', '203', '1295', '【ヘアスタイル限定】セカンドヘアスタイルガシャ 秋のエレナフェア！　島原エレナ', '2021-09-25 11:16:53', '2021-09-25 11:16:53', null);
+INSERT INTO `gasha_pickups` VALUES ('747', '204', '1298', '【フェス限定】ミリオンフェス エンド・ゲーム　菊地真', '2021-10-17 10:58:58', '2021-10-17 10:58:58', null);
+INSERT INTO `gasha_pickups` VALUES ('748', '204', '1299', '【フェス限定】ミリオンフェス 女神は微笑まない　木下ひなた', '2021-10-17 10:59:16', '2021-10-17 10:59:16', null);
+INSERT INTO `gasha_pickups` VALUES ('749', '205', '1300', '【ヘアスタイル限定】セカンドヘアスタイルガシャ 満韻・御札！　徳川まつり', '2021-10-17 10:59:38', '2021-10-17 10:59:38', null);
+INSERT INTO `gasha_pickups` VALUES ('750', '205', '1301', '【ヘアスタイル限定】セカンドヘアスタイルガシャ トリック・オア…♡　百瀬莉緒', '2021-10-17 10:59:52', '2021-10-17 10:59:52', null);
+INSERT INTO `gasha_pickups` VALUES ('751', '205', '1302', '【ヘアスタイル限定】セカンドヘアスタイルガシャ プリンセス＆ビースト　篠宮可憐', '2021-10-17 11:00:06', '2021-10-17 11:00:06', null);
+INSERT INTO `gasha_pickups` VALUES ('752', '205', '1303', '【ヘアスタイル限定】セカンドヘアスタイルガシャ MILLION LIVE CONFERENCE！　横山奈緒', '2021-10-17 11:00:22', '2021-10-17 11:00:22', null);
+INSERT INTO `gasha_pickups` VALUES ('753', '206', '1310', 'SONG FOR YOU！ガシャ VOL.21 ホントウノワタシ　田中琴葉', '2021-10-17 11:00:59', '2021-10-17 11:00:59', null);
+INSERT INTO `gasha_pickups` VALUES ('754', '206', '1311', 'SONG FOR YOU！ガシャ VOL.21 黎明スターライン　双海亜美', '2021-10-17 11:01:14', '2021-10-17 11:01:14', null);
+INSERT INTO `gasha_pickups` VALUES ('755', '206', '1312', 'SONG FOR YOU！ガシャ VOL.21 MILLION LIVE CONFERENCE！　ロコ', '2021-10-17 11:01:29', '2021-10-17 11:01:29', null);
+INSERT INTO `gasha_pickups` VALUES ('756', '206', '1313', 'SONG FOR YOU！ガシャ VOL.21 MILLION LIVE CONFERENCE！　伊吹翼', '2021-10-17 11:01:48', '2021-10-17 11:01:48', null);
