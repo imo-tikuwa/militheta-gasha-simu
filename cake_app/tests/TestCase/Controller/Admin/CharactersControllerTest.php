@@ -32,14 +32,6 @@ class CharactersControllerTest extends TestCase
     ];
 
     /**
-     * By default, all fixtures attached to this class will be truncated and reloaded after each test.
-     * Set this to false to handle manually
-     *
-     * @var bool
-     */
-    public $autoFixtures = false;
-
-    /**
      * characters table.
      * @var \App\Model\Table\CharactersTable $Characters
      */
@@ -88,8 +80,6 @@ class CharactersControllerTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->loadFixtures();
-
         parent::setUp();
         $characters_config = $this->getTableLocator()->exists('Characters') ? [] : ['className' => \App\Model\Table\CharactersTable::class];
         /** @var \App\Model\Table\CharactersTable $Characters */

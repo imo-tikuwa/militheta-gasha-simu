@@ -11,63 +11,6 @@ use Cake\TestSuite\Fixture\TestFixture;
 class CharactersFixture extends TestFixture
 {
     /**
-     * Fields
-     *
-     * @var array
-     */
-    public $fields = [
-        'id' => [
-            'type' => 'integer',
-            'length' => null,
-            'unsigned' => false,
-            'null' => false,
-            'default' => null,
-            'comment' => 'ID',
-            'autoIncrement' => true,
-            'precision' => null,
-        ],
-        'name' => [
-            'type' => 'string',
-            'length' => 255,
-            'null' => true,
-            'default' => null,
-            'collate' => 'utf8_general_ci',
-            'comment' => '名前',
-            'precision' => null,
-        ],
-        'created' => [
-            'type' => 'datetime',
-            'length' => null,
-            'precision' => null,
-            'null' => true,
-            'default' => null,
-            'comment' => '作成日時',
-        ],
-        'modified' => [
-            'type' => 'datetime',
-            'length' => null,
-            'precision' => null,
-            'null' => true,
-            'default' => null,
-            'comment' => '更新日時',
-        ],
-        '_constraints' => [
-            'primary' => [
-                'type' => 'primary',
-                'columns' => [
-                    'id',
-                ],
-                'length' => [
-                ],
-            ],
-        ],
-        '_options' => [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8_general_ci',
-        ],
-    ];
-
-    /**
      * Init method
      *
      * @return void
@@ -78,8 +21,8 @@ class CharactersFixture extends TestFixture
             [
                 'id' => 1,
                 'name' => 'Lorem ipsum dolor sit amet',
-                'created' => '2021-03-30 18:25:31',
-                'modified' => '2021-03-30 18:25:31',
+                'created' => '2021-10-31 16:51:18',
+                'modified' => '2021-10-31 16:51:18',
             ],
         ];
         parent::init();

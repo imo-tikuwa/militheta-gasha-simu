@@ -33,14 +33,6 @@ class GashasControllerTest extends TestCase
     ];
 
     /**
-     * By default, all fixtures attached to this class will be truncated and reloaded after each test.
-     * Set this to false to handle manually
-     *
-     * @var bool
-     */
-    public $autoFixtures = false;
-
-    /**
      * gashas table.
      * @var \App\Model\Table\GashasTable $Gashas
      */
@@ -99,8 +91,6 @@ class GashasControllerTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->loadFixtures();
-
         parent::setUp();
         $gashas_config = $this->getTableLocator()->exists('Gashas') ? [] : ['className' => \App\Model\Table\GashasTable::class];
         /** @var \App\Model\Table\GashasTable $Gashas */
@@ -539,7 +529,8 @@ class GashasControllerTest extends TestCase
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
-        $this->loadFixtures();
+        $this->teardownFixtures();
+        $this->setupFixtures();
         $this->session([
             'Auth.Admin' => $this->delete_admin
         ]);

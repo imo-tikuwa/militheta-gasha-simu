@@ -33,14 +33,6 @@ class GashaPickupsControllerTest extends TestCase
     ];
 
     /**
-     * By default, all fixtures attached to this class will be truncated and reloaded after each test.
-     * Set this to false to handle manually
-     *
-     * @var bool
-     */
-    public $autoFixtures = false;
-
-    /**
      * gasha_pickups table.
      * @var \App\Model\Table\GashaPickupsTable $GashaPickups
      */
@@ -94,8 +86,6 @@ class GashaPickupsControllerTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->loadFixtures();
-
         parent::setUp();
         $gasha_pickups_config = $this->getTableLocator()->exists('GashaPickups') ? [] : ['className' => \App\Model\Table\GashaPickupsTable::class];
         /** @var \App\Model\Table\GashaPickupsTable $GashaPickups */
@@ -541,7 +531,8 @@ class GashaPickupsControllerTest extends TestCase
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
-        $this->loadFixtures();
+        $this->teardownFixtures();
+        $this->setupFixtures();
         $this->session([
             'Auth.Admin' => $this->delete_admin
         ]);
