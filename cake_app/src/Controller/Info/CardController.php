@@ -6,6 +6,8 @@ use Cake\Database\Query;
 
 /**
  * Card Controller
+ *
+ * @property \App\Model\Table\CardsTable $Cards
  */
 class CardController extends ApiController
 {
@@ -15,7 +17,7 @@ class CardController extends ApiController
      */
     public function index()
     {
-        $this->loadModel('Cards');
+        $this->Cards = $this->fetchTable('Cards');
         $results = $this->Cards->find()
         ->select([
             'name',

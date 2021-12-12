@@ -1,4 +1,8 @@
 {
     "files.autoGuessEncoding": true,
-    "workbench.editor.enablePreview": false
+    "workbench.editor.enablePreview": false,
+    // マークダウン保存時の空白削除を無効化
+    "[markdown]": {
+        "files.trimTrailingWhitespace": false
+    }
 }

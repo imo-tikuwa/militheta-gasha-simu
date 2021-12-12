@@ -39,8 +39,8 @@ class GashaPickupsController extends AppController
             return $result;
         }
 
-        $this->loadModel('Gashas');
-        $this->loadModel('Cards');
+        $this->Gashas = $this->fetchTable('Gashas');
+        $this->Cards = $this->fetchTable('Cards');
 
         if (in_array($this->getRequest()->getParam('action'), [ACTION_INDEX, ACTION_ADD, ACTION_EDIT], true)) {
             $gasha_id_list = $this->Gashas->find('list', [

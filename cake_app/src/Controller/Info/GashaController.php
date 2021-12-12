@@ -5,6 +5,8 @@ use App\Controller\Info\ApiController;
 
 /**
  * Gasha Controller
+ *
+ * @property \App\Model\Table\GashasTable $Gashas
  */
 class GashaController extends ApiController
 {
@@ -14,7 +16,7 @@ class GashaController extends ApiController
      */
     public function index()
     {
-        $this->loadModel('Gashas');
+        $this->Gashas = $this->fetchTable('Gashas');
         $results = $this->Gashas->find()
         ->select([
             'start_date',

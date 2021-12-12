@@ -5,6 +5,8 @@ use App\Controller\Info\ApiController;
 
 /**
  * Character Controller
+ *
+ * @property \App\Model\Table\CharactersTable $Characters
  */
 class CharacterController extends ApiController
 {
@@ -14,7 +16,7 @@ class CharacterController extends ApiController
      */
     public function index()
     {
-        $this->loadModel('Characters');
+        $this->Characters = $this->fetchTable('Characters');
         $results = $this->Characters->find()
         ->select([
             'id',

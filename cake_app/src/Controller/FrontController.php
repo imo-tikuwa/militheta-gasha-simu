@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
 use Cake\Event\EventInterface;
 
@@ -21,8 +20,8 @@ class FrontController extends AppController
     public function initialize(): void
     {
         parent::initialize();
-        $this->Gashas = TableRegistry::getTableLocator()->get("Gashas");
-        $this->Cards = TableRegistry::getTableLocator()->get("Cards");
+        $this->Gashas = $this->fetchTable("Gashas");
+        $this->Cards = $this->fetchTable("Cards");
 
         $this->viewBuilder()->setLayout('default_front');
     }
