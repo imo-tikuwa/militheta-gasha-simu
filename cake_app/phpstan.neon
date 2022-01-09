@@ -1,0 +1,12 @@
+parameters:
+    level: 7
+    checkMissingIterableValueType: false
+    treatPhpDocTypesAsCertain: false
+    paths:
+        - src
+    bootstrapFiles:
+        - config/bootstrap.php
+    scanFiles:
+        - vendor/imo-tikuwa/cakephp-operation-logs/config/bootstrap.php
+includes:
+    - ./vendor/cakedc/cakephp-phpstan/extension.neon

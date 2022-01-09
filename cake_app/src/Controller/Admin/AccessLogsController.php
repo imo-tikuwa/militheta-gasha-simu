@@ -14,6 +14,8 @@ class AccessLogsController extends AppController
      * バーチャートのカラーコード表
      * https://color.adobe.com/ja/create
      * で作成
+     *
+     * @var array<string>
      */
     private $rgb_colors = [
         '110, 59, 246',
@@ -62,7 +64,7 @@ class AccessLogsController extends AppController
      * 集計タイプ = 全のときのChartJs用のチャートデータを返す
      * @param string $date_type 絞込の日付タイプ
      * @param \DateTime $target_date 対象日
-     * @return array[]
+     * @return null|string
      */
     private function findAllData($date_type, \DateTime $target_date)
     {
@@ -92,6 +94,7 @@ class AccessLogsController extends AppController
                 'data' => array_values($result[0])
             ];
             $graph_data = json_encode($graph_data);
+            assert($graph_data !== false);
         }
         return $graph_data;
     }
@@ -100,70 +103,69 @@ class AccessLogsController extends AppController
      * 集計タイプ = IPのときのチャートデータを返す
      * @param string $date_type 絞込の日付タイプ
      * @param \DateTime $target_date 対象日
-     * @return array[]
+     * @return null|string
      */
     private function findDataGroupedByIp($date_type, \DateTime $target_date)
     {
         $graph_data = null;
-        if (isset($date_type)) {
-            $result = null;
-            switch ($date_type) {
-                case OL_DATE_TYPE_HOURLY:
-                    $result = OperationLogsUtils::findHourlySummaryLogs(OL_SUMMARY_TYPE_IP, $target_date);
-                    break;
-                case OL_DATE_TYPE_DAILY:
-                    $result = OperationLogsUtils::findDailySummaryLogs(OL_SUMMARY_TYPE_IP, $target_date);
-                    break;
-                case OL_DATE_TYPE_MONTHLY:
-                    $result = OperationLogsUtils::findMonthlySummaryLogs(OL_SUMMARY_TYPE_IP, $target_date);
-                    break;
+        $result = null;
+        switch ($date_type) {
+            case OL_DATE_TYPE_HOURLY:
+                $result = OperationLogsUtils::findHourlySummaryLogs(OL_SUMMARY_TYPE_IP, $target_date);
+                break;
+            case OL_DATE_TYPE_DAILY:
+                $result = OperationLogsUtils::findDailySummaryLogs(OL_SUMMARY_TYPE_IP, $target_date);
+                break;
+            case OL_DATE_TYPE_MONTHLY:
+                $result = OperationLogsUtils::findMonthlySummaryLogs(OL_SUMMARY_TYPE_IP, $target_date);
+                break;
+        }
+
+        if (isset($result) && !empty($result)) {
+            // いったんカウントの多い順にソートする
+            foreach ($result as $ip => $data) {
+                $sort_array[$ip] = array_sum(array_values($data));
             }
+            array_multisort($sort_array, SORT_DESC, $result);
 
-            if (isset($result) && !empty($result)) {
-                // いったんカウントの多い順にソートする
+            // 10件目以降はその他のグループにまとめ、最大10件まで表示する
+            if (count($result) > 10) {
+                $tmp_result = [];
+                $loop_count = 0;
                 foreach ($result as $ip => $data) {
-                    $sort_array[$ip] = array_sum(array_values($data));
-                }
-                array_multisort($sort_array, SORT_DESC, $result);
-
-                // 10件目以降はその他のグループにまとめ、最大10件まで表示する
-                if (count($result) > 10) {
-                    $tmp_result = [];
-                    $loop_count = 0;
-                    foreach ($result as $ip => $data) {
-                        $loop_count++;
-                        if ($loop_count == 10) {
-                            $tmp_result['その他'] = $data;
-                        } elseif ($loop_count > 10) {
-                            foreach ($data as $key => $count) {
-                                $tmp_result['その他'][$key] += $count;
-                            }
-                        } else {
-                            $tmp_result[$ip] = $data;
+                    $loop_count++;
+                    if ($loop_count == 10) {
+                        $tmp_result['その他'] = $data;
+                    } elseif ($loop_count > 10) {
+                        foreach ($data as $key => $count) {
+                            $tmp_result['その他'][$key] += $count;
                         }
+                    } else {
+                        $tmp_result[$ip] = $data;
                     }
-                    $result = $tmp_result;
                 }
-
-                $graph_data = [];
-                foreach ($result as $ip => $data) {
-                    $graph_data['labels'] = array_keys($data);
-                    break;
-                }
-                $graph_data['datasets'] = [];
-                $chart_index = 0;
-                foreach ($result as $ip => $data) {
-                    $graph_data['datasets'][] = [
-                        'label' => $ip,
-                        'backgroundColor' => "rgba({$this->rgb_colors[$chart_index]},0.9)",
-                        'borderColor' => "rgba({$this->rgb_colors[$chart_index]},0.8)",
-                        'data' => array_values($data)
-                    ];
-                    $chart_index++;
-                }
-
-                $graph_data = json_encode($graph_data);
+                $result = $tmp_result;
             }
+
+            $graph_data = [];
+            foreach ($result as $ip => $data) {
+                $graph_data['labels'] = array_keys($data);
+                break;
+            }
+            $graph_data['datasets'] = [];
+            $chart_index = 0;
+            foreach ($result as $ip => $data) {
+                $graph_data['datasets'][] = [
+                    'label' => $ip,
+                    'backgroundColor' => "rgba({$this->rgb_colors[$chart_index]},0.9)",
+                    'borderColor' => "rgba({$this->rgb_colors[$chart_index]},0.8)",
+                    'data' => array_values($data)
+                ];
+                $chart_index++;
+            }
+
+            $graph_data = json_encode($graph_data);
+            assert($graph_data !== false);
         }
         return $graph_data;
     }
@@ -172,70 +174,69 @@ class AccessLogsController extends AppController
      * 集計タイプ = UserAgentのときのチャートデータを返す
      * @param string $date_type 絞込の日付タイプ
      * @param \DateTime $target_date 対象日
-     * @return array[]
+     * @return null|string
      */
     private function findDataGroupedByUa($date_type, \DateTime $target_date)
     {
         $graph_data = null;
-        if (isset($date_type)) {
-            $result = null;
-            switch ($date_type) {
-                case OL_DATE_TYPE_HOURLY:
-                    $result = OperationLogsUtils::findHourlySummaryLogs(OL_SUMMARY_TYPE_USER_AGENT, $target_date);
-                    break;
-                case OL_DATE_TYPE_DAILY:
-                    $result = OperationLogsUtils::findDailySummaryLogs(OL_SUMMARY_TYPE_USER_AGENT, $target_date);
-                    break;
-                case OL_DATE_TYPE_MONTHLY:
-                    $result = OperationLogsUtils::findMonthlySummaryLogs(OL_SUMMARY_TYPE_USER_AGENT, $target_date);
-                    break;
+        $result = null;
+        switch ($date_type) {
+            case OL_DATE_TYPE_HOURLY:
+                $result = OperationLogsUtils::findHourlySummaryLogs(OL_SUMMARY_TYPE_USER_AGENT, $target_date);
+                break;
+            case OL_DATE_TYPE_DAILY:
+                $result = OperationLogsUtils::findDailySummaryLogs(OL_SUMMARY_TYPE_USER_AGENT, $target_date);
+                break;
+            case OL_DATE_TYPE_MONTHLY:
+                $result = OperationLogsUtils::findMonthlySummaryLogs(OL_SUMMARY_TYPE_USER_AGENT, $target_date);
+                break;
+        }
+
+        if (isset($result) && !empty($result)) {
+            // いったんカウントの多い順にソートする
+            foreach ($result as $ua => $data) {
+                $sort_array[$ua] = array_sum(array_values($data));
             }
+            array_multisort($sort_array, SORT_DESC, $result);
 
-            if (isset($result) && !empty($result)) {
-                // いったんカウントの多い順にソートする
+            // 10件目以降はその他のグループにまとめ、最大10件まで表示する
+            if (count($result) > 10) {
+                $tmp_result = [];
+                $loop_count = 0;
                 foreach ($result as $ua => $data) {
-                    $sort_array[$ua] = array_sum(array_values($data));
-                }
-                array_multisort($sort_array, SORT_DESC, $result);
-
-                // 10件目以降はその他のグループにまとめ、最大10件まで表示する
-                if (count($result) > 10) {
-                    $tmp_result = [];
-                    $loop_count = 0;
-                    foreach ($result as $ua => $data) {
-                        $loop_count++;
-                        if ($loop_count == 10) {
-                            $tmp_result['その他'] = $data;
-                        } elseif ($loop_count > 10) {
-                            foreach ($data as $key => $count) {
-                                $tmp_result['その他'][$key] += $count;
-                            }
-                        } else {
-                            $tmp_result[$ua] = $data;
+                    $loop_count++;
+                    if ($loop_count == 10) {
+                        $tmp_result['その他'] = $data;
+                    } elseif ($loop_count > 10) {
+                        foreach ($data as $key => $count) {
+                            $tmp_result['その他'][$key] += $count;
                         }
+                    } else {
+                        $tmp_result[$ua] = $data;
                     }
-                    $result = $tmp_result;
                 }
-
-                $graph_data = [];
-                foreach ($result as $ua => $data) {
-                    $graph_data['labels'] = array_keys($data);
-                    break;
-                }
-                $graph_data['datasets'] = [];
-                $chart_index = 0;
-                foreach ($result as $ua => $data) {
-                    $graph_data['datasets'][] = [
-                        'label' => $ua,
-                        'backgroundColor' => "rgba({$this->rgb_colors[$chart_index]},0.9)",
-                        'borderColor' => "rgba({$this->rgb_colors[$chart_index]},0.8)",
-                        'data' => array_values($data)
-                    ];
-                    $chart_index++;
-                }
-
-                $graph_data = json_encode($graph_data);
+                $result = $tmp_result;
             }
+
+            $graph_data = [];
+            foreach ($result as $ua => $data) {
+                $graph_data['labels'] = array_keys($data);
+                break;
+            }
+            $graph_data['datasets'] = [];
+            $chart_index = 0;
+            foreach ($result as $ua => $data) {
+                $graph_data['datasets'][] = [
+                    'label' => $ua,
+                    'backgroundColor' => "rgba({$this->rgb_colors[$chart_index]},0.9)",
+                    'borderColor' => "rgba({$this->rgb_colors[$chart_index]},0.8)",
+                    'data' => array_values($data)
+                ];
+                $chart_index++;
+            }
+
+            $graph_data = json_encode($graph_data);
+            assert($graph_data !== false);
         }
         return $graph_data;
     }
@@ -244,71 +245,70 @@ class AccessLogsController extends AppController
      * 集計タイプ = URLのときのチャートデータを返す
      * @param string $date_type 絞込の日付タイプ
      * @param \DateTime $target_date 対象日
-     * @return array[]
+     * @return null|string
      */
     private function findDataGroupedByUrl($date_type, \DateTime $target_date)
     {
 
         $graph_data = null;
-        if (isset($date_type)) {
-            $result = null;
-            switch ($date_type) {
-                case OL_DATE_TYPE_HOURLY:
-                    $result = OperationLogsUtils::findHourlySummaryLogs(OL_SUMMARY_TYPE_URL, $target_date);
-                    break;
-                case OL_DATE_TYPE_DAILY:
-                    $result = OperationLogsUtils::findDailySummaryLogs(OL_SUMMARY_TYPE_URL, $target_date);
-                    break;
-                case OL_DATE_TYPE_MONTHLY:
-                    $result = OperationLogsUtils::findMonthlySummaryLogs(OL_SUMMARY_TYPE_URL, $target_date);
-                    break;
+        $result = null;
+        switch ($date_type) {
+            case OL_DATE_TYPE_HOURLY:
+                $result = OperationLogsUtils::findHourlySummaryLogs(OL_SUMMARY_TYPE_URL, $target_date);
+                break;
+            case OL_DATE_TYPE_DAILY:
+                $result = OperationLogsUtils::findDailySummaryLogs(OL_SUMMARY_TYPE_URL, $target_date);
+                break;
+            case OL_DATE_TYPE_MONTHLY:
+                $result = OperationLogsUtils::findMonthlySummaryLogs(OL_SUMMARY_TYPE_URL, $target_date);
+                break;
+        }
+
+        if (isset($result) && !empty($result)) {
+            // いったんカウントの多い順にソートする
+            foreach ($result as $url => $data) {
+                $sort_array[$url] = array_sum(array_values($data));
             }
+            array_multisort($sort_array, SORT_DESC, $result);
 
-            if (isset($result) && !empty($result)) {
-                // いったんカウントの多い順にソートする
+            // 10件目以降はその他のグループにまとめ、最大10件まで表示する
+            if (count($result) > 10) {
+                $tmp_result = [];
+                $loop_count = 0;
                 foreach ($result as $url => $data) {
-                    $sort_array[$url] = array_sum(array_values($data));
-                }
-                array_multisort($sort_array, SORT_DESC, $result);
-
-                // 10件目以降はその他のグループにまとめ、最大10件まで表示する
-                if (count($result) > 10) {
-                    $tmp_result = [];
-                    $loop_count = 0;
-                    foreach ($result as $url => $data) {
-                        $loop_count++;
-                        if ($loop_count == 10) {
-                            $tmp_result['その他'] = $data;
-                        } elseif ($loop_count > 10) {
-                            foreach ($data as $key => $count) {
-                                $tmp_result['その他'][$key] += $count;
-                            }
-                        } else {
-                            $tmp_result[$url] = $data;
+                    $loop_count++;
+                    if ($loop_count == 10) {
+                        $tmp_result['その他'] = $data;
+                    } elseif ($loop_count > 10) {
+                        foreach ($data as $key => $count) {
+                            $tmp_result['その他'][$key] += $count;
                         }
+                    } else {
+                        $tmp_result[$url] = $data;
                     }
-                    $result = $tmp_result;
                 }
-
-                $graph_data = [];
-                foreach ($result as $url => $data) {
-                    $graph_data['labels'] = array_keys($data);
-                    break;
-                }
-                $graph_data['datasets'] = [];
-                $chart_index = 0;
-                foreach ($result as $url => $data) {
-                    $graph_data['datasets'][] = [
-                        'label' => $url,
-                        'backgroundColor' => "rgba({$this->rgb_colors[$chart_index]},0.9)",
-                        'borderColor' => "rgba({$this->rgb_colors[$chart_index]},0.8)",
-                        'data' => array_values($data)
-                    ];
-                    $chart_index++;
-                }
-
-                $graph_data = json_encode($graph_data);
+                $result = $tmp_result;
             }
+
+            $graph_data = [];
+            foreach ($result as $url => $data) {
+                $graph_data['labels'] = array_keys($data);
+                break;
+            }
+            $graph_data['datasets'] = [];
+            $chart_index = 0;
+            foreach ($result as $url => $data) {
+                $graph_data['datasets'][] = [
+                    'label' => $url,
+                    'backgroundColor' => "rgba({$this->rgb_colors[$chart_index]},0.9)",
+                    'borderColor' => "rgba({$this->rgb_colors[$chart_index]},0.8)",
+                    'data' => array_values($data)
+                ];
+                $chart_index++;
+            }
+
+            $graph_data = json_encode($graph_data);
+            assert($graph_data !== false);
         }
         return $graph_data;
     }

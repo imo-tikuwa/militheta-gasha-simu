@@ -114,6 +114,7 @@ class GashaUtils
             usort($tmp_cards, function ($a, $b) {
 
                 // ピックアップが上に来るようにする
+                // @phpstan-ignore-next-line
                 if ($a['rate'] < $b['rate']) {
                     return 1;
                 } elseif ($a['rate'] > $b['rate']) {

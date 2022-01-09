@@ -125,7 +125,7 @@ class CharactersController extends AppController
             }
         }
         $this->set(compact('character'));
-        $this->render('edit');
+        return $this->render('edit');
     }
 
     /**

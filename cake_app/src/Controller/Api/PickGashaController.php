@@ -3,7 +3,7 @@ namespace App\Controller\Api;
 
 use App\Model\Entity\Gasha;
 use App\Utils\GashaUtils;
-use Cake\Core\Exception\Exception;
+use Cake\Core\Exception\CakeException;
 use Cake\Event\EventInterface;
 
 /**
@@ -29,7 +29,7 @@ class PickGashaController extends ApiController
 
     /**
      * 提供割合
-     * @var unknown
+     * @var array
      */
     private $provision_ratios;
 
@@ -55,7 +55,7 @@ class PickGashaController extends ApiController
             $gasha_id = @$this->getRequest()->getQuery('gasha_id');
 
             if (is_null($gasha_id) || !is_numeric($gasha_id)) {
-                throw new Exception('gasha_id is invalid.');
+                throw new CakeException('gasha_id is invalid.');
             }
 
             // ガシャ情報取得
@@ -78,7 +78,7 @@ class PickGashaController extends ApiController
 
     /**
      * 10連ガシャ
-     * @return static
+     * @return \Cake\Http\Response
      */
     public function jyuren()
     {
@@ -98,12 +98,14 @@ class PickGashaController extends ApiController
         // レスポンスにセットするカード情報を取得
         $results = $this->Cards->findByIds($card_ids);
 
-        return $this->response->withType('json')->withStringBody(json_encode($results, JSON_UNESCAPED_UNICODE));
+        $string = json_encode($results, JSON_UNESCAPED_UNICODE);
+        assert($string !== false);
+        return $this->response->withType('json')->withStringBody($string);
     }
 
     /**
      * 単発ガシャ
-     * @return static
+     * @return \Cake\Http\Response
      */
     public function tanpatsu()
     {
@@ -113,7 +115,9 @@ class PickGashaController extends ApiController
         // レスポンスにセットするカード情報を取得
         $results = $this->Cards->findByIds($card_ids);
 
-        return $this->response->withType('json')->withStringBody(json_encode($results, JSON_UNESCAPED_UNICODE));
+        $string = json_encode($results, JSON_UNESCAPED_UNICODE);
+        assert($string !== false);
+        return $this->response->withType('json')->withStringBody($string);
     }
 
     /**
@@ -125,10 +129,10 @@ class PickGashaController extends ApiController
      */
     private function _pick($entries)
     {
-        $sum  = array_sum($entries);
+        $sum  = (int)array_sum($entries);
         $rand = rand(1, $sum);
 
-        foreach ($entries as $card_id => $rate) {
+        foreach ($entries as $card_id => $rate) { // @phpstan-ignore-line
             if (($sum -= $rate) < $rand) {
                 return $card_id;
             }

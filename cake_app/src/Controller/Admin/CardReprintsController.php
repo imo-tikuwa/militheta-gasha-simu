@@ -167,7 +167,7 @@ class CardReprintsController extends AppController
             }
         }
         $this->set(compact('card_reprint'));
-        $this->render('edit');
+        return $this->render('edit');
     }
 
     /**
@@ -273,7 +273,7 @@ class CardReprintsController extends AppController
 
         // ガシャIDの一覧を取得、選択肢情報を設定
         $gashas = $this->Gashas->find('list', ['keyField' => 'id', 'valueField' => 'title'])->toArray();
-        if (!is_null($gashas) && count($gashas) > 0) {
+        if (count($gashas) > 0) {
             $row_num = 2;
             foreach ($gashas as $selection_key => $selection_value) {
                 $list_sheet->setCellValue("A{$row_num}", "{$selection_key}:{$selection_value}");
@@ -283,7 +283,7 @@ class CardReprintsController extends AppController
 
         // カードIDの一覧を取得、選択肢情報を設定
         $cards = $this->Cards->find('list', ['keyField' => 'id', 'valueField' => 'name'])->toArray();
-        if (!is_null($cards) && count($cards) > 0) {
+        if (count($cards) > 0) {
             $row_num = 2;
             foreach ($cards as $selection_key => $selection_value) {
                 $list_sheet->setCellValue("B{$row_num}", "{$selection_key}:{$selection_value}");

@@ -2,7 +2,7 @@
 namespace App\Controller\Api;
 
 use App\Utils\GashaUtils;
-use Cake\Core\Exception\Exception;
+use Cake\Core\Exception\CakeException;
 use Cake\Event\EventInterface;
 
 /**
@@ -56,9 +56,9 @@ class TargetPickGashaController extends ApiController
             $this->target_card_ids = @$request_data['target_card_ids'];
 
             if (is_null($gasha_id) || !is_numeric($gasha_id)) {
-                throw new Exception('gasha_id is invalid.');
+                throw new CakeException('gasha_id is invalid.');
             } elseif (is_null($this->target_card_ids) || empty($this->target_card_ids)) {
-                throw new Exception('target_card_ids is invalid.');
+                throw new CakeException('target_card_ids is invalid.');
             }
 
             // ガシャ情報取得
@@ -89,7 +89,7 @@ class TargetPickGashaController extends ApiController
 
     /**
      * ピックしたいカードがそろうまで10連ガシャを引き続ける
-     * @return static
+     * @return \Cake\Http\Response
      */
     public function jyuren()
     {
@@ -120,12 +120,14 @@ class TargetPickGashaController extends ApiController
         // レスポンスにセットするカード情報を取得
         $results = $this->Cards->findByIds($card_ids);
 
-        return $this->response->withType('json')->withStringBody(json_encode($results, JSON_UNESCAPED_UNICODE));
+        $string = json_encode($results, JSON_UNESCAPED_UNICODE);
+        assert($string !== false);
+        return $this->response->withType('json')->withStringBody($string);
     }
 
     /**
      * ピックしたいカードがそろうまで単発ガシャを引き続ける
-     * @return static
+     * @return \Cake\Http\Response
      */
     public function tanpatsu()
     {
@@ -148,7 +150,9 @@ class TargetPickGashaController extends ApiController
         // レスポンスにセットするカード情報を取得
         $results = $this->Cards->findByIds($card_ids);
 
-        return $this->response->withType('json')->withStringBody(json_encode($results, JSON_UNESCAPED_UNICODE));
+        $string = json_encode($results, JSON_UNESCAPED_UNICODE);
+        assert($string !== false);
+        return $this->response->withType('json')->withStringBody($string);
     }
 
     /**
@@ -156,14 +160,15 @@ class TargetPickGashaController extends ApiController
      *
      * ガシャを1回引く
      * @param array $entries 重み付けデータ
-     * @return string|int $card_id カードID
+     * @return int $card_id カードID
      */
     private function _pick($entries)
     {
-        $sum  = array_sum($entries);
+        $sum  = (int)array_sum($entries);
         $rand = rand(1, $sum);
 
-        foreach ($entries as $card_id => $rate) {
+        /** @var int $card_id */
+        foreach ($entries as $card_id => $rate) { // @phpstan-ignore-line
             if (($sum -= $rate) < $rand) {
                 return $card_id;
             }

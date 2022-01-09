@@ -247,6 +247,7 @@ class CardsTable extends AppTable
         if (isset($data['character_id'])) {
             $character = TableRegistry::getTableLocator()->get('Characters')->find()->select(['name'])->where(['id' => $data['character_id']])->first();
             if (!empty($character)) {
+                assert($character instanceof \App\Model\Entity\Character);
                 $search_snippet[] = $character->name;
             }
         }
@@ -264,7 +265,9 @@ class CardsTable extends AppTable
         }
         $data['search_snippet'] = implode(' ', $search_snippet);
 
-        return parent::patchEntity($entity, $data, $options);
+        $entity = parent::patchEntity($entity, $data, $options);
+        assert($entity instanceof \App\Model\Entity\Card);
+        return $entity;
     }
 
     /**
@@ -379,6 +382,7 @@ class CardsTable extends AppTable
         $characters = TableRegistry::getTableLocator()->get('Characters');
         $character_data = $characters->find()->select(['id'])->where(['name' => $csv_data['character_id']])->first();
         if (!empty($character_data)) {
+            assert($character_data instanceof \App\Model\Entity\Character);
             $csv_data['character_id'] = (string)$character_data->id;
         } else {
             $csv_data['character_id'] = '';
@@ -455,24 +459,14 @@ class CardsTable extends AppTable
     {
         $start_date = $gasha->start_date->i18nFormat('yyyy-MM-dd');
         $query = $this->find();
-        $rarity_cases = $query->newExpr()->addCase(
-            [
-                $query->newExpr()->add(['rarity' => '02']),
-                $query->newExpr()->add(['rarity' => '03']),
-                $query->newExpr()->add(['rarity' => '04'])
-            ],
-            ['R', 'SR', 'SSR'],
-            ['string', 'string', 'string']
-        );
-        $type_cases = $query->newExpr()->addCase(
-            [
-                $query->newExpr()->add(['type' => '01']),
-                $query->newExpr()->add(['type' => '02']),
-                $query->newExpr()->add(['type' => '03'])
-            ],
-            ['Princess', 'Fairy', 'Angel'],
-            ['string', 'string', 'string']
-        );
+        $rarity_cases = $query->newExpr()->case()
+        ->when(['rarity' => '02'])->then('R', 'string')
+        ->when(['rarity' => '03'])->then('SR', 'string')
+        ->when(['rarity' => '04'])->then('SSR', 'string');
+        $type_cases = $query->newExpr()->case()
+        ->when(['type' => '01'])->then('Princess', 'string')
+        ->when(['type' => '02'])->then('Fairy', 'string')
+        ->when(['type' => '03'])->then('Angel', 'string');
         $query->select(['id', 'character_id', 'name', 'rarity' => $rarity_cases, 'type' => $type_cases])
         ->enableHydration(false);
 
@@ -529,6 +523,7 @@ class CardsTable extends AppTable
         ])
         ->enableHydration(false)->toArray();
         $pickup_targets = Hash::extract($pickup_targets, '{n}.card_id');
+        assert(is_array($pickup_targets));
         foreach ($cards as $card_index => $card) {
             $cards[$card_index]['pickup'] = (in_array($card['id'], $pickup_targets));
         }
@@ -542,7 +537,7 @@ class CardsTable extends AppTable
     /**
      * 引数のIDのカードの情報を返す
      *
-     * ガシャを引く処理のレスポンスにセットするなカード情報とする
+     * ガシャを引く処理のレスポンスにそのままセットする形で取得
      * 順番も引数のカードIDの配列順とする
      *
      * @param array $card_ids カードIDの配列
@@ -552,24 +547,14 @@ class CardsTable extends AppTable
     {
 
         $query = $this->find();
-        $rarity_cases = $query->newExpr()->addCase(
-            [
-                        $query->newExpr()->add(['rarity' => '02']),
-                        $query->newExpr()->add(['rarity' => '03']),
-                        $query->newExpr()->add(['rarity' => '04'])
-                ],
-            ['R', 'SR', 'SSR'],
-            ['string', 'string', 'string']
-        );
-        $type_cases = $query->newExpr()->addCase(
-            [
-                        $query->newExpr()->add(['type' => '01']),
-                        $query->newExpr()->add(['type' => '02']),
-                        $query->newExpr()->add(['type' => '03'])
-                ],
-            ['Princess', 'Fairy', 'Angel'],
-            ['string', 'string', 'string']
-        );
+        $rarity_cases = $query->newExpr()->case()
+        ->when(['rarity' => '02'])->then('R', 'string')
+        ->when(['rarity' => '03'])->then('SR', 'string')
+        ->when(['rarity' => '04'])->then('SSR', 'string');
+        $type_cases = $query->newExpr()->case()
+        ->when(['type' => '01'])->then('Princess', 'string')
+        ->when(['type' => '02'])->then('Fairy', 'string')
+        ->when(['type' => '03'])->then('Angel', 'string');
         $cards = $query->select(['id', 'name', 'rarity' => $rarity_cases, 'type' => $type_cases])
         ->where(['id IN' => $card_ids])
         ->enableHydration(false)->toArray();

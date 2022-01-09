@@ -145,18 +145,22 @@ class GashaPickupsTable extends AppTable
         if (isset($data['gasha_id'])) {
             $gasha = TableRegistry::getTableLocator()->get('Gashas')->find()->select(['title'])->where(['id' => $data['gasha_id']])->first();
             if (!empty($gasha)) {
+                assert($gasha instanceof \App\Model\Entity\Gasha);
                 $search_snippet[] = $gasha->title;
             }
         }
         if (isset($data['card_id'])) {
             $card = TableRegistry::getTableLocator()->get('Cards')->find()->select(['name'])->where(['id' => $data['card_id']])->first();
             if (!empty($card)) {
+                assert($card instanceof \App\Model\Entity\Card);
                 $search_snippet[] = $card->name;
             }
         }
         $data['search_snippet'] = implode(' ', $search_snippet);
 
-        return parent::patchEntity($entity, $data, $options);
+        $entity = parent::patchEntity($entity, $data, $options);
+        assert($entity instanceof \App\Model\Entity\GashaPickup);
+        return $entity;
     }
 
     /**

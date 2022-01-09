@@ -182,7 +182,9 @@ class GashasTable extends AppTable
         }
         $data['search_snippet'] = implode(' ', $search_snippet);
 
-        return parent::patchEntity($entity, $data, $options);
+        $entity = parent::patchEntity($entity, $data, $options);
+        assert($entity instanceof \App\Model\Entity\Gasha);
+        return $entity;
     }
 
     /**
@@ -333,7 +335,7 @@ class GashasTable extends AppTable
     /**
      * ガシャ情報をjson形式で取得する
      * @param array $gasha_datas ガシャ情報
-     * @return string Key: ガシャID、Value:ガシャ情報なjsonテキスト
+     * @return string|null Key: ガシャID、Value:ガシャ情報なjsonテキスト
      */
     public function getGashaJsonData($gasha_datas = null)
     {
@@ -346,6 +348,9 @@ class GashasTable extends AppTable
             $gasha_data['end_date'] = $gasha_data['end_date']->format('Y-m-d');
             $json_data[$gasha_data['id']] = $gasha_data;
         }
-        return json_encode($json_data, JSON_UNESCAPED_UNICODE);
+
+        $json = json_encode($json_data, JSON_UNESCAPED_UNICODE);
+        assert($json !== false);
+        return $json;
     }
 }

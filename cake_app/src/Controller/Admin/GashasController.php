@@ -129,7 +129,7 @@ class GashasController extends AppController
             }
         }
         $this->set(compact('gasha'));
-        $this->render('edit');
+        return $this->render('edit');
     }
 
     /**

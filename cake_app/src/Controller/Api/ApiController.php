@@ -6,6 +6,9 @@ use Cake\ORM\TableRegistry;
 
 /**
  * APIの共通処理をまとめたコントローラ
+ *
+ * @property \App\Model\Table\GashasTable $Gashas
+ * @property \App\Model\Table\CardsTable $Cards
  */
 class ApiController extends AppController
 {

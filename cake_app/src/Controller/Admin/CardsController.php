@@ -161,7 +161,7 @@ class CardsController extends AppController
             }
         }
         $this->set(compact('card'));
-        $this->render('edit');
+        return $this->render('edit');
     }
 
     /**
@@ -363,7 +363,7 @@ class CardsController extends AppController
 
         // キャラクターの一覧を取得、選択肢情報を設定
         $characters = $this->Characters->find('list', ['keyField' => 'id', 'valueField' => 'name'])->toArray();
-        if (!is_null($characters) && count($characters) > 0) {
+        if (count($characters) > 0) {
             $row_num = 2;
             foreach ($characters as $selection_key => $selection_value) {
                 $list_sheet->setCellValue("A{$row_num}", "{$selection_key}:{$selection_value}");

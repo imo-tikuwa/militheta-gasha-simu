@@ -17,7 +17,7 @@ class GetProvisionRatioController extends ApiController
      * 提供割合情報を返す
      *
      * @param string $gasha_id ガシャID
-     * @return static
+     * @return \Cake\Http\Response
      */
     public function index($gasha_id = null)
     {
@@ -34,6 +34,8 @@ class GetProvisionRatioController extends ApiController
         // 提供割合を取得
         $provision_ratios = GashaUtils::getProvisionRatio($gasha, $cards);
 
-        return $this->response->withType('json')->withStringBody(json_encode($provision_ratios, JSON_UNESCAPED_UNICODE));
+        $string = json_encode($provision_ratios, JSON_UNESCAPED_UNICODE);
+        assert($string !== false);
+        return $this->response->withType('json')->withStringBody($string);
     }
 }
