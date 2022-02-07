@@ -498,9 +498,17 @@ class CardsTable extends AppTable
             $shs_limited_cards = $query->where([
                 'gasha_include' => true,
                 'limited' => '04',
+                'rarity' => '04', // SHS限定は今のところSSRのみ
                 'add_date <=' => $start_date, // 過去のSHS限を含める
             ], [], true)->toArray();
-            $cards = array_merge($shs_limited_cards, $cards);
+            // SHS限定ガシャ開催中、ピックアップする限定カードを取得（R,SR）
+            $other_limited_cards = $query->where([
+                'gasha_include' => true,
+                'limited' => '02',
+                'rarity IN' => ['02', '03'],
+                'add_date' => $start_date,
+            ], [], true)->toArray();
+            $cards = array_merge($shs_limited_cards, $other_limited_cards, $cards);
         } elseif ($gasha->isReprintLimited()) {
             // 復刻？の条件追加
             $card_reprints = TableRegistry::getTableLocator()->get('CardReprints');

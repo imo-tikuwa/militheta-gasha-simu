@@ -1317,6 +1317,42 @@ class CardReprintsSeed extends AbstractSeed
                 'modified' => '2021-12-30 15:52:59',
                 'deleted' => NULL,
             ],
+            [
+                'id' => '145',
+                'gasha_id' => '217',
+                'card_id' => '941',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 輝く勲章　舞浜歩',
+                'created' => '2022-02-07 21:23:57',
+                'modified' => '2022-02-07 21:23:57',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '146',
+                'gasha_id' => '217',
+                'card_id' => '942',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 優美に、軽やかに！　桜守歌織',
+                'created' => '2022-02-07 21:24:04',
+                'modified' => '2022-02-07 21:24:04',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '147',
+                'gasha_id' => '217',
+                'card_id' => '954',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ エンゲージメント・ダンス　秋月律子',
+                'created' => '2022-02-07 21:24:13',
+                'modified' => '2022-02-07 21:24:13',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '148',
+                'gasha_id' => '217',
+                'card_id' => '943',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 海っ子お祭りライブ！　馬場このみ',
+                'created' => '2022-02-07 21:24:21',
+                'modified' => '2022-02-07 21:24:21',
+                'deleted' => NULL,
+            ],
         ];
 
         $table = $this->table('card_reprints');
