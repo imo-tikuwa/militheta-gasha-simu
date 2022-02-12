@@ -1,6 +1,7 @@
 <?php
 
-use Cake\Cache\Engine\FileEngine;
+use Cake\Cache\Engine\NullEngine;
+use Cake\Cache\Engine\RedisEngine;
 use Cake\Error\ExceptionRenderer;
 use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
@@ -96,9 +97,7 @@ return [
      */
     'Cache' => [
         'default' => [
-            'className' => FileEngine::class,
-            'path' => CACHE,
-            'url' => env('CACHE_DEFAULT_URL', null),
+            'className' => NullEngine::class,
         ],
 
         /**
@@ -108,12 +107,12 @@ return [
          * If you set 'className' => 'Null' core cache will be disabled.
          */
         '_cake_core_' => [
-            'className' => FileEngine::class,
+            'className' => RedisEngine::class,
             'prefix' => 'myapp_cake_core_',
-            'path' => CACHE . 'persistent' . DS,
-            'serialize' => true,
-            'duration' => '+1 years',
-            'url' => env('CACHE_CAKECORE_URL', null),
+            'duration' => '+1 hours',
+            'host' => 'redis',
+            'port' => 6379,
+            'fallback' => 'default',
         ],
 
         /**
@@ -123,12 +122,12 @@ return [
          * Duration will be set to '+2 minutes' in bootstrap.php when debug = true
          */
         '_cake_model_' => [
-            'className' => FileEngine::class,
+            'className' => RedisEngine::class,
             'prefix' => 'myapp_cake_model_',
-            'path' => CACHE . 'models' . DS,
-            'serialize' => true,
-            'duration' => '+1 years',
-            'url' => env('CACHE_CAKEMODEL_URL', null),
+            'duration' => '+1 hours',
+            'host' => 'redis',
+            'port' => 6379,
+            'fallback' => 'default',
         ],
 
         /**
@@ -137,12 +136,12 @@ return [
          * Duration will be set to '+2 seconds' in bootstrap.php when debug = true
          */
         '_cake_routes_' => [
-            'className' => FileEngine::class,
+            'className' => RedisEngine::class,
             'prefix' => 'myapp_cake_routes_',
-            'path' => CACHE,
-            'serialize' => true,
-            'duration' => '+1 years',
-            'url' => env('CACHE_CAKEROUTES_URL', null),
+            'duration' => '+1 hours',
+            'host' => 'redis',
+            'port' => 6379,
+            'fallback' => 'default',
         ],
     ],
 
