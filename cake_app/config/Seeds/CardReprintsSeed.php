@@ -1353,6 +1353,42 @@ class CardReprintsSeed extends AbstractSeed
                 'modified' => '2022-02-07 21:24:21',
                 'deleted' => NULL,
             ],
+            [
+                'id' => '149',
+                'gasha_id' => '221',
+                'card_id' => '961',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 選ばれし少女　伊吹翼',
+                'created' => '2022-04-09 18:26:42',
+                'modified' => '2022-04-09 18:26:42',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '150',
+                'gasha_id' => '221',
+                'card_id' => '962',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 昨日の悪友は今日の、　矢吹可奈',
+                'created' => '2022-04-09 18:27:05',
+                'modified' => '2022-04-09 18:27:05',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '151',
+                'gasha_id' => '221',
+                'card_id' => '974',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ 秘められた正義　篠宮可憐',
+                'created' => '2022-04-09 18:27:26',
+                'modified' => '2022-04-09 18:27:26',
+                'deleted' => NULL,
+            ],
+            [
+                'id' => '152',
+                'gasha_id' => '221',
+                'card_id' => '963',
+                'search_snippet' => '【限定復刻】日替わりピックアップ！限定復刻ガシャ ふたりきりの街角　舞浜歩',
+                'created' => '2022-04-09 18:27:45',
+                'modified' => '2022-04-09 18:27:45',
+                'deleted' => NULL,
+            ],
         ];
 
         $table = $this->table('card_reprints');
