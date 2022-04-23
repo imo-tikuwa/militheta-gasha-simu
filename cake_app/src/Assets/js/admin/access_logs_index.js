@@ -23,7 +23,7 @@ $(function(){
 
 	// 集計間隔
 	$('#date-type').select2({
-		theme: "bootstrap4",
+		theme: "bootstrap-5",
 		width: 'auto',
 		dropdownAutoWidth: true,
 	});

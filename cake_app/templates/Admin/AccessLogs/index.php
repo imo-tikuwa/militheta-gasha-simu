@@ -13,23 +13,23 @@ alert("データが見つかりませんでした。");
 
 <div class="col-md-12 mb-12">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header bg-body">
       <?= $this->Form->create(null, ['type' => 'GET']) ?>
         <div class="row">
           <div class="col-lg-1 col-md-3 col-sm-3">
             <div class="form-group">
-              <?= $this->Form->control('target_date', ['type' => 'text', 'id' => 'target_date-datepicker', 'class' => 'form-control rounded-0 ', 'label' => '検索対象日', 'data-toggle' => 'datetimepicker', 'data-target' => '#target_date-datepicker', 'value' => @$params['target_date']]); ?>
+              <?= $this->Form->control('target_date', ['type' => 'text', 'id' => 'target_date-datepicker', 'class' => 'form-control form-control-sm rounded-0 ', 'label' => '検索対象日', 'data-toggle' => 'datetimepicker', 'data-target' => '#target_date-datepicker', 'value' => @$params['target_date']]); ?>
             </div>
           </div>
           <div class="col-lg-1 col-md-3 col-sm-3">
             <div class="form-group">
-              <?= $this->Form->control('date_type', ['type' => 'select', 'class' => 'select2', 'label' => '集計間隔', 'options' => _code('OperationLogs.date_type_jp'), 'value' => @$params['date_type']]); ?>
+              <?= $this->Form->control('date_type', ['type' => 'select', 'class' => 'form-control form-control-sm', 'label' => '集計間隔', 'options' => _code('OperationLogs.date_type_jp'), 'value' => @$params['date_type']]); ?>
             </div>
           </div>
           <div class="col-md-1 col-md-3 col-sm-3">
             <label>　</label>
             <?= $this->Form->hidden('search'); ?>
-            <?= $this->Form->submit('検索', ['class' => "btn btn-flat btn-outline-secondary"]) ?>
+            <?= $this->Form->submit('検索', ['class' => "btn btn-sm btn-flat btn-outline-secondary"]) ?>
           </div>
         </div>
       <?= $this->Form->end(); ?>

@@ -1,146 +1,406 @@
 body {
-  font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
-}
-
-.button-functions button {
-  margin: 0;
-}
-
-/* override adminlte */
-
-.layout-navbar-fixed.sidebar-collapse .brand-link {
-  width: 4rem;
-}
-
-.content-header h1 {
-  font-size: $h1-font-size;
-}
-
-@media (min-width: 992px) {
-  .sidebar-mini.sidebar-collapse {
-    .content-wrapper, .main-footer, .main-header {
-      margin-left: 4rem !important;
+  font-family: sans-serif;
+  &> div#app {
+    #brand {
+      width: $left-column-width;
+      background-color: $dark;
+      .navbar-brand {
+        color:$gray-500;
+      }
+      @include media-breakpoint-down(lg) {
+        width: auto;
+        background-color: $light;
+        .navbar-brand {
+          color:$dark;
+        }
+      }
+    }
+    #header-link {
+      .navbar-nav li.nav-item {
+        border-right: 1px solid #eee;
+        &:last-of-type {
+          border-right: none;
+        }
+        a {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+    #navbar-togglers {
+      --bs-gutter-x: 1.5rem;
+      padding-right: calc(var(--bs-gutter-x)*0.5);
+      margin-left: auto;
+      @include media-breakpoint-down(lg) {
+        display: flex;
+      }
+      .navbar-toggler {
+        width: 42px;
+        height: 42px;
+        @include media-breakpoint-down(lg) {
+          display: flex;
+        }
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    #sidebar {
+      min-width: $left-column-width;
+      max-width: $left-column-width;
+      padding: 0 .5rem;
+      .sidebar-inner {
+        height: calc(100vh - 3.5rem);
+        scrollbar-width: none;
+        overflow-x: hidden;
+        overflow-y: initial;
+        &:hover {
+          overflow-y: auto;
+        }
+        .nav-item {
+          &:hover > .nav-link {
+            background-color: hsla(0,0%,100%,.1);
+          }
+          &> .nav-link {
+            margin-bottom: .2rem;
+            &.active {
+              background-color: $primary;
+              color: #fff;
+            }
+            i {
+              width: 16px;
+            }
+            p {
+              display: inline;
+              margin: 0;
+              white-space: normal;
+            }
+          }
+        }
+      }
+      @include media-breakpoint-up(lg) {
+        display: block;
+      }
     }
 
-    .main-sidebar {
-      width: 4rem;
+    a,
+    a:hover {
+      text-decoration: none;
+    }
 
-      &:before {
-        width: 4rem;
+    /* テーブル */
+    .table th {
+      white-space: nowrap;
+    }
+    .card-body.p-0 .table {
+      border-top: 1px solid $table-border-color;
+      > :not(:first-child) {
+        border-color: $table-border-color;
+      }
+      td.actions div.btn-group {
+        max-width: 34px;
+        max-height: 34px;
+      }
+      tbody > tr > td:first-of-type,
+      tbody > tr > th:first-of-type,
+      tfoot > tr > td:first-of-type,
+      tfoot > tr > th:first-of-type,
+      thead > tr > td:first-of-type,
+      thead > tr > th:first-of-type {
+        padding-left: 1.5rem;
+      }
+    }
+
+    /* 項目のラベルと必須アイコン */
+    label.form-label {
+      display:block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+      span.require-icon {
+        position: relative;
+        top: -2px;
+      }
+    }
+
+    /* フリーワード検索 */
+    .freeword-search .input-group-text small {
+      /* フリーワード検索のAND、ORラベルについて画面が狭くなったときにレイアウトが崩れるのを防ぐ */
+      label {
+        margin-bottom: 0 !important;
+      }
+      /* フリーワード検索のAND、OR検索のラジオボタンについてANDの後ろの間隔を空ける */
+      &:first-of-type {
+        margin-right: .25rem !important;
+      }
+    }
+
+    /* チェックボックス、ラジオボタンのデザイン */
+    .form-check {
+      padding-left: 0;
+      .adm-checkbox + .form-check-label {
+        padding: 0 !important;
+      }
+      .adm-checkbox {
+        display:none;
+      }
+      .adm-checkbox + label:before {
+        font-weight: 900;
+        font-family: "Font Awesome 6 Free";
+        content: '\f14a';
+        color: #ccc;
+        letter-spacing: 5px;
+        font-size: 1.4rem;
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+        top: 2px;
+      }
+      .adm-checkbox + label {
+        vertical-align: middle;
+      }
+      .adm-checkbox:checked + label:before {
+        color: $primary;
+      }
+    }
+
+    /* 入力項目にくっつくボタンの線色を入力項目に揃える */
+    .input-group .btn {
+      border-color: $input-border-color;
+    }
+
+    /* ラベル太くするのやめる */
+    label:not(.form-check-label):not(.custom-file-label) {
+      font-weight: inherit;
+    }
+
+    /* アカウント/権限更新の「権限」について.form-checkのスタイルをbootstrap5標準に戻す */
+    #privilege-form .form-check {
+      padding-left: $form-check-padding-start;
+    }
+
+    /* アカウント管理のパスワードを表示のラベル */
+    #password-toggle-label {
+      font-weight: inherit;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    /* モーダル */
+    .modal {
+      &.search-form {
+        .modal-dialog {
+          position: fixed;
+          margin: auto;
+          width: 320px;
+          height: 100%;
+          -webkit-transform: translate3d(0%, 0, 0);
+          -ms-transform: translate3d(0%, 0, 0);
+          -o-transform: translate3d(0%, 0, 0);
+          transform: translate3d(0%, 0, 0);
+        }
+        .modal-content {
+          height: 100%;
+          overflow-y: auto;
+        }
+        .modal-body {
+          padding: 15px 15px 80px;
+        }
+        &.fade {
+          .modal-dialog {
+            right: -320px;
+            -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+            -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+            -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+            transition: opacity 0.3s linear, right 0.3s ease-out;
+          }
+          &.show .modal-dialog {
+            right: 0;
+            .modal-content {
+              border-radius: 0;
+              border: none;
+            }
+          }
+        }
+      }
+      &.modal-sidebar {
+        .modal-dialog {
+          position: fixed;
+          margin: 0;
+          padding: 0;
+          min-width: $left-column-width;
+          max-width: $left-column-width;
+          height: 100%;
+          -webkit-transform: translate3d(0%, 0, 0);
+          -ms-transform: translate3d(0%, 0, 0);
+          -o-transform: translate3d(0%, 0, 0);
+          transform: translate3d(0%, 0, 0);
+        }
+        .modal-content {
+          height: 100%;
+          overflow-y: auto;
+          scrollbar-width: none;
+          .modal-body {
+            padding: 0 .5rem;
+            .nav-item {
+              &:hover > .nav-link {
+                background-color: hsla(0,0%,100%,.1);
+              }
+              &> .nav-link {
+                margin-bottom: .2rem;
+                &.active {
+                  background-color: $primary;
+                  color: #fff;
+                }
+                i {
+                  width: 16px;
+                }
+                p {
+                  display: inline;
+                  margin: 0;
+                  white-space: normal;
+                }
+              }
+            }
+          }
+        }
+        &.fade {
+          .modal-dialog {
+            left: -320px;
+            -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+            -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+            -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+            transition: opacity 0.3s linear, left 0.3s ease-out;
+          }
+          &.show .modal-dialog {
+            left: 0;
+            .modal-content {
+              border-radius: 0;
+              border: none;
+            }
+          }
+        }
       }
     }
   }
-
-  .sidebar-mini-md.sidebar-collapse .main-sidebar {
-    width: 4rem;
-
-    &:before {
-      width: 4rem;
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  .sidebar-mini-md.sidebar-collapse {
-    .content-wrapper, .main-footer, .main-header {
-      margin-left: 4.6rem !important;
-    }
-  }
-}
-
-/* ブランドテキストのトグル表示 */
-
-body {
-  &:not(.sidebar-open) .brand-text-disp-collapse, &:not(.sidebar-collapse) .brand-text-disp-collapse, &.sidebar-open .brand-text-disp-collapse {
-    display: none;
-  }
-
-  &.sidebar-collapse .brand-text-disp-collapse {
-    display: inline;
-    padding-left: 10px;
-  }
-}
-
-/* adminlteのサイドバー下部の横スクロールバーを削除 */
-
-.layout-fixed .main-sidebar {
-  overflow: hidden;
-}
-
-/** サイドメニューのアイコン要素のサイズ */
-
-ul.nav-sidebar li a i {
-  width: 16px;
-}
-
-/* 検索フォーム */
-
-.modal.search-form {
-  .modal-dialog {
-    position: fixed;
-    margin: auto;
-    width: 320px;
-    height: 100%;
-    -webkit-transform: translate3d(0%, 0, 0);
-    -ms-transform: translate3d(0%, 0, 0);
-    -o-transform: translate3d(0%, 0, 0);
-    transform: translate3d(0%, 0, 0);
-  }
-
-  .modal-content {
-    height: 100%;
-    overflow-y: auto;
-  }
-
-  .modal-body {
-    padding: 15px 15px 80px;
-  }
-
-  &.fade {
-    .modal-dialog {
-      right: -320px;
-      -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
-      -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
-      -o-transition: opacity 0.3s linear, right 0.3s ease-out;
-      transition: opacity 0.3s linear, right 0.3s ease-out;
-    }
-
-    &.show .modal-dialog {
-      right: 0;
-
-      .modal-content {
-        border-radius: 0;
-        border: none;
-      }
-    }
-  }
-}
-
-/* テーブルのthタグ内のテキストは折り返さない */
-
-table.table th {
-  white-space: nowrap;
-}
-
-/* 操作ボタン */
-
-table.table td.actions div.btn-group {
-  max-width: 34px;
-  max-height: 34px;
 }
 
 /* 角丸をとる  */
-
 .bootstrap-tagsinput {
   border-radius: 0 !important;
 }
 
+/* テキストサイズ */
+.text-sm {
+  font-size: .9rem !important;
+}
+.text-lg {
+  font-size: 1.2rem !important;
+}
+
+/* エラーメッセージ修飾 */
+.error-message {
+  &:before {
+    content: '※';
+  }
+  font-size: 90%;
+  color: red;
+}
+
+/* 日付選択プラグイン(tempusdominus-bootstrap-4)の土日に色を付ける */
+.datepicker-days {
+  th.dow:first-child, td:first-child {
+    color: #f00;
+  }
+  th.dow:last-child, td:last-child {
+    color: #00f;
+  }
+}
+
+/* bootstrap-fileinput のオーバーライド */
 .theme-explorer-fas {
-  .kv-fileinput-caption, .btn-file,
+  /* ファイルキャプションとファイルプレビューについてfileinput.min.cssファイルの代わりにbootstrap-fileinput/scss/fileinput.scssをインポートした場合の表示崩れを修正する */
+  .file-caption {
+    .file-caption-name {
+      width: auto !important;
+      padding: $input-padding-y $input-padding-x !important;
+      border: 1px solid $input-border-color;
+    }
+    .input-group-sm .file-caption-name {
+      padding: $input-padding-y-sm $input-padding-x-sm !important;
+    }
+    .input-group-lg .file-caption-name {
+      padding: $input-padding-y-lg $input-padding-x-lg !important;
+    }
+    &.icon-visible {
+      .kv-caption-icon {
+        color: $primary;
+      }
+      .file-caption-icon {
+        display: inline-block !important;
+      }
+      .file-caption-name {
+        width: 0 !important;
+        padding-left: 1.875rem !important;
+      }
+      > .input-group-lg .file-caption-name {
+        padding-left: 2.1rem !important;
+      }
+      > .input-group-sm .file-caption-name {
+        padding-left: 1.5rem !important;
+      }
+    }
+  }
+  .file-preview .kv-file-content {
+    display: table;
+    .kv-preview-data {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+  /* 角丸を取る */
+  .kv-fileinput-caption,
+  .btn-file {
+    border-radius: 0 !important;
+  }
+  /* プレビューのデザインのオーバーライド */
   .file-preview {
     border-radius: 0 !important;
     .table {
       table-layout: fixed !important;
+    }
+    &.file-preview-sm {
+      .explorer-frame {
+        .kv-file-content {
+          width: 68px;
+          height: 68px;
+          padding: 3px 3px 0 3px;
+          .file-other-icon {
+            font-size: 2.4em;
+          }
+        }
+        .file-details-cell {
+          font-size: .9rem;
+        }
+      }
+    }
+    &.file-preview-lg {
+      .explorer-frame {
+        .kv-file-content {
+          width: 92px;
+          height: 92px;
+          .file-other-icon {
+            font-size: 2.8em;
+          }
+        }
+        .file-details-cell {
+          font-size: 1.2rem;
+        }
+      }
     }
   }
   .explorer-caption {
@@ -153,183 +413,29 @@ table.table td.actions div.btn-group {
   }
 }
 
-/* エラーメッセージ修飾 */
-
-.error-message {
-  &:before {
-    content: '※';
-  }
-
-  font-size: 90%;
-  color: red;
-}
-
-/* ヘッダーリンク */
-
-.navbar-nav li.nav-item {
-  border-right: 1px solid #eee;
-
-  &:last-of-type {
-    border-right: none;
-  }
-
-  a {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+/* select2-bootstrap5-themeの一部cssを書き換え */
+// form-control
+.form-control + .select2-container--bootstrap-5 {
+  .select2-selection {
+    box-shadow: none !important;
   }
 }
-
-/* 日付選択プラグイン(tempusdominus-bootstrap-4)の土日に色を付ける */
-
-.datepicker-days {
-  th.dow:first-child, td:first-child {
-    color: #f00;
-  }
-
-  th.dow:last-child, td:last-child {
-    color: #00f;
-  }
-}
-
-/* ログインボックスの幅調整 */
-.login-page {
-  flex-direction: inherit !important;
-
-  .login-box, .register-box {
-    width: 400px;
-  }
-}
-
-/* アカウント管理のパスワードを表示のラベル */
-
-#password-toggle-label {
-  font-weight: inherit;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-/* 項目のラベルと必須アイコン */
-
-label.item-label {
-  display:block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-
-  span.require-icon {
-    position: relative;
-    top: -2px;
-  }
-}
-
-/* 検索一覧画面 */
-.index-dropdown-toggle {
-  padding-left: 0.65rem !important;
-  padding-right: 0.65rem !important;
-}
-
-/* チェックボックスのデザイン */
-.adm-checkbox + .form-check-label {
-  padding: 0 !important;
-}
-.adm-checkbox {
-  display:none;
-}
-.adm-checkbox + label:before {
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  content: '\f14a';
-  color: #ccc;
-  letter-spacing: 5px;
-  font-size: 1.4rem;
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  position: relative;
-  top: 2px;
-}
-.adm-checkbox + label {
-  vertical-align: middle;
-}
-.adm-checkbox:checked + label:before {
-  color: $primary;
-}
-
-/* fileinput の入力項目サイズ別のデザイン */
-.theme-explorer-fas {
-  .file-preview.file-preview-sm {
-    tr.explorer-frame {
-      .kv-file-content {
-        width: 68px;
-        height: 68px;
-        padding: 3px 3px 0 3px;
-        .file-other-icon {
-          font-size: 2.4em;
-        }
-      }
-      .file-details-cell {
-        font-size: .9rem;
-      }
-    }
-  }
-  .file-preview.file-preview-lg {
-    tr.explorer-frame {
-      .kv-file-content {
-        width: 92px;
-        height: 92px;
-        .file-other-icon {
-          font-size: 2.8em;
-        }
-      }
-      .file-details-cell {
-        font-size: 1.2rem;
-      }
-    }
-  }
-}
-
-/* フリーワード検索のAND、OR検索のラジオボタンについてANDの後ろの間隔を空ける */
-.freeword-search .input-group-prepend .input-group-text small:first-of-type {
-  margin-right: .25rem !important;
-}
-/* フリーワード検索のAND、ORラベルについて画面が狭くなったときにレイアウトが崩れるのを防ぐ */
-.freeword-search .input-group-prepend .input-group-text small label {
-  margin-bottom: 0 !important;
-}
-
-/* 入力項目にくっつくボタンの線色を入力項目に揃える */
-.input-group .input-group-append .btn {
-  border-color: $input-border-color;
-}
-
-/* ラベル太くするのやめる */
-label:not(.form-check-label):not(.custom-file-label) {
-  font-weight: inherit;
-}
-
-// imo-tikuwa/select2-bootstrap4-themeのlayout.cssに追加した内容
-// https://github.com/imo-tikuwa/select2-bootstrap4-theme/blob/master/src/layout.scss#L28-L49
-// フォークするのではなくここでscssを追加する
 // form-control-sm
-.form-control-sm + .select2-container--bootstrap4 {
+.form-control-sm + .select2-container--bootstrap-5 {
   .select2-selection {
     height: $input-height-sm !important;
+    min-height: $input-height-sm !important;
     @include font-size($input-font-size-sm);
     .select2-selection__rendered {
       margin-top: -0.2em;
     }
   }
 }
-
 // form-control-lg
-.form-control-lg + .select2-container--bootstrap4 {
+.form-control-lg + .select2-container--bootstrap-5 {
   .select2-selection {
     height: $input-height-lg !important;
+    min-height: $input-height-lg !important;
     @include font-size($input-font-size-lg);
     .select2-selection__rendered {
       margin-top: -0.2em;

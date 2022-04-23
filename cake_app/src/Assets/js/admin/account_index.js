@@ -1,11 +1,9 @@
 $(function(){
 
     // 二段階認証用のQRコードがあったらモーダルを表示
-    $(window).on('load', function(){
-        if ($(document).find('#qr-modal')[0]) {
-            $('#qr-modal').modal('show');
-        }
-    });
+    if ($(document).find('#qr-modal')[0]) {
+        $('#qr-modal').modal('show');
+    }
 
     // 発行済みのQRコードの再表示
     $('.redraw-qr').on('click', function(){

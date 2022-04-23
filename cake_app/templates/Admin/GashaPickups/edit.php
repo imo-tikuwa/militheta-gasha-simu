@@ -6,14 +6,14 @@
 $button_name = (!empty($gasha_pickup) && !$gasha_pickup->isNew()) ? "更新" : "登録";
 $this->assign('title', "ピックアップ情報{$button_name}");
 ?>
-<div class="col-md-12 mb-12">
+<div class="col">
   <div class="card">
     <div class="card-body">
       <?= $this->Form->create($gasha_pickup) ?>
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'gasha_id', 'label' => 'ガシャID', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'gasha_id', 'label' => 'ガシャID', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('gasha_id', [
               'id' => 'gasha-id',
               'type' => 'select',
@@ -27,8 +27,8 @@ $this->assign('title', "ピックアップ情報{$button_name}");
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'card_id', 'label' => 'カードID', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'card_id', 'label' => 'カードID', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('card_id', [
               'id' => 'card-id',
               'type' => 'select',

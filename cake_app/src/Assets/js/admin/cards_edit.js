@@ -2,21 +2,21 @@ $(() => {
 
     // キャラクター
     $('#character-id').select2({
-        theme: "bootstrap4",
+        theme: "bootstrap-5",
         width: 'auto',
         dropdownAutoWidth: true,
     });
 
     // レアリティ
     $('#rarity').select2({
-        theme: "bootstrap4",
+        theme: "bootstrap-5",
         width: 'auto',
         dropdownAutoWidth: true,
     });
 
     // タイプ
     $('#type').select2({
-        theme: "bootstrap4",
+        theme: "bootstrap-5",
         width: 'auto',
         dropdownAutoWidth: true,
     });
@@ -49,14 +49,14 @@ $(() => {
 
     // ガシャ対象？
     $('#gasha-include').select2({
-        theme: "bootstrap4",
+        theme: "bootstrap-5",
         width: 'auto',
         dropdownAutoWidth: true,
     });
 
     // 限定？
     $('#limited').select2({
-        theme: "bootstrap4",
+        theme: "bootstrap-5",
         width: 'auto',
         dropdownAutoWidth: true,
     });
