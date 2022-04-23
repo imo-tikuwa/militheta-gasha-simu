@@ -221,7 +221,7 @@ select.list-dt:focus {
 #progressbar #step2:before,
 #progressbar #step3:before,
 #progressbar #step4:before {
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome 6 Free';
 }
 #progressbar #step1:before {
     content: "\f25a";

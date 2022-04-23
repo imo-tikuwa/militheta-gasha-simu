@@ -38,7 +38,6 @@ services:
         volumes:
             - db-store:/var/lib/mysql
             - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
-            - ./log/mysql:/var/log/mysql
         ports:
             - $MYSQL_PUBLISHED_PORT:3306
         environment:

@@ -3,7 +3,8 @@ SHELL ["/bin/ash", "-oeux", "pipefail", "-c"]
 
 ENV TZ=Asia/Tokyo
 
-RUN apk update && \
+RUN adduser -H -S www-data -u 1000 && \
+    apk update && \
     apk add --update --no-cache --virtual=.build-dependencies g++ tzdata
 
 COPY ./conf.d/default.conf /etc/nginx/conf.d/default.conf
