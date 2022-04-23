@@ -6,14 +6,14 @@
 $button_name = (!empty($gasha) && !$gasha->isNew()) ? "更新" : "登録";
 $this->assign('title', "ガシャ{$button_name}");
 ?>
-<div class="col-md-12 mb-12">
+<div class="col">
   <div class="card">
     <div class="card-body">
       <?= $this->Form->create($gasha) ?>
       <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'start-date-datepicker', 'label' => 'ガシャ開始日', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'start-date-datepicker', 'label' => 'ガシャ開始日', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('start_date', [
               'type' => 'text',
               'id' => 'start-date-datepicker',
@@ -28,8 +28,8 @@ $this->assign('title', "ガシャ{$button_name}");
           </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'end-date-datepicker', 'label' => 'ガシャ終了日', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'end-date-datepicker', 'label' => 'ガシャ終了日', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('end_date', [
               'type' => 'text',
               'id' => 'end-date-datepicker',
@@ -44,8 +44,8 @@ $this->assign('title', "ガシャ{$button_name}");
           </div>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'title', 'label' => 'ガシャタイトル', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'title', 'label' => 'ガシャタイトル', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('title', [
               'type' => 'text',
               'class' => 'form-control form-control-sm rounded-0 ',
@@ -56,8 +56,8 @@ $this->assign('title', "ガシャ{$button_name}");
           </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'ssr_rate', 'label' => 'SSRレート', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'ssr_rate', 'label' => 'SSRレート', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <div class="input number">
               <div class="input-group input-group-sm">
                 <?= $this->Form->text('ssr_rate', [
@@ -71,14 +71,14 @@ $this->assign('title', "ガシャ{$button_name}");
                   'required' => false,
                   'error' => false
                 ]); ?>
-                <div class="input-group-append"><span class="input-group-text rounded-0">%</span></div>
+                <div class="input-group-text">%</div>
               </div>
             </div>
           </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'sr_rate', 'label' => 'SRレート', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'sr_rate', 'label' => 'SRレート', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <div class="input number">
               <div class="input-group input-group-sm">
                 <?= $this->Form->text('sr_rate', [
@@ -92,7 +92,7 @@ $this->assign('title', "ガシャ{$button_name}");
                   'required' => false,
                   'error' => false
                 ]); ?>
-                <div class="input-group-append"><span class="input-group-text rounded-0">%</span></div>
+                <div class="input-group-text">%</div>
               </div>
             </div>
           </div>

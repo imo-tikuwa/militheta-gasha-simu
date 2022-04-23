@@ -7,9 +7,9 @@ $this->assign('title', "直近のログ");
 ?>
 
 <div class="col-md-12 mb-12">
-  <div class="card">
+  <div class="card d-grid">
     <div class="card-body table-responsive p-0">
-      <table class="table table-hover">
+      <table class="table table-sm table-hover text-sm text-nowrap">
         <thead>
           <tr>
             <th scope="col">クライアントIP</th>

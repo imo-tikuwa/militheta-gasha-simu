@@ -6,14 +6,14 @@
 $button_name = (!empty($card) && !$card->isNew()) ? "更新" : "登録";
 $this->assign('title', "カード{$button_name}");
 ?>
-<div class="col-md-12 mb-12">
+<div class="col">
   <div class="card">
     <div class="card-body">
       <?= $this->Form->create($card) ?>
       <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'character_id', 'label' => 'キャラクター', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'character_id', 'label' => 'キャラクター', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('character_id', [
               'id' => 'character-id',
               'type' => 'select',
@@ -27,8 +27,8 @@ $this->assign('title', "カード{$button_name}");
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'name', 'label' => 'カード名', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'name', 'label' => 'カード名', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('name', [
               'type' => 'text',
               'class' => 'form-control form-control-sm rounded-0 ',
@@ -39,8 +39,8 @@ $this->assign('title', "カード{$button_name}");
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'rarity', 'label' => 'レアリティ', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'rarity', 'label' => 'レアリティ', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('rarity', [
               'id' => 'rarity',
               'type' => 'select',
@@ -55,8 +55,8 @@ $this->assign('title', "カード{$button_name}");
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'type', 'label' => 'タイプ', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'type', 'label' => 'タイプ', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('type', [
               'id' => 'type',
               'type' => 'select',
@@ -71,8 +71,8 @@ $this->assign('title', "カード{$button_name}");
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'add-date-datepicker', 'label' => '実装日', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'add-date-datepicker', 'label' => '実装日', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('add_date', [
               'type' => 'text',
               'id' => 'add-date-datepicker',
@@ -87,8 +87,8 @@ $this->assign('title', "カード{$button_name}");
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'gasha_include', 'label' => 'ガシャ対象？', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'gasha_include', 'label' => 'ガシャ対象？', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('gasha_include', [
               'id' => 'gasha-include',
               'type' => 'select',
@@ -103,8 +103,8 @@ $this->assign('title', "カード{$button_name}");
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
-          <div class="form-group">
-            <?= $this->element('Parts/label', ['field' => 'limited', 'label' => '限定？', 'require' => true, 'class' => 'item-label col-form-label col-form-label-sm']); ?>
+          <div class="mb-3">
+            <?= $this->element('Parts/label', ['field' => 'limited', 'label' => '限定？', 'require' => true, 'class' => 'form-label col-form-label col-form-label-sm']); ?>
             <?= $this->Form->control('limited', [
               'id' => 'limited',
               'type' => 'select',

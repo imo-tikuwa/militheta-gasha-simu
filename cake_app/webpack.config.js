@@ -21,6 +21,11 @@ const exportScript = {
         publicPath: '/js/vendor/',
         filename: '[name].js'
     },
+    resolve: {
+        alias: {
+            jQuery: path.resolve(__dirname, "node_modules/jquery"),
+        }
+    },
     plugins: [
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new webpack.ProvidePlugin({
@@ -49,6 +54,9 @@ const exportScript = {
     },
     performance: {
         hints: false
+    },
+    watchOptions: {
+        poll: 5000,
     }
 };
 
@@ -82,6 +90,9 @@ const exportPageScripts = {
     },
     performance: {
         hints: false
+    },
+    watchOptions: {
+        poll: 5000,
     }
 };
 // src/Assets/js/admin以下のjsファイルをすべてエントリーポイントに追加
@@ -190,6 +201,9 @@ const exportStyle = {
     },
     performance: {
         hints: false
+    },
+    watchOptions: {
+        poll: 5000,
     }
 };
 
@@ -223,7 +237,7 @@ if (mode === 'production') {
                     })
                 ]
             };
-    	}
+        }
     });
 }
 
