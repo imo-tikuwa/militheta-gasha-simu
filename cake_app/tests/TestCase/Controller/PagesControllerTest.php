@@ -36,17 +36,10 @@ class PagesControllerTest extends TestCase
      */
     public function testMultipleGet()
     {
-        if (Configure::read('debug')) {
-            $this->get('/pages/home');
-            $this->assertResponseOk();
-            $this->get('/pages/home');
-            $this->assertResponseOk();
-        } else {
-            $this->get('/pages/home');
-            $this->assertResponseError();
-            $this->get('/pages/home');
-            $this->assertResponseError();
-        }
+        $this->get('/pages/home');
+        $this->assertResponseOk();
+        $this->get('/pages/home');
+        $this->assertResponseOk();
     }
 
     /**
@@ -56,16 +49,25 @@ class PagesControllerTest extends TestCase
      */
     public function testDisplay()
     {
+        Configure::write('debug', false);
         $this->get('/pages/home');
-        if (Configure::read('debug')) {
-            $this->assertResponseOk();
-            $this->assertResponseContains('CakePHP');
-            $this->assertResponseContains('<html>');
-        } else {
-            $this->assertResponseError();
-            $this->assertResponseContains('Please replace templates/Pages/home.php with your own version or re-enable debug mode.');
-            $this->assertResponseContains('<html>');
-        }
+        $this->assertResponseOk();
+        $this->assertResponseContains('Please be aware that this page will not be shown if you turn off debug mode unless you replace templates/Pages/home.php with your own version.');
+        $this->assertResponseContains('<html>');
+    }
+
+    /**
+     * testDisplay method in debug
+     *
+     * @return void
+     */
+    public function testDisplayInDebug()
+    {
+        Configure::write('debug', true);
+        $this->get('/pages/home');
+        $this->assertResponseOk();
+        $this->assertResponseContains('CakePHP');
+        $this->assertResponseContains('<html>');
     }
 
     /**
@@ -75,15 +77,25 @@ class PagesControllerTest extends TestCase
      */
     public function testMissingTemplate()
     {
+        Configure::write('debug', false);
         $this->get('/pages/not_existing');
-        if (Configure::read('debug')) {
-            $this->assertResponseContains('Missing Template');
-            $this->assertResponseContains('Stacktrace');
-            $this->assertResponseContains('not_existing.php');
-        } else {
-            $this->assertResponseError();
-            $this->assertResponseContains('Error');
-        }
+        $this->assertResponseFailure();
+        $this->assertResponseContains('Error');
+    }
+
+    /**
+     * Test that missing template in debug
+     *
+     * @return void
+     */
+    public function testMissingTemplateInDebug()
+    {
+        Configure::write('debug', true);
+        $this->get('/pages/not_existing');
+        $this->assertResponseFailure();
+        $this->assertResponseContains('Missing Template');
+        $this->assertResponseContains('Stacktrace');
+        $this->assertResponseContains('not_existing.php');
     }
 
     /**

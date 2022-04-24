@@ -326,7 +326,7 @@ body {
   /* ファイルキャプションとファイルプレビューについてfileinput.min.cssファイルの代わりにbootstrap-fileinput/scss/fileinput.scssをインポートした場合の表示崩れを修正する */
   .file-caption {
     .file-caption-name {
-      width: auto !important;
+      width: 0 !important;
       padding: $input-padding-y $input-padding-x !important;
       border: 1px solid $input-border-color;
     }
@@ -344,7 +344,6 @@ body {
         display: inline-block !important;
       }
       .file-caption-name {
-        width: 0 !important;
         padding-left: 1.875rem !important;
       }
       > .input-group-lg .file-caption-name {
