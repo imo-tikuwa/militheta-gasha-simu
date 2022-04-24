@@ -9,7 +9,7 @@ init:
 	-e "s/^export DATABASE_HOST=\"127.0.0.1\"/export DATABASE_HOST=\"db\"/g" \
 	-e "s/^export DATABASE_NAME=\"dbname\"/export DATABASE_NAME=\"$$MYSQL_DATABASE\"/g" \
 	-e "s/^export DATABASE_USER=\"dbuser\"/export DATABASE_USER=\"$$MYSQL_USER\"/g" \
-	-e "s/^export DATABASE_PASS=\"dbpass\"/export DATABASE_PASS=\"$$MYSQL_PASSWORD\"/g" \
+	-e "s/^export DATABASE_PASS=\"dbpassword\"/export DATABASE_PASS=\"$$MYSQL_PASSWORD\"/g" \
 	config/.env'
 	docker-compose exec --user=www-data app cp -f config/app_for_docker.php config/app_local.php
 	docker-compose exec --user=www-data app npm install
