@@ -41,7 +41,8 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     { \
         echo "alias ll='ls -l --color=auto'"; \
     } >> /root/.bashrc && \
-    chown -R www-data: /composer
+    mkdir ${COMPOSER_HOME} && \
+    chown -R www-data: ${COMPOSER_HOME}
 
 COPY ./php-fpm.d/zzz-www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
 COPY ./php.ini /usr/local/etc/php/php.ini
