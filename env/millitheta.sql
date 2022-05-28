@@ -27,6 +27,7 @@ CREATE TABLE `admins` (
   `use_otp` tinyint(1) DEFAULT '0' COMMENT '二段階認証を使用する？',
   `otp_secret` varchar(255) DEFAULT NULL COMMENT '二段階認証用シークレットキー',
   `privilege` json DEFAULT NULL COMMENT '権限',
+  `api_token` varchar(255) DEFAULT NULL COMMENT 'OpenAPIトークン',
   `created` datetime DEFAULT NULL COMMENT '作成日時',
   `modified` datetime DEFAULT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
@@ -36,8 +37,8 @@ CREATE TABLE `admins` (
 -- ----------------------------
 -- Records of admins
 -- ----------------------------
-INSERT INTO `admins` VALUES ('1', '', 'admin@imo-tikuwa.com', 'ExkD1/9lm1NHZZt2+phf5w==:QgOAS4fgkguFQ9jZYHL9ow==', '0', null, null, '2020-10-07 16:13:05', '2020-10-07 16:13:05', null);
-INSERT INTO `admins` VALUES ('2', '', 'user1@imo-tikuwa.com', 'yerFNCGATtp9Cb+O3gAECg==:KJExaS9/APeHbcirsqZVYg==', '0', null, '{\"Cards\": [\"READ\", \"CSV_EXPORT\", \"EXCEL_EXPORT\"], \"Gashas\": [\"READ\"], \"Characters\": [\"READ\"], \"CardReprints\": [\"READ\"], \"GashaPickups\": [\"READ\"]}', '2020-10-07 16:14:02', '2020-11-24 18:31:29', null);
+INSERT INTO `admins` VALUES ('1', '', 'admin@imo-tikuwa.com', 'ExkD1/9lm1NHZZt2+phf5w==:QgOAS4fgkguFQ9jZYHL9ow==', '0', null, null, null, '2020-10-07 16:13:05', '2020-10-07 16:13:05', null);
+INSERT INTO `admins` VALUES ('2', '', 'user1@imo-tikuwa.com', 'yerFNCGATtp9Cb+O3gAECg==:KJExaS9/APeHbcirsqZVYg==', '0', null, '{\"Cards\": [\"READ\", \"CSV_EXPORT\", \"EXCEL_EXPORT\"], \"Gashas\": [\"READ\"], \"Characters\": [\"READ\"], \"CardReprints\": [\"READ\"], \"GashaPickups\": [\"READ\"]}', null, '2020-10-07 16:14:02', '2020-11-24 18:31:29', null);
 
 -- ----------------------------
 -- Table structure for `card_reprints`
