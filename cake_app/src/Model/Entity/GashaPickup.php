@@ -19,7 +19,6 @@ namespace App\Model\Entity;
  */
 class GashaPickup extends AppEntity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -38,5 +37,17 @@ class GashaPickup extends AppEntity
         'deleted' => true,
         'gasha' => true,
         'card' => true,
+    ];
+
+    /**
+     * Fields that are excluded from JSON versions of the entity.
+     *
+     * @var array<string>
+     */
+    protected $_hidden = [
+        'search_snippet',
+        'created',
+        'modified',
+        'deleted',
     ];
 }

@@ -98,7 +98,7 @@ class GashaPickupsTableTest extends TestCase
 
         $expected = [
             'gasha_id' => [
-                '_existsIn' => 'This value does not exist'
+                '_existsIn' => 'This value does not exist',
             ],
         ];
         $this->assertEquals($gasha_pickup->getErrors(), $expected);
@@ -108,7 +108,7 @@ class GashaPickupsTableTest extends TestCase
 
         $expected = [
             'card_id' => [
-                '_existsIn' => 'This value does not exist'
+                '_existsIn' => 'This value does not exist',
             ],
         ];
         $this->assertEquals($gasha_pickup->getErrors(), $expected);

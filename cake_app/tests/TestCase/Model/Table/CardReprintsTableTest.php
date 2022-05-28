@@ -98,7 +98,7 @@ class CardReprintsTableTest extends TestCase
 
         $expected = [
             'gasha_id' => [
-                '_existsIn' => 'This value does not exist'
+                '_existsIn' => 'This value does not exist',
             ],
         ];
         $this->assertEquals($card_reprint->getErrors(), $expected);
@@ -108,7 +108,7 @@ class CardReprintsTableTest extends TestCase
 
         $expected = [
             'card_id' => [
-                '_existsIn' => 'This value does not exist'
+                '_existsIn' => 'This value does not exist',
             ],
         ];
         $this->assertEquals($card_reprint->getErrors(), $expected);

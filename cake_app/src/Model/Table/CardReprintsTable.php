@@ -4,9 +4,7 @@ declare(strict_types=1);
 namespace App\Model\Table;
 
 use Cake\Datasource\EntityInterface;
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
 use SoftDelete\Model\Table\SoftDeleteTrait;
@@ -16,7 +14,6 @@ use SoftDelete\Model\Table\SoftDeleteTrait;
  *
  * @property \App\Model\Table\GashasTable&\Cake\ORM\Association\BelongsTo $Gashas
  * @property \App\Model\Table\CardsTable&\Cake\ORM\Association\BelongsTo $Cards
- *
  * @method \App\Model\Entity\CardReprint newEmptyEntity()
  * @method \App\Model\Entity\CardReprint newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\CardReprint[] newEntities(array $data, array $options = [])
@@ -30,7 +27,6 @@ use SoftDelete\Model\Table\SoftDeleteTrait;
  * @method \App\Model\Entity\CardReprint[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
  * @method \App\Model\Entity\CardReprint[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\CardReprint[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
- *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class CardReprintsTable extends AppTable
@@ -78,16 +74,17 @@ class CardReprintsTable extends AppTable
             ->add('gasha_id', 'integer', [
                 'rule' => 'isInteger',
                 'message' => 'ガシャIDを正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('gasha_id', 'existForeignEntity', [
                 'rule' => function ($gasha_id) {
                     $table = TableRegistry::getTableLocator()->get('Gashas');
                     $entity = $table->find()->select(['id'])->where(['id' => $gasha_id])->first();
+
                     return !empty($entity);
                 },
                 'message' => 'ガシャIDに不正な値が入力されています。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyString('gasha_id', 'ガシャIDを選択してください。');
 
@@ -97,16 +94,17 @@ class CardReprintsTable extends AppTable
             ->add('card_id', 'integer', [
                 'rule' => 'isInteger',
                 'message' => 'カードIDを正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('card_id', 'existForeignEntity', [
                 'rule' => function ($card_id) {
                     $table = TableRegistry::getTableLocator()->get('Cards');
                     $entity = $table->find()->select(['id'])->where(['id' => $card_id])->first();
+
                     return !empty($entity);
                 },
                 'message' => 'カードIDに不正な値が入力されています。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyString('card_id', 'カードIDを選択してください。');
 
@@ -133,7 +131,7 @@ class CardReprintsTable extends AppTable
      * ファイル項目、GoogleMap項目のJSON文字列を配列に変換する
      *
      * @see \Cake\ORM\Table::patchEntity()
-     * @param EntityInterface $entity エンティティ
+     * @param \Cake\Datasource\EntityInterface $entity エンティティ
      * @param array $data エンティティに上書きするデータ
      * @param array $options オプション配列
      * @return \App\Model\Entity\CardReprint
@@ -160,11 +158,13 @@ class CardReprintsTable extends AppTable
 
         $entity = parent::patchEntity($entity, $data, $options);
         assert($entity instanceof \App\Model\Entity\CardReprint);
+
         return $entity;
     }
 
     /**
      * ページネートに渡すクエリオブジェクトを生成する
+     *
      * @param array $request リクエスト情報
      * @return \Cake\ORM\Query $query
      */
@@ -204,6 +204,7 @@ class CardReprintsTable extends AppTable
 
     /**
      * CSVヘッダー情報を取得する
+     *
      * @return array
      */
     public function getCsvHeaders()
@@ -219,6 +220,7 @@ class CardReprintsTable extends AppTable
 
     /**
      * CSVカラム情報を取得する
+     *
      * @return array
      */
     public function getCsvColumns()
@@ -234,6 +236,7 @@ class CardReprintsTable extends AppTable
 
     /**
      * Excelカラム情報を取得する
+     *
      * @return array
      */
     public function getExcelColumns()

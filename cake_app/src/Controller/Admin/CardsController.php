@@ -3,34 +3,31 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\AppController;
-use App\Utils\CsvUtils;
 use App\Form\SearchForm;
+use App\Utils\CsvUtils;
 use App\Utils\ExcelUtils;
+use Cake\Core\Exception\CakeException;
 use Cake\Event\EventInterface;
 use Cake\Http\CallbackStream;
-use Cake\Core\Exception\CakeException;
+use Cake\Utility\Hash;
+use DateTime;
+use DateTimeZone;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
-use DateTime;
-use DateTimeZone;
 
 /**
  * Cards Controller
  *
  * @property \App\Model\Table\CardsTable $Cards
  * @property \App\Model\Table\CharactersTable $Characters
- *
  * @method \App\Model\Entity\Card[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class CardsController extends AppController
 {
     /**
-     *
-     * {@inheritDoc}
-     * @see \App\Controller\Admin\AppController::beforeFilter()
+     * @inheritDoc
      */
     public function beforeFilter(EventInterface $event)
     {
@@ -85,7 +82,7 @@ class CardsController extends AppController
                 'Characters',
                 'CardReprints',
                 'GashaPickups',
-            ]
+            ],
         ]);
 
         $this->set('card', $card);
@@ -128,7 +125,7 @@ class CardsController extends AppController
                     'Characters',
                     'CardReprints',
                     'GashaPickups',
-                ]
+                ],
             ]);
             $this->Cards->touch($card);
         } else {
@@ -140,13 +137,13 @@ class CardsController extends AppController
                     'Characters',
                     'CardReprints',
                     'GashaPickups',
-                ]
+                ],
             ]);
             if ($card->hasErrors()) {
                 $this->Flash->set(implode('<br />', $card->getErrorMessages()), [
                     'escape' => false,
                     'element' => 'validation_error',
-                    'params' => ['alert-class' => 'text-sm']
+                    'params' => ['alert-class' => 'text-sm'],
                 ]);
             } else {
                 $conn = $this->Cards->getConnection();
@@ -161,6 +158,7 @@ class CardsController extends AppController
             }
         }
         $this->set(compact('card'));
+
         return $this->render('edit');
     }
 
@@ -187,18 +185,20 @@ class CardsController extends AppController
 
     /**
      * csv export method
+     *
      * @return void
      */
     public function csvExport()
     {
         $request = $this->getRequest()->getQueryParams();
         $cards = $this->Cards->getSearchQuery($request)->toArray();
+        array_walk($cards, fn(\App\Model\Entity\Card $card) => $card->setHidden([]));
         $extract = [
             // ID
             'id',
             // キャラクター
             function ($row) {
-                return @$row['character']['name'];
+                return Hash::get($row, 'character.name');
             },
             // カード名
             'name',
@@ -249,13 +249,14 @@ class CardsController extends AppController
             'serialize' => 'cards',
             'header' => $this->Cards->getCsvHeaders(),
             'extract' => $extract,
-            'csvEncoding' => 'UTF-8'
+            'csvEncoding' => 'UTF-8',
         ]);
         $this->set(compact('cards'));
     }
 
     /**
      * csv import method
+     *
      * @return \Cake\Http\Response|NULL
      */
     public function csvImport()
@@ -293,7 +294,7 @@ class CardsController extends AppController
             } catch (CakeException $e) {
                 $error_message = 'カードCSVの登録でエラーが発生しました。';
                 if (!empty($e->getMessage())) {
-                    $error_message .= "(" . $e->getMessage() . ")";
+                    $error_message .= '(' . $e->getMessage() . ')';
                 }
                 $this->Flash->error($error_message);
                 $conn->rollback();
@@ -305,6 +306,7 @@ class CardsController extends AppController
 
     /**
      * excel export method
+     *
      * @return \Cake\Http\Response
      */
     public function excelExport()
@@ -316,10 +318,16 @@ class CardsController extends AppController
         $reader = new XlsxReader();
         $spreadsheet = $reader->load(EXCEL_TEMPLATE_DIR . 'cards_template.xlsx');
         $data_sheet = $spreadsheet->getSheetByName('DATA');
+        if (is_null($data_sheet)) {
+            throw new CakeException('DATA sheet does not exist in the template used for Excel export.');
+        }
         $list_sheet = $spreadsheet->getSheetByName('LIST');
-        $row_num = 2;
+        if (is_null($list_sheet)) {
+            throw new CakeException('LIST sheet does not exist in the template used for Excel export.');
+        }
 
         // 取得したデータをExcelに書き込む
+        $row_num = 2;
         foreach ($cards as $card) {
             // ID
             $data_sheet->setCellValue("A{$row_num}", $card->id);

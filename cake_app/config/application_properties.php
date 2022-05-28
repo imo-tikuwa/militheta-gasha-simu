@@ -193,6 +193,8 @@ return [
             ROLE_EXCEL_EXPORT => 'ガシャExcelエクスポート',
         ],
     ],
+    'SwaggerConfigs' => [
+    ],
     'Others' => [
         'search_snippet_format' => [
             'AND' => ' AND',

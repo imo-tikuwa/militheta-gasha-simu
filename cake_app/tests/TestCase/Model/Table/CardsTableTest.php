@@ -149,7 +149,7 @@ class CardsTableTest extends TestCase
 
         $expected = [
             'character_id' => [
-                '_existsIn' => 'This value does not exist'
+                '_existsIn' => 'This value does not exist',
             ],
         ];
         $this->assertEquals($card->getErrors(), $expected);

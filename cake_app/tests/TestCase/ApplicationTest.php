@@ -66,7 +66,7 @@ class ApplicationTest extends TestCase
             'CsvView',
             'AdminBaker',
             'ApiGenerator',
-            'ErdGenerator'
+            'ErdGenerator',
         ];
         if (Configure::read('debug')) {
             $testPlugins[] = 'DebugKit';

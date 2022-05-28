@@ -3,23 +3,21 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\AppController;
-use App\Utils\CsvUtils;
 use App\Form\SearchForm;
-use Cake\Http\CallbackStream;
+use App\Utils\CsvUtils;
 use Cake\Core\Exception\CakeException;
+use Cake\Http\CallbackStream;
+use DateTime;
+use DateTimeZone;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
-use DateTime;
-use DateTimeZone;
 
 /**
  * Gashas Controller
  *
  * @property \App\Model\Table\GashasTable $Gashas
- *
  * @method \App\Model\Entity\Gasha[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class GashasController extends AppController
@@ -97,7 +95,7 @@ class GashasController extends AppController
                 'contain' => [
                     'CardReprints',
                     'GashaPickups',
-                ]
+                ],
             ]);
             $this->Gashas->touch($gasha);
         } else {
@@ -108,13 +106,13 @@ class GashasController extends AppController
                 'associated' => [
                     'CardReprints',
                     'GashaPickups',
-                ]
+                ],
             ]);
             if ($gasha->hasErrors()) {
                 $this->Flash->set(implode('<br />', $gasha->getErrorMessages()), [
                     'escape' => false,
                     'element' => 'validation_error',
-                    'params' => ['alert-class' => 'text-sm']
+                    'params' => ['alert-class' => 'text-sm'],
                 ]);
             } else {
                 $conn = $this->Gashas->getConnection();
@@ -129,6 +127,7 @@ class GashasController extends AppController
             }
         }
         $this->set(compact('gasha'));
+
         return $this->render('edit');
     }
 
@@ -155,12 +154,14 @@ class GashasController extends AppController
 
     /**
      * csv export method
+     *
      * @return void
      */
     public function csvExport()
     {
         $request = $this->getRequest()->getQueryParams();
         $gashas = $this->Gashas->getSearchQuery($request)->toArray();
+        array_walk($gashas, fn(\App\Model\Entity\Gasha $gasha) => $gasha->setHidden([]));
         $extract = [
             // ID
             'id',
@@ -199,13 +200,14 @@ class GashasController extends AppController
             'serialize' => 'gashas',
             'header' => $this->Gashas->getCsvHeaders(),
             'extract' => $extract,
-            'csvEncoding' => 'UTF-8'
+            'csvEncoding' => 'UTF-8',
         ]);
         $this->set(compact('gashas'));
     }
 
     /**
      * csv import method
+     *
      * @return \Cake\Http\Response|NULL
      */
     public function csvImport()
@@ -243,7 +245,7 @@ class GashasController extends AppController
             } catch (CakeException $e) {
                 $error_message = 'ガシャCSVの登録でエラーが発生しました。';
                 if (!empty($e->getMessage())) {
-                    $error_message .= "(" . $e->getMessage() . ")";
+                    $error_message .= '(' . $e->getMessage() . ')';
                 }
                 $this->Flash->error($error_message);
                 $conn->rollback();
@@ -255,6 +257,7 @@ class GashasController extends AppController
 
     /**
      * excel export method
+     *
      * @return \Cake\Http\Response
      */
     public function excelExport()
@@ -266,9 +269,12 @@ class GashasController extends AppController
         $reader = new XlsxReader();
         $spreadsheet = $reader->load(EXCEL_TEMPLATE_DIR . 'gashas_template.xlsx');
         $data_sheet = $spreadsheet->getSheetByName('DATA');
-        $row_num = 2;
+        if (is_null($data_sheet)) {
+            throw new CakeException('DATA sheet does not exist in the template used for Excel export.');
+        }
 
         // 取得したデータをExcelに書き込む
+        $row_num = 2;
         foreach ($gashas as $gasha) {
             // ID
             $data_sheet->setCellValue("A{$row_num}", $gasha->id);
@@ -292,7 +298,6 @@ class GashasController extends AppController
         // データ入力行のフォーマットを文字列に設定
         $gashas_row_num = count($gashas) + 100;
         $data_sheet->getStyle("A2:H{$gashas_row_num}")->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
-
 
         // 罫線設定、A2セルを選択、1行目固定、DATAシートをアクティブ化
         $data_sheet->getStyle("A1:H{$gashas_row_num}")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);

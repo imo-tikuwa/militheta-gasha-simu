@@ -1,7 +1,8 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller\Info;
 
-use App\Controller\Info\ApiController;
 use Cake\Database\Query;
 
 /**
@@ -12,7 +13,6 @@ use Cake\Database\Query;
 class CardController extends ApiController
 {
     /**
-     *
      * @return void
      */
     public function index()
@@ -38,7 +38,7 @@ class CardController extends ApiController
         $this->set([
             'results' => $results,
             '_serialize' => 'results',
-            '_jsonOptions' => JSON_UNESCAPED_UNICODE
+            '_jsonOptions' => JSON_UNESCAPED_UNICODE,
         ]);
     }
 }

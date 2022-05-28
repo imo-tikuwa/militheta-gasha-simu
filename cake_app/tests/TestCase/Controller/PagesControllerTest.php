@@ -109,36 +109,4 @@ class PagesControllerTest extends TestCase
         $this->assertResponseCode(403);
         $this->assertResponseContains('Forbidden');
     }
-
-    /**
-     * Test that CSRF protection is applied to page rendering.
-     *
-     * @return void
-     */
-    public function testCsrfAppliedError()
-    {
-        $this->post('/pages/home', ['hello' => 'world']);
-
-        $this->assertResponseCode(403);
-        $this->assertResponseContains('CSRF');
-    }
-
-    /**
-     * Test that CSRF protection is applied to page rendering.
-     *
-     * @return void
-     */
-    public function testCsrfAppliedOk()
-    {
-        $this->enableCsrfToken();
-        $this->post('/pages/home', ['hello' => 'world']);
-
-        if (Configure::read('debug')) {
-            $this->assertResponseCode(200);
-            $this->assertResponseContains('CakePHP');
-        } else {
-            $this->assertResponseCode(404);
-            $this->assertResponseContains('Please replace templates/Pages/home.php with your own version or re-enable debug mode.');
-        }
-    }
 }

@@ -1,7 +1,8 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller\Api;
 
-use App\Model\Entity\Gasha;
 use App\Utils\GashaUtils;
 use Cake\Core\Exception\CakeException;
 use Cake\Event\EventInterface;
@@ -11,30 +12,33 @@ use Cake\Event\EventInterface;
  *
  * @property \App\Model\Table\GashasTable $Gashas
  * @property \App\Model\Table\CardsTable $Cards
- *
  */
 class PickGashaController extends ApiController
 {
     /**
      * ガシャ情報
-     * @var Gasha
+     *
+     * @var \App\Model\Entity\Gasha
      */
     private $gasha;
 
     /**
      * カード情報
+     *
      * @var array
      */
     private $cards;
 
     /**
      * 提供割合
+     *
      * @var array
      */
     private $provision_ratios;
 
     /**
      * 重み付けデータ
+     *
      * @var array
      */
     private $cards_rate_data;
@@ -42,7 +46,7 @@ class PickGashaController extends ApiController
     /**
      * 共通処理内でガシャに必要なデータを取得
      *
-     * @param EventInterface $event EventInterface
+     * @param \Cake\Event\EventInterface $event EventInterface
      * @see \Cake\Controller\Controller::beforeFilter()
      * @return \Cake\Http\Response|void
      */
@@ -52,7 +56,7 @@ class PickGashaController extends ApiController
 
         try {
             // ガシャID
-            $gasha_id = @$this->getRequest()->getQuery('gasha_id');
+            $gasha_id = $this->getRequest()->getQuery('gasha_id');
 
             if (is_null($gasha_id) || !is_numeric($gasha_id)) {
                 throw new CakeException('gasha_id is invalid.');
@@ -72,12 +76,14 @@ class PickGashaController extends ApiController
         } catch (\Exception $e) {
             $error_message = $e->getMessage();
             $this->log($error_message);
+
             return $this->response->withStatus(500, $error_message)->withStringBody(null);
         }
     }
 
     /**
      * 10連ガシャ
+     *
      * @return \Cake\Http\Response
      */
     public function jyuren()
@@ -100,11 +106,13 @@ class PickGashaController extends ApiController
 
         $string = json_encode($results, JSON_UNESCAPED_UNICODE);
         assert($string !== false);
+
         return $this->response->withType('json')->withStringBody($string);
     }
 
     /**
      * 単発ガシャ
+     *
      * @return \Cake\Http\Response
      */
     public function tanpatsu()
@@ -117,6 +125,7 @@ class PickGashaController extends ApiController
 
         $string = json_encode($results, JSON_UNESCAPED_UNICODE);
         assert($string !== false);
+
         return $this->response->withType('json')->withStringBody($string);
     }
 
@@ -124,12 +133,13 @@ class PickGashaController extends ApiController
      * 重み付けの抽選処理
      *
      * ガシャを1回引く
+     *
      * @param array $entries 重み付けデータ
      * @return string|int $card_id カードID
      */
     private function _pick($entries)
     {
-        $sum  = (int)array_sum($entries);
+        $sum = (int)array_sum($entries);
         $rand = rand(1, $sum);
 
         foreach ($entries as $card_id => $rate) { // @phpstan-ignore-line

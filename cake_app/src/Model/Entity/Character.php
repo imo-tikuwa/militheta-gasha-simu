@@ -15,7 +15,6 @@ namespace App\Model\Entity;
  */
 class Character extends AppEntity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -30,5 +29,15 @@ class Character extends AppEntity
         'created' => true,
         'modified' => true,
         'cards' => true,
+    ];
+
+    /**
+     * Fields that are excluded from JSON versions of the entity.
+     *
+     * @var array<string>
+     */
+    protected $_hidden = [
+        'created',
+        'modified',
     ];
 }

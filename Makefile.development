@@ -21,7 +21,8 @@ init:
 	docker-compose exec --user=www-data app bin/cake recreate_admin admin@imo-tikuwa.com password
 	# 必要に応じて以下実行
 	# docker-compose exec --user=www-data app bin/cake init_operation_logs
-	# docker-compose exec --user=www-data app bin/cake install_graphviz
+	# docker-compose exec --user=www-data app bash -c 'bin/cake install_graphviz && composer require phpdocumentor/graphviz'
+	# docker-compose exec --user=www-data app bin/cake admin_baker generate_download_password
 	# docker-compose exec --user=www-data app bin/cake admin_baker create_all_migrations_and_seeds
 
 start:

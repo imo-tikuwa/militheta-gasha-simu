@@ -35,12 +35,14 @@ class CardsControllerTest extends TestCase
 
     /**
      * cards table.
+     *
      * @var \App\Model\Table\CardsTable $Cards
      */
     protected $Cards;
 
     /**
      * admins table.
+     *
      * @var \App\Model\Table\AdminsTable $Admins
      */
     protected $Admins;
@@ -113,7 +115,7 @@ class CardsControllerTest extends TestCase
             'use_otp' => '0',
             'privilege' => [
                 'Cards' => [ROLE_READ],
-            ]
+            ],
         ]);
         $this->Admins->save($read_admin);
         /** @var \App\Model\Entity\Admin $read_admin */
@@ -128,7 +130,7 @@ class CardsControllerTest extends TestCase
             'use_otp' => '0',
             'privilege' => [
                 'Cards' => [ROLE_WRITE],
-            ]
+            ],
         ]);
         $this->Admins->save($write_admin);
         /** @var \App\Model\Entity\Admin $write_admin */
@@ -143,7 +145,7 @@ class CardsControllerTest extends TestCase
             'use_otp' => '0',
             'privilege' => [
                 'Cards' => [ROLE_DELETE],
-            ]
+            ],
         ]);
         $this->Admins->save($delete_admin);
         /** @var \App\Model\Entity\Admin $delete_admin */
@@ -158,7 +160,7 @@ class CardsControllerTest extends TestCase
             'use_otp' => '0',
             'privilege' => [
                 'Cards' => [ROLE_CSV_EXPORT],
-            ]
+            ],
         ]);
         $this->Admins->save($csv_export_admin);
         /** @var \App\Model\Entity\Admin $csv_export_admin */
@@ -173,7 +175,7 @@ class CardsControllerTest extends TestCase
             'use_otp' => '0',
             'privilege' => [
                 'Cards' => [ROLE_CSV_IMPORT],
-            ]
+            ],
         ]);
         $this->Admins->save($csv_import_admin);
         /** @var \App\Model\Entity\Admin $csv_import_admin */
@@ -188,7 +190,7 @@ class CardsControllerTest extends TestCase
             'use_otp' => '0',
             'privilege' => [
                 'Cards' => [ROLE_EXCEL_EXPORT],
-            ]
+            ],
         ]);
         $this->Admins->save($excel_export_admin);
         /** @var \App\Model\Entity\Admin $excel_export_admin */
@@ -203,7 +205,7 @@ class CardsControllerTest extends TestCase
             'use_otp' => '0',
             'privilege' => [
                 'Cards' => [],
-            ]
+            ],
         ]);
         $this->Admins->save($no_authority_admin);
         /** @var \App\Model\Entity\Admin $no_authority_admin */
@@ -220,7 +222,7 @@ class CardsControllerTest extends TestCase
     public function testBeforeFilter(): void
     {
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/cards');
         $this->assertIsArray($this->viewVariable('character_id_list'));
@@ -239,7 +241,7 @@ class CardsControllerTest extends TestCase
         $this->assertResponseCode(200);
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/cards');
         $this->assertResponseCode(302);
@@ -270,7 +272,7 @@ class CardsControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/cards');
         $this->assertResponseCode(200);
@@ -278,7 +280,7 @@ class CardsControllerTest extends TestCase
         $this->assertTextContains('<title>カード</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/cards');
         $this->assertResponseCode(200);
@@ -286,42 +288,42 @@ class CardsControllerTest extends TestCase
         $this->assertTextContains('<title>カード</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/cards');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->delete_admin
+            'Auth.Admin' => $this->delete_admin,
         ]);
         $this->get('/admin/cards');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/cards');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_import_admin
+            'Auth.Admin' => $this->csv_import_admin,
         ]);
         $this->get('/admin/cards');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/cards');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/cards');
         $this->assertResponseCode(302);
@@ -340,7 +342,7 @@ class CardsControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/cards/view/1');
         $this->assertResponseCode(200);
@@ -348,7 +350,7 @@ class CardsControllerTest extends TestCase
         $this->assertTextContains('<title>カード詳細</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/cards/view/1');
         $this->assertResponseCode(200);
@@ -356,42 +358,42 @@ class CardsControllerTest extends TestCase
         $this->assertTextContains('<title>カード詳細</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/cards/view/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->delete_admin
+            'Auth.Admin' => $this->delete_admin,
         ]);
         $this->get('/admin/cards/view/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/cards/view/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_import_admin
+            'Auth.Admin' => $this->csv_import_admin,
         ]);
         $this->get('/admin/cards/view/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/cards/view/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/cards/view/1');
         $this->assertResponseCode(302);
@@ -410,7 +412,7 @@ class CardsControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/cards/add');
         $this->assertResponseCode(200);
@@ -418,14 +420,14 @@ class CardsControllerTest extends TestCase
         $this->assertTextContains('<title>カード登録</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/cards/add');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/cards/add');
         $this->assertResponseCode(200);
@@ -433,35 +435,35 @@ class CardsControllerTest extends TestCase
         $this->assertTextContains('<title>カード登録</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->delete_admin
+            'Auth.Admin' => $this->delete_admin,
         ]);
         $this->get('/admin/cards/add');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/cards/add');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_import_admin
+            'Auth.Admin' => $this->csv_import_admin,
         ]);
         $this->get('/admin/cards/add');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/cards/add');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/cards/add');
         $this->assertResponseCode(302);
@@ -480,7 +482,7 @@ class CardsControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/cards/edit/1');
         $this->assertResponseCode(200);
@@ -488,14 +490,14 @@ class CardsControllerTest extends TestCase
         $this->assertTextContains('<title>カード更新</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/cards/edit/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/cards/edit/1');
         $this->assertResponseCode(200);
@@ -503,35 +505,35 @@ class CardsControllerTest extends TestCase
         $this->assertTextContains('<title>カード更新</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->delete_admin
+            'Auth.Admin' => $this->delete_admin,
         ]);
         $this->get('/admin/cards/edit/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/cards/edit/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_import_admin
+            'Auth.Admin' => $this->csv_import_admin,
         ]);
         $this->get('/admin/cards/edit/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/cards/edit/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/cards/edit/1');
         $this->assertResponseCode(302);
@@ -552,7 +554,7 @@ class CardsControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $card = $this->Cards->get(1);
         $this->assertInstanceOf('\App\Model\Entity\Card', $card);
@@ -563,14 +565,14 @@ class CardsControllerTest extends TestCase
         $this->assertEquals(null, $card);
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->delete('/admin/cards/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->delete('/admin/cards/delete/1');
         $this->assertResponseCode(302);
@@ -579,35 +581,35 @@ class CardsControllerTest extends TestCase
         $this->teardownFixtures();
         $this->setupFixtures();
         $this->session([
-            'Auth.Admin' => $this->delete_admin
+            'Auth.Admin' => $this->delete_admin,
         ]);
         $this->delete('/admin/cards/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession('カードの削除が完了しました。', 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->delete('/admin/cards/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_import_admin
+            'Auth.Admin' => $this->csv_import_admin,
         ]);
         $this->delete('/admin/cards/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->delete('/admin/cards/delete/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->delete('/admin/cards/delete/1');
         $this->assertResponseCode(302);
@@ -623,7 +625,7 @@ class CardsControllerTest extends TestCase
                 'controller' => 'Cards',
                 'action' => 'delete',
                 'pass' => ['1'],
-            ]
+            ],
         ]);
         $response = new \Cake\Http\Response();
         $controller = new CardsController($url, $response);
@@ -642,7 +644,7 @@ class CardsControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/cards/csv-export');
         $this->assertResponseCode(200);
@@ -650,28 +652,28 @@ class CardsControllerTest extends TestCase
         $this->assertHeaderContains('Content-Type', 'text/csv;');
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/cards/csv-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/cards/csv-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->delete_admin
+            'Auth.Admin' => $this->delete_admin,
         ]);
         $this->get('/admin/cards/csv-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/cards/csv-export');
         $this->assertResponseCode(200);
@@ -679,21 +681,21 @@ class CardsControllerTest extends TestCase
         $this->assertHeaderContains('Content-Type', 'text/csv;');
 
         $this->session([
-            'Auth.Admin' => $this->csv_import_admin
+            'Auth.Admin' => $this->csv_import_admin,
         ]);
         $this->get('/admin/cards/csv-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/cards/csv-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/cards/csv-export');
         $this->assertResponseCode(302);
@@ -726,86 +728,86 @@ class CardsControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/cards/csv-import');
         $this->assertResponseCode(302);
         $this->assertRedirectEquals('http://localhost/admin/cards?' . http_build_query(_code('InitialOrders.Cards')));
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->configRequest([
             'Content-Type' => 'multipart/form-data',
             'files' => [
-                'csv_import_file' => $file
+                'csv_import_file' => $file,
             ],
         ]);
         $this->post('/admin/cards/csv-import', [
-            'csv_import_file' => $file
+            'csv_import_file' => $file,
         ]);
         $this->assertResponseCode(302);
         $this->assertSession('カードCSVの登録が完了しました。<br />新規：0件<br />更新：0件', 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/cards/csv-import');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/cards/csv-import');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->delete_admin
+            'Auth.Admin' => $this->delete_admin,
         ]);
         $this->get('/admin/cards/csv-import');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/cards/csv-import');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_import_admin
+            'Auth.Admin' => $this->csv_import_admin,
         ]);
         $this->get('/admin/cards/csv-import');
         $this->assertResponseCode(302);
         $this->assertRedirectEquals('http://localhost/admin/cards?' . http_build_query(_code('InitialOrders.Cards')));
 
         $this->session([
-            'Auth.Admin' => $this->csv_import_admin
+            'Auth.Admin' => $this->csv_import_admin,
         ]);
         $this->configRequest([
             'Content-Type' => 'multipart/form-data',
             'files' => [
-                'csv_import_file' => $file
+                'csv_import_file' => $file,
             ],
         ]);
         $this->post('/admin/cards/csv-import', [
-            'csv_import_file' => $file
+            'csv_import_file' => $file,
         ]);
         $this->assertResponseCode(302);
         $this->assertSession('カードCSVの登録が完了しました。<br />新規：0件<br />更新：0件', 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/cards/csv-import');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/cards/csv-import');
         $this->assertResponseCode(302);
@@ -826,7 +828,7 @@ class CardsControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/cards/excel-export');
         $this->assertResponseCode(200);
@@ -834,42 +836,42 @@ class CardsControllerTest extends TestCase
         $this->assertHeaderContains('Content-Type', EXCEL_CONTENT_TYPE);
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/cards/excel-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/cards/excel-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->delete_admin
+            'Auth.Admin' => $this->delete_admin,
         ]);
         $this->get('/admin/cards/excel-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/cards/excel-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_import_admin
+            'Auth.Admin' => $this->csv_import_admin,
         ]);
         $this->get('/admin/cards/excel-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/cards/excel-export');
         $this->assertResponseCode(200);
@@ -877,7 +879,7 @@ class CardsControllerTest extends TestCase
         $this->assertHeaderContains('Content-Type', EXCEL_CONTENT_TYPE);
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/cards/excel-export');
         $this->assertResponseCode(302);

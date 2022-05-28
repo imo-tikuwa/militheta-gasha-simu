@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller\Api;
 
 use App\Utils\GashaUtils;
@@ -8,11 +10,9 @@ use App\Utils\GashaUtils;
  *
  * @property \App\Model\Table\GashasTable $Gashas
  * @property \App\Model\Table\CardsTable $Cards
- *
  */
 class GetProvisionRatioController extends ApiController
 {
-
     /**
      * 提供割合情報を返す
      *
@@ -36,6 +36,7 @@ class GetProvisionRatioController extends ApiController
 
         $string = json_encode($provision_ratios, JSON_UNESCAPED_UNICODE);
         assert($string !== false);
+
         return $this->response->withType('json')->withStringBody($string);
     }
 }

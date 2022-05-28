@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Utils;
 
 use App\Model\Entity\Gasha;
@@ -6,10 +8,10 @@ use Cake\Utility\Hash;
 
 class GashaUtils
 {
-
     /**
      * 提供割合を返す
-     * @param Gasha $gasha ガシャ情報
+     *
+     * @param \App\Model\Entity\Gasha $gasha ガシャ情報
      * @param array $cards カード情報
      * @return array
      */
@@ -52,9 +54,9 @@ class GashaUtils
         } else {
             $base_ssr_pickup_rate = BASE_SSR_PICKUP_RATE;
         }
-        $per_ssr_pickup_rate = ($ssr_pickup_target_count > 0) ? @($base_ssr_pickup_rate / $ssr_pickup_target_count) : 0;
-        $per_sr_pickup_rate = ($sr_pickup_target_count > 0) ? @(BASE_SR_PICKUP_RATE / $sr_pickup_target_count) : 0;
-        $per_r_pickup_rate = ($r_pickup_target_count > 0) ? (BASE_R_PICKUP_RATE / $r_pickup_target_count) : 0;
+        $per_ssr_pickup_rate = $ssr_pickup_target_count > 0 ? $base_ssr_pickup_rate / $ssr_pickup_target_count : 0;
+        $per_sr_pickup_rate = $sr_pickup_target_count > 0 ? BASE_SR_PICKUP_RATE / $sr_pickup_target_count : 0;
+        $per_r_pickup_rate = $r_pickup_target_count > 0 ? BASE_R_PICKUP_RATE / $r_pickup_target_count : 0;
 
         // 非ピックアップ1枚当たりのピック確率を計算する
         // SSR、SRは最初にピックアップの確率で減算し、残りの枚数で分け合う
@@ -67,7 +69,7 @@ class GashaUtils
 
         // 結果を返す
         $provition_ratios = [];
-        foreach (array_reverse(_code("Codes.Cards.rarity")) as $rarity_code => $rarity_text) {
+        foreach (array_reverse(_code('Codes.Cards.rarity')) as $rarity_code => $rarity_text) {
             // Nカードはガシャ対象ではないのでスキップ
             if ($rarity_text == 'N') {
                 continue;
