@@ -5,12 +5,11 @@ namespace App\Model\Table;
 
 use App\Model\Entity\Gasha;
 use Cake\Datasource\EntityInterface;
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
 use Cake\Validation\Validator;
+use Exception;
 use SoftDelete\Model\Table\SoftDeleteTrait;
 
 /**
@@ -19,7 +18,6 @@ use SoftDelete\Model\Table\SoftDeleteTrait;
  * @property \App\Model\Table\CharactersTable&\Cake\ORM\Association\BelongsTo $Characters
  * @property \App\Model\Table\CardReprintsTable&\Cake\ORM\Association\HasMany $CardReprints
  * @property \App\Model\Table\GashaPickupsTable&\Cake\ORM\Association\HasMany $GashaPickups
- *
  * @method \App\Model\Entity\Card newEmptyEntity()
  * @method \App\Model\Entity\Card newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Card[] newEntities(array $data, array $options = [])
@@ -33,7 +31,6 @@ use SoftDelete\Model\Table\SoftDeleteTrait;
  * @method \App\Model\Entity\Card[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
  * @method \App\Model\Entity\Card[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\Card[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
- *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class CardsTable extends AppTable
@@ -84,16 +81,17 @@ class CardsTable extends AppTable
             ->add('character_id', 'integer', [
                 'rule' => 'isInteger',
                 'message' => 'キャラクターを正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('character_id', 'existForeignEntity', [
                 'rule' => function ($character_id) {
                     $table = TableRegistry::getTableLocator()->get('Characters');
                     $entity = $table->find()->select(['id'])->where(['id' => $character_id])->first();
+
                     return !empty($entity);
                 },
                 'message' => 'キャラクターに不正な値が入力されています。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyString('character_id', 'キャラクターを選択してください。');
 
@@ -103,12 +101,12 @@ class CardsTable extends AppTable
             ->add('name', 'scalar', [
                 'rule' => 'isScalar',
                 'message' => 'カード名を正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('name', 'maxLength', [
                 'rule' => ['maxLength', 255],
                 'message' => 'カード名は255文字以内で入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyString('name', 'カード名を入力してください。');
 
@@ -118,19 +116,19 @@ class CardsTable extends AppTable
             ->add('rarity', 'scalar', [
                 'rule' => 'isScalar',
                 'message' => 'レアリティを正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('rarity', 'maxLength', [
                 'rule' => ['maxLength', 2],
                 'message' => 'レアリティは2文字以内で入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('rarity', 'existIn', [
                 'rule' => function ($value) {
                     return array_key_exists($value, _code('Codes.Cards.rarity'));
                 },
                 'message' => 'レアリティに不正な値が含まれています。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyString('rarity', 'レアリティを選択してください。');
 
@@ -140,19 +138,19 @@ class CardsTable extends AppTable
             ->add('type', 'scalar', [
                 'rule' => 'isScalar',
                 'message' => 'タイプを正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('type', 'maxLength', [
                 'rule' => ['maxLength', 2],
                 'message' => 'タイプは2文字以内で入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('type', 'existIn', [
                 'rule' => function ($value) {
                     return array_key_exists($value, _code('Codes.Cards.type'));
                 },
                 'message' => 'タイプに不正な値が含まれています。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyString('type', 'タイプを選択してください。');
 
@@ -162,7 +160,7 @@ class CardsTable extends AppTable
             ->add('add_date', 'date', [
                 'rule' => ['date', ['ymd']],
                 'message' => '実装日を正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyDate('add_date', '実装日を入力してください。');
 
@@ -174,7 +172,7 @@ class CardsTable extends AppTable
                     return array_key_exists($value, _code('Codes.Cards.gasha_include'));
                 },
                 'message' => 'ガシャ対象？に不正な値が含まれています。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyString('gasha_include', 'ガシャ対象？を選択してください。');
 
@@ -184,19 +182,19 @@ class CardsTable extends AppTable
             ->add('limited', 'scalar', [
                 'rule' => 'isScalar',
                 'message' => '限定？を正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('limited', 'maxLength', [
                 'rule' => ['maxLength', 2],
                 'message' => '限定？は2文字以内で入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('limited', 'existIn', [
                 'rule' => function ($value) {
                     return array_key_exists($value, _code('Codes.Cards.limited'));
                 },
                 'message' => '限定？に不正な値が含まれています。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyString('limited', '限定？を選択してください。');
 
@@ -235,7 +233,7 @@ class CardsTable extends AppTable
      * ファイル項目、GoogleMap項目のJSON文字列を配列に変換する
      *
      * @see \Cake\ORM\Table::patchEntity()
-     * @param EntityInterface $entity エンティティ
+     * @param \Cake\Datasource\EntityInterface $entity エンティティ
      * @param array $data エンティティに上書きするデータ
      * @param array $options オプション配列
      * @return \App\Model\Entity\Card
@@ -267,11 +265,13 @@ class CardsTable extends AppTable
 
         $entity = parent::patchEntity($entity, $data, $options);
         assert($entity instanceof \App\Model\Entity\Card);
+
         return $entity;
     }
 
     /**
      * ページネートに渡すクエリオブジェクトを生成する
+     *
      * @param array $request リクエスト情報
      * @return \Cake\ORM\Query $query
      */
@@ -331,6 +331,7 @@ class CardsTable extends AppTable
 
     /**
      * CSVヘッダー情報を取得する
+     *
      * @return array
      */
     public function getCsvHeaders()
@@ -351,6 +352,7 @@ class CardsTable extends AppTable
 
     /**
      * CSVカラム情報を取得する
+     *
      * @return array
      */
     public function getCsvColumns()
@@ -371,6 +373,7 @@ class CardsTable extends AppTable
 
     /**
      * CSVの入力情報を元にエンティティを作成する
+     *
      * @param array $csv_row CSVの1行辺りの配列データ
      * @return \App\Model\Entity\Card エンティティ
      */
@@ -388,14 +391,14 @@ class CardsTable extends AppTable
             $csv_data['character_id'] = '';
         }
         // レアリティ
-        $codes = array_flip(_code("Codes.Cards.rarity"));
+        $codes = array_flip(_code('Codes.Cards.rarity'));
         foreach ($codes as $code_value => $code_key) {
             if ($code_value === $csv_data['rarity']) {
                 $csv_data['rarity'] = $code_key;
             }
         }
         // タイプ
-        $codes = array_flip(_code("Codes.Cards.type"));
+        $codes = array_flip(_code('Codes.Cards.type'));
         foreach ($codes as $code_value => $code_key) {
             if ($code_value === $csv_data['type']) {
                 $csv_data['type'] = $code_key;
@@ -403,18 +406,17 @@ class CardsTable extends AppTable
         }
         // ガシャ対象？
         $gasha_include = 0;
-        if (array_key_exists($csv_data['gasha_include'], _code("Codes.Cards.gasha_include"))) {
+        if (array_key_exists($csv_data['gasha_include'], _code('Codes.Cards.gasha_include'))) {
             $gasha_include = $csv_data['gasha_include'];
         }
         $csv_data['gasha_include'] = $gasha_include;
         // 限定？
-        $codes = array_flip(_code("Codes.Cards.limited"));
+        $codes = array_flip(_code('Codes.Cards.limited'));
         foreach ($codes as $code_value => $code_key) {
             if ($code_value === $csv_data['limited']) {
                 $csv_data['limited'] = $code_key;
             }
         }
-
         unset($csv_data['created']);
         unset($csv_data['modified']);
 
@@ -432,6 +434,7 @@ class CardsTable extends AppTable
 
     /**
      * Excelカラム情報を取得する
+     *
      * @return array
      */
     public function getExcelColumns()
@@ -452,11 +455,15 @@ class CardsTable extends AppTable
 
     /**
      * カード情報を返す
-     * @param Gasha $gasha ガシャ情報
+     *
+     * @param \App\Model\Entity\Gasha $gasha ガシャ情報
      * @return array $cards
      */
     public function findGashaTargetCards(Gasha $gasha)
     {
+        if (is_null($gasha->start_date)) {
+            throw new Exception('gashas.start_date invalid.');
+        }
         $start_date = $gasha->start_date->i18nFormat('yyyy-MM-dd');
         $query = $this->find();
         $rarity_cases = $query->newExpr()->case()
@@ -474,7 +481,7 @@ class CardsTable extends AppTable
         $cards = $query->where([
             'gasha_include' => true,
             'limited' => '01',
-            'add_date <=' => $start_date
+            'add_date <=' => $start_date,
         ])->toArray();
 
         if ($gasha->isLimited()) {
@@ -482,7 +489,7 @@ class CardsTable extends AppTable
             $limited_cards = $query->where([
                 'gasha_include' => true,
                 'limited' => '02',
-                'add_date' => $start_date
+                'add_date' => $start_date,
             ], [], true)->toArray();
             $cards = array_merge($limited_cards, $cards);
         } elseif ($gasha->isFesLimited()) {
@@ -533,7 +540,7 @@ class CardsTable extends AppTable
         $pickup_targets = Hash::extract($pickup_targets, '{n}.card_id');
         assert(is_array($pickup_targets));
         foreach ($cards as $card_index => $card) {
-            $cards[$card_index]['pickup'] = (in_array($card['id'], $pickup_targets));
+            $cards[$card_index]['pickup'] = in_array($card['id'], $pickup_targets);
         }
 
         // レアリティごとに持ち替え
@@ -553,7 +560,6 @@ class CardsTable extends AppTable
      */
     public function findByIds($card_ids = [])
     {
-
         $query = $this->find();
         $rarity_cases = $query->newExpr()->case()
         ->when(['rarity' => '02'])->then('R', 'string')
@@ -573,6 +579,7 @@ class CardsTable extends AppTable
         foreach ($card_ids as $card_id) {
             $results[] = $cards[$card_id];
         }
+
         return $results;
     }
 }

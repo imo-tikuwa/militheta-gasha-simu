@@ -3,21 +3,20 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\AppController;
 use App\Form\SearchForm;
+use Cake\Core\Exception\CakeException;
 use Cake\Http\CallbackStream;
+use DateTime;
+use DateTimeZone;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
-use DateTime;
-use DateTimeZone;
 
 /**
  * Characters Controller
  *
  * @property \App\Model\Table\CharactersTable $Characters
- *
  * @method \App\Model\Entity\Character[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class CharactersController extends AppController
@@ -94,7 +93,7 @@ class CharactersController extends AppController
             $character = $this->Characters->get($id, [
                 'contain' => [
                     'Cards',
-                ]
+                ],
             ]);
             $this->Characters->touch($character);
         } else {
@@ -104,13 +103,13 @@ class CharactersController extends AppController
             $character = $this->Characters->patchEntity($character, $this->getRequest()->getData(), [
                 'associated' => [
                     'Cards',
-                ]
+                ],
             ]);
             if ($character->hasErrors()) {
                 $this->Flash->set(implode('<br />', $character->getErrorMessages()), [
                     'escape' => false,
                     'element' => 'validation_error',
-                    'params' => ['alert-class' => 'text-sm']
+                    'params' => ['alert-class' => 'text-sm'],
                 ]);
             } else {
                 $conn = $this->Characters->getConnection();
@@ -125,17 +124,20 @@ class CharactersController extends AppController
             }
         }
         $this->set(compact('character'));
+
         return $this->render('edit');
     }
 
     /**
      * csv export method
+     *
      * @return void
      */
     public function csvExport()
     {
         $request = $this->getRequest()->getQueryParams();
         $characters = $this->Characters->getSearchQuery($request)->toArray();
+        array_walk($characters, fn(\App\Model\Entity\Character $character) => $character->setHidden([]));
         $extract = [
             // ID
             'id',
@@ -158,13 +160,14 @@ class CharactersController extends AppController
             'serialize' => 'characters',
             'header' => $this->Characters->getCsvHeaders(),
             'extract' => $extract,
-            'csvEncoding' => 'UTF-8'
+            'csvEncoding' => 'UTF-8',
         ]);
         $this->set(compact('characters'));
     }
 
     /**
      * excel export method
+     *
      * @return \Cake\Http\Response
      */
     public function excelExport()
@@ -176,9 +179,12 @@ class CharactersController extends AppController
         $reader = new XlsxReader();
         $spreadsheet = $reader->load(EXCEL_TEMPLATE_DIR . 'characters_template.xlsx');
         $data_sheet = $spreadsheet->getSheetByName('DATA');
-        $row_num = 2;
+        if (is_null($data_sheet)) {
+            throw new CakeException('DATA sheet does not exist in the template used for Excel export.');
+        }
 
         // 取得したデータをExcelに書き込む
+        $row_num = 2;
         foreach ($characters as $character) {
             // ID
             $data_sheet->setCellValue("A{$row_num}", $character->id);
@@ -194,7 +200,6 @@ class CharactersController extends AppController
         // データ入力行のフォーマットを文字列に設定
         $characters_row_num = count($characters) + 100;
         $data_sheet->getStyle("A2:D{$characters_row_num}")->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
-
 
         // 罫線設定、A2セルを選択、1行目固定、DATAシートをアクティブ化
         $data_sheet->getStyle("A1:D{$characters_row_num}")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);

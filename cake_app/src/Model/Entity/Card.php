@@ -25,7 +25,6 @@ namespace App\Model\Entity;
  */
 class Card extends AppEntity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -50,5 +49,17 @@ class Card extends AppEntity
         'character' => true,
         'card_reprints' => true,
         'gasha_pickups' => true,
+    ];
+
+    /**
+     * Fields that are excluded from JSON versions of the entity.
+     *
+     * @var array<string>
+     */
+    protected $_hidden = [
+        'search_snippet',
+        'created',
+        'modified',
+        'deleted',
     ];
 }

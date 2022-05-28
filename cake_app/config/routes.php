@@ -64,6 +64,10 @@ return static function (RouteBuilder $routes) {
          * 管理者権限
          */
         $builder->prefix('admin', function (RouteBuilder $routes) {
+            $routes->registerMiddleware('csrf', new \Cake\Http\Middleware\CsrfProtectionMiddleware([
+                'httponly' => true
+            ]));
+            $routes->applyMiddleware('csrf');
             $routes->connect('/', ['controller' => 'Top', 'action' => 'index']);
             $routes->connect('/access-logs/*', ['controller' => 'AccessLogs', 'action' => 'index']);
             $routes->fallbacks(DashedRoute::class);

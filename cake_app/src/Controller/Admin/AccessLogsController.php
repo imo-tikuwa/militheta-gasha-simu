@@ -1,8 +1,8 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\AppController;
-use Cake\ORM\TableRegistry;
 use OperationLogs\Util\OperationLogsUtils;
 
 /**
@@ -27,7 +27,7 @@ class AccessLogsController extends AppController
         '96, 154, 247',
         '255, 246, 77',
         '222, 125, 60',
-        '180, 180, 180'
+        '180, 180, 180',
     ];
 
     /**
@@ -62,6 +62,7 @@ class AccessLogsController extends AppController
 
     /**
      * 集計タイプ = 全のときのChartJs用のチャートデータを返す
+     *
      * @param string $date_type 絞込の日付タイプ
      * @param \DateTime $target_date 対象日
      * @return null|string
@@ -91,16 +92,18 @@ class AccessLogsController extends AppController
                 'label' => _code("OperationLogs.date_type_jp.{$date_type}"),
                 'backgroundColor' => "rgba({$this->rgb_colors[9]},0.9)",
                 'borderColor' => "rgba({$this->rgb_colors[9]},0.8)",
-                'data' => array_values($result[0])
+                'data' => array_values($result[0]),
             ];
             $graph_data = json_encode($graph_data);
             assert($graph_data !== false);
         }
+
         return $graph_data;
     }
 
     /**
      * 集計タイプ = IPのときのチャートデータを返す
+     *
      * @param string $date_type 絞込の日付タイプ
      * @param \DateTime $target_date 対象日
      * @return null|string
@@ -159,7 +162,7 @@ class AccessLogsController extends AppController
                     'label' => $ip,
                     'backgroundColor' => "rgba({$this->rgb_colors[$chart_index]},0.9)",
                     'borderColor' => "rgba({$this->rgb_colors[$chart_index]},0.8)",
-                    'data' => array_values($data)
+                    'data' => array_values($data),
                 ];
                 $chart_index++;
             }
@@ -167,11 +170,13 @@ class AccessLogsController extends AppController
             $graph_data = json_encode($graph_data);
             assert($graph_data !== false);
         }
+
         return $graph_data;
     }
 
     /**
      * 集計タイプ = UserAgentのときのチャートデータを返す
+     *
      * @param string $date_type 絞込の日付タイプ
      * @param \DateTime $target_date 対象日
      * @return null|string
@@ -230,7 +235,7 @@ class AccessLogsController extends AppController
                     'label' => $ua,
                     'backgroundColor' => "rgba({$this->rgb_colors[$chart_index]},0.9)",
                     'borderColor' => "rgba({$this->rgb_colors[$chart_index]},0.8)",
-                    'data' => array_values($data)
+                    'data' => array_values($data),
                 ];
                 $chart_index++;
             }
@@ -238,18 +243,19 @@ class AccessLogsController extends AppController
             $graph_data = json_encode($graph_data);
             assert($graph_data !== false);
         }
+
         return $graph_data;
     }
 
     /**
      * 集計タイプ = URLのときのチャートデータを返す
+     *
      * @param string $date_type 絞込の日付タイプ
      * @param \DateTime $target_date 対象日
      * @return null|string
      */
     private function findDataGroupedByUrl($date_type, \DateTime $target_date)
     {
-
         $graph_data = null;
         $result = null;
         switch ($date_type) {
@@ -302,7 +308,7 @@ class AccessLogsController extends AppController
                     'label' => $url,
                     'backgroundColor' => "rgba({$this->rgb_colors[$chart_index]},0.9)",
                     'borderColor' => "rgba({$this->rgb_colors[$chart_index]},0.8)",
-                    'data' => array_values($data)
+                    'data' => array_values($data),
                 ];
                 $chart_index++;
             }
@@ -310,6 +316,7 @@ class AccessLogsController extends AppController
             $graph_data = json_encode($graph_data);
             assert($graph_data !== false);
         }
+
         return $graph_data;
     }
 }

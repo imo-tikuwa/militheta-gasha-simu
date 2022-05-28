@@ -4,10 +4,6 @@ declare(strict_types=1);
 namespace App\Model\Table;
 
 use Cake\Datasource\EntityInterface;
-use Cake\ORM\Query;
-use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
-use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
 use SoftDelete\Model\Table\SoftDeleteTrait;
 
@@ -16,7 +12,6 @@ use SoftDelete\Model\Table\SoftDeleteTrait;
  *
  * @property \App\Model\Table\CardReprintsTable&\Cake\ORM\Association\HasMany $CardReprints
  * @property \App\Model\Table\GashaPickupsTable&\Cake\ORM\Association\HasMany $GashaPickups
- *
  * @method \App\Model\Entity\Gasha newEmptyEntity()
  * @method \App\Model\Entity\Gasha newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Gasha[] newEntities(array $data, array $options = [])
@@ -30,7 +25,6 @@ use SoftDelete\Model\Table\SoftDeleteTrait;
  * @method \App\Model\Entity\Gasha[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
  * @method \App\Model\Entity\Gasha[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\Gasha[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
- *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class GashasTable extends AppTable
@@ -78,7 +72,7 @@ class GashasTable extends AppTable
             ->add('start_date', 'date', [
                 'rule' => ['date', ['ymd']],
                 'message' => 'ガシャ開始日を正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyDate('start_date', 'ガシャ開始日を入力してください。');
 
@@ -88,7 +82,7 @@ class GashasTable extends AppTable
             ->add('end_date', 'date', [
                 'rule' => ['date', ['ymd']],
                 'message' => 'ガシャ終了日を正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyDate('end_date', 'ガシャ終了日を入力してください。');
 
@@ -98,12 +92,12 @@ class GashasTable extends AppTable
             ->add('title', 'scalar', [
                 'rule' => 'isScalar',
                 'message' => 'ガシャタイトルを正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('title', 'maxLength', [
                 'rule' => ['maxLength', 255],
                 'message' => 'ガシャタイトルは255文字以内で入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyString('title', 'ガシャタイトルを入力してください。');
 
@@ -113,17 +107,17 @@ class GashasTable extends AppTable
             ->add('ssr_rate', 'integer', [
                 'rule' => 'isInteger',
                 'message' => 'SSRレートを正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('ssr_rate', 'greaterThanOrEqual', [
                 'rule' => ['comparison', '>=', 0],
                 'message' => 'SSRレートは0以上の値で入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('ssr_rate', 'lessThanOrEqual', [
                 'rule' => ['comparison', '<=', 100],
                 'message' => 'SSRレートは100以下の値で入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyString('ssr_rate', 'SSRレートを入力してください。');
 
@@ -133,17 +127,17 @@ class GashasTable extends AppTable
             ->add('sr_rate', 'integer', [
                 'rule' => 'isInteger',
                 'message' => 'SRレートを正しく入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('sr_rate', 'greaterThanOrEqual', [
                 'rule' => ['comparison', '>=', 0],
                 'message' => 'SRレートは0以上の値で入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->add('sr_rate', 'lessThanOrEqual', [
                 'rule' => ['comparison', '<=', 100],
                 'message' => 'SRレートは100以下の値で入力してください。',
-                'last' => true
+                'last' => true,
             ])
             ->notEmptyString('sr_rate', 'SRレートを入力してください。');
 
@@ -168,7 +162,7 @@ class GashasTable extends AppTable
      * ファイル項目、GoogleMap項目のJSON文字列を配列に変換する
      *
      * @see \Cake\ORM\Table::patchEntity()
-     * @param EntityInterface $entity エンティティ
+     * @param \Cake\Datasource\EntityInterface $entity エンティティ
      * @param array $data エンティティに上書きするデータ
      * @param array $options オプション配列
      * @return \App\Model\Entity\Gasha
@@ -184,11 +178,13 @@ class GashasTable extends AppTable
 
         $entity = parent::patchEntity($entity, $data, $options);
         assert($entity instanceof \App\Model\Entity\Gasha);
+
         return $entity;
     }
 
     /**
      * ページネートに渡すクエリオブジェクトを生成する
+     *
      * @param array $request リクエスト情報
      * @return \Cake\ORM\Query $query
      */
@@ -231,6 +227,7 @@ class GashasTable extends AppTable
 
     /**
      * CSVヘッダー情報を取得する
+     *
      * @return array
      */
     public function getCsvHeaders()
@@ -249,6 +246,7 @@ class GashasTable extends AppTable
 
     /**
      * CSVカラム情報を取得する
+     *
      * @return array
      */
     public function getCsvColumns()
@@ -267,6 +265,7 @@ class GashasTable extends AppTable
 
     /**
      * CSVの入力情報を元にエンティティを作成する
+     *
      * @param array $csv_row CSVの1行辺りの配列データ
      * @return \App\Model\Entity\Gasha エンティティ
      */
@@ -278,7 +277,6 @@ class GashasTable extends AppTable
         $csv_data['ssr_rate'] = preg_replace('/[^0-9]/', '', $csv_data['ssr_rate']);
         // SRレート
         $csv_data['sr_rate'] = preg_replace('/[^0-9]/', '', $csv_data['sr_rate']);
-
         unset($csv_data['created']);
         unset($csv_data['modified']);
 
@@ -296,6 +294,7 @@ class GashasTable extends AppTable
 
     /**
      * Excelカラム情報を取得する
+     *
      * @return array
      */
     public function getExcelColumns()
@@ -314,6 +313,7 @@ class GashasTable extends AppTable
 
     /**
      * ガシャ情報を取得
+     *
      * @return array ガシャ情報
      */
     public function findGashaData()
@@ -325,15 +325,17 @@ class GashasTable extends AppTable
             'end_date',
             'title',
             'ssr_rate',
-            'sr_rate'
+            'sr_rate',
         ])->enableHydration(false)
         ->order(['id' => 'DESC'])
         ->toArray();
+
         return $gasha_data;
     }
 
     /**
      * ガシャ情報をjson形式で取得する
+     *
      * @param array $gasha_datas ガシャ情報
      * @return string|null Key: ガシャID、Value:ガシャ情報なjsonテキスト
      */
@@ -351,6 +353,7 @@ class GashasTable extends AppTable
 
         $json = json_encode($json_data, JSON_UNESCAPED_UNICODE);
         assert($json !== false);
+
         return $json;
     }
 }

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Controller\Api;
 
 use App\Controller\AppController;
@@ -12,10 +14,8 @@ use Cake\ORM\TableRegistry;
  */
 class ApiController extends AppController
 {
-
     /**
-     * {@inheritDoc}
-     * Initialize Method.
+     * @inheritDoc
      */
     public function initialize(): void
     {
@@ -25,7 +25,7 @@ class ApiController extends AppController
         $this->response->withCharset('UTF-8');
         $this->response->withType('application/json');
 
-        $this->Gashas = TableRegistry::getTableLocator()->get("Gashas");
-        $this->Cards = TableRegistry::getTableLocator()->get("Cards");
+        $this->Gashas = TableRegistry::getTableLocator()->get('Gashas');
+        $this->Cards = TableRegistry::getTableLocator()->get('Cards');
     }
 }

@@ -1,7 +1,7 @@
 <?php
-namespace App\Controller\Info;
+declare(strict_types=1);
 
-use App\Controller\Info\ApiController;
+namespace App\Controller\Info;
 
 /**
  * Character Controller
@@ -11,7 +11,6 @@ use App\Controller\Info\ApiController;
 class CharacterController extends ApiController
 {
     /**
-     *
      * @return void
      */
     public function index()
@@ -27,7 +26,7 @@ class CharacterController extends ApiController
         $this->set([
             'results' => $results,
             '_serialize' => 'results',
-            '_jsonOptions' => JSON_UNESCAPED_UNICODE
+            '_jsonOptions' => JSON_UNESCAPED_UNICODE,
         ]);
     }
 }

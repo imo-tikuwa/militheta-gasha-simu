@@ -3,18 +3,19 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\AppController;
 use App\Form\SearchForm;
 use App\Model\Entity\Gasha;
 use App\Utils\ExcelUtils;
+use Cake\Core\Exception\CakeException;
 use Cake\Event\EventInterface;
 use Cake\Http\CallbackStream;
+use Cake\Utility\Hash;
+use DateTime;
+use DateTimeZone;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
-use DateTime;
-use DateTimeZone;
 
 /**
  * CardReprints Controller
@@ -22,15 +23,12 @@ use DateTimeZone;
  * @property \App\Model\Table\CardReprintsTable $CardReprints
  * @property \App\Model\Table\GashasTable $Gashas
  * @property \App\Model\Table\CardsTable $Cards
- *
  * @method \App\Model\Entity\CardReprint[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class CardReprintsController extends AppController
 {
     /**
-     *
-     * {@inheritDoc}
-     * @see \App\Controller\Admin\AppController::beforeFilter()
+     * @inheritDoc
      */
     public function beforeFilter(EventInterface $event)
     {
@@ -46,8 +44,8 @@ class CardReprintsController extends AppController
             $gasha_id_list = $this->Gashas->find('list', [
                 'keyField' => 'id',
                 'valueField' => function (Gasha $gasha) {
-                    return $gasha->start_date->i18nFormat('yyyy/MM/dd') . '　' . $gasha->title;
-                }
+                    return $gasha->start_date?->i18nFormat('yyyy/MM/dd') . '　' . $gasha->title;
+                },
             ])
             ->where(['title LIKE' => '【限定復刻】%'])
             ->order(['id' => 'DESC'])->toArray();
@@ -93,7 +91,7 @@ class CardReprintsController extends AppController
             'contain' => [
                 'Gashas',
                 'Cards',
-            ]
+            ],
         ]);
 
         $this->set('card_reprint', $card_reprint);
@@ -135,7 +133,7 @@ class CardReprintsController extends AppController
                 'contain' => [
                     'Gashas',
                     'Cards',
-                ]
+                ],
             ]);
             $this->CardReprints->touch($card_reprint);
         } else {
@@ -146,13 +144,13 @@ class CardReprintsController extends AppController
                 'associated' => [
                     'Gashas',
                     'Cards',
-                ]
+                ],
             ]);
             if ($card_reprint->hasErrors()) {
                 $this->Flash->set(implode('<br />', $card_reprint->getErrorMessages()), [
                     'escape' => false,
                     'element' => 'validation_error',
-                    'params' => ['alert-class' => 'text-sm']
+                    'params' => ['alert-class' => 'text-sm'],
                 ]);
             } else {
                 $conn = $this->CardReprints->getConnection();
@@ -167,6 +165,7 @@ class CardReprintsController extends AppController
             }
         }
         $this->set(compact('card_reprint'));
+
         return $this->render('edit');
     }
 
@@ -193,22 +192,24 @@ class CardReprintsController extends AppController
 
     /**
      * csv export method
+     *
      * @return void
      */
     public function csvExport()
     {
         $request = $this->getRequest()->getQueryParams();
         $card_reprints = $this->CardReprints->getSearchQuery($request)->toArray();
+        array_walk($card_reprints, fn(\App\Model\Entity\CardReprint $card_reprint) => $card_reprint->setHidden([]));
         $extract = [
             // ID
             'id',
             // ガシャID
             function ($row) {
-                return @$row['gasha']['title'];
+                return Hash::get($row, 'gasha.title');
             },
             // カードID
             function ($row) {
-                return @$row['card']['name'];
+                return Hash::get($row, 'card.name');
             },
             // 作成日時
             function ($row) {
@@ -227,13 +228,14 @@ class CardReprintsController extends AppController
             'serialize' => 'card_reprints',
             'header' => $this->CardReprints->getCsvHeaders(),
             'extract' => $extract,
-            'csvEncoding' => 'UTF-8'
+            'csvEncoding' => 'UTF-8',
         ]);
         $this->set(compact('card_reprints'));
     }
 
     /**
      * excel export method
+     *
      * @return \Cake\Http\Response
      */
     public function excelExport()
@@ -245,10 +247,16 @@ class CardReprintsController extends AppController
         $reader = new XlsxReader();
         $spreadsheet = $reader->load(EXCEL_TEMPLATE_DIR . 'card_reprints_template.xlsx');
         $data_sheet = $spreadsheet->getSheetByName('DATA');
+        if (is_null($data_sheet)) {
+            throw new CakeException('DATA sheet does not exist in the template used for Excel export.');
+        }
         $list_sheet = $spreadsheet->getSheetByName('LIST');
-        $row_num = 2;
+        if (is_null($list_sheet)) {
+            throw new CakeException('LIST sheet does not exist in the template used for Excel export.');
+        }
 
         // 取得したデータをExcelに書き込む
+        $row_num = 2;
         foreach ($card_reprints as $card_reprint) {
             // ID
             $data_sheet->setCellValue("A{$row_num}", $card_reprint->id);

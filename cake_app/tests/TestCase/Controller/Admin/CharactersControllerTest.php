@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller\Admin;
 
-use App\Controller\Admin\CharactersController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
@@ -33,12 +32,14 @@ class CharactersControllerTest extends TestCase
 
     /**
      * characters table.
+     *
      * @var \App\Model\Table\CharactersTable $Characters
      */
     protected $Characters;
 
     /**
      * admins table.
+     *
      * @var \App\Model\Table\AdminsTable $Admins
      */
     protected $Admins;
@@ -101,7 +102,7 @@ class CharactersControllerTest extends TestCase
             'use_otp' => '0',
             'privilege' => [
                 'Characters' => [ROLE_READ],
-            ]
+            ],
         ]);
         $this->Admins->save($read_admin);
         /** @var \App\Model\Entity\Admin $read_admin */
@@ -116,7 +117,7 @@ class CharactersControllerTest extends TestCase
             'use_otp' => '0',
             'privilege' => [
                 'Characters' => [ROLE_WRITE],
-            ]
+            ],
         ]);
         $this->Admins->save($write_admin);
         /** @var \App\Model\Entity\Admin $write_admin */
@@ -131,7 +132,7 @@ class CharactersControllerTest extends TestCase
             'use_otp' => '0',
             'privilege' => [
                 'Characters' => [ROLE_CSV_EXPORT],
-            ]
+            ],
         ]);
         $this->Admins->save($csv_export_admin);
         /** @var \App\Model\Entity\Admin $csv_export_admin */
@@ -146,7 +147,7 @@ class CharactersControllerTest extends TestCase
             'use_otp' => '0',
             'privilege' => [
                 'Characters' => [ROLE_EXCEL_EXPORT],
-            ]
+            ],
         ]);
         $this->Admins->save($excel_export_admin);
         /** @var \App\Model\Entity\Admin $excel_export_admin */
@@ -161,7 +162,7 @@ class CharactersControllerTest extends TestCase
             'use_otp' => '0',
             'privilege' => [
                 'Characters' => [],
-            ]
+            ],
         ]);
         $this->Admins->save($no_authority_admin);
         /** @var \App\Model\Entity\Admin $no_authority_admin */
@@ -182,7 +183,7 @@ class CharactersControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/characters');
         $this->assertResponseCode(200);
@@ -190,7 +191,7 @@ class CharactersControllerTest extends TestCase
         $this->assertTextContains('<title>キャラクター</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/characters');
         $this->assertResponseCode(200);
@@ -198,28 +199,28 @@ class CharactersControllerTest extends TestCase
         $this->assertTextContains('<title>キャラクター</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/characters');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/characters');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/characters');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/characters');
         $this->assertResponseCode(302);
@@ -238,7 +239,7 @@ class CharactersControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/characters/view/1');
         $this->assertResponseCode(200);
@@ -246,7 +247,7 @@ class CharactersControllerTest extends TestCase
         $this->assertTextContains('<title>キャラクター詳細</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/characters/view/1');
         $this->assertResponseCode(200);
@@ -254,28 +255,28 @@ class CharactersControllerTest extends TestCase
         $this->assertTextContains('<title>キャラクター詳細</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/characters/view/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/characters/view/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/characters/view/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/characters/view/1');
         $this->assertResponseCode(302);
@@ -294,7 +295,7 @@ class CharactersControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/characters/add');
         $this->assertResponseCode(200);
@@ -302,14 +303,14 @@ class CharactersControllerTest extends TestCase
         $this->assertTextContains('<title>キャラクター登録</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/characters/add');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/characters/add');
         $this->assertResponseCode(200);
@@ -317,21 +318,21 @@ class CharactersControllerTest extends TestCase
         $this->assertTextContains('<title>キャラクター登録</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/characters/add');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/characters/add');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/characters/add');
         $this->assertResponseCode(302);
@@ -350,7 +351,7 @@ class CharactersControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/characters/edit/1');
         $this->assertResponseCode(200);
@@ -358,14 +359,14 @@ class CharactersControllerTest extends TestCase
         $this->assertTextContains('<title>キャラクター更新</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/characters/edit/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/characters/edit/1');
         $this->assertResponseCode(200);
@@ -373,21 +374,21 @@ class CharactersControllerTest extends TestCase
         $this->assertTextContains('<title>キャラクター更新</title>', (string)$this->_response->getBody());
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/characters/edit/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/characters/edit/1');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/characters/edit/1');
         $this->assertResponseCode(302);
@@ -406,7 +407,7 @@ class CharactersControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/characters/csv-export');
         $this->assertResponseCode(200);
@@ -414,21 +415,21 @@ class CharactersControllerTest extends TestCase
         $this->assertHeaderContains('Content-Type', 'text/csv;');
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/characters/csv-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/characters/csv-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/characters/csv-export');
         $this->assertResponseCode(200);
@@ -436,14 +437,14 @@ class CharactersControllerTest extends TestCase
         $this->assertHeaderContains('Content-Type', 'text/csv;');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/characters/csv-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/characters/csv-export');
         $this->assertResponseCode(302);
@@ -462,7 +463,7 @@ class CharactersControllerTest extends TestCase
         $this->assertHeaderContains('location', '/admin/auth/login');
 
         $this->session([
-            'Auth.Admin' => $this->super_admin
+            'Auth.Admin' => $this->super_admin,
         ]);
         $this->get('/admin/characters/excel-export');
         $this->assertResponseCode(200);
@@ -470,28 +471,28 @@ class CharactersControllerTest extends TestCase
         $this->assertHeaderContains('Content-Type', EXCEL_CONTENT_TYPE);
 
         $this->session([
-            'Auth.Admin' => $this->read_admin
+            'Auth.Admin' => $this->read_admin,
         ]);
         $this->get('/admin/characters/excel-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->write_admin
+            'Auth.Admin' => $this->write_admin,
         ]);
         $this->get('/admin/characters/excel-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->csv_export_admin
+            'Auth.Admin' => $this->csv_export_admin,
         ]);
         $this->get('/admin/characters/excel-export');
         $this->assertResponseCode(302);
         $this->assertSession(MESSAGE_AUTH_ERROR, 'Flash.flash.0.message');
 
         $this->session([
-            'Auth.Admin' => $this->excel_export_admin
+            'Auth.Admin' => $this->excel_export_admin,
         ]);
         $this->get('/admin/characters/excel-export');
         $this->assertResponseCode(200);
@@ -499,7 +500,7 @@ class CharactersControllerTest extends TestCase
         $this->assertHeaderContains('Content-Type', EXCEL_CONTENT_TYPE);
 
         $this->session([
-            'Auth.Admin' => $this->no_authority_admin
+            'Auth.Admin' => $this->no_authority_admin,
         ]);
         $this->get('/admin/characters/excel-export');
         $this->assertResponseCode(302);

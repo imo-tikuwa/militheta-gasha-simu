@@ -18,4 +18,11 @@ $(function(){
         }
     });
 
+    // OpenAPIトークン
+    $('#update-api-token').select2({
+        theme: "bootstrap-5",
+        width: 'auto',
+        dropdownAutoWidth: true,
+    });
+
 });

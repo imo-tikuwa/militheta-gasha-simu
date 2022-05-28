@@ -77,5 +77,6 @@ return [
         'csv_encoding' => 'utf8',
         'excel_export' => true,
         'excel_import' => false,
+        'bake_swagger_api' => false,
     ],
 ];

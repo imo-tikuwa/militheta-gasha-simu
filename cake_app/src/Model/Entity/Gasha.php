@@ -22,7 +22,6 @@ namespace App\Model\Entity;
  */
 class Gasha extends AppEntity
 {
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -47,38 +46,54 @@ class Gasha extends AppEntity
     ];
 
     /**
+     * Fields that are excluded from JSON versions of the entity.
+     *
+     * @var array<string>
+     */
+    protected $_hidden = [
+        'search_snippet',
+        'created',
+        'modified',
+        'deleted',
+    ];
+
+    /**
      * 限定ガチャ？
+     *
      * @return bool
      */
     public function isLimited()
     {
-        return str_starts_with($this->title, '【期間限定】');
+        return is_string($this->title) && str_starts_with($this->title, '【期間限定】');
     }
 
     /**
      * フェス限定ガチャ？
+     *
      * @return bool
      */
     public function isFesLimited()
     {
-        return str_starts_with($this->title, '【フェス限定】');
+        return is_string($this->title) && str_starts_with($this->title, '【フェス限定】');
     }
 
     /**
      * SHS限定ガチャ？
+     *
      * @return bool
      */
     public function isShsLimited()
     {
-        return str_starts_with($this->title, '【ヘアスタイル限定】');
+        return is_string($this->title) && str_starts_with($this->title, '【ヘアスタイル限定】');
     }
 
     /**
      * 復刻ガチャ？
+     *
      * @return bool
      */
     public function isReprintLimited()
     {
-        return str_starts_with($this->title, '【限定復刻】');
+        return is_string($this->title) && str_starts_with($this->title, '【限定復刻】');
     }
 }
