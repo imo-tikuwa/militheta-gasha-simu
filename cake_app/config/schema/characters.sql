@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS `characters`;
 CREATE TABLE `characters` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `name` varchar(255) DEFAULT NULL COMMENT '名前',
-  `created` datetime DEFAULT NULL COMMENT '作成日時',
-  `modified` datetime DEFAULT NULL COMMENT '更新日時',
+  `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '名前',
+  `created` datetime NOT NULL COMMENT '作成日時',
+  `modified` datetime NOT NULL COMMENT '更新日時',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='キャラクター';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='キャラクター';

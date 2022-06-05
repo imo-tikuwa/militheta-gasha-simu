@@ -167,11 +167,11 @@ class GashasController extends AppController
             'id',
             // ガシャ開始日
             function ($row) {
-                return $row['start_date']?->i18nFormat('yyyy-MM-dd');
+                return $row['start_date']->i18nFormat('yyyy-MM-dd');
             },
             // ガシャ終了日
             function ($row) {
-                return $row['end_date']?->i18nFormat('yyyy-MM-dd');
+                return $row['end_date']->i18nFormat('yyyy-MM-dd');
             },
             // ガシャタイトル
             'title',
@@ -185,11 +185,11 @@ class GashasController extends AppController
             },
             // 作成日時
             function ($row) {
-                return $row['created']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
+                return $row['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
             // 更新日時
             function ($row) {
-                return $row['modified']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
+                return $row['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
         ];
 
@@ -279,9 +279,9 @@ class GashasController extends AppController
             // ID
             $data_sheet->setCellValue("A{$row_num}", $gasha->id);
             // ガシャ開始日
-            $data_sheet->setCellValue("B{$row_num}", $gasha->start_date?->i18nFormat('yyyy-MM-dd'));
+            $data_sheet->setCellValue("B{$row_num}", $gasha->start_date->i18nFormat('yyyy-MM-dd'));
             // ガシャ終了日
-            $data_sheet->setCellValue("C{$row_num}", $gasha->end_date?->i18nFormat('yyyy-MM-dd'));
+            $data_sheet->setCellValue("C{$row_num}", $gasha->end_date->i18nFormat('yyyy-MM-dd'));
             // ガシャタイトル
             $data_sheet->setCellValue("D{$row_num}", $gasha->title);
             // SSRレート
@@ -289,9 +289,9 @@ class GashasController extends AppController
             // SRレート
             $data_sheet->setCellValue("F{$row_num}", $gasha->sr_rate);
             // 作成日時
-            $data_sheet->setCellValue("G{$row_num}", $gasha->created?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
+            $data_sheet->setCellValue("G{$row_num}", $gasha->created->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             // 更新日時
-            $data_sheet->setCellValue("H{$row_num}", $gasha->modified?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
+            $data_sheet->setCellValue("H{$row_num}", $gasha->modified->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             $row_num++;
         }
 

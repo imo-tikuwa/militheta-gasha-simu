@@ -41,7 +41,7 @@ class AdminsSeed extends AbstractSeed
                 'password' => 'yerFNCGATtp9Cb+O3gAECg==:KJExaS9/APeHbcirsqZVYg==',
                 'use_otp' => false,
                 'otp_secret' => NULL,
-                'privilege' => '{"Cards": ["READ", "CSV_EXPORT", "EXCEL_EXPORT"], "Gashas": ["READ"], "Characters": ["READ"], "CardReprints": ["READ"], "GashaPickups": ["READ"]}',
+                'privilege' => '{"Cards":["READ","CSV_EXPORT","EXCEL_EXPORT"],"Gashas":["READ"],"Characters":["READ"],"CardReprints":["READ"],"GashaPickups":["READ"]}',
                 'api_token' => NULL,
                 'created' => '2020-10-07 16:14:02',
                 'modified' => '2020-11-24 18:31:29',

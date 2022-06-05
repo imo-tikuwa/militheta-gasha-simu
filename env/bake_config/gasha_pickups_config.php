@@ -5,7 +5,7 @@ return [
         'id' => [
             'search' => true,
             'listview' => true,
-            'require' => false,
+            'require' => true,
             'label' => 'ID',
             'col_lg_size' => 6,
             'col_md_size' => 6,
@@ -40,7 +40,7 @@ return [
         'created' => [
             'search' => false,
             'listview' => false,
-            'require' => false,
+            'require' => true,
             'label' => '作成日時',
             'col_lg_size' => 6,
             'col_md_size' => 6,
@@ -49,7 +49,7 @@ return [
         'modified' => [
             'search' => false,
             'listview' => true,
-            'require' => false,
+            'require' => true,
             'label' => '更新日時',
             'col_lg_size' => 6,
             'col_md_size' => 6,

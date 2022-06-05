@@ -18,6 +18,7 @@ class Initial extends AbstractMigration
     {
         $this->table('admins', [
                 'comment' => '管理者情報',
+                'collation' => 'utf8mb4_bin',
             ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
@@ -28,20 +29,26 @@ class Initial extends AbstractMigration
             ])
             ->addPrimaryKey(['id'])
             ->addColumn('name', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => '名前',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 255,
                 'null' => false,
             ])
             ->addColumn('mail', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'メールアドレス',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 255,
                 'null' => false,
             ])
             ->addColumn('password', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'パスワード',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 255,
                 'null' => false,
             ])
@@ -52,8 +59,10 @@ class Initial extends AbstractMigration
                 'null' => true,
             ])
             ->addColumn('otp_secret', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => '二段階認証用シークレットキー',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 255,
                 'null' => true,
             ])
@@ -64,8 +73,10 @@ class Initial extends AbstractMigration
                 'null' => true,
             ])
             ->addColumn('api_token', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'OpenAPIトークン',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 255,
                 'null' => true,
             ])
@@ -73,13 +84,13 @@ class Initial extends AbstractMigration
                 'comment' => '作成日時',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('modified', 'datetime', [
                 'comment' => '更新日時',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('deleted', 'datetime', [
                 'comment' => '削除日時',
@@ -91,6 +102,7 @@ class Initial extends AbstractMigration
 
         $this->table('card_reprints', [
                 'comment' => '復刻情報',
+                'collation' => 'utf8mb4_bin',
             ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
@@ -104,17 +116,19 @@ class Initial extends AbstractMigration
                 'comment' => 'ガシャID',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('card_id', 'integer', [
                 'comment' => 'カードID',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('search_snippet', 'text', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'フリーワード検索用のスニペット',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 16777215,
                 'null' => true,
             ])
@@ -122,13 +136,13 @@ class Initial extends AbstractMigration
                 'comment' => '作成日時',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('modified', 'datetime', [
                 'comment' => '更新日時',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('deleted', 'datetime', [
                 'comment' => '削除日時',
@@ -138,18 +152,19 @@ class Initial extends AbstractMigration
             ])
             ->addIndex(
                 [
-                    'card_id',
+                    'gasha_id',
                 ]
             )
             ->addIndex(
                 [
-                    'gasha_id',
+                    'card_id',
                 ]
             )
             ->create();
 
         $this->table('cards', [
                 'comment' => 'カード',
+                'collation' => 'utf8mb4_bin',
             ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
@@ -163,47 +178,57 @@ class Initial extends AbstractMigration
                 'comment' => 'キャラクター',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('name', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'カード名',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 255,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('rarity', 'char', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'レアリティ',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 2,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('type', 'char', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'タイプ',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 2,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('add_date', 'date', [
                 'comment' => '実装日',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('gasha_include', 'boolean', [
                 'comment' => 'ガシャ対象？',
                 'default' => true,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('limited', 'char', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => '限定？',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 2,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('search_snippet', 'text', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'フリーワード検索用のスニペット',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 16777215,
                 'null' => true,
             ])
@@ -211,13 +236,13 @@ class Initial extends AbstractMigration
                 'comment' => '作成日時',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('modified', 'datetime', [
                 'comment' => '更新日時',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('deleted', 'datetime', [
                 'comment' => '削除日時',
@@ -234,6 +259,7 @@ class Initial extends AbstractMigration
 
         $this->table('characters', [
                 'comment' => 'キャラクター',
+                'collation' => 'utf8mb4_bin',
             ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
@@ -244,27 +270,30 @@ class Initial extends AbstractMigration
             ])
             ->addPrimaryKey(['id'])
             ->addColumn('name', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => '名前',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 255,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('created', 'datetime', [
                 'comment' => '作成日時',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('modified', 'datetime', [
                 'comment' => '更新日時',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->create();
 
         $this->table('gasha_pickups', [
                 'comment' => 'ピックアップ情報',
+                'collation' => 'utf8mb4_bin',
             ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
@@ -278,17 +307,19 @@ class Initial extends AbstractMigration
                 'comment' => 'ガシャID',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('card_id', 'integer', [
                 'comment' => 'カードID',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('search_snippet', 'text', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'フリーワード検索用のスニペット',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 16777215,
                 'null' => true,
             ])
@@ -296,13 +327,13 @@ class Initial extends AbstractMigration
                 'comment' => '作成日時',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('modified', 'datetime', [
                 'comment' => '更新日時',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('deleted', 'datetime', [
                 'comment' => '削除日時',
@@ -312,18 +343,19 @@ class Initial extends AbstractMigration
             ])
             ->addIndex(
                 [
-                    'card_id',
+                    'gasha_id',
                 ]
             )
             ->addIndex(
                 [
-                    'gasha_id',
+                    'card_id',
                 ]
             )
             ->create();
 
         $this->table('gashas', [
                 'comment' => 'ガシャ',
+                'collation' => 'utf8mb4_bin',
             ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
@@ -337,35 +369,39 @@ class Initial extends AbstractMigration
                 'comment' => 'ガシャ開始日',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('end_date', 'date', [
                 'comment' => 'ガシャ終了日',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('title', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'ガシャタイトル',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 255,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('ssr_rate', 'integer', [
                 'comment' => 'SSRレート',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('sr_rate', 'integer', [
                 'comment' => 'SRレート',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('search_snippet', 'text', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'フリーワード検索用のスニペット',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 16777215,
                 'null' => true,
             ])
@@ -373,13 +409,13 @@ class Initial extends AbstractMigration
                 'comment' => '作成日時',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('modified', 'datetime', [
                 'comment' => '更新日時',
                 'default' => null,
                 'limit' => null,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('deleted', 'datetime', [
                 'comment' => '削除日時',
@@ -391,6 +427,7 @@ class Initial extends AbstractMigration
 
         $this->table('operation_logs', [
                 'comment' => '操作ログ',
+                'collation' => 'utf8mb4_bin',
             ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
@@ -401,20 +438,26 @@ class Initial extends AbstractMigration
             ])
             ->addPrimaryKey(['id'])
             ->addColumn('client_ip', 'text', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'クライアントIP',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => null,
                 'null' => false,
             ])
             ->addColumn('user_agent', 'text', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'ユーザーエージェント',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => null,
                 'null' => true,
             ])
             ->addColumn('request_url', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'リクエストURL',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 255,
                 'null' => false,
             ])
@@ -438,6 +481,7 @@ class Initial extends AbstractMigration
 
         $this->table('operation_logs_daily', [
                 'comment' => '操作ログの集計(日毎)',
+                'collation' => 'utf8mb4_bin',
             ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
@@ -454,14 +498,18 @@ class Initial extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('summary_type', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => '集計タイプ',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 20,
                 'null' => false,
             ])
             ->addColumn('groupedby', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'グループ元',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 255,
                 'null' => true,
             ])
@@ -475,6 +523,7 @@ class Initial extends AbstractMigration
 
         $this->table('operation_logs_hourly', [
                 'comment' => '操作ログの集計(1時間毎)',
+                'collation' => 'utf8mb4_bin',
             ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
@@ -491,14 +540,18 @@ class Initial extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('summary_type', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => '集計タイプ',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 20,
                 'null' => false,
             ])
             ->addColumn('groupedby', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'グループ元',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 255,
                 'null' => true,
             ])
@@ -512,6 +565,7 @@ class Initial extends AbstractMigration
 
         $this->table('operation_logs_monthly', [
                 'comment' => '操作ログの集計(月毎)',
+                'collation' => 'utf8mb4_bin',
             ])
             ->addColumn('id', 'integer', [
                 'autoIncrement' => true,
@@ -528,14 +582,18 @@ class Initial extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('summary_type', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => '集計タイプ',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 20,
                 'null' => false,
             ])
             ->addColumn('groupedby', 'string', [
+                'collation' => 'utf8mb4_bin',
                 'comment' => 'グループ元',
                 'default' => null,
+                'encoding' => 'utf8mb4',
                 'limit' => 255,
                 'null' => true,
             ])

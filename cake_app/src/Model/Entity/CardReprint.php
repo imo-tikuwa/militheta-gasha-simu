@@ -7,11 +7,11 @@ namespace App\Model\Entity;
  * CardReprint Entity
  *
  * @property int $id
- * @property int|null $gasha_id
- * @property int|null $card_id
+ * @property int $gasha_id
+ * @property int $card_id
  * @property string|null $search_snippet
- * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime $modified
  * @property \Cake\I18n\FrozenTime|null $deleted
  *
  * @property \App\Model\Entity\Gasha $gasha

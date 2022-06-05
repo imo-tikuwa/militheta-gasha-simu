@@ -44,7 +44,7 @@ class GashaPickupsController extends AppController
             $gasha_id_list = $this->Gashas->find('list', [
                 'keyField' => 'id',
                 'valueField' => function (Gasha $gasha) {
-                    return $gasha->start_date?->i18nFormat('yyyy/MM/dd') . '　' . $gasha->title;
+                    return $gasha->start_date->i18nFormat('yyyy/MM/dd') . '　' . $gasha->title;
                 },
             ])->order(['id' => 'DESC'])->toArray();
             $card_id_list = $this->Cards->find('list', ['keyField' => 'id', 'valueField' => 'name'])->toArray();
@@ -211,11 +211,11 @@ class GashaPickupsController extends AppController
             },
             // 作成日時
             function ($row) {
-                return $row['created']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
+                return $row['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
             // 更新日時
             function ($row) {
-                return $row['modified']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
+                return $row['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
         ];
 
@@ -271,9 +271,9 @@ class GashaPickupsController extends AppController
             }
             $data_sheet->setCellValue("C{$row_num}", $cell_value);
             // 作成日時
-            $data_sheet->setCellValue("D{$row_num}", $gasha_pickup->created?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
+            $data_sheet->setCellValue("D{$row_num}", $gasha_pickup->created->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             // 更新日時
-            $data_sheet->setCellValue("E{$row_num}", $gasha_pickup->modified?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
+            $data_sheet->setCellValue("E{$row_num}", $gasha_pickup->modified->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             $row_num++;
         }
 

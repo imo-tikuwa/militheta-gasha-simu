@@ -49,9 +49,11 @@ class GashaPickupsTable extends AppTable
         $this->setPrimaryKey('id');
         $this->belongsTo('Gashas', [
             'foreignKey' => 'gasha_id',
+            'joinType' => 'INNER',
         ]);
         $this->belongsTo('Cards', [
             'foreignKey' => 'card_id',
+            'joinType' => 'INNER',
         ]);
     }
 
@@ -154,7 +156,7 @@ class GashaPickupsTable extends AppTable
                 $search_snippet[] = $card->name;
             }
         }
-        $data['search_snippet'] = implode(' ', $search_snippet);
+        $data['search_snippet'] = implode(' ', array_unique($search_snippet));
 
         $entity = parent::patchEntity($entity, $data, $options);
         assert($entity instanceof \App\Model\Entity\GashaPickup);

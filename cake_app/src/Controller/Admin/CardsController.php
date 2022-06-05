@@ -220,7 +220,7 @@ class CardsController extends AppController
             },
             // 実装日
             function ($row) {
-                return $row['add_date']?->i18nFormat('yyyy-MM-dd');
+                return $row['add_date']->i18nFormat('yyyy-MM-dd');
             },
             // ガシャ対象？
             'gasha_include',
@@ -234,11 +234,11 @@ class CardsController extends AppController
             },
             // 作成日時
             function ($row) {
-                return $row['created']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
+                return $row['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
             // 更新日時
             function ($row) {
-                return $row['modified']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
+                return $row['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
         ];
 
@@ -352,7 +352,7 @@ class CardsController extends AppController
             }
             $data_sheet->setCellValue("E{$row_num}", $cell_value);
             // 実装日
-            $data_sheet->setCellValue("F{$row_num}", $card->add_date?->i18nFormat('yyyy-MM-dd'));
+            $data_sheet->setCellValue("F{$row_num}", $card->add_date->i18nFormat('yyyy-MM-dd'));
             // ガシャ対象？
             $cell_value = _code('Codes.Cards.gasha_include.' . $card->gasha_include, 'false');
             $data_sheet->setCellValue("G{$row_num}", $cell_value);
@@ -363,9 +363,9 @@ class CardsController extends AppController
             }
             $data_sheet->setCellValue("H{$row_num}", $cell_value);
             // 作成日時
-            $data_sheet->setCellValue("I{$row_num}", $card->created?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
+            $data_sheet->setCellValue("I{$row_num}", $card->created->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             // 更新日時
-            $data_sheet->setCellValue("J{$row_num}", $card->modified?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
+            $data_sheet->setCellValue("J{$row_num}", $card->modified->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             $row_num++;
         }
 

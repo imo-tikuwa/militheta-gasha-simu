@@ -174,7 +174,7 @@ class GashasTable extends AppTable
         if (isset($data['title']) && $data['title'] != '') {
             $search_snippet[] = $data['title'];
         }
-        $data['search_snippet'] = implode(' ', $search_snippet);
+        $data['search_snippet'] = implode(' ', array_unique($search_snippet));
 
         $entity = parent::patchEntity($entity, $data, $options);
         assert($entity instanceof \App\Model\Entity\Gasha);
