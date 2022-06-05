@@ -44,7 +44,7 @@ class CardReprintsController extends AppController
             $gasha_id_list = $this->Gashas->find('list', [
                 'keyField' => 'id',
                 'valueField' => function (Gasha $gasha) {
-                    return $gasha->start_date?->i18nFormat('yyyy/MM/dd') . '　' . $gasha->title;
+                    return $gasha->start_date->i18nFormat('yyyy/MM/dd') . '　' . $gasha->title;
                 },
             ])
             ->where(['title LIKE' => '【限定復刻】%'])
@@ -213,11 +213,11 @@ class CardReprintsController extends AppController
             },
             // 作成日時
             function ($row) {
-                return $row['created']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
+                return $row['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
             // 更新日時
             function ($row) {
-                return $row['modified']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
+                return $row['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
         ];
 
@@ -273,9 +273,9 @@ class CardReprintsController extends AppController
             }
             $data_sheet->setCellValue("C{$row_num}", $cell_value);
             // 作成日時
-            $data_sheet->setCellValue("D{$row_num}", $card_reprint->created?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
+            $data_sheet->setCellValue("D{$row_num}", $card_reprint->created->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             // 更新日時
-            $data_sheet->setCellValue("E{$row_num}", $card_reprint->modified?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
+            $data_sheet->setCellValue("E{$row_num}", $card_reprint->modified->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             $row_num++;
         }
 

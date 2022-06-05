@@ -62,6 +62,9 @@ npm-dev:
 npm-build:
 	docker-compose exec --user=www-data app npm run build
 
+db-dump:
+	bash mysqldump.sh
+
 down:
 	docker-compose down
 down-all:

@@ -7,14 +7,14 @@ namespace App\Model\Entity;
  * Gasha Entity
  *
  * @property int $id
- * @property \Cake\I18n\FrozenDate|null $start_date
- * @property \Cake\I18n\FrozenDate|null $end_date
- * @property string|null $title
- * @property int|null $ssr_rate
- * @property int|null $sr_rate
+ * @property \Cake\I18n\FrozenDate $start_date
+ * @property \Cake\I18n\FrozenDate $end_date
+ * @property string $title
+ * @property int $ssr_rate
+ * @property int $sr_rate
  * @property string|null $search_snippet
- * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime $modified
  * @property \Cake\I18n\FrozenTime|null $deleted
  *
  * @property \App\Model\Entity\CardReprint[] $card_reprints

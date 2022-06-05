@@ -145,11 +145,11 @@ class CharactersController extends AppController
             'name',
             // 作成日時
             function ($row) {
-                return $row['created']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
+                return $row['created']->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
             // 更新日時
             function ($row) {
-                return $row['modified']?->i18nFormat('yyyy-MM-dd HH:mm:ss');
+                return $row['modified']->i18nFormat('yyyy-MM-dd HH:mm:ss');
             },
         ];
 
@@ -191,9 +191,9 @@ class CharactersController extends AppController
             // 名前
             $data_sheet->setCellValue("B{$row_num}", $character->name);
             // 作成日時
-            $data_sheet->setCellValue("C{$row_num}", $character->created?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
+            $data_sheet->setCellValue("C{$row_num}", $character->created->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             // 更新日時
-            $data_sheet->setCellValue("D{$row_num}", $character->modified?->i18nFormat('yyyy-MM-dd HH:mm:ss'));
+            $data_sheet->setCellValue("D{$row_num}", $character->modified->i18nFormat('yyyy-MM-dd HH:mm:ss'));
             $row_num++;
         }
 

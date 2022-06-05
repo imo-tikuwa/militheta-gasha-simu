@@ -1,5 +1,6 @@
+.env
 erd/schemaspy-6.1.0.jar
 erd/millitheta/*
-log/mysql/*.log
 redis/data/dump.rdb
-.env
+dump/*
+!.gitkeep

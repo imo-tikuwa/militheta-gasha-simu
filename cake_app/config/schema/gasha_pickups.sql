@@ -1,13 +1,13 @@
 DROP TABLE IF EXISTS `gasha_pickups`;
 CREATE TABLE `gasha_pickups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `gasha_id` int(11) DEFAULT NULL COMMENT 'ガシャID',
-  `card_id` int(11) DEFAULT NULL COMMENT 'カードID',
-  `search_snippet` mediumtext DEFAULT NULL COMMENT 'フリーワード検索用のスニペット',
-  `created` datetime DEFAULT NULL COMMENT '作成日時',
-  `modified` datetime DEFAULT NULL COMMENT '更新日時',
+  `id` int NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `gasha_id` int NOT NULL COMMENT 'ガシャID',
+  `card_id` int NOT NULL COMMENT 'カードID',
+  `search_snippet` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT 'フリーワード検索用のスニペット',
+  `created` datetime NOT NULL COMMENT '作成日時',
+  `modified` datetime NOT NULL COMMENT '更新日時',
   `deleted` datetime DEFAULT NULL COMMENT '削除日時',
   PRIMARY KEY (`id`),
-  INDEX `gasha_id` (`gasha_id`),
-  INDEX `card_id` (`card_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ピックアップ情報';
+  KEY `gasha_id` (`gasha_id`),
+  KEY `card_id` (`card_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='ピックアップ情報';

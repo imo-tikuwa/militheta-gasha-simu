@@ -2,9 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
+const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const mode = (process.env.NODE_ENV == undefined) ? 'production' : process.env.NODE_ENV;
 const devtool = (mode != 'production') ? 'source-map' : false;
 
@@ -27,7 +27,7 @@ const exportScript = {
         }
     },
     plugins: [
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        new webpack.IgnorePlugin({resourceRegExp: /^\.\/locale$/, contextRegExp: /moment$/}),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
@@ -158,20 +158,7 @@ const exportStyle = {
         new MiniCssExtractPlugin({
             filename: '[name].css'
         }),
-        new OptimizeCssAssetsPlugin({
-            cssProcessor: require('cssnano'),
-            cssProcessorPluginOptions: {
-                preset: [
-                    'default',
-                    {
-                        discardComments: {
-                            removeAll: true
-                        }
-                    }
-                ]
-            }
-        }),
-        new FixStyleOnlyEntriesPlugin()
+        new RemoveEmptyScriptsPlugin(),
     ],
     module: {
         rules: [
@@ -198,6 +185,11 @@ const exportStyle = {
                 ]
             }
         ]
+    },
+    optimization: {
+        minimizer: [
+            new CssMinimizerPlugin(),
+        ],
     },
     performance: {
         hints: false

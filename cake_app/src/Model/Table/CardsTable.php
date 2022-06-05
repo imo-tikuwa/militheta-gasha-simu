@@ -9,7 +9,6 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\TableRegistry;
 use Cake\Utility\Hash;
 use Cake\Validation\Validator;
-use Exception;
 use SoftDelete\Model\Table\SoftDeleteTrait;
 
 /**
@@ -53,6 +52,7 @@ class CardsTable extends AppTable
         $this->setPrimaryKey('id');
         $this->belongsTo('Characters', [
             'foreignKey' => 'character_id',
+            'joinType' => 'INNER',
         ]);
         $this->hasMany('CardReprints', [
             'foreignKey' => 'card_id',
@@ -261,7 +261,7 @@ class CardsTable extends AppTable
         if (isset($data['limited']) && $data['limited'] != '') {
             $search_snippet[] = _code("Codes.Cards.limited.{$data['limited']}");
         }
-        $data['search_snippet'] = implode(' ', $search_snippet);
+        $data['search_snippet'] = implode(' ', array_unique($search_snippet));
 
         $entity = parent::patchEntity($entity, $data, $options);
         assert($entity instanceof \App\Model\Entity\Card);
@@ -461,9 +461,6 @@ class CardsTable extends AppTable
      */
     public function findGashaTargetCards(Gasha $gasha)
     {
-        if (is_null($gasha->start_date)) {
-            throw new Exception('gashas.start_date invalid.');
-        }
         $start_date = $gasha->start_date->i18nFormat('yyyy-MM-dd');
         $query = $this->find();
         $rarity_cases = $query->newExpr()->case()
