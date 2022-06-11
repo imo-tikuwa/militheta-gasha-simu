@@ -6,7 +6,12 @@
 https://milligasha.imo-tikuwa.com/
 
 ## Dockerを使った環境構築
-https://github.com/imo-tikuwa/docker-militheta-gasha-simu
+```
+git clone https://github.com/imo-tikuwa/militheta-gasha-simu.git
+cd militheta-gasha-simu
+cp .env.example .env
+make init
+```
 
 ## Dockerを使わない環境構築
 非公開の開発用プラグインを使用しているのでcomposer installの際--no-devを付ける必要あり  
