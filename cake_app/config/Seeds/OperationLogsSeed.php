@@ -2069,6 +2069,14 @@ class OperationLogsSeed extends AbstractSeed
                 'request_time' => '2022-06-11 22:49:01.179',
                 'response_time' => '2022-06-11 22:49:01.196',
             ],
+            [
+                'id' => 257,
+                'client_ip' => '172.20.0.1',
+                'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0',
+                'request_url' => '/',
+                'request_time' => '2022-07-16 10:14:06.674',
+                'response_time' => '2022-07-16 10:14:07.521',
+            ],
         ];
 
         $table = $this->table('operation_logs');
