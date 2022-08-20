@@ -82,11 +82,6 @@ return static function (RouteBuilder $routes) {
         });
 
         /*
-         * ...and connect the rest of 'Pages' controller's URLs.
-         */
-        $builder->connect('/pages/*', 'Pages::display');
-
-        /*
          * Connect catchall routes for all controllers.
          *
          * The `fallbacks` method is a shortcut for

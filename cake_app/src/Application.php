@@ -109,7 +109,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             // creating the middleware instance specify the cache config name by
             // using it's second constructor argument:
             // `new RoutingMiddleware($this, '_cake_routes_')`
-            ->add(new RoutingMiddleware($this, '_cake_routes_'))
+            ->add(new RoutingMiddleware($this))
 
             // Add cakephp/authentication Middleware
             // https://github.com/cakephp/authentication

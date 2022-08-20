@@ -2,7 +2,7 @@ up:
 	docker-compose up -d
 init:
 	docker-compose up -d --build
-	docker-compose exec --user=www-data app cp -f config/.env.default config/.env
+	docker-compose exec --user=www-data app cp -f config/.env.example config/.env
 	docker-compose exec --user=www-data app bash -c 'sed -i \
 	-e "s/^export DEBUG=\"true\"/export DEBUG=\"false\"/g" \
 	-e "s/^export SECURITY_SALT=\"__SALT__\"/export SECURITY_SALT=\"$$CAKE_SECURITY_SALT\"/g" \
@@ -59,6 +59,8 @@ app-check-all:
 	@make app-phpstan
 npm-dev:
 	docker-compose exec --user=www-data app npm run dev
+npm-watch:
+	docker-compose exec --user=www-data app npm run watch
 npm-build:
 	docker-compose exec --user=www-data app npm run build
 
