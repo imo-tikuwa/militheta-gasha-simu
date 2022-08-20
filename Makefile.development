@@ -1,6 +1,6 @@
 init:
 	docker-compose up -d --build
-	docker-compose exec --user=www-data app cp -f config/.env.default config/.env
+	docker-compose exec --user=www-data app cp -f config/.env.example config/.env
 	docker-compose exec --user=www-data app bash -c 'sed -i \
 	-e "s/^export SECURITY_SALT=\"__SALT__\"/export SECURITY_SALT=\"$$CAKE_SECURITY_SALT\"/g" \
 	-e "s/^export DATABASE_HOST=\"127.0.0.1\"/export DATABASE_HOST=\"db\"/g" \

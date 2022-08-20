@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const mode = (process.env.NODE_ENV == undefined) ? 'production' : process.env.NODE_ENV;
 const devtool = (mode != 'production') ? 'source-map' : false;
+const Dotenv = require('dotenv-webpack');
 
 // jsのバンドル設定
 const exportScript = {
@@ -27,6 +28,11 @@ const exportScript = {
         }
     },
     plugins: [
+        new Dotenv({
+            path: path.resolve(__dirname, "config/.env"),
+            allowEmptyValues: true,
+            prefix: 'import.meta.env.',
+        }),
         new webpack.IgnorePlugin({resourceRegExp: /^\.\/locale$/, contextRegExp: /moment$/}),
         new webpack.ProvidePlugin({
             $: 'jquery',
